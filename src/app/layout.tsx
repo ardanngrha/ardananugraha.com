@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+
+const inter = Inter({ subsets: ["latin"], display: "swap" });
 
 export const metadata: Metadata = {
   title: "Ardana Nugraha",
@@ -15,15 +19,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased`}
+        className={`antialiased ${inter.className} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
       >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
-          disableTransitionOnChange
         >
-          {children}
+          <Navbar />
+          <div className="sm:mt-6 lg:mt-8" >
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
