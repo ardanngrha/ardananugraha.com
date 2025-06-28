@@ -29,11 +29,11 @@ async function getProject(slug: string) {
 }
 
 // The main page component
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const { frontmatter, content, found } = await getProject(params.slug);
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const { frontmatter, content, found } = await getProject(slug);
 
   if (!found) {
-    // You can add a custom 404 page here if you want
     return <div>Project not found.</div>;
   }
 

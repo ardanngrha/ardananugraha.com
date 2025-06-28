@@ -29,8 +29,9 @@ async function getPost(slug: string) {
 }
 
 // The main page component
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const { frontmatter, content, found } = await getPost(params.slug);
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const { frontmatter, content, found } = await getPost(slug);
 
   if (!found) {
     // You can add a custom 404 page here if you want
