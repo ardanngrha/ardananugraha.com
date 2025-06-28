@@ -1,3 +1,9 @@
+"use client"
+
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+
 export default function Home() {
   return (
     <div>
@@ -70,7 +76,7 @@ export default function Home() {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              Download My Résumé
+              Download My Resume
             </a>
           </div>
         </div>
@@ -78,32 +84,105 @@ export default function Home() {
 
       {/* Featured Projects Section */}
       <section className="py-16">
-        <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-3xl font-bold">Featured Projects</h2>
+          <Button variant="outline" asChild>
+            <Link href="/projects" className="inline-flex items-center gap-2">
+              More
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </Button>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-xl font-semibold mb-3">Project One</h3>
-            <p className="text-muted-foreground mb-4">A brief description of your featured project and the technologies used.</p>
-            <div className="flex gap-2 flex-wrap">
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">React</span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">TypeScript</span>
+          <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <div className="aspect-video bg-muted flex items-center justify-center">
+              <Image
+                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop"
+                alt="Project One"
+                width={600}
+                height={400}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const nextElement = e.currentTarget.nextElementSibling as HTMLElement;
+                  if (nextElement) {
+                    nextElement.style.display = 'flex';
+                  }
+                }}
+              />
+              <div className="hidden w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 items-center justify-center">
+                <span className="text-muted-foreground text-sm">Project Image</span>
+              </div>
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-3">Project One</h3>
+              <p className="text-muted-foreground mb-4">A brief description of your featured project and the technologies used.</p>
+              <div className="flex gap-2 flex-wrap">
+                <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">React</span>
+                <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">TypeScript</span>
+              </div>
             </div>
           </div>
 
-          <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-xl font-semibold mb-3">Project Two</h3>
-            <p className="text-muted-foreground mb-4">A brief description of your featured project and the technologies used.</p>
-            <div className="flex gap-2 flex-wrap">
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Python</span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Django</span>
+          <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <div className="aspect-video bg-muted flex items-center justify-center">
+              <Image
+                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&h=400&fit=crop"
+                alt="Project Two"
+                width={600}
+                height={400}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const nextElement = e.currentTarget.nextElementSibling as HTMLElement;
+                  if (nextElement) {
+                    nextElement.style.display = 'flex';
+                  }
+                }}
+              />
+              <div className="hidden w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 items-center justify-center">
+                <span className="text-muted-foreground text-sm">Project Image</span>
+              </div>
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-3">Project Two</h3>
+              <p className="text-muted-foreground mb-4">A brief description of your featured project and the technologies used.</p>
+              <div className="flex gap-2 flex-wrap">
+                <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Python</span>
+                <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Django</span>
+              </div>
             </div>
           </div>
 
-          <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
-            <h3 className="text-xl font-semibold mb-3">Project Three</h3>
-            <p className="text-muted-foreground mb-4">A brief description of your featured project and the technologies used.</p>
-            <div className="flex gap-2 flex-wrap">
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Java</span>
-              <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Spring</span>
+          <div className="border rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+            <div className="aspect-video bg-muted flex items-center justify-center">
+              <Image
+                src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop"
+                alt="Project Three"
+                width={600}
+                height={400}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  const nextElement = e.currentTarget.nextElementSibling as HTMLElement;
+                  if (nextElement) {
+                    nextElement.style.display = 'flex';
+                  }
+                }}
+              />
+              <div className="hidden w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 items-center justify-center">
+                <span className="text-muted-foreground text-sm">Project Image</span>
+              </div>
+            </div>
+            <div className="p-6">
+              <h3 className="text-xl font-semibold mb-3">Project Three</h3>
+              <p className="text-muted-foreground mb-4">A brief description of your featured project and the technologies used.</p>
+              <div className="flex gap-2 flex-wrap">
+                <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Java</span>
+                <span className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">Spring</span>
+              </div>
             </div>
           </div>
         </div>
@@ -111,7 +190,17 @@ export default function Home() {
 
       {/* Featured Writings Section */}
       <section className="py-16">
-        <h2 className="text-3xl font-bold mb-8">Featured Writings</h2>
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-3xl font-bold">Featured Writings</h2>
+          <Button variant="outline" asChild>
+            <Link href="/writings" className="inline-flex items-center gap-2">
+              More
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </Button>
+        </div>
         <div className="space-y-6">
           <article className="border-l-4 border-primary pl-6 py-4">
             <h3 className="text-xl font-semibold mb-2">Building Scalable Web Applications</h3>
@@ -130,6 +219,57 @@ export default function Home() {
             <p className="text-muted-foreground mb-2">A comprehensive guide to writing clean, maintainable TypeScript code in large-scale applications.</p>
             <time className="text-sm text-muted-foreground">January 20, 2024</time>
           </article>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16">
+        <h2 className="text-3xl font-bold mb-8">Some Words</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="flex items-center mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mr-4">
+                <span className="text-lg font-semibold">JD</span>
+              </div>
+              <div>
+                <h4 className="font-semibold">John Doe</h4>
+                <p className="text-sm text-muted-foreground">Senior Tech Lead</p>
+              </div>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              &quot;Ardana&apos;s technical expertise and problem-solving skills are exceptional. He consistently delivers high-quality solutions and is a valuable team collaborator.&quot;
+            </p>
+          </div>
+
+          <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="flex items-center mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mr-4">
+                <span className="text-lg font-semibold">SM</span>
+              </div>
+              <div>
+                <h4 className="font-semibold">Sarah Miller</h4>
+                <p className="text-sm text-muted-foreground">Product Manager</p>
+              </div>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              &quot;Working with Ardana has been a pleasure. His attention to detail and ability to translate complex requirements into elegant solutions is remarkable.&quot;
+            </p>
+          </div>
+
+          <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow">
+            <div className="flex items-center mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full flex items-center justify-center mr-4">
+                <span className="text-lg font-semibold">MJ</span>
+              </div>
+              <div>
+                <h4 className="font-semibold">Mike Johnson</h4>
+                <p className="text-sm text-muted-foreground">CTO</p>
+              </div>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              &quot;Ardana brings both technical depth and strategic thinking to every project. His code quality and architectural decisions have significantly improved our platform.&quot;
+            </p>
+          </div>
         </div>
       </section>
     </div>
