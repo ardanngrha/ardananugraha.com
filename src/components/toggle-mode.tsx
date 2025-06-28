@@ -68,7 +68,7 @@ export function ModeToggle() {
       ref={buttonRef}
       variant="outline"
       size="icon"
-      className="rounded-full border-gray-800 dark:border-gray-300 hover:bg-gray-700 dark:hover:bg-gray-100 bg-gray-800 dark:bg-gray-300 transition-all duration-300"
+      className="rounded-full border-gray-800 dark:border-gray-300 hover:bg-gray-700 dark:hover:bg-gray-100 bg-gray-800 dark:bg-gray-300 transition-all duration-300 cursor-pointer"
       onClick={toggleTheme}
       disabled={isAnimating}
     >

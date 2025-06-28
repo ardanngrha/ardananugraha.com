@@ -44,20 +44,19 @@ export default function Newsletter() {
       <p className="text-sm text-muted-foreground">
         Subscribe to my newsletter for the latest articles and project updates.
       </p>
-      <form onSubmit={handleSubscribe} className="space-y-2">
+      <form onSubmit={handleSubscribe} className="flex gap-2">
         <Input
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="text-sm"
+          className="text-sm flex-1"
           required
         />
         <Button
           type="submit"
-          size="sm"
-          className="w-full"
           disabled={isSubscribing}
+          className="cursor-pointer text-sm"
         >
           {isSubscribing ? "Subscribing..." : "Subscribe"}
         </Button>

@@ -1,4 +1,4 @@
-// src/app/projects/[slug]/page.tsx
+// src/app/writings/[slug]/page.tsx
 import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -6,18 +6,18 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 
 // This function tells Next.js which routes to pre-render at build time.
 export async function generateStaticParams() {
-  const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
-  const filenames = await fs.readdir(projectsDirectory);
+  const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
+  const filenames = await fs.readdir(writingsDirectory);
 
   return filenames.map((filename) => ({
     slug: filename.replace(/\.mdx$/, ''),
   }));
 }
 
-// Helper function to get a specific project by its slug
-async function getProject(slug: string) {
-  const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
-  const filePath = path.join(projectsDirectory, `${slug}.mdx`);
+// Helper function to get a specific post by its slug
+async function getPost(slug: string) {
+  const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
+  const filePath = path.join(writingsDirectory, `${slug}.mdx`);
 
   try {
     const fileContents = await fs.readFile(filePath, 'utf8');
@@ -29,12 +29,12 @@ async function getProject(slug: string) {
 }
 
 // The main page component
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const { frontmatter, content, found } = await getProject(params.slug);
+export default async function PostPage({ params }: { params: { slug: string } }) {
+  const { frontmatter, content, found } = await getPost(params.slug);
 
   if (!found) {
     // You can add a custom 404 page here if you want
-    return <div>Project not found.</div>;
+    return <div>Post not found.</div>;
   }
 
   return (

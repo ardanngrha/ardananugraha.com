@@ -28,9 +28,9 @@ export default function RootLayout({
           enableSystem
         >
           <Navbar />
-          <div className="sm:mt-6 lg:mt-8" >
+          <main className="sm:mt-6 lg:mt-8 pb-16 min-h-[calc(100vh-200px)]" >
             {children}
-          </div>
+          </main>
           <Footer />
         </ThemeProvider>
       </body>

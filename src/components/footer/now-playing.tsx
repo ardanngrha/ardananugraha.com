@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import getNowPlayingItem from "@/lib/spotify-api"
+import getNowPlayingItem from "@/lib/spotify"
 
 interface CurrentTrack {
   name: string

@@ -1,15 +1,55 @@
-export default function BlogPage() {
+// src/app/writings/page.tsx
+import { promises as fs } from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+import Link from 'next/link';
+
+async function getAllPosts() {
+  const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
+  const filenames = await fs.readdir(writingsDirectory);
+
+  const posts = await Promise.all(
+    filenames.map(async (filename) => {
+      const filePath = path.join(writingsDirectory, filename);
+      const fileContents = await fs.readFile(filePath, 'utf8');
+      const { data } = matter(fileContents); // We only need frontmatter here
+
+      return {
+        slug: filename.replace(/\.mdx$/, ''),
+        frontmatter: data,
+      };
+    })
+  );
+
+  // Sort posts by date in descending order
+  return posts.sort((a, b) =>
+    new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+  );
+}
+
+export default async function WritingsPage() {
+  const allPosts = await getAllPosts();
+
   return (
     <div>
-      <p className="text-2xl font-bold">Writings</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, dolores hic voluptatem non vitae cumque, sit sapiente maxime eos laborum ratione, provident consequuntur sunt harum ullam cum reprehenderit minima! Consequatur.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, dolores hic voluptatem non vitae cumque, sit sapiente maxime eos laborum ratione, provident consequuntur sunt harum ullam cum reprehenderit minima! Consequatur.</p>
-      <p>Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque.</p>
-      <p>Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque.</p>
-      <p>Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque.</p>
-      <p>Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque.</p>
-      <p>Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque.</p>
-      <p>Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque. Quisquam, voluptatum. Doloribus, cumque.</p>
+      <h1 className="text-4xl font-bold mb-8">Writings</h1>
+      <div className="space-y-6">
+        {allPosts.map((post) => (
+          <div key={post.slug}>
+            <Link href={`/writings/${post.slug}`}>
+              <h2 className="text-2xl font-semibold hover:underline">
+                {post.frontmatter.title}
+              </h2>
+            </Link>
+            <p className="text-muted-foreground mt-2">
+              {post.frontmatter.summary}
+            </p>
+            <p className="text-sm text-muted-foreground mt-2">
+              {new Date(post.frontmatter.date).toLocaleDateString()}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
