@@ -24,7 +24,9 @@ export function Tabs({ tabs }: TabsProps) {
   useEffect(() => {
     const currentTab = tabs.find(tab => tab.href === pathname)
     if (currentTab) {
-      setActiveTab(currentTab.id)
+      setActiveTab(currentTab?.id || null)
+    } else {
+      setActiveTab(null)
     }
   }, [pathname, tabs])
 

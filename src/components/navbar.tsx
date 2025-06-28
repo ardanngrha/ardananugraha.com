@@ -5,7 +5,7 @@ import { Tabs } from "@/components/tabs";
 
 const navigationTabs = [
   { id: "projects", label: "Projects", href: "/projects" },
-  { id: "blog", label: "Blog", href: "/blog" },
+  { id: "writings", label: "Writings", href: "/writings" },
   { id: "about", label: "About", href: "/about" },
 ];
 
@@ -18,14 +18,16 @@ export default function Navbar() {
             src="/images/an-white.png"
             alt="logo"
             width={30}
-            height={35}
+            height={0}
+            style={{ height: "auto", width: "auto" }}
             className="dark:block hidden"
           />
           <Image
             src="/images/an-black.png"
             alt="logo"
             width={30}
-            height={35}
+            height={0}
+            style={{ height: "auto", width: "auto" }}
             className="dark:hidden block"
           />
         </Link>
