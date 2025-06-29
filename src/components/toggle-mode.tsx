@@ -6,9 +6,14 @@ import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const [isAnimating, setIsAnimating] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
   const buttonRef = React.useRef<HTMLButtonElement>(null)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const toggleTheme = () => {
     if (isAnimating) return
@@ -21,6 +26,9 @@ export function ModeToggle() {
       const rect = button.getBoundingClientRect()
       const x = rect.left + rect.width / 2
       const y = rect.top + rect.height / 2
+
+      // Use resolvedTheme for accurate current theme
+      const currentTheme = resolvedTheme || theme
 
       // Create ripple effect
       const ripple = document.createElement('div')
@@ -52,15 +60,31 @@ export function ModeToggle() {
 
       // Change theme after animation starts
       setTimeout(() => {
-        setTheme(theme === "dark" ? "light" : "dark")
+        setTheme(currentTheme === "dark" ? "light" : "dark")
       }, 300)
 
       // Clean up
       setTimeout(() => {
-        document.body.removeChild(ripple)
+        if (document.body.contains(ripple)) {
+          document.body.removeChild(ripple)
+        }
         setIsAnimating(false)
       }, 600)
     }
+  }
+
+  if (!mounted) {
+    return (
+      <Button
+        variant="outline"
+        size="icon"
+        className="rounded-full border-gray-800 dark:border-gray-300 hover:bg-gray-700 dark:hover:bg-gray-100 bg-gray-800 dark:bg-gray-300 transition-all duration-300"
+        disabled
+      >
+        <div className="h-[1.2rem] w-[1.2rem]" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    )
   }
 
   return (

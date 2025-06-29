@@ -38,7 +38,7 @@ export function Tabs({ tabs }: TabsProps) {
           href={tab.href}
           data-tab={tab.id}
           className={cn(
-            "relative z-10 px-4 py-2 text-sm font-medium rounded-md transition-colors duration-200",
+            "relative z-10 px-2 py-2 sm:px-4 text-xs sm:text-sm font-medium rounded-md transition-colors duration-200",
             "hover:text-foreground/80",
             activeTab === tab.id
               ? "text-foreground"

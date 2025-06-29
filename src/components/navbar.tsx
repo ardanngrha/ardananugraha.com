@@ -1,11 +1,11 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "./toggle-mode";
 import Image from "next/image";
 import { Tabs } from "@/components/tabs";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
-import { useState } from "react";
 
 const navigationTabs = [
   { id: "projects", label: "Projects", href: "/projects" },
@@ -15,16 +15,28 @@ const navigationTabs = [
 
 export default function Navbar() {
   const { scrollY } = useScroll();
-  const [isVisible, setIsVisible] = useState(typeof window !== 'undefined' ? window.scrollY === 0 : true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Handle mounting and initial scroll position
+  useEffect(() => {
+    setIsMounted(true);
+    // Set initial visibility based on current scroll position
+    setIsVisible(window.scrollY === 0);
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // If the latest scroll position is 0, make the navbar visible.
-    // Otherwise, hide it.
+    if (!isMounted) return;
     setIsVisible(latest === 0);
   });
 
+  // Don't render anything until mounted to prevent hydration issues
+  if (!isMounted) {
+    return null;
+  }
+
   return (
-    <AnimatePresence initial={false}>
+    <AnimatePresence mode="wait" initial={false}>
       {isVisible && (
         <motion.div
           initial={{ opacity: 0, y: -100 }}
@@ -41,7 +53,7 @@ export default function Navbar() {
                 width={30}
                 height={0}
                 style={{ height: "auto", width: "auto" }}
-                className="dark:block hidden"
+                className="dark:block hidden w-6 h-6 sm:w-[30px] sm:h-auto"
               />
               <Image
                 src="/images/an-black.png"
@@ -49,14 +61,16 @@ export default function Navbar() {
                 width={30}
                 height={0}
                 style={{ height: "auto", width: "auto" }}
-                className="dark:hidden block"
+                className="dark:hidden block w-6 h-6 sm:w-[30px] sm:h-auto"
               />
             </Link>
           </div>
 
-          <Tabs tabs={navigationTabs} />
+          <div className="flex-1 flex justify-center min-w-0">
+            <Tabs tabs={navigationTabs} />
+          </div>
 
-          <div className="flex items-center justify-center w-10 h-10">
+          <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
             <ModeToggle />
           </div>
         </motion.div>
