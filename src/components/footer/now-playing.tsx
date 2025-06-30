@@ -12,12 +12,8 @@ interface CurrentTrack {
 }
 
 export default function NowPlaying() {
-  const [currentTrack, setCurrentTrack] = useState<CurrentTrack>({
-    name: "Bohemian Rhapsody",
-    artist: "Queen",
-    isPlaying: false,
-    albumImageUrl: ""
-  })
+  const [currentTrack, setCurrentTrack] = useState<CurrentTrack | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchCurrentTrack = async () => {
@@ -28,6 +24,7 @@ export default function NowPlaying() {
 
         if (!clientId || !clientSecret || !refreshToken) {
           console.warn('Spotify environment variables not configured');
+          setLoading(false);
           return;
         }
 
@@ -44,9 +41,15 @@ export default function NowPlaying() {
             isPlaying: track.isPlaying,
             albumImageUrl: track.albumImageUrl
           });
+        } else {
+          // No track is currently playing or available
+          setCurrentTrack(null);
         }
       } catch (error) {
         console.error('Failed to fetch current track:', error);
+        setCurrentTrack(null);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,10 +59,41 @@ export default function NowPlaying() {
     return () => clearInterval(interval);
   }, []);
 
+  if (loading) {
+    return (
+      <div className="space-y-4">
+        <h3 className="font-semibold text-lg">Loading...</h3>
+        <div className="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg">
+          <div className="w-12 h-12 bg-primary/20 rounded-lg animate-pulse"></div>
+          <div className="flex-1 min-w-0 space-y-2">
+            <div className="h-4 bg-primary/20 rounded animate-pulse"></div>
+            <div className="h-3 bg-primary/20 rounded animate-pulse w-3/4"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!currentTrack) {
+    return (
+      <div className="flex flex-col">
+        <h3 className="font-semibold text-lg">Ardana Nugraha</h3>
+        <div className="flex items-center gap-2 pt-4">
+          <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+            <span className="text-muted-foreground text-xs">♪</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-muted-foreground text-sm">No music playing</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-4">
-      <h3 className="font-semibold text-lg">Currently Playing</h3>
-      <div className="flex items-center gap-3 p-3 bg-secondary/30 rounded-lg">
+    <div className="flex flex-col " >
+      <h3 className="font-semibold text-lg">Ardana Nugraha</h3>
+      <div className="flex items-center gap-2 pt-4">
         <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
           {currentTrack.albumImageUrl ? (
             <Image
@@ -70,13 +104,13 @@ export default function NowPlaying() {
               className="rounded-lg"
             />
           ) : (
-            <span className="text-muted-foreground">No Image</span>
+            <span className="text-muted-foreground text-xs">♪</span>
           )}
         </div>
         <div className="flex-1 min-w-0">
           <p className="font-medium text-sm truncate">{currentTrack.name}</p>
           <p className="text-muted-foreground text-xs truncate">{currentTrack.artist}</p>
-          <div className="flex items-center gap-1 mt-1">
+          <div className="flex items-center gap-1">
             <div className={`w-1 h-1 rounded-full ${currentTrack.isPlaying ? 'bg-green-500' : 'bg-muted-foreground'}`} />
             <span className="text-xs text-muted-foreground">
               {currentTrack.isPlaying ? 'Now playing' : 'Last played'}
@@ -84,6 +118,6 @@ export default function NowPlaying() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

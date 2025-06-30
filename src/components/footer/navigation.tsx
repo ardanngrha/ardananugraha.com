@@ -7,7 +7,7 @@ const navigationLinks = [
   { label: "About", href: "/about" },
 ]
 
-export default function NavigationSection() {
+export default function Navigation() {
   return (
     <div className="space-y-4">
       <h3 className="font-semibold text-lg">Navigate</h3>
