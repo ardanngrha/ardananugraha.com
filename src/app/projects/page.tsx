@@ -31,9 +31,17 @@ export default async function ProjectsPage() {
   const allProjects = await getAllProjects();
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold mb-8">Projects</h1>
-      <div className="space-y-6">
+    <div className="pt-16">
+      {/* Centered title section */}
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-bold mb-4">Projects</h1>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Explore my portfolio of software projects, from web applications to open-source contributions.
+        </p>
+      </div>
+
+      {/* Projects content */}
+      <div className="max-w-4xl mx-auto space-y-6">
         {allProjects.map((project) => (
           <div key={project.slug}>
             <Link href={`/projects/${project.slug}`}>

@@ -31,9 +31,17 @@ export default async function WritingsPage() {
   const allPosts = await getAllPosts();
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold mb-8">Writings</h1>
-      <div className="space-y-6">
+    <div className="pt-16">
+      {/* Centered title section */}
+      <div className="text-center mb-16">
+        <h1 className="text-4xl font-bold mb-4">Writings</h1>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Thoughts, insights, and tutorials on software development, technology trends, and my learning journey.
+        </p>
+      </div>
+
+      {/* Writings content */}
+      <div className="max-w-4xl mx-auto space-y-6">
         {allPosts.map((post) => (
           <div key={post.slug}>
             <Link href={`/writings/${post.slug}`}>

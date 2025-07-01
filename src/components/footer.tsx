@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     <footer className="border-t">
       {/* Main Row - 5 columns */}
-      <div className="flex md:flex-row gap-6 py-12 sm:flex-col">
+      <div className="flex flex-col md:flex-row gap-6 py-12">
         {/* Name and Now Playing */}
         <div className="col-span-1 flex-1">
           <NowPlaying />
