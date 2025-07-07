@@ -11,6 +11,21 @@ interface CurrentTrack {
   albumImageUrl: string
 }
 
+// Sound waves component
+function SoundWaves({ isPlaying }: { isPlaying: boolean }) {
+  if (!isPlaying) return null;
+
+  return (
+    <div className="sound-wave">
+      <div className="sound-wave-bar"></div>
+      <div className="sound-wave-bar"></div>
+      <div className="sound-wave-bar"></div>
+      <div className="sound-wave-bar"></div>
+      <div className="sound-wave-bar"></div>
+    </div>
+  );
+}
+
 export default function NowPlaying() {
   const [currentTrack, setCurrentTrack] = useState<CurrentTrack | null>(null)
   const [loading, setLoading] = useState(true)
@@ -107,13 +122,14 @@ export default function NowPlaying() {
         <div className="flex-1 min-w-0">
           <p className="font-medium text-sm truncate">{currentTrack.name}</p>
           <p className="text-muted-foreground text-xs truncate">{currentTrack.artist}</p>
-          <div className="flex items-center gap-1">
+          {/* <div className="flex items-center gap-1">
             <div className={`w-1 h-1 rounded-full ${currentTrack.isPlaying ? 'bg-green-500' : 'bg-muted-foreground'}`} />
             <span className="text-xs text-muted-foreground">
-              {currentTrack.isPlaying ? 'Now playing' : 'Last played'}
+              Now Playing
             </span>
-          </div>
+          </div> */}
         </div>
+        <SoundWaves isPlaying={currentTrack.isPlaying} />
       </div>
     </div>
   )

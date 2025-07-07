@@ -152,6 +152,51 @@
   .font-handwriting {
     font-family: var(--font-zeyada), 'Zeyada', cursive;
   }
+
+  .sound-wave {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+  }
+
+  .sound-wave-bar {
+    width: 3px;
+    background-color: #000000;
+    border-radius: 2px;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+
+  .dark .sound-wave-bar {
+    background-color: #ffffff;
+  }
+
+  .sound-wave-bar:nth-child(1) {
+    height: 8px;
+    animation-delay: 0s;
+  }
+
+  .sound-wave-bar:nth-child(2) {
+    height: 16px;
+    animation-delay: 0.1s;
+  }
+
+  .sound-wave-bar:nth-child(3) {
+    height: 12px;
+    animation-delay: 0.2s;
+  }
+
+  .sound-wave-bar:nth-child(4) {
+    height: 20px;
+    animation-delay: 0.3s;
+  }
+
+  .sound-wave-bar:nth-child(5) {
+    height: 8px;
+    animation-delay: 0.4s;
+  }
 }
 
 /* Custom keyframes for theme transition */
@@ -163,6 +208,15 @@
   to {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0;
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.3);
   }
 }
 
