@@ -74,25 +74,22 @@ export default function NowPlaying() {
     );
   }
 
+  const name = (<h3 className="font-semibold text-4xl font-handwriting">Ardana Nugraha</h3>);
+  const quote = (<p className="text-sm text-muted-foreground italic">&quot;stay foolish, stay hungry&quot;</p>);
+
   if (!currentTrack) {
     return (
-      <div className="flex flex-col">
-        <h3 className="font-semibold text-lg">Ardana Nugraha</h3>
-        <div className="flex items-center gap-2 pt-4">
-          <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
-            <span className="text-muted-foreground text-xs">♪</span>
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-muted-foreground text-sm">No music playing</p>
-          </div>
-        </div>
+      <div className="flex flex-col items-center md:items-start gap-2">
+        {name}
+        {quote}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col " >
-      <h3 className="font-semibold text-lg">Ardana Nugraha</h3>
+    <div className="flex flex-col items-center md:items-start gap-2">
+      {name}
+      {quote}
       <div className="flex items-center gap-2 pt-4">
         <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
           {currentTrack.albumImageUrl ? (
@@ -118,6 +115,6 @@ export default function NowPlaying() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   )
 }

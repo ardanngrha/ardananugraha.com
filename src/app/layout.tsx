@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Zeyada } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
+const zeyada = Zeyada({
+  weight: '400',
+  subsets: ["latin"],
+  display: "swap",
+  variable: '--font-zeyada'
+});
 
 export const metadata: Metadata = {
   title: "Ardana Nugraha",
@@ -20,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased ${inter.className} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
+        className={`antialiased ${inter.className} ${zeyada.variable} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
       >
         <ThemeProvider
           attribute="class"

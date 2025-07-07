@@ -11,10 +11,10 @@ export default function Copyright() {
   const minutes = useMotionValue(0)
   const hours = useMotionValue(0)
 
-  // Transform to rounded values
-  const roundedSeconds = useTransform(() => Math.round(seconds.get()))
-  const roundedMinutes = useTransform(() => Math.round(minutes.get()))
-  const roundedHours = useTransform(() => Math.round(hours.get()))
+  // Transform to rounded values with leading zeros
+  const roundedSeconds = useTransform(() => Math.round(seconds.get()).toString().padStart(2, '0'))
+  const roundedMinutes = useTransform(() => Math.round(minutes.get()).toString().padStart(2, '0'))
+  const roundedHours = useTransform(() => Math.round(hours.get()).toString().padStart(2, '0'))
 
   useEffect(() => {
     setMounted(true)
@@ -68,7 +68,7 @@ export default function Copyright() {
   return (
     <div className="space-y-2 flex flex-col items-center justify-center text-center">
       <p className="text-sm text-muted-foreground">
-        © 2024. All rights reserved.
+        © 2025. All rights reserved.
       </p>
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <span>Built with</span>
@@ -93,7 +93,7 @@ export default function Copyright() {
         <motion.span className="inline-block min-w-[2ch] text-center">
           {roundedSeconds}
         </motion.span>
-        UTC+7
+        {" "}UTC+7
       </p>
     </div>
   )

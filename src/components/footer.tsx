@@ -10,30 +10,30 @@ export default function Footer() {
     <footer className="border-t">
       {/* Main Row - 5 columns */}
       <div className="flex flex-col md:flex-row gap-6 py-12">
-        {/* Name and Now Playing */}
-        <div className="col-span-1 flex-1">
+        {/* Now Playing */}
+        <div className="col-span-1 flex-1 flex justify-center md:justify-start">
           <NowPlaying />
         </div>
 
-        <div className="flex flex-row gap-12">
+        <div className="flex flex-row gap-4 md:gap-12">
           {/* Navigation */}
-          <div className="col-span-1">
+          <div className="col-span-1 flex justify-center md:justify-start">
             <Navigation />
           </div>
 
           {/* Socials */}
-          <div className="col-span-1">
+          <div className="col-span-1 flex justify-center md:justify-start order-2 md:order-3">
             <Socials />
           </div>
 
           {/* Contact */}
-          <div className="col-span-1">
+          <div className="col-span-1 flex justify-center md:justify-start order-1 md:order-2">
             <Contact />
           </div>
         </div>
 
         {/* Newsletter */}
-        <div className="col-span-1 flex-1">
+        <div className="col-span-1 flex-1 flex justify-center md:justify-start">
           <Newsletter />
         </div>
       </div>

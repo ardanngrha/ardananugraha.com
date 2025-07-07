@@ -9,9 +9,9 @@ const socialLinks = [
 
 export default function Socials() {
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col items-center md:items-start gap-3">
       <h3 className="font-semibold text-lg">Socials</h3>
-      <nav className="flex flex-col space-y-2">
+      <nav className="flex flex-col gap-2 items-center md:items-start">
         {socialLinks.map((link) => (
           <Link
             key={link.href}

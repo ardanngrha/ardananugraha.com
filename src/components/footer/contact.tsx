@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function Contact() {
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col items-center md:items-start gap-2">
       <h3 className="font-semibold text-lg">Contact</h3>
       <div>
         <a

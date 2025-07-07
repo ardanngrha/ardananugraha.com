@@ -8,9 +8,9 @@ export default function Newsletter() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col items-center md:items-start gap-2">
       <h3 className="font-semibold text-lg">Stay Updated</h3>
-      <p className="text-sm text-muted-foreground">
+      <p className="text-sm text-muted-foreground text-center md:text-left">
         Subscribe to my newsletter for the latest articles and project updates.
       </p>
       <Button
