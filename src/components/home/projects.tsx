@@ -82,7 +82,7 @@ export default function ProjectsSection({ projects, loading }: ProjectsSectionPr
                   {project.frontmatter.tags && (
                     <div className="flex gap-2 flex-wrap">
                       {project.frontmatter.tags.map((tech: string) => (
-                        <span key={tech} className="px-2 py-1 bg-secondary text-secondary-foreground rounded text-sm">
+                        <span key={tech} className="px-2 py-1 bg-secondary text-secondary-foreground font-mono rounded text-sm">
                           {tech}
                         </span>
                       ))}

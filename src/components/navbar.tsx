@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ModeToggle } from "./toggle-mode";
 import Image from "next/image";
-import { Tabs } from "@/components/tabs";
+import { Tabs } from "@/components/navigation-tabs";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
 
 const navigationTabs = [

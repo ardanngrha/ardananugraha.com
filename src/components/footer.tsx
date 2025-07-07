@@ -17,17 +17,17 @@ export default function Footer() {
 
         <div className="flex flex-row gap-4 md:gap-12">
           {/* Navigation */}
-          <div className="col-span-1 flex justify-center md:justify-start">
+          <div className="col-span-1 flex justify-center md:justify-start order-1 md:order-1">
             <Navigation />
           </div>
 
           {/* Socials */}
-          <div className="col-span-1 flex justify-center md:justify-start order-2 md:order-3">
+          <div className="col-span-1 flex justify-center md:justify-start order-3 md:order-2">
             <Socials />
           </div>
 
           {/* Contact */}
-          <div className="col-span-1 flex justify-center md:justify-start order-1 md:order-2">
+          <div className="col-span-1 flex justify-center md:justify-start order-2 md:order-3">
             <Contact />
           </div>
         </div>

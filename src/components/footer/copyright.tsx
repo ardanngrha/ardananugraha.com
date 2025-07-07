@@ -72,28 +72,28 @@ export default function Copyright() {
       </p>
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
         <span>Built with</span>
-        <div className="flex items-center gap-1 flex-wrap">
-          <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Next.js</span>
-          <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Tailwind</span>
-          <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">shadcn/ui</span>
-          <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Vercel</span>
-          <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Motion</span>
+        <div className="flex items-center gap-1 flex-wrap font-mono">
+          <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Next.js</a>
+          <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Tailwind</a>
+          <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">shadcn/ui</a>
+          <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Vercel</a>
+          <a href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Motion</a>
         </div>
       </div>
       <p className="text-xs text-muted-foreground font-mono">
         Local Time:
-        <motion.span className="inline-block min-w-[2ch] text-center">
+        <motion.span className="inline-block min-w-[2ch] text-center ">
           {roundedHours}
         </motion.span>
         :
-        <motion.span className="inline-block min-w-[2ch] text-center">
+        <motion.span className="inline-block min-w-[2ch] text-center ">
           {roundedMinutes}
         </motion.span>
         :
-        <motion.span className="inline-block min-w-[2ch] text-center">
+        <motion.span className="inline-block min-w-[2ch] text-center ">
           {roundedSeconds}
         </motion.span>
-        {" "}UTC+7
+        <span> UTC+7</span>
       </p>
     </div>
   )

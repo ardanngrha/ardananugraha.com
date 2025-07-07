@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter, Zeyada } from "next/font/google";
+import { Inter, Zeyada, Space_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -11,6 +11,12 @@ const zeyada = Zeyada({
   subsets: ["latin"],
   display: "swap",
   variable: '--font-zeyada'
+});
+const spaceMono = Space_Mono({
+  weight: ['400', '700'],
+  subsets: ["latin"],
+  display: "swap",
+  variable: '--font-space-mono'
 });
 
 export const metadata: Metadata = {
@@ -26,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased ${inter.className} ${zeyada.variable} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
+        className={`antialiased ${inter.className} ${zeyada.variable} ${spaceMono.variable} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
       >
         <ThemeProvider
           attribute="class"
@@ -34,7 +40,7 @@ export default function RootLayout({
           enableSystem
         >
           <Navbar />
-          <main className="sm:mt-6 lg:mt-8 pb-16 min-h-[calc(100vh-200px)]" >
+          <main>
             {children}
           </main>
           <Footer />
