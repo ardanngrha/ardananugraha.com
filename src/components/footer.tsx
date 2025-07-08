@@ -7,7 +7,7 @@ import Contact from "./footer/contact"
 
 export default function Footer() {
   return (
-    <footer className="border-t">
+    <footer className="border-t mb-16 md:mb-0">
       {/* Main Row - 5 columns */}
       <div className="flex flex-col md:flex-row gap-6 py-12 items-center md:items-start">
         {/* Now Playing */}
@@ -15,14 +15,14 @@ export default function Footer() {
           <NowPlaying />
         </div>
 
-        <div className="flex flex-row gap-4 md:gap-12">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-12">
           {/* Navigation */}
-          <div className="col-span-1 flex justify-center md:justify-start order-1 md:order-1">
+          <div className="col-span-1 hidden md:flex justify-center md:justify-start order-1 md:order-1">
             <Navigation />
           </div>
 
           {/* Socials */}
-          <div className="col-span-1 flex justify-center md:justify-start order-3 md:order-2">
+          <div className="col-span-1 flex justify-center md:justify-start order-1 md:order-2">
             <Socials />
           </div>
 

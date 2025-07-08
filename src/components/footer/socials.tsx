@@ -11,14 +11,14 @@ export default function Socials() {
   return (
     <div className="flex flex-col items-center md:items-start gap-3">
       <h3 className="font-semibold text-lg">Socials</h3>
-      <nav className="flex flex-col gap-2 items-center md:items-start">
+      <nav className="grid grid-cols-2 gap-2 md:flex md:flex-col md:items-start">
         {socialLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors text-center md:text-left"
           >
             {link.label}
           </Link>

@@ -15,20 +15,20 @@ interface MobileTabsProps {
 export function MobileTabs({ navigationTabs }: MobileTabsProps) {
   return (
     <>
-      {/* Mobile Navigation - Bottom */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-t border-border">
-        <div className="flex justify-between items-center px-4 py-2">
-          <div className="flex-1 flex justify-center">
+      {/* Mobile Navigation - Floating Bottom */}
+      <div className="md:hidden fixed bottom-5 left-1/2 transform -translate-x-1/2 z-50">
+        <div className="bg-background/50 backdrop-blur-xl border border-border/50 rounded-full px-6 shadow-lg">
+          <div className="flex justify-center items-center gap-1.5">
             <Tabs tabs={navigationTabs} showLabels={false} />
-          </div>
-          <div className="flex items-center justify-center w-8 h-8 ml-4">
-            <ModeToggle />
+            <div className="flex items-center justify-center py-2">
+              <ModeToggle variant="mobile" />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Mobile spacing to prevent content from being hidden behind bottom nav */}
-      <div className="md:hidden h-16" />
+      <div className="md:hidden" />
     </>
   )
 }

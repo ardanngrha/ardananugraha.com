@@ -68,6 +68,7 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
     }
   }
 
+  // Fix: Always prioritize hoveredTab over activeTab for background position
   const backgroundPosition = getTabPosition(hoveredTab || activeTab)
 
   return (
@@ -90,12 +91,12 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
           data-tab={tab.id}
           className={cn(
             "relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200",
-            // Only highlight the tab that currently has the background (hovered or active)
+            // Fix: Check if this tab should have the background (either hovered or active when not hovering)
             (hoveredTab === tab.id || (!hoveredTab && activeTab === tab.id))
               ? "text-white dark:text-black"
               : "text-muted-foreground hover:text-foreground",
             // Adjust padding when labels are hidden
-            !showLabels && "px-2"
+            !showLabels && "px-3"
           )}
           onClick={() => setActiveTab(tab.id)}
           onMouseEnter={() => setHoveredTab(tab.id)}

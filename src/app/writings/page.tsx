@@ -31,7 +31,7 @@ export default async function WritingsPage() {
   const allPosts = await getAllPosts();
 
   return (
-    <div className="pt-16">
+    <div className="pt-8 md:pt-16">
       {/* Centered title section */}
       <div className="text-center mb-16">
         <h1 className="text-4xl font-bold mb-4">Writings</h1>

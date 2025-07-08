@@ -4,8 +4,13 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
-export function ModeToggle() {
+interface ModeToggleProps {
+  variant?: "default" | "mobile"
+}
+
+export function ModeToggle({ variant = "default" }: ModeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [isAnimating, setIsAnimating] = React.useState(false)
   const [mounted, setMounted] = React.useState(false)
@@ -40,11 +45,11 @@ export function ModeToggle() {
         width: 0;
         height: 0;
         border-radius: 50%;
-        background: ${theme === 'dark' ? '#ffffff' : '#000000'};
-        z-index: 9999;
+        background: ${currentTheme === 'dark' ? '#ffffff' : '#000000'};
+        z-index: 99999;
         pointer-events: none;
         transform: translate(-50%, -50%);
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       `
 
       document.body.appendChild(ripple)
@@ -54,14 +59,14 @@ export function ModeToggle() {
         const maxDimension = Math.max(window.innerWidth, window.innerHeight)
         const diagonal = Math.sqrt(Math.pow(maxDimension, 2) + Math.pow(maxDimension, 2))
 
-        ripple.style.width = `${diagonal * 2}px`
-        ripple.style.height = `${diagonal * 2}px`
+        ripple.style.width = `${diagonal * 2.5}px`
+        ripple.style.height = `${diagonal * 2.5}px`
       })
 
       // Change theme after animation starts
       setTimeout(() => {
         setTheme(currentTheme === "dark" ? "light" : "dark")
-      }, 300)
+      }, 400)
 
       // Clean up
       setTimeout(() => {
@@ -69,19 +74,26 @@ export function ModeToggle() {
           document.body.removeChild(ripple)
         }
         setIsAnimating(false)
-      }, 600)
+      }, 800)
     }
   }
+
+  const isMobile = variant === "mobile"
 
   if (!mounted) {
     return (
       <Button
-        variant="outline"
+        variant="ghost"
         size="icon"
-        className="rounded-full border-gray-800 dark:border-gray-300 hover:bg-gray-700 dark:hover:bg-gray-100 bg-gray-800 dark:bg-gray-300 transition-all duration-300"
+        className={cn(
+          "transition-all duration-300",
+          isMobile
+            ? "rounded-xl w-10 h-10 hover:bg-transparent"
+            : "rounded-xl border-gray-800 dark:border-gray-300 hover:bg-gray-700 dark:hover:bg-gray-100 bg-gray-800 dark:bg-gray-300"
+        )}
         disabled
       >
-        <div className="h-[1.2rem] w-[1.2rem]" />
+        <div className={cn(isMobile ? "h-5 w-5" : "h-[1.2rem] w-[1.2rem]")} />
         <span className="sr-only">Toggle theme</span>
       </Button>
     )
@@ -90,14 +102,29 @@ export function ModeToggle() {
   return (
     <Button
       ref={buttonRef}
-      variant="outline"
+      variant={isMobile ? "ghost" : "outline"}
       size="icon"
-      className="rounded-full border-gray-800 dark:border-gray-300 hover:bg-gray-700 dark:hover:bg-gray-100 bg-gray-800 dark:bg-gray-300 transition-all duration-300 cursor-pointer"
+      className={cn(
+        "transition-all duration-300 cursor-pointer",
+        isMobile
+          ? "rounded-xl w-10 h-10 hover:bg-transparent text-muted-foreground hover:text-foreground"
+          : "rounded-full border-gray-800 dark:border-gray-300 hover:bg-gray-700 dark:hover:bg-gray-100 bg-gray-800 dark:bg-gray-300"
+      )}
       onClick={toggleTheme}
       disabled={isAnimating}
     >
-      <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90 dark:text-gray-800 text-gray-300" />
-      <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0 dark:text-gray-800 text-gray-300" />
+      <Sun className={cn(
+        "scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90",
+        isMobile
+          ? "h-5 w-5 text-muted-foreground"
+          : "h-[1.2rem] w-[1.2rem] dark:text-gray-800 text-gray-300"
+      )} />
+      <Moon className={cn(
+        "absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0",
+        isMobile
+          ? "h-5 w-5 text-muted-foreground"
+          : "h-[1.2rem] w-[1.2rem] dark:text-gray-800 text-gray-300"
+      )} />
       <span className="sr-only">Toggle theme</span>
     </Button>
   )
