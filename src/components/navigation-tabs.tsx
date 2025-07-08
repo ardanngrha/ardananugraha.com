@@ -14,9 +14,10 @@ interface Tab {
 
 interface TabsProps {
   tabs: Tab[]
+  showLabels?: boolean
 }
 
-export function Tabs({ tabs }: TabsProps) {
+export function Tabs({ tabs, showLabels = true }: TabsProps) {
   const pathname = usePathname()
   const [activeTab, setActiveTab] = useState(() => {
     return tabs.find(tab => tab.href === pathname)?.id || null
@@ -92,14 +93,16 @@ export function Tabs({ tabs }: TabsProps) {
             // Only highlight the tab that currently has the background (hovered or active)
             (hoveredTab === tab.id || (!hoveredTab && activeTab === tab.id))
               ? "text-white dark:text-black"
-              : "text-muted-foreground hover:text-foreground"
+              : "text-muted-foreground hover:text-foreground",
+            // Adjust padding when labels are hidden
+            !showLabels && "px-2"
           )}
           onClick={() => setActiveTab(tab.id)}
           onMouseEnter={() => setHoveredTab(tab.id)}
           onMouseLeave={() => setHoveredTab(null)}
         >
           {tab.logo}
-          {tab.label}
+          {showLabels && tab.label}
         </Link>
       ))}
     </div>
