@@ -93,32 +93,39 @@ export default function NowPlaying() {
     <div className="flex flex-col items-center md:items-start gap-2">
       <h3 className="font-semibold text-4xl font-handwriting">Ardana Nugraha</h3>
       <p className="text-sm text-muted-foreground italic">&quot;stay foolish, stay hungry&quot;</p>
-      <div className="flex items-center gap-2 pt-4">
-        <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
-          {currentTrack!.albumImageUrl ? (
-            <Image
-              src={currentTrack!.albumImageUrl}
-              alt={`${currentTrack!.name} album cover`}
-              width={48}
-              height={48}
-              className="rounded-lg"
-            />
-          ) : (
-            <span className="text-muted-foreground text-xs">♪</span>
-          )}
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="font-medium text-sm truncate">{currentTrack!.name}</p>
-          <p className="text-muted-foreground text-xs truncate">{currentTrack!.artist}</p>
-          <div className="flex items-center gap-1">
-            <div className={`w-1 h-1 rounded-full ${currentTrack!.isPlaying ? 'bg-green-500' : 'bg-muted-foreground'}`} />
-            <span className="text-xs text-muted-foreground">
-              {currentTrack!.isPlaying ? 'Now Playing' : 'Last Played'}
-            </span>
+
+      {currentTrack ? (
+        <div className="flex items-center gap-2 pt-4">
+          <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+            {currentTrack.albumImageUrl ? (
+              <Image
+                src={currentTrack.albumImageUrl}
+                alt={`${currentTrack.name} album cover`}
+                width={48}
+                height={48}
+                className="rounded-lg"
+              />
+            ) : (
+              <span className="text-muted-foreground text-xs">♪</span>
+            )}
           </div>
+          <div className="flex-1 min-w-0">
+            <p className="font-medium text-sm truncate">{currentTrack.name}</p>
+            <p className="text-muted-foreground text-xs truncate">{currentTrack.artist}</p>
+            <div className="flex items-center gap-1">
+              <div className={`w-1 h-1 rounded-full ${currentTrack.isPlaying ? 'bg-green-500' : 'bg-muted-foreground'}`} />
+              <span className="text-xs text-muted-foreground">
+                {currentTrack.isPlaying ? 'Now Playing' : 'Last Played'}
+              </span>
+            </div>
+          </div>
+          <SoundWaves isPlaying={currentTrack.isPlaying} />
         </div>
-        <SoundWaves isPlaying={currentTrack!.isPlaying} />
-      </div>
+      ) : (
+        <></>
+        // No track is currently playing
+
+      )}
     </div>
   )
 }
