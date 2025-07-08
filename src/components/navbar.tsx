@@ -1,16 +1,17 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { ModeToggle } from "./toggle-mode";
 import Image from "next/image";
 import { Tabs } from "@/components/navigation-tabs";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "motion/react";
+import { HiHome, HiBriefcase, HiPencilAlt, HiUser } from "react-icons/hi";
 
 const navigationTabs = [
-  { id: "projects", label: "Projects", href: "/projects" },
-  { id: "writings", label: "Writings", href: "/writings" },
-  { id: "about", label: "About", href: "/about" },
+  { id: "home", label: "Home", href: "/", logo: <HiHome className="w-4 h-4" /> },
+  { id: "projects", label: "Projects", href: "/projects", logo: <HiBriefcase className="w-4 h-4" /> },
+  { id: "writings", label: "Writings", href: "/writings", logo: <HiPencilAlt className="w-4 h-4" /> },
+  { id: "about", label: "About", href: "/about", logo: <HiUser className="w-4 h-4" /> },
 ];
 
 export default function Navbar() {
@@ -30,7 +31,6 @@ export default function Navbar() {
     setIsVisible(latest === 0);
   });
 
-  // Don't render anything until mounted to prevent hydration issues
   if (!isMounted) {
     return null;
   }
@@ -46,24 +46,22 @@ export default function Navbar() {
           className="sticky top-5 z-50 bg-transparent backdrop-blur-md container mx-auto flex justify-between items-center border-2 rounded-full px-2 py-0.5 dark:border-gray-700 border-gray-300"
         >
           <div className="flex items-center justify-center w-10 h-10">
-            <Link href="/">
-              <Image
-                src="/images/an-white.png"
-                alt="logo"
-                width={30}
-                height={0}
-                style={{ height: "auto", width: "auto" }}
-                className="dark:block hidden w-6 h-6 sm:w-[30px] sm:h-auto"
-              />
-              <Image
-                src="/images/an-black.png"
-                alt="logo"
-                width={30}
-                height={0}
-                style={{ height: "auto", width: "auto" }}
-                className="dark:hidden block w-6 h-6 sm:w-[30px] sm:h-auto"
-              />
-            </Link>
+            <Image
+              src="/images/an-white.png"
+              alt="logo"
+              width={30}
+              height={0}
+              style={{ height: "auto", width: "auto" }}
+              className="dark:block hidden w-6 h-6 sm:w-[30px] sm:h-auto"
+            />
+            <Image
+              src="/images/an-black.png"
+              alt="logo"
+              width={30}
+              height={0}
+              style={{ height: "auto", width: "auto" }}
+              className="dark:hidden block w-6 h-6 sm:w-[30px] sm:h-auto"
+            />
           </div>
 
           <div className="flex-1 flex justify-center min-w-0">
