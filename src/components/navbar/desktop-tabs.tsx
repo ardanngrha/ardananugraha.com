@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "motion/react"
 import Image from "next/image"
-import { Tabs } from "@/components/navigation-tabs"
+import { Tabs } from "@/components/navbar/navigation-tabs"
 import { ModeToggle } from "./toggle-mode"
 
 interface DesktopTabsProps {

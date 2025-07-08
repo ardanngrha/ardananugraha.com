@@ -1,6 +1,6 @@
 "use client"
 
-import { Tabs } from "@/components/navigation-tabs"
+import { Tabs } from "@/components/navbar/navigation-tabs"
 import { ModeToggle } from "./toggle-mode"
 
 interface MobileTabsProps {

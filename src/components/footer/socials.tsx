@@ -10,7 +10,7 @@ const socialLinks = [
 export default function Socials() {
   return (
     <div className="flex flex-col items-center md:items-start gap-3">
-      <h3 className="font-semibold text-lg">Socials</h3>
+      <h3 className="text-muted-foreground text-sm">Socials</h3>
       <nav className="grid grid-cols-2 gap-2 md:flex md:flex-col md:items-start">
         {socialLinks.map((link) => (
           <Link
@@ -18,7 +18,7 @@ export default function Socials() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-muted-foreground hover:text-foreground transition-colors text-center md:text-left"
+            className="text-sm transition-colors text-center md:text-left"
           >
             {link.label}
           </Link>

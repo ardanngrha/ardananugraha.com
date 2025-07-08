@@ -31,11 +31,11 @@ export default async function ProjectsPage() {
   const allProjects = await getAllProjects();
 
   return (
-    <div className="pt-8 md:pt-16">
+    <div className="pt-8 md:pt-16 pb-8 md:pb-16">
       {/* Centered title section */}
       <div className="text-center mb-16">
-        <h1 className="text-4xl font-bold mb-4">Projects</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <h1 className="text-6xl md:text-7xl font-bold mb-4 font-handwriting">Projects</h1>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-mono">
           Explore my portfolio of software projects, from web applications to open-source contributions.
         </p>
       </div>

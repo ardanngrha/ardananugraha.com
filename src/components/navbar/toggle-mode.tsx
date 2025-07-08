@@ -25,56 +25,70 @@ export function ModeToggle({ variant = "default" }: ModeToggleProps) {
 
     setIsAnimating(true)
 
-    // Get button position for animation origin
-    const button = buttonRef.current
-    if (button) {
-      const rect = button.getBoundingClientRect()
-      const x = rect.left + rect.width / 2
-      const y = rect.top + rect.height / 2
+    // Check if we should apply ripple effect (only on desktop)
+    const shouldApplyRipple = variant === "default" && window.innerWidth >= 768
 
-      // Use resolvedTheme for accurate current theme
+    if (shouldApplyRipple) {
+      // Get button position for animation origin
+      const button = buttonRef.current
+      if (button) {
+        const rect = button.getBoundingClientRect()
+        const x = rect.left + rect.width / 2
+        const y = rect.top + rect.height / 2
+
+        // Use resolvedTheme for accurate current theme
+        const currentTheme = resolvedTheme || theme
+
+        // Create ripple effect
+        const ripple = document.createElement('div')
+        ripple.className = 'theme-transition-overlay'
+        ripple.style.cssText = `
+          position: fixed;
+          top: ${y}px;
+          left: ${x}px;
+          width: 0;
+          height: 0;
+          border-radius: 50%;
+          background: ${currentTheme === 'dark' ? '#ffffff' : '#000000'};
+          z-index: 99999;
+          pointer-events: none;
+          transform: translate(-50%, -50%);
+          transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        `
+
+        document.body.appendChild(ripple)
+
+        // Trigger animation
+        requestAnimationFrame(() => {
+          const maxDimension = Math.max(window.innerWidth, window.innerHeight)
+          const diagonal = Math.sqrt(Math.pow(maxDimension, 2) + Math.pow(maxDimension, 2))
+
+          ripple.style.width = `${diagonal * 2.5}px`
+          ripple.style.height = `${diagonal * 2.5}px`
+        })
+
+        // Change theme after animation starts
+        setTimeout(() => {
+          setTheme(currentTheme === "dark" ? "light" : "dark")
+        }, 400)
+
+        // Clean up
+        setTimeout(() => {
+          if (document.body.contains(ripple)) {
+            document.body.removeChild(ripple)
+          }
+          setIsAnimating(false)
+        }, 800)
+      }
+    } else {
+      // For mobile or when ripple is disabled, just change theme immediately
       const currentTheme = resolvedTheme || theme
+      setTheme(currentTheme === "dark" ? "light" : "dark")
 
-      // Create ripple effect
-      const ripple = document.createElement('div')
-      ripple.className = 'theme-transition-overlay'
-      ripple.style.cssText = `
-        position: fixed;
-        top: ${y}px;
-        left: ${x}px;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: ${currentTheme === 'dark' ? '#ffffff' : '#000000'};
-        z-index: 99999;
-        pointer-events: none;
-        transform: translate(-50%, -50%);
-        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-      `
-
-      document.body.appendChild(ripple)
-
-      // Trigger animation
-      requestAnimationFrame(() => {
-        const maxDimension = Math.max(window.innerWidth, window.innerHeight)
-        const diagonal = Math.sqrt(Math.pow(maxDimension, 2) + Math.pow(maxDimension, 2))
-
-        ripple.style.width = `${diagonal * 2.5}px`
-        ripple.style.height = `${diagonal * 2.5}px`
-      })
-
-      // Change theme after animation starts
+      // Still need to handle the animation state
       setTimeout(() => {
-        setTheme(currentTheme === "dark" ? "light" : "dark")
-      }, 400)
-
-      // Clean up
-      setTimeout(() => {
-        if (document.body.contains(ripple)) {
-          document.body.removeChild(ripple)
-        }
         setIsAnimating(false)
-      }, 800)
+      }, 300)
     }
   }
 
