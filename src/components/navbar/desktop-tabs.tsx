@@ -23,35 +23,43 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 0.2, ease: "easeInOut" }}
-          className="hidden md:block sticky top-5 z-50 bg-transparent backdrop-blur-md container mx-auto border-2 rounded-full px-2 py-0.5 dark:border-gray-700 border-gray-300"
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          className="hidden md:block sticky top-5 z-50 container mx-auto"
         >
-          <div className="flex justify-between items-center">
-            <div className="flex items-center justify-center w-10 h-10">
-              <Image
-                src="/images/an-white.png"
-                alt="logo"
-                width={30}
-                height={0}
-                style={{ height: "auto", width: "auto" }}
-                className="dark:block hidden w-6 h-6 sm:w-[30px] sm:h-auto"
-              />
-              <Image
-                src="/images/an-black.png"
-                alt="logo"
-                width={30}
-                height={0}
-                style={{ height: "auto", width: "auto" }}
-                className="dark:hidden block w-6 h-6 sm:w-[30px] sm:h-auto"
-              />
-            </div>
+          {/* Outer glow effect */}
+          <div className="relative">
+            {/* Glow background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl scale-110 opacity-50 dark:opacity-30" />
 
-            <div className="flex-1 flex justify-center min-w-0">
-              <Tabs tabs={navigationTabs} />
-            </div>
+            {/* Main navbar */}
+            <div className="relative bg-white/80 dark:bg-black backdrop-blur-xl border border-gray-200 dark:border-gray rounded-full px-2 py-1.5 shadow-2xl shadow-gray-900/10 dark:shadow-gray-900/30">
 
-            <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
-              <ModeToggle />
+              <div className="relative flex justify-between items-center">
+                {/* Logo section with hover effect */}
+                <motion.div
+                  className="flex items-center justify-center w-9 h-9 pl-2"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Image
+                    src="/images/an-black.png"
+                    alt="logo"
+                    width={30}
+                    height={30}
+                    className="w-8 h-8 dark:filter dark:brightness-0 dark:invert"
+                  />
+                </motion.div>
+
+                {/* Navigation tabs */}
+                <div className="flex-1 flex justify-center min-w-0 mx-4">
+                  <Tabs tabs={navigationTabs} />
+                </div>
+
+                {/* Theme toggle with enhanced styling */}
+                <div className="flex items-center justify-center w-8 h-8">
+                  <ModeToggle />
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>

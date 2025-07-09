@@ -4,12 +4,14 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { MoreDropdown } from "./more-dropdown"
 
 interface Tab {
   id: string
   label: string
   href: string
   logo: React.ReactNode
+  isDropdown?: boolean
 }
 
 interface TabsProps {
@@ -23,8 +25,9 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
     return tabs.find(tab => tab.href === pathname)?.id || null
   })
   const [hoveredTab, setHoveredTab] = useState<string | null>(null)
+  const [moreDropdownOpen, setMoreDropdownOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
-  const tabsRef = useRef<(HTMLAnchorElement | null)[]>([])
+  const tabsRef = useRef<(HTMLAnchorElement | HTMLButtonElement | HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const currentTab = tabs.find(tab => tab.href === pathname)
@@ -68,8 +71,17 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
     }
   }
 
-  // Fix: Always prioritize hoveredTab over activeTab for background position
-  const backgroundPosition = getTabPosition(hoveredTab || activeTab)
+  // Determine which tab should show the background
+  const getBackgroundTab = () => {
+    // If More dropdown is open, show background on More tab
+    if (moreDropdownOpen) {
+      return tabs.find(tab => tab.isDropdown)?.id || null
+    }
+    // Otherwise, prioritize hovered tab over active tab
+    return hoveredTab || activeTab
+  }
+
+  const backgroundPosition = getTabPosition(getBackgroundTab())
 
   return (
     <div className="relative flex items-center gap-1">
@@ -79,33 +91,56 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
         style={{
           left: backgroundPosition.left,
           width: backgroundPosition.width,
-          opacity: (hoveredTab || activeTab) && isMounted ? 1 : 0
+          opacity: (hoveredTab || activeTab || moreDropdownOpen) && isMounted ? 1 : 0
         }}
       />
 
-      {tabs.map((tab, index) => (
-        <Link
-          key={tab.id}
-          ref={el => { tabsRef.current[index] = el }}
-          href={tab.href}
-          data-tab={tab.id}
-          className={cn(
-            "relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200",
-            // Fix: Check if this tab should have the background (either hovered or active when not hovering)
-            (hoveredTab === tab.id || (!hoveredTab && activeTab === tab.id))
-              ? "text-white dark:text-black"
-              : "text-muted-foreground hover:text-foreground",
-            // Adjust padding when labels are hidden
-            !showLabels && "px-3"
-          )}
-          onClick={() => setActiveTab(tab.id)}
-          onMouseEnter={() => setHoveredTab(tab.id)}
-          onMouseLeave={() => setHoveredTab(null)}
-        >
-          {tab.logo}
-          {showLabels && tab.label}
-        </Link>
-      ))}
+      {tabs.map((tab, index) => {
+        // Handle dropdown tab separately
+        if (tab.isDropdown) {
+          return (
+            <div
+              key={tab.id}
+              ref={el => { tabsRef.current[index] = el as HTMLDivElement }}
+              onMouseEnter={() => setHoveredTab(tab.id)}
+              onMouseLeave={() => setHoveredTab(null)}
+            >
+              <MoreDropdown
+                isActive={activeTab === tab.id || moreDropdownOpen}
+                isHovered={hoveredTab === tab.id}
+                onMouseEnterAction={() => setHoveredTab(tab.id)}
+                onMouseLeaveAction={() => setHoveredTab(null)}
+                onOpenChangeAction={setMoreDropdownOpen}
+                showLabel={showLabels}
+              />
+            </div>
+          )
+        }
+
+        return (
+          <Link
+            key={tab.id}
+            ref={el => { tabsRef.current[index] = el }}
+            href={tab.href}
+            data-tab={tab.id}
+            className={cn(
+              "relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200",
+              // Fix: Check if this tab should have the background (either hovered or active when not hovering)
+              (hoveredTab === tab.id || (!hoveredTab && !moreDropdownOpen && activeTab === tab.id))
+                ? "text-white dark:text-black"
+                : "text-muted-foreground hover:text-foreground",
+              // Adjust padding when labels are hidden
+              !showLabels && "px-3"
+            )}
+            onClick={() => setActiveTab(tab.id)}
+            onMouseEnter={() => setHoveredTab(tab.id)}
+            onMouseLeave={() => setHoveredTab(null)}
+          >
+            {tab.logo}
+            {showLabels && tab.label}
+          </Link>
+        )
+      })}
     </div>
   )
 }
