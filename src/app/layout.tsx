@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter, Zeyada, Space_Mono } from "next/font/google";
+import { Inter, Space_Mono, Oooh_Baby } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
-const zeyada = Zeyada({
+const zeyada = Oooh_Baby({
   weight: '400',
   subsets: ["latin"],
   display: "swap",
-  variable: '--font-zeyada'
+  variable: '--font-oooh-baby'
 });
 const spaceMono = Space_Mono({
   weight: ['400', '700'],

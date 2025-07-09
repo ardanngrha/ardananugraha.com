@@ -11,7 +11,7 @@ export default function Footer() {
       {/* Main Row - 5 columns */}
       <div className="flex flex-col md:flex-row gap-6 py-12 items-center md:items-start">
         {/* Now Playing */}
-        <div className="col-span-1 flex-1 flex justify-center md:justify-start">
+        <div className="col-span-1 md:mr-20 flex justify-center md:justify-start">
           <NowPlaying />
         </div>
 
