@@ -34,7 +34,12 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
     if (currentTab) {
       setActiveTab(currentTab?.id || null)
     } else {
-      setActiveTab(null)
+      const dropdownPaths = ['/guestbook', '/attribution']
+      if (dropdownPaths.includes(pathname)) {
+        setActiveTab('more')
+      } else {
+        setActiveTab(null)
+      }
     }
   }, [pathname, tabs])
 

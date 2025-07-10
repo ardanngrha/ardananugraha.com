@@ -16,7 +16,7 @@ const dropdownItems = [
   {
     id: "guestbook",
     label: "Guest Book",
-    href: "/guest-book",
+    href: "/guestbook",
     icon: <HiOutlineBookOpen className="w-4 h-4" />,
   },
   {

@@ -10,6 +10,7 @@
   --font-sans: var(--font-inter), 'Inter', sans-serif;
   --font-mono: var(--font-space-mono), 'Space Mono', monospace;
   --font-handwriting: var(--font-oooh-baby), 'Oooh Baby', cursive;
+  --font-tik-tok: var(--font-tik-tok), 'TikTok Sans', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -155,6 +156,10 @@
 
   .font-mono {
     font-family: var(--font-space-mono), 'Space Mono', monospace;
+  }
+
+  .font-tik-tok {
+    font-family: var(--font-tik-tok), 'TikTok Sans', sans-serif;
   }
 
   .sound-wave {

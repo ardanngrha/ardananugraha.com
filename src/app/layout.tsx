@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter, Space_Mono, Oooh_Baby } from "next/font/google";
+import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -18,6 +19,12 @@ const spaceMono = Space_Mono({
   display: "swap",
   variable: '--font-space-mono'
 });
+const tikTok = localFont({
+  src: [
+    { path: "../../public/fonts/TikTokSans-VariableFont_opsz,slnt,wdth,wght.ttf" },
+  ],
+  variable: "--font-tik-tok"
+});
 
 export const metadata: Metadata = {
   title: "Ardana Nugraha",
@@ -32,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`antialiased ${inter.className} ${zeyada.variable} ${spaceMono.variable} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
+        className={`antialiased ${inter.className} ${zeyada.variable} ${spaceMono.variable} ${tikTok.variable} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
       >
         <ThemeProvider
           attribute="class"
