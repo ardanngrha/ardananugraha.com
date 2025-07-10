@@ -87,7 +87,7 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
     <div className="relative flex items-center gap-1">
       {/* Sliding background */}
       <div
-        className="absolute top-0 h-full bg-black dark:bg-white rounded-full transition-all duration-200 ease-out z-0"
+        className="absolute top-0 h-full bg-black dark:bg-gray-600 rounded-full transition-all duration-200 ease-out z-0"
         style={{
           left: backgroundPosition.left,
           width: backgroundPosition.width,
@@ -127,7 +127,7 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
               "relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200",
               // Fix: Check if this tab should have the background (either hovered or active when not hovering)
               (hoveredTab === tab.id || (!hoveredTab && !moreDropdownOpen && activeTab === tab.id))
-                ? "text-white dark:text-black"
+                ? "text-white"
                 : "text-muted-foreground hover:text-foreground",
               // Adjust padding when labels are hidden
               !showLabels && "px-3"

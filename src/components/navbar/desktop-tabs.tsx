@@ -32,7 +32,7 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-xl scale-110 opacity-50 dark:opacity-30" />
 
             {/* Main navbar */}
-            <div className="relative bg-white/80 dark:bg-black backdrop-blur-xl border border-gray-200 dark:border-gray rounded-full px-2 py-1.5 shadow-2xl shadow-gray-900/10 dark:shadow-gray-900/30">
+            <div className="relative bg-white/80 dark:bg-black backdrop-blur-xl border border-gray-600 dark:border-gray rounded-full px-2 py-1.5 shadow-2xl shadow-gray-900/10 dark:shadow-gray-900/30">
 
               <div className="relative flex justify-between items-center">
                 {/* Logo section with hover effect */}
