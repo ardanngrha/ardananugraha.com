@@ -3,8 +3,10 @@ import "./globals.css";
 import { Inter, Space_Mono, Oooh_Baby } from "next/font/google";
 import localFont from "next/font/local";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Providers } from "@/components/session-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { getSession } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 const zeyada = Oooh_Baby({
@@ -31,27 +33,30 @@ export const metadata: Metadata = {
   description: "Personal website of Ardana Nugraha, a software engineer.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getSession()
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`antialiased ${inter.className} ${zeyada.variable} ${spaceMono.variable} ${tikTok.variable} max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
-          <Navbar />
-          <main>
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <Providers session={session}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
+            <Navbar />
+            <main>
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
