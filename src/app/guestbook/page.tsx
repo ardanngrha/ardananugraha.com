@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,22 +20,30 @@ export default function GuestbookPage() {
   const { data: session } = useSession();
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
+  const commentsContainerRef = useRef<HTMLDivElement>(null);
 
-  const fetchComments = async () => {
+  const scrollToBottom = () => {
+    if (commentsContainerRef.current) {
+      commentsContainerRef.current.scrollTop = commentsContainerRef.current.scrollHeight;
+    }
+  };
+
+  const fetchComments = useCallback(async () => {
     try {
       const response = await fetch("/api/guestbook");
       if (response.ok) {
         const data = await response.json();
         setComments(data);
+        setTimeout(scrollToBottom, 100);
       }
     } catch (error) {
       console.error("Failed to fetch comments:", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchComments();
-  }, []);
+  }, [fetchComments]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -77,7 +85,7 @@ export default function GuestbookPage() {
       </div>
 
       <div className="max-w-4xl mx-auto border rounded-lg bg-background font-mono">
-        <div className="h-80 md:h-96 overflow-y-auto flex flex-col-reverse p-3 md:p-4 mb-4 border rounded-md">
+        <div ref={commentsContainerRef} className="h-80 md:h-96 overflow-y-auto flex flex-col p-3 md:p-4 mb-4 border rounded-md">
           <div className="flex-grow" />
           <div className="space-y-3 md:space-y-4">
             {comments.map((comment) => (

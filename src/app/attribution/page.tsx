@@ -2,9 +2,8 @@ import Link from "next/link";
 
 export default function AttributionPage() {
   const inspirations = [
-    { name: "Lee Robinson", url: "https://leerob.io" },
-    { name: "Manu Arora", url: "https://manuarora.in" },
-    { name: "Julien Gauthier", url: "https://juliengauthier.com" },
+    { name: "Theodorus Clarence", url: "https://theodorusclarence.com/" },
+    { name: "Wiscaksono", url: "https://wiscaksono.com/" },
     // Add more inspirations here
   ];
 

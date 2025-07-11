@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { comments, users } from "@/lib/schema";
 import { getSession } from "@/lib/auth";
-import { desc, eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 
 export async function GET() {
   try {
@@ -10,7 +10,7 @@ export async function GET() {
       with: {
         author: true,
       },
-      orderBy: [desc(comments.createdAt)],
+      orderBy: [asc(comments.createdAt)],
     });
 
     return NextResponse.json(allComments);
