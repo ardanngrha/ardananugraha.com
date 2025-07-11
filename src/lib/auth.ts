@@ -1,21 +1,87 @@
+import { db } from "@/lib/drizzle";
+import { users } from "@/lib/schema";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import { AuthOptions, getServerSession } from "next-auth";
+import { Adapter } from "next-auth/adapters";
 import GitHubProvider from "next-auth/providers/github";
-import { AuthOptions, getServerSession } from "next-auth"
 
-const authOptions: AuthOptions = {
-    // Configure one or more authentication providers
+export const authOptions: AuthOptions = {
+  adapter: {
+    ...DrizzleAdapter(db),
+    async createUser(user: { id?: string; name?: string; email?: string; emailVerified?: Date; image?: string; username?: string }) {
+      const { name, email, emailVerified, image, username } = user;
+      
+      const newUser = await db.insert(users).values({
+        name,
+        email: email!,
+        emailVerified,
+        image,
+        username: username || 'user', // Fallback username
+      }).returning();
+      
+      return newUser[0];
+    },
+  } as Adapter,
   providers: [
-        GitHubProvider({
+    GitHubProvider({
       clientId: process.env.NEXT_GITHUB_CLIENT_ID!,
       clientSecret: process.env.NEXT_GITHUB_CLIENT_SECRET!,
+      async profile(profile) {
+        // Extract user ID from avatar URL
+        const avatarUrl = profile.avatar_url;
+        const userIdMatch = avatarUrl.match(/\/u\/(\d+)/);
+        
+        let username = profile.login; // fallback to profile.login
+        
+        if (userIdMatch) {
+          const userId = userIdMatch[1];
+          try {
+            // Fetch username from GitHub API
+            const response = await fetch(`https://api.github.com/user/${userId}`, {
+              headers: {
+                'User-Agent': 'ardananugraha.com',
+              },
+            });
+            
+            if (response.ok) {
+              const userData = await response.json();
+              username = userData.login;
+            }
+          } catch (error) {
+            console.error('Failed to fetch GitHub username:', error);
+            // Keep the fallback username
+          }
+        }
+
+        return {
+          id: profile.id.toString(),
+          name: profile.name,
+          email: profile.email,
+          image: profile.avatar_url,
+          username: username,
+        };
+      },
     }),
-    // ...add more providers here
   ],
-}
+  callbacks: {
+    async session({ session, user }) {
+      if (session.user) {
+        const dbUser = await db.query.users.findFirst({
+          where: (users, { eq }) => eq(users.id, user.id),
+        });
+        if (dbUser) {
+          session.user.id = dbUser.id;
+          session.user.username = dbUser.username;
+        }
+      }
+      return session;
+    },
+  },
+};
 
 /**
- * Helper function to get the session on the server without having to import the authOptions object every single time
+ * Helper function to get the session on the server without having to import
+ * the authOptions object every single time.
  * @returns The session object or null
  */
-const getSession = () => getServerSession(authOptions)
-
-export { authOptions, getSession }
+export const getSession = () => getServerSession(authOptions);

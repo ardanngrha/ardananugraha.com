@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/drizzle";
 import { comments, users } from "@/lib/schema";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/lib/auth";
-import { desc } from "drizzle-orm";
+import { getSession } from "@/lib/auth";
+import { desc, eq } from "drizzle-orm";
 
 export async function GET() {
   try {
@@ -26,41 +25,31 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await getServerSession(authOptions);
+    const session = await getSession();
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { content } = await req.json();
-    const { name, image, email } = session.user;
-    
-    // Use email as the primary identifier instead of GitHub ID
-    if (!content || !email) {
+    const { id: userId, username } = session.user;
+
+    if (!content || !userId || !username) {
       return NextResponse.json(
-        { error: "Content and email are required" },
+        { error: "Content and user identifiers are required" },
         { status: 400 }
       );
     }
-    
-    console.log('Session user:', session.user);
-    console.log('Email:', email);
 
-    // Upsert the user using email instead of githubId
     const [user] = await db
-      .insert(users)
-      .values({
-        githubId: email, // Using email in the githubId field, or you might want to rename this field
-        username: name || "Anonymous",
-        avatarUrl: image,
-      })
-      .onConflictDoUpdate({
-        target: users.githubId, // This should match your database constraint
-        set: { username: name || "Anonymous", avatarUrl: image },
-      })
-      .returning();
+      .select()
+      .from(users)
+      .where(eq(users.id, userId));
 
-    // Insert the new comment
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
     await db.insert(comments).values({
       userId: user.id,
       content,

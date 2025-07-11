@@ -25,7 +25,9 @@ const tikTok = localFont({
   src: [
     { path: "../../public/fonts/TikTokSans-VariableFont_opsz,slnt,wdth,wght.ttf" },
   ],
-  variable: "--font-tik-tok"
+  variable: "--font-tik-tok",
+  display: 'swap',
+  fallback: ['system-ui', 'arial']
 });
 
 export const metadata: Metadata = {
