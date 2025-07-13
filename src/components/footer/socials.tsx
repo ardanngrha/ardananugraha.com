@@ -18,7 +18,7 @@ export default function Socials() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm transition-colors text-center md:text-left"
+            className="text-sm transition-colors text-center md:text-left custom-cursor hover:text-primary hover:underline"
           >
             {link.label}
           </Link>
