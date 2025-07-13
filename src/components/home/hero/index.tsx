@@ -105,7 +105,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.9 }}
-          className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <div className="inline-flex items-center gap-1 px-2 py-2 bg-gray-100/50 dark:bg-gray-900/50 border border-gray-300/50 dark:border-gray-600/50 rounded-lg font-mono text-sm font-semibold h-12 w-fit">
             <span className="text-green-600 dark:text-green-400">$</span>
@@ -119,7 +119,7 @@ export default function Hero() {
               PLN Icon Plus
             </a>
           </div>
-          <div className="mt-3 sm:mt-0 flex justify-center h-12">
+          <div className="flex justify-center h-12">
             <Link
               href="/about"
               className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gray-100/50 dark:bg-gray-900/50 border border-gray-300/50 dark:border-gray-600/50 rounded-lg font-medium text-sm text-gray-700 dark:text-gray-300 transition-all duration-300 hover:shadow-lg hover:scale-105 active:scale-95 overflow-hidden"

@@ -27,6 +27,7 @@ const tikTok = localFont({
   ],
   variable: "--font-tik-tok",
   display: 'swap',
+  preload: false,
   fallback: ['system-ui', 'arial']
 });
 

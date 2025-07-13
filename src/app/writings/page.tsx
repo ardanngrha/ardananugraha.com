@@ -39,7 +39,7 @@ export default async function WritingsPage() {
         description="Thoughts, insights, and tutorials on software development, technology trends, and my learning journey."
         background={<WritingsBg />}
       />
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div className="flex flex-col max-w-4xl mx-auto px-4 py-16 gap-8">
         {allPosts.map((post) => (
           <div key={post.slug}>
             <Link href={`/writings/${post.slug}`}>

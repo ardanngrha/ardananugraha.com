@@ -39,7 +39,7 @@ export default async function ProjectsPage() {
         description="Here are some of the projects I'm proud of. They range from web development to data science."
         background={<ProjectsBg />}
       />
-      <div className="max-w-4xl mx-auto px-4 py-16">
+      <div className="flex flex-col max-w-4xl mx-auto px-4 py-16 gap-8">
         {allProjects.map((project) => (
           <div key={project.slug}>
             <Link href={`/projects/${project.slug}`}>
