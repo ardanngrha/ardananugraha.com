@@ -21,9 +21,9 @@ export function TestimonialCard({
       transition={{ type: "spring", stiffness: 400, damping: 20 }}
     >
       <div
-        className={`w-full h-80 backdrop-blur-md border rounded-2xl p-8 flex flex-col shadow-2xl ${isCenter
-            ? "bg-white/80 dark:bg-black/80 border-white/30 dark:border-white/20"
-            : "bg-white/10 dark:bg-black/10 border-white/20 dark:border-white/10"
+        className={`w-full h-80 backdrop-blur-md border p-8 flex flex-col shadow-2xl ring-1 ring-inset ring-gray-200 dark:ring-zinc-700/50 hover:ring-primary/50 dark:hover:ring-primary/50 rounded-2xl ${isCenter
+          ? "bg-white/80 dark:bg-black/80 border-white/30 dark:border-white/20"
+          : "bg-white/10 dark:bg-black/10 border-white/20 dark:border-white/10"
           }`}
       >
         <div className="flex-1 flex items-center justify-center">
@@ -32,7 +32,7 @@ export function TestimonialCard({
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-center mt-4 space-x-3 p-3 rounded-xl backdrop-blur-md bg-white/90 dark:bg-black/90 border border-white/30 dark:border-white/20 shadow-lg">
+      <div className="flex items-center justify-center mt-4 space-x-3 p-3 backdrop-blur-md bg-white/90 dark:bg-black/90 border border-white/30 dark:border-white/20 shadow-lg ring-1 ring-inset ring-gray-200 dark:ring-zinc-700/50 hover:ring-primary/50 dark:hover:ring-primary/50 rounded-2xl">
         <div className="w-12 h-12 rounded-full overflow-hidden bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center text-white font-semibold">
           {testimonial.avatar ? (
             <Image
