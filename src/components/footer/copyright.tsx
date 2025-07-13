@@ -1,6 +1,7 @@
 "use client"
 
 import { animate, motion, useMotionValue, useTransform } from "motion/react"
+import Link from "next/link"
 import { useEffect, useState } from "react"
 
 export default function Copyright() {
@@ -61,12 +62,12 @@ export default function Copyright() {
         </p>
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span>Built with</span>
-          <div className="flex items-center gap-1 flex-wrap">
-            <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Next.js</span>
-            <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Tailwind</span>
-            <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">shadcn/ui</span>
-            <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Vercel</span>
-            <span className="px-1.5 py-0.5 bg-secondary rounded text-xs">Motion</span>
+          <div className="flex items-center gap-1 flex-wrap font-mono">
+            <Link href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Next.js</Link>
+            <Link href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Tailwind</Link>
+            <Link href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">shadcn/ui</Link>
+            <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Vercel</Link>
+            <Link href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Motion</Link>
           </div>
         </div>
         <p className="text-xs text-muted-foreground font-mono">
@@ -81,14 +82,14 @@ export default function Copyright() {
       <p className="text-sm text-muted-foreground">
         © 2025. All rights reserved.
       </p>
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+      <div className="flex flex-col md:flex-row items-center gap-2 text-xs text-muted-foreground">
         <span>Built with</span>
         <div className="flex items-center gap-1 flex-wrap font-mono">
-          <a href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Next.js</a>
-          <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Tailwind</a>
-          <a href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">shadcn/ui</a>
-          <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Vercel</a>
-          <a href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Motion</a>
+          <Link href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Next.js</Link>
+          <Link href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Tailwind</Link>
+          <Link href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">shadcn/ui</Link>
+          <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Vercel</Link>
+          <Link href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Motion</Link>
         </div>
       </div>
       <p className="font-handwriting">

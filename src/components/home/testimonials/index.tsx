@@ -8,15 +8,12 @@ const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 export default function TestimonialsSection() {
   const [[current, direction], setCurrent] = useState([0, 0]);
 
-  const getIndex = (index: number, offset: number) =>
-    (index + offset + testimonials.length) % testimonials.length;
+  const getIndex = (index: number) => {
+    return ((index % testimonials.length) + testimonials.length) % testimonials.length;
+  };
 
   const paginate = (newDirection: number) => {
     setCurrent([current + newDirection, newDirection]);
-  };
-
-  const getCurrentIndex = () => {
-    return ((current % testimonials.length) + testimonials.length) % testimonials.length;
   };
 
   const variants = {
@@ -69,7 +66,7 @@ export default function TestimonialsSection() {
   const positions = ["left", "center", "right"];
   const visibleCards = [-1, 0, 1].map((offset) => ({
     pos: positions[offset + 1],
-    index: getIndex(current, offset),
+    index: getIndex(current + offset),
   }));
 
   const handleDragEnd = (
@@ -134,10 +131,11 @@ export default function TestimonialsSection() {
           <button
             key={index}
             onClick={() => {
-              const direction = index > getCurrentIndex() ? 1 : -1;
+              const newIndex = getIndex(index);
+              const direction = newIndex > getIndex(current) ? 1 : -1;
               setCurrent([index, direction]);
             }}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === getCurrentIndex()
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === getIndex(current)
               ? "bg-primary scale-125"
               : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
               }`}

@@ -4,6 +4,7 @@ import { RoughNotation, RoughNotationGroup } from "react-rough-notation"
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { motion } from "motion/react"
 import HeroBackground from "./background"
 
 export default function Hero() {
@@ -26,23 +27,46 @@ export default function Hero() {
   return (
     <div className="relative flex flex-col min-h-screen justify-center items-center text-center p-4 md:p-0">
       <HeroBackground />
-      <div className="flex flex-col items-center gap-1 z-10">
-        <Image
-          src="/images/avatar.png"
-          alt="Ardana Nugraha"
-          width={128}
-          height={128}
-          className="rounded-full"
-          priority
-        />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="flex flex-col items-center gap-1 z-10"
+      >
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, type: "spring", stiffness: 100, delay: 0.3 }}
+        >
+          <Image
+            src="/images/avatar.png"
+            alt="Ardana Nugraha"
+            width={128}
+            height={128}
+            className="rounded-full"
+            priority
+          />
+        </motion.div>
         <div className="flex flex-col gap-4 text-center">
           {/* <h1 className="text-4xl md:text-5xl font-bold">Hi, I'm Ardana 👋</h1>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl">
               I build things for the web.
             </p> */}
         </div>
-        <p className="text-6xl md:text-7xl font-bold font-tik-tok gradient-text">I&apos;m Ardana</p>
-        <p className="relative text-lg font-medium max-w-lg">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-6xl md:text-7xl font-bold font-tik-tok"
+        >
+          I&apos;m Ardana
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="relative text-lg font-medium max-w-lg"
+        >
           I work with{" "}
           <RoughNotationGroup show={isMounted}>
             <RoughNotation
@@ -76,8 +100,13 @@ export default function Hero() {
             </RoughNotation>
           </RoughNotationGroup>{" "}
           to build applications.
-        </p>
-        <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-4">
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.9 }}
+          className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
           <div className="inline-flex items-center gap-1 px-2 py-2 bg-gray-100/50 dark:bg-gray-900/50 border border-gray-300/50 dark:border-gray-600/50 rounded-lg font-mono text-sm font-semibold h-12 w-fit">
             <span className="text-green-600 dark:text-green-400">$</span>
             <span className="text-gray-700 dark:text-gray-300">currently_working_at</span>
@@ -108,8 +137,8 @@ export default function Hero() {
               <span className="relative z-10">more about me</span>
             </Link>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   )
 }

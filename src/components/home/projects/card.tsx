@@ -42,6 +42,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 alt={project.frontmatter.title}
                 fill
                 className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">

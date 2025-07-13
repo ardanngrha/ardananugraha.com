@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { motion } from "motion/react"
 
 interface PageHeaderProps {
   title: string
@@ -26,14 +29,19 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 mx-auto px-4 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="container relative z-10 mx-auto px-4 text-center"
+      >
         <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
           {title}
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground md:text-xl">
           {description}
         </p>
-      </div>
+      </motion.div>
     </section>
   )
 }
