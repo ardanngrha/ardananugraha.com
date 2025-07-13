@@ -22,7 +22,7 @@ export default function WritingsSection({ writings, loading }: WritingsSectionPr
   return (
     <section className="py-16">
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-3xl font-bold">Featured Writings</h2>
+        <h2 className="text-3xl font-bold">Featured <span className="gradient-text">Writings</span></h2>
         <Button variant="outline" asChild>
           <Link href="/writings" className="inline-flex items-center gap-2">
             More
@@ -42,6 +42,7 @@ export default function WritingsSection({ writings, loading }: WritingsSectionPr
               <div className="h-3 bg-muted rounded w-24"></div>
             </div>
           ))}
+
         </div>
       ) : (
         <div className="space-y-6">

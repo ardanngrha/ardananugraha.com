@@ -79,8 +79,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --gradient-from: #66a6ff;
-  --gradient-to: #0040ff;
+  --gradient-from: #6190e8;
+  --gradient-to: #a7bfe8;
 }
 
 .dark {
@@ -142,7 +142,7 @@
 
 @layer components {
   .gradient-text {
-    background: linear-gradient(135deg, var(--gradient-from) 0%, var(--gradient-to) 100%);
+    background: linear-gradient(90deg, #6190e8 0%, #a7bfe8 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -206,6 +206,9 @@
     height: 8px;
     animation-delay: 0.4s;
   }
+
+  .-rotate-15 { transform: rotate(-15deg); }
+  .rotate-15 { transform: rotate(15deg); }
 }
 
 /* Custom keyframes for theme transition */

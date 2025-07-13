@@ -23,7 +23,7 @@ export default function HeroLeft() {
 
   return (
     <div className="flex-col">
-      <p className="text-7xl font-bold font-tik-tok">I&apos;m Ardana</p>
+      <p className="text-7xl font-bold font-tik-tok gradient-text">I&apos;m Ardana</p>
       <p className="relative text-lg font-medium">
         I work with{" "}
         <RoughNotationGroup show={isMounted}>
