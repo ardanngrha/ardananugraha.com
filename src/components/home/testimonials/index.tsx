@@ -89,7 +89,13 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="py-16 flex flex-col items-center overflow-hidden">
+    <motion.section
+      className="py-16 flex flex-col items-center overflow-hidden"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5 }}
+    >
       <h2 className="text-3xl font-bold mb-8">
         Some <span className="gradient-text">Words</span>
       </h2>
@@ -132,12 +138,12 @@ export default function TestimonialsSection() {
               setCurrent([index, direction]);
             }}
             className={`w-2 h-2 rounded-full transition-all duration-300 ${index === getCurrentIndex()
-                ? "bg-primary scale-125"
-                : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
+              ? "bg-primary scale-125"
+              : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
               }`}
           />
         ))}
       </div>
-    </section>
+    </motion.section>
   );
 }
