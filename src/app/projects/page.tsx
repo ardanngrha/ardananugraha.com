@@ -3,6 +3,8 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
+import { PageHeader } from '@/components/page-header';
+import { ProjectsBg } from '@/components/backgrounds/projects-bg';
 
 async function getAllProjects() {
   const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
@@ -31,17 +33,13 @@ export default async function ProjectsPage() {
   const allProjects = await getAllProjects();
 
   return (
-    <div className="pt-8 md:pt-16 pb-8 md:pb-16">
-      {/* Centered title section */}
-      <div className="text-center mb-16">
-        <h1 className="text-6xl md:text-7xl font-bold mb-4 font-handwriting">Projects</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-mono">
-          Explore my portfolio of software projects, from web applications to open-source contributions.
-        </p>
-      </div>
-
-      {/* Projects content */}
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div>
+      <PageHeader
+        title="Projects"
+        description="Here are some of the projects I'm proud of. They range from web development to data science."
+        background={<ProjectsBg />}
+      />
+      <div className="max-w-4xl mx-auto px-4 py-16">
         {allProjects.map((project) => (
           <div key={project.slug}>
             <Link href={`/projects/${project.slug}`}>

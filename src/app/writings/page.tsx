@@ -3,6 +3,8 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import Link from 'next/link';
+import { WritingsBg } from '@/components/backgrounds/writings-bg';
+import { PageHeader } from '@/components/page-header';
 
 async function getAllPosts() {
   const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
@@ -12,7 +14,7 @@ async function getAllPosts() {
     filenames.map(async (filename) => {
       const filePath = path.join(writingsDirectory, filename);
       const fileContents = await fs.readFile(filePath, 'utf8');
-      const { data } = matter(fileContents); // We only need frontmatter here
+      const { data } = matter(fileContents);
 
       return {
         slug: filename.replace(/\.mdx$/, ''),
@@ -31,17 +33,13 @@ export default async function WritingsPage() {
   const allPosts = await getAllPosts();
 
   return (
-    <div className="pt-8 md:pt-16 pb-8 md:pb-16">
-      {/* Centered title section */}
-      <div className="text-center mb-16">
-        <h1 className="text-6xl md:text-7xl font-bold mb-4 font-handwriting">Writings</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-mono">
-          Thoughts, insights, and tutorials on software development, technology trends, and my learning journey.
-        </p>
-      </div>
-
-      {/* Writings content */}
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div>
+      <PageHeader
+        title="Writings"
+        description="Thoughts, insights, and tutorials on software development, technology trends, and my learning journey."
+        background={<WritingsBg />}
+      />
+      <div className="max-w-4xl mx-auto px-4 py-16">
         {allPosts.map((post) => (
           <div key={post.slug}>
             <Link href={`/writings/${post.slug}`}>

@@ -1,24 +1,21 @@
 import Link from "next/link";
+import { AttributionBg } from "@/components/backgrounds/attribution-bg";
+import { PageHeader } from "@/components/page-header";
 
 export default function AttributionPage() {
   const inspirations = [
     { name: "Theodorus Clarence", url: "https://theodorusclarence.com/" },
     { name: "Wiscaksono", url: "https://wiscaksono.com/" },
-    // Add more inspirations here
   ];
 
   return (
-    <div className="pt-8 md:pt-16 pb-8 md:pb-16">
-      {/* Centered title section */}
-      <div className="text-center mb-16">
-        <h1 className="text-6xl md:text-7xl font-bold mb-4 font-handwriting">Attributions</h1>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-mono">
-          A special thanks to the creative minds who inspired this website. My design and structure are heavily influenced by their amazing work.
-        </p>
-      </div>
-
-      {/* Inspirations content */}
-      <div className="max-w-2xl mx-auto">
+    <div>
+      <PageHeader
+        title="Attribution"
+        description="A special thanks to the creative minds who inspired this website. My design and structure are heavily influenced by their amazing work."
+        background={<AttributionBg />}
+      />
+      <div className="max-w-2xl mx-auto px-4 py-16">
         <ul className="space-y-4">
           {inspirations.map((inspiration) => (
             <li key={inspiration.name} className="text-center">
@@ -29,6 +26,6 @@ export default function AttributionPage() {
           ))}
         </ul>
       </div>
-    </div>
+    </div >
   );
 }

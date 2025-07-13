@@ -1,10 +1,13 @@
 "use client";
 
+import { GuestbookBg } from "@/components/backgrounds/guestbook-bg";
+import { PageHeader } from "@/components/page-header";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa";
 
 interface Comment {
   id: number;
@@ -73,18 +76,15 @@ export default function GuestbookPage() {
   };
 
   return (
-    <div className="pt-8 md:pt-16 pb-8 md:pb-16 px-4">
-      <div className="text-center mb-8 md:mb-12">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 font-handwriting">
-          Guestbook
-        </h1>
-        <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto font-mono px-4">
-          Leave a comment below. It could be anything – appreciation, feedback,
-          or just a friendly hello.
-        </p>
-      </div>
+    <div>
+      <PageHeader
+        title="Guestbook"
+        description="Leave a comment below. It could be anything – appreciation, feedback,
+          or just a friendly hello."
+        background={<GuestbookBg />}
+      />
 
-      <div className="max-w-4xl mx-auto border rounded-lg bg-background font-mono">
+      <div className="max-w-4xl mx-auto border rounded-lg bg-background font-mono p-4 my-16">
         <div ref={commentsContainerRef} className="h-80 md:h-96 overflow-y-auto flex flex-col p-3 md:p-4 mb-4 border rounded-md">
           <div className="flex-grow" />
           <div className="space-y-3 md:space-y-4">
@@ -168,7 +168,7 @@ export default function GuestbookPage() {
         ) : (
           <div className="text-center p-4 md:p-6">
             <Button onClick={() => signIn("github")} className="w-full sm:w-auto cursor-pointer">
-              Sign in with GitHub to comment
+              Sign in with GitHub to comment <FaGithub className="inline-block ml-2" />
             </Button>
           </div>
         )}
