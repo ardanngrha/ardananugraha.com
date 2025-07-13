@@ -12,7 +12,7 @@ export default function AttributionPage() {
     <div>
       <PageHeader
         title="Attribution"
-        description="A special thanks to the creative minds who inspired this website. My design and structure are heavily influenced by their amazing work."
+        description="Journey to build this website. A special thanks to the creative minds who inspired this website."
         background={<AttributionBg />}
       />
       <div className="max-w-2xl mx-auto px-4 py-16">
