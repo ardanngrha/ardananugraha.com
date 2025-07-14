@@ -2,33 +2,21 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const images = [
-  // {
-  //   src: "/images/me-bg.jpeg",
-  //   description: "A picture of me in a beautiful landscape.",
-  //   year: "2023",
-  //   rotation: 2,
-  // },
-  // {
-  //   src: "/images/me.png",
-  //   description: "A professional headshot.",
-  //   year: "2024",
-  //   rotation: -1,
-  // },
+  {
+    src: "/images/me.jpeg",
+    description: "A professional headshot.",
+    year: "2024",
+    rotation: -1,
+  },
   {
     src: "/images/google.jpg",
     description: "Visiting the Google office.",
     year: "2023",
     rotation: 2.5,
-  },
-  {
-    src: "/images/bangkit.png",
-    description: "Receiving an award at Bangkit Academy.",
-    year: "2023",
-    rotation: 3,
   },
   {
     src: "/images/pln.jpg",
@@ -56,7 +44,6 @@ const images = [
   },
 ];
 
-// Animation variants for the cards entering, centering, and exiting.
 const variants = {
   enter: (direction: number) => ({
     x: direction > 0 ? 300 : -300,
@@ -87,7 +74,7 @@ const swipePower = (offset: number, velocity: number) => {
 export function ImageCarousel() {
   const [[page, direction], setPage] = useState([0, 0]);
 
-  // Wraps the page index to loop through the 'images' array.
+  // Correctly wrap the index to create an infinite loop
   const imageIndex = ((page % images.length) + images.length) % images.length;
 
   const paginate = (newDirection: number) => {
@@ -101,73 +88,86 @@ export function ImageCarousel() {
   const currentImage = images[imageIndex];
 
   return (
-    <div className="flex items-center justify-center w-full py-8">
-      {/* Previous Button */}
-      <button
-        onClick={() => paginate(-1)}
-        className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mr-2 md:mr-4 flex-shrink-0"
-      >
-        <ChevronLeft className="h-8 w-8" />
-      </button>
+    <div className="flex flex-col items-center justify-center w-full py-8">
+      <div className="flex items-center justify-center w-full">
+        {/* Previous Button (Desktop) */}
+        <button
+          onClick={() => paginate(-1)}
+          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mr-2 md:mr-4 flex-shrink-0"
+        >
+          <FaChevronLeft className="h-8 w-8" />
+        </button>
 
-      {/* Carousel Container */}
-      <div className="relative w-full max-w-xs h-[380px] flex items-center justify-center">
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={page}
-            className="absolute w-full h-full p-4 bg-card border rounded-2xl shadow-lg cursor-grab active:cursor-grabbing"
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate={{ ...variants.center, rotate: currentImage.rotation }}
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-              rotate: { type: "spring", stiffness: 300, damping: 30 },
-            }}
-            // Drag functionality for swiping
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
-            // Hover effect to lift and scale the card
-            whileHover={{ y: -10, scale: 1.05, transition: { duration: 0.2 } }}
-          >
-            <div className="flex flex-col h-full pointer-events-none">
-              <div className="relative w-full h-56 rounded-lg overflow-hidden">
-                <Image
-                  src={currentImage.src}
-                  alt={currentImage.description}
-                  fill
-                  className="object-cover"
-                  priority={imageIndex === 0}
-                  sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
-                />
+        {/* Carousel Container */}
+        <div className="relative w-full max-w-sm h-[420px] m:h-[480px] sm:max-w-xs flex items-center justify-center overflow-hidden">
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={page} // Use page state for re-rendering
+              className="absolute w-full h-full p-2 sm:p-4 bg-card border rounded-2xl shadow-lg cursor-grab active:cursor-grabbing"
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate={{ ...variants.center, rotate: currentImage.rotation }}
+              exit="exit"
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30 },
+                opacity: { duration: 0.2 },
+                rotate: { type: "spring", stiffness: 300, damping: 30 },
+              }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={1}
+              onDragEnd={(e, { offset, velocity }) => {
+                const swipe = swipePower(offset.x, velocity.x);
+                if (swipe < -swipeConfidenceThreshold) paginate(1);
+                else if (swipe > swipeConfidenceThreshold) paginate(-1);
+              }}
+              whileHover={{ y: -10, scale: 1.05, transition: { duration: 0.2 } }}
+            >
+              <div className="flex flex-col h-full pointer-events-none">
+                <div className="relative w-full aspect-square rounded-lg overflow-hidden">
+                  <Image
+                    src={currentImage.src}
+                    alt={currentImage.description}
+                    fill
+                    className="object-cover"
+                    priority={imageIndex === 0}
+                    sizes="(max-width: 640px) 100vw, 320px"
+                  />
+                </div>
+                <div className="text-center flex-grow flex flex-col justify-center">
+                  <p className="font-handwriting text-lg md:text-xl font-bold">{currentImage.description}</p>
+                  <p className="font-handwriting text-base font-bold">{currentImage.year}</p>
+                </div>
               </div>
-              <div className="text-center mt-4 flex-grow flex flex-col justify-center">
-                <p className="font-handwriting text-sm md:text-xl font-bold">{currentImage.description}</p>
-                <p className="font-handwriting text-sm font-bold mt-1">{currentImage.year}</p>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Next Button (Desktop) */}
+        <button
+          onClick={() => paginate(1)}
+          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 ml-2 md:ml-4 flex-shrink-0"
+        >
+          <FaChevronRight className="h-8 w-8" />
+        </button>
       </div>
 
-      {/* Next Button */}
-      <button
-        onClick={() => paginate(1)}
-        className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 ml-2 md:ml-4 flex-shrink-0"
-      >
-        <ChevronRight className="h-8 w-8" />
-      </button>
+      {/* Arrow Buttons (Mobile) */}
+      <div className="sm:hidden flex items-center justify-center mt-4">
+        <button
+          onClick={() => paginate(-1)}
+          className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mx-6"
+        >
+          <FaChevronLeft className="h-8 w-8" />
+        </button>
+        <button
+          onClick={() => paginate(1)}
+          className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mx-6"
+        >
+          <FaChevronRight className="h-8 w-8" />
+        </button>
+      </div>
     </div>
   );
 }
