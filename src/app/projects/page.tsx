@@ -2,11 +2,12 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import Link from 'next/link';
 import { PageHeader } from '@/components/page-header';
 import { ProjectsBg } from '@/components/backgrounds/projects-bg';
+import { ProjectPageCard } from '@/components/projects/project-card';
+import type { ContentItem } from '@/components/home/projects/types';
 
-async function getAllProjects() {
+async function getAllProjects(): Promise<ContentItem[]> {
   const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
   const filenames = await fs.readdir(projectsDirectory);
 
@@ -14,11 +15,11 @@ async function getAllProjects() {
     filenames.map(async (filename) => {
       const filePath = path.join(projectsDirectory, filename);
       const fileContents = await fs.readFile(filePath, 'utf8');
-      const { data } = matter(fileContents); // We only need frontmatter here
+      const { data } = matter(fileContents);
 
       return {
         slug: filename.replace(/\.mdx$/, ''),
-        frontmatter: data,
+        frontmatter: data as ContentItem['frontmatter'],
       };
     })
   );
@@ -39,21 +40,9 @@ export default async function ProjectsPage() {
         description="Here are some of the projects I'm proud of. They range from web development to data science."
         background={<ProjectsBg />}
       />
-      <div className="flex flex-col max-w-4xl mx-auto px-4 py-16 gap-8">
+      <div className="flex flex-col max-w-5xl mx-auto px-4 py-16 gap-12">
         {allProjects.map((project) => (
-          <div key={project.slug}>
-            <Link href={`/projects/${project.slug}`}>
-              <h2 className="text-2xl font-semibold hover:underline">
-                {project.frontmatter.title}
-              </h2>
-            </Link>
-            <p className="text-muted-foreground mt-2">
-              {project.frontmatter.summary}
-            </p>
-            <p className="text-sm text-muted-foreground mt-2">
-              {new Date(project.frontmatter.date).toLocaleDateString()}
-            </p>
-          </div>
+          <ProjectPageCard key={project.slug} project={project} />
         ))}
       </div>
     </div>

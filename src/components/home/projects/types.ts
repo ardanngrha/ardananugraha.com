@@ -8,5 +8,7 @@ export interface ContentItem {
     tags?: string[];
     image?: string | null;
     [key: string]: unknown;
+    githubUrl?: string | null;
+    liveUrl?: string | null;
   };
 }
