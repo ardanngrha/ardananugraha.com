@@ -10,5 +10,6 @@ export interface ContentItem {
     [key: string]: unknown;
     githubUrl?: string | null;
     liveUrl?: string | null;
+    bulletPoints?: string[] | null;
   };
 }

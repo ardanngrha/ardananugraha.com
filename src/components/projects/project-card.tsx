@@ -96,11 +96,11 @@ export function ProjectPageCard({ project }: ProjectCardProps) {
               </p>
               {/* Bullet Points */}
               <ul className="list-disc list-inside">
-                {bulletPoints.map((point, index) => (
+                {bulletPoints?.map((point, index) => (
                   <li key={index} className="text-muted-foreground">
                     {point}
                   </li>
-                ))}
+                )) || []}
               </ul>
             </div>
 
