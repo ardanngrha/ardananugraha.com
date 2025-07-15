@@ -3,26 +3,8 @@ import { PageHeader } from "@/components/page-header";
 import { ImageCarousel } from "@/components/about/image";
 import { TechStack } from "@/components/about/tech-stack";
 import { ExperienceTimeline } from "@/components/about/experiences";
-import { CheckCircle } from "lucide-react";
 
 export default function AboutPage() {
-  const doing = [
-    {
-      description: "Developing GRITA, an Advanced Distribution Management System (ADMS) for PLN's power grids using Event-Driven Architecture.",
-    },
-    {
-      description: "Building microservices that connect 500+ field devices via Modbus TCP, IEC104, and ICCP protocols, processing millions of real-time data points within milliseconds.",
-    },
-    {
-      description: "Creating web-based server simulators for Modbus TCP and IEC104, enabling comprehensive testing and validation.",
-    },
-    {
-      description: "Collaborating with frontend developers to integrate high-performance real-time dashboards for monitoring and control.",
-    },
-    {
-      description: "Managing deployment and containerization using Docker and Kubernetes on-premises.",
-    },
-  ]
   return (
     <div>
       <PageHeader
@@ -54,18 +36,6 @@ export default function AboutPage() {
               </p>
               <TechStack />
             </div>
-          </div>
-        </div>
-
-        <div className="my-16">
-          <h2 className="text-3xl font-bold text-center mb-8">What I&apos;m Currently Doing</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {doing.map((item, index) => (
-              <div key={index} className="bg-secondary p-6 rounded-lg flex items-start gap-4">
-                <CheckCircle className="text-primary w-6 h-6 mt-1" />
-                <p className="text-muted-foreground">{item.description}</p>
-              </div>
-            ))}
           </div>
         </div>
 

@@ -138,6 +138,85 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 0.3s;
   }
+
+  /* Accessibility Enhancements */
+  
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Skip links */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    font-weight: 600;
+    transition: top 0.3s;
+  }
+
+  .skip-link:focus {
+    top: 6px;
+  }
+
+  /* Enhanced focus styles */
+  .focus-visible:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .border {
+      border-width: 2px;
+    }
+    
+    .shadow-sm {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .shadow-md {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Touch target improvements */
+  @media (pointer: coarse) {
+    button,
+    [role="button"],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
 }
 
 @layer components {
@@ -149,6 +228,28 @@
     height: 100%;
     z-index: 0;
   }
+  
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
   .gradient-text {
     background: linear-gradient(90deg, #6190e8 0%, #a7bfe8 100%);
     background-clip: text;
@@ -156,6 +257,123 @@
     -webkit-text-fill-color: transparent;
     background-size: 100%;
     display: inline-block;
+  }
+  
+  /* Enhanced reading experience for writing content */
+  .writing-content {
+    line-height: 1.75;
+    font-size: 1.125rem;
+  }
+  
+  .writing-content h1,
+  .writing-content h2,
+  .writing-content h3,
+  .writing-content h4,
+  .writing-content h5,
+  .writing-content h6 {
+    scroll-margin-top: 5rem;
+    position: relative;
+  }
+  
+  .writing-content h1:hover .heading-anchor,
+  .writing-content h2:hover .heading-anchor,
+  .writing-content h3:hover .heading-anchor,
+  .writing-content h4:hover .heading-anchor,
+  .writing-content h5:hover .heading-anchor,
+  .writing-content h6:hover .heading-anchor {
+    opacity: 1;
+  }
+  
+  .heading-anchor {
+    position: absolute;
+    left: -1.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: hsl(var(--muted-foreground));
+    text-decoration: none;
+    font-weight: normal;
+  }
+  
+  .heading-anchor:hover {
+    color: hsl(var(--primary));
+  }
+  
+  /* Code block enhancements */
+  .writing-content pre {
+    position: relative;
+    overflow-x: auto;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--muted));
+  }
+  
+  .writing-content pre::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .writing-content pre::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .writing-content pre::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+  
+  .writing-content pre::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+  
+  /* Table enhancements */
+  .writing-content table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+  }
+  
+  .writing-content table th:first-child,
+  .writing-content table td:first-child {
+    border-left: 1px solid hsl(var(--border));
+  }
+  
+  .writing-content table th:last-child,
+  .writing-content table td:last-child {
+    border-right: 1px solid hsl(var(--border));
+  }
+  
+  .writing-content table tr:first-child th {
+    border-top: 1px solid hsl(var(--border));
+  }
+  
+  .writing-content table tr:last-child td {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+  
+  /* Responsive typography */
+  @media (max-width: 640px) {
+    .writing-content {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    
+    .writing-content h1 {
+      font-size: 2rem;
+    }
+    
+    .writing-content h2 {
+      font-size: 1.75rem;
+    }
+    
+    .writing-content h3 {
+      font-size: 1.5rem;
+    }
+    
+    .writing-content pre {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
   }
   
   .font-handwriting {
@@ -218,7 +436,17 @@
   .-rotate-15 { transform: rotate(-15deg); }
   .rotate-15 { transform: rotate(15deg); }
   .custom-cursor {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-arrow-up-right'><path d='M7 17L17 7'/><path d='M7 7h10v10'/></svg>"), auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-arrow-up-right'><path d='M7 17L17 7' stroke='%23ffffff' stroke-width='4'/><path d='M7 7h10v10' stroke='%23ffffff' stroke-width='4'/><path d='M7 17L17 7' stroke='%23000000' stroke-width='2'/><path d='M7 7h10v10' stroke='%23000000' stroke-width='2'/></svg>"), auto;
+  }
+
+  /* Scrollbar hiding utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -241,6 +469,19 @@
   50% {
     transform: scaleY(0.3);
   }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
 }
 
 .theme-transition-overlay {

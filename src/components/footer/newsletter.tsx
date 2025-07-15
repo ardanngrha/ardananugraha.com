@@ -16,7 +16,7 @@ export default function Newsletter() {
       <Button
         onClick={handleRedirect}
         variant="outline"
-        className="text-sm mt-2 custom-cursor"
+        className="text-sm mt-2 cursor-pointer"
       >
         Subscribe
       </Button>

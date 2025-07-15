@@ -25,7 +25,7 @@ export default function Hero() {
   }
 
   return (
-    <div className="relative flex flex-col min-h-screen justify-center items-center text-center p-4 md:p-0">
+    <div className="relative flex flex-col min-h-[calc(100vh-100px)] justify-center items-center text-center p-4 md:p-0">
       <HeroBackground />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -48,10 +48,6 @@ export default function Hero() {
           />
         </motion.div>
         <div className="flex flex-col gap-4 text-center">
-          {/* <h1 className="text-4xl md:text-5xl font-bold">Hi, I'm Ardana 👋</h1>
-            <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl">
-              I build things for the web.
-            </p> */}
         </div>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -136,6 +132,20 @@ export default function Hero() {
               />
               <span className="relative z-10">more about me</span>
             </Link>
+          </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="mt-4"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100/50 dark:bg-green-900/50 border border-green-300/50 dark:border-green-600/50 rounded-lg font-mono text-sm font-semibold">
+            <span className="relative flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <span>Available for job opportunities</span>
           </div>
         </motion.div>
       </motion.div>

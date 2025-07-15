@@ -58,3 +58,87 @@ export function isRecent(dateString: string, days = 30): boolean {
     const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
     return diffInDays <= days;
 }
+
+/**
+ * Generates SEO-friendly metadata for content items.
+ * @param item - The content item (project or writing).
+ * @returns An object containing SEO metadata.
+ */
+export function generateSEOMetadata(item: {
+  frontmatter: {
+    title: string;
+    summary: string;
+    tags: string[];
+    image?: string;
+  };
+  slug: string;
+}) {
+  return {
+    title: item.frontmatter.title,
+    description: item.frontmatter.summary,
+    keywords: item.frontmatter.tags.join(', '),
+    openGraph: {
+      title: item.frontmatter.title,
+      description: item.frontmatter.summary,
+      images: item.frontmatter.image ? [{ url: item.frontmatter.image }] : [],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: item.frontmatter.title,
+      description: item.frontmatter.summary,
+      images: item.frontmatter.image ? [item.frontmatter.image] : [],
+    },
+  };
+}
+
+/**
+ * Extracts and formats read time from frontmatter or calculates it from content.
+ * @param frontmatter - The frontmatter object that may contain readTime.
+ * @param content - The content string to calculate read time from.
+ * @returns A formatted read time string.
+ */
+export function getFormattedReadTime(
+  frontmatter: { readTime?: string },
+  content: string
+): string {
+  if (frontmatter.readTime) {
+    return frontmatter.readTime;
+  }
+  
+  const calculatedMinutes = calculateReadTime(content);
+  return `${calculatedMinutes} min read`;
+}
+
+/**
+ * Normalizes tags for consistent comparison and filtering.
+ * @param tags - Array of tag strings.
+ * @returns Array of normalized tag strings.
+ */
+export function normalizeTags(tags: string[]): string[] {
+  return tags.map(tag => tag.toLowerCase().trim()).filter(Boolean);
+}
+
+/**
+ * Finds common tags between two arrays of tags.
+ * @param tags1 - First array of tags.
+ * @param tags2 - Second array of tags.
+ * @returns Array of common tags.
+ */
+export function findCommonTags(tags1: string[], tags2: string[]): string[] {
+  const normalizedTags1 = normalizeTags(tags1);
+  const normalizedTags2 = normalizeTags(tags2);
+  
+  return normalizedTags1.filter(tag => normalizedTags2.includes(tag));
+}
+
+/**
+ * Truncates text to a specified length with ellipsis.
+ * @param text - The text to truncate.
+ * @param maxLength - Maximum length of the text.
+ * @returns Truncated text with ellipsis if needed.
+ */
+export function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength).trim() + '...';
+}

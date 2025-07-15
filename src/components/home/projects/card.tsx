@@ -23,25 +23,15 @@ const cardVariants = {
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <motion.div variants={cardVariants}>
-      <Link href={`/projects/${project.slug}`} className="block h-full">
-        <div className="bg-white dark:bg-zinc-800/50 rounded-2xl p-4 flex flex-col h-full ring-1 ring-inset ring-gray-200 dark:ring-zinc-700/50 hover:ring-primary/50 dark:hover:ring-primary/50 transition-all duration-300 hover:shadow-2xl">
-          <div className="flex gap-2 flex-wrap mb-4">
-            {project.frontmatter.tags?.map((tag: string) => (
-              <span
-                key={tag}
-                className="px-3 py-1 bg-gray-100 dark:bg-zinc-700 text-gray-700 dark:text-gray-300 rounded-full text-xs font-medium"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="aspect-[16/10] rounded-lg overflow-hidden mb-4 relative bg-muted">
+      <Link href={`/projects/${project.slug}`} className="block h-full group">
+        <div className="bg-card/30 border rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-primary/10 hover:border-primary/30 h-full flex flex-col">
+          <div className="relative aspect-video overflow-hidden bg-muted/50">
             {project.frontmatter.image ? (
               <Image
                 src={project.frontmatter.image as string}
                 alt={project.frontmatter.title}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             ) : (
@@ -52,13 +42,28 @@ export function ProjectCard({ project }: ProjectCardProps) {
               </div>
             )}
           </div>
-          <div className="mt-auto flex flex-col">
-            <h3 className="text-xl font-semibold mb-2">
+          <div className="p-6 flex flex-col flex-grow">
+            <div className="flex gap-2 flex-wrap mb-4">
+              {project.frontmatter.tags?.map((tag: string) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-primary">
               {project.frontmatter.title}
             </h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               {project.frontmatter.summary}
             </p>
+            <div className="mt-auto pt-4 border-t border-border/50">
+              <span className="text-sm text-primary font-semibold group-hover:underline">
+                View Details →
+              </span>
+            </div>
           </div>
         </div>
       </Link>
