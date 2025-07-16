@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { ContentItem } from "./types";
+import { techIconMap } from "@/components/projects/project-card";
 
 interface ProjectCardProps {
   project: ContentItem;
@@ -45,12 +46,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div className="p-6 flex flex-col flex-grow">
             <div className="flex gap-2 flex-wrap mb-4">
               {project.frontmatter.tags?.map((tag: string) => (
-                <span
+                <div
                   key={tag}
-                  className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-xs font-medium"
+                  className="flex items-center gap-1.5 bg-secondary px-3 py-1.5 rounded-full text-xs font-medium text-secondary-foreground"
                 >
-                  {tag}
-                </span>
+                  {techIconMap[tag] || null}
+                  <span>{tag}</span>
+                </div>
               ))}
             </div>
             <h3 className="text-xl font-semibold mb-2 text-primary">
@@ -59,11 +61,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <p className="text-muted-foreground text-sm leading-relaxed mb-4">
               {project.frontmatter.summary}
             </p>
-            <div className="mt-auto pt-4 border-t border-border/50">
-              <span className="text-sm text-primary font-semibold group-hover:underline">
-                View Details →
-              </span>
-            </div>
           </div>
         </div>
       </Link>

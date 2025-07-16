@@ -94,12 +94,14 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
           </div>
 
           {/* Read Time */}
-          <div className="flex items-center gap-1">
-            <FiClock className="w-4 h-4" aria-hidden="true" />
-            <span aria-label={`Estimated reading time: ${item.readTime} minutes`}>
-              {`${item.readTime} min read`}
-            </span>
-          </div>
+          {!isProject && (
+            <div className="flex items-center gap-1">
+              <FiClock className="w-4 h-4" aria-hidden="true" />
+              <span aria-label={`Estimated reading time: ${item.readTime} minutes`}>
+                {`${item.readTime} min read`}
+              </span>
+            </div>
+          )}
 
           {/* Writing Category */}
           {!isProject && writingData?.category && (
@@ -143,11 +145,11 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
           </div>
         )}
 
-        {/* Tags */}
-        {frontmatter.tags && frontmatter.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2" role="group" aria-label={`${isProject ? 'Technologies' : 'Tags'} used in this ${isProject ? 'project' : 'article'}`}>
+        {/* Tags for writings */}
+        {!isProject && frontmatter.tags && frontmatter.tags.length > 0 && (
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Tags for this article">
             {frontmatter.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`${isProject ? 'Technology' : 'Tag'}: ${tag}`}>
+              <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`Tag: ${tag}`}>
                 {tag}
               </Badge>
             ))}

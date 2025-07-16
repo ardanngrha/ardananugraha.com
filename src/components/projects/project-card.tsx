@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { ContentItem } from "@/components/home/projects/types";
 
 // Maps tech stack names to their corresponding icons with colors
-const techIconMap: { [key: string]: React.ReactNode } = {
+export const techIconMap: { [key: string]: React.ReactNode } = {
   "React.js": <FaReact className="text-blue-500" />,
   "React": <FaReact className="text-blue-500" />,
   "Tailwind CSS": <SiTailwindcss className="text-cyan-500" />,
@@ -118,7 +118,7 @@ export function ProjectPageCard({ project }: ProjectCardProps) {
                 ))}
               </div>
               {/* Action Buttons */}
-              <div>
+              <div className="flex gap-2">
                 {githubUrl && (
                   <Button variant="outline" size="sm" asChild>
                     <Link href={githubUrl as string} target="_blank" rel="noopener noreferrer">

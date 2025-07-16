@@ -1,4 +1,3 @@
-// ardananugraha.com/src/components/writings/writing-card.tsx
 "use client";
 
 import Link from "next/link";
@@ -73,7 +72,7 @@ export function WritingCard({ writing }: WritingCardProps) {
             </p>
             <div className="flex flex-col md:flex-row gap-4 justify-between mt-auto text-sm">
               <div className="flex items-center gap-2">
-                <MdAccessTime className="inline-block text-indigo-400 text-base" />
+                <MdAccessTime className="inline-block text-muted-foreground text-base" />
                 <span className="text-muted-foreground whitespace-nowrap text-xs">{readTime} min read</span>
               </div>
               <div className="flex gap-2 flex-wrap justify-start md:justify-end text-xs">

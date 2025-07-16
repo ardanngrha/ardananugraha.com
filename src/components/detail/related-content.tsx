@@ -4,10 +4,11 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { FaCalendar, FaClock, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaCalendar, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { EnhancedProject, EnhancedWriting } from '@/lib/types';
 import { CardImageWithLoading } from './image-with-loading';
+import { techIconMap } from '@/components/projects/project-card';
 
 interface RelatedContentProps {
   items: (EnhancedProject | EnhancedWriting)[];
@@ -101,19 +102,19 @@ interface RelatedContentCardProps {
 }
 
 function RelatedContentCard({ item, type }: RelatedContentCardProps) {
-  const { slug, frontmatter, readTime } = item;
+  const { slug, frontmatter } = item;
   const isProject = type === 'projects';
   const href = isProject ? `/projects/${slug}` : `/writings/${slug}`;
   const projectData = isProject ? (item as EnhancedProject).frontmatter : null;
 
   return (
-    <motion.div variants={cardVariants} whileHover="hover">
+    <motion.div variants={cardVariants} whileHover="hover" className="h-full">
       <Link
         href={href}
-        className="group block touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg"
+        className="group block touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-lg h-full"
         aria-label={`Read more about ${frontmatter.title}`}
       >
-        <article className="bg-card border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-primary/30 min-h-[280px] sm:min-h-[320px] flex flex-col">
+        <article className="bg-card border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-primary/30 h-full flex flex-col">
           {/* Image */}
           {frontmatter.image && (
             <div className="group flex-shrink-0" role="img" aria-label={`Featured image for ${frontmatter.title}`}>
@@ -168,7 +169,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
             )}
 
             {/* Metadata */}
-            <div className="flex items-center gap-3 text-xs text-muted-foreground" role="group" aria-label="Content metadata">
+            <div className="flex items-center gap-3 text-xs text-muted-foreground mt-auto" role="group" aria-label="Content metadata">
               <div className="flex items-center gap-1">
                 <FaCalendar className="w-3 h-3" aria-hidden="true" />
                 <time dateTime={frontmatter.date} aria-label={`Published ${new Date(frontmatter.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`}>
@@ -179,19 +180,16 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
                   })}
                 </time>
               </div>
-              <div className="flex items-center gap-1">
-                <FaClock className="w-3 h-3" aria-hidden="true" />
-                <span aria-label={`${readTime} minute read`}>{readTime} min read</span>
-              </div>
             </div>
 
             {/* Tags */}
             {frontmatter.tags && frontmatter.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1" role="group" aria-label={`${isProject ? 'Technologies' : 'Tags'} used`}>
+              <div className="flex flex-wrap gap-2 mt-3" role="group" aria-label={`${isProject ? 'Technologies' : 'Tags'} used`}>
                 {frontmatter.tags.slice(0, 3).map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`${isProject ? 'Technology' : 'Tag'}: ${tag}`}>
-                    {tag}
-                  </Badge>
+                  <div key={tag} className="flex items-center gap-1.5 bg-secondary px-2 py-1 rounded-full text-xs font-medium text-secondary-foreground">
+                    {isProject && techIconMap[tag] ? techIconMap[tag] : <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`${isProject ? 'Technology' : 'Tag'}: ${tag}`}>{tag}</Badge>}
+                    {!isProject && <span>{tag}</span>}
+                  </div>
                 ))}
                 {frontmatter.tags.length > 3 && (
                   <Badge variant="secondary" className="text-xs" role="note" aria-label={`${frontmatter.tags.length - 3} more ${isProject ? 'technologies' : 'tags'}`}>
@@ -203,7 +201,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
 
             {/* Project Actions */}
             {isProject && projectData && (projectData.githubUrl || projectData.liveUrl) && (
-              <div className="flex gap-2 pt-2" role="group" aria-label="Project links">
+              <div className="flex gap-2 pt-2 mt-auto" role="group" aria-label="Project links">
                 {projectData.githubUrl && (
                   <button
                     className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-8 px-2 text-xs rounded-md gap-1"
@@ -240,6 +238,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
     </motion.div>
   );
 }
+
 
 // Utility components for specific use cases
 export function RelatedProjects({

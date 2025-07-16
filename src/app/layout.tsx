@@ -7,6 +7,7 @@ import { Providers } from "@/components/session-provider";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { getSession } from "@/lib/auth";
+import { ScrollToTop } from "@/components/detail/scroll-to-top";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 const zeyada = Oooh_Baby({
@@ -58,6 +59,7 @@ export default async function RootLayout({
               {children}
             </main>
             <Footer />
+            <ScrollToTop />
           </ThemeProvider>
         </Providers>
       </body>

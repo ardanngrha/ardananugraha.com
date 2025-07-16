@@ -4,11 +4,15 @@ import { DesktopTabs } from "./navbar/desktop-tabs"
 import { MobileTabs } from "./navbar/mobile-tabs"
 import { navigationTabs } from "./navbar/constants"
 import { useNavbarScroll } from "@/hooks/use-navbar-scroll"
+import { usePathname } from "next/navigation"
 
 export default function Navbar() {
   const { isVisible, isMounted } = useNavbarScroll()
+  const pathname = usePathname()
 
-  if (!isMounted) {
+  const isDetailPage = pathname.includes('/projects/') || pathname.includes('/writings/')
+
+  if (!isMounted || isDetailPage) {
     return null
   }
 

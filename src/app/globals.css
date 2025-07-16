@@ -448,6 +448,10 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  .custom-hover-effect {
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
 }
 
 /* Custom keyframes for theme transition */
