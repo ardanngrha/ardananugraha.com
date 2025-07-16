@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { FaCalendar, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { FaCalendar, FaExternalLinkAlt, FaGithub, FaClock } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { EnhancedProject, EnhancedWriting } from '@/lib/types';
 import { CardImageWithLoading } from './image-with-loading';
@@ -102,10 +102,11 @@ interface RelatedContentCardProps {
 }
 
 function RelatedContentCard({ item, type }: RelatedContentCardProps) {
-  const { slug, frontmatter } = item;
+  const { slug, frontmatter, readTime } = item;
   const isProject = type === 'projects';
   const href = isProject ? `/projects/${slug}` : `/writings/${slug}`;
   const projectData = isProject ? (item as EnhancedProject).frontmatter : null;
+  const uniqueTags = frontmatter.tags ? [...new Set(frontmatter.tags)] : [];
 
   return (
     <motion.div variants={cardVariants} whileHover="hover" className="h-full">
@@ -180,20 +181,26 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
                   })}
                 </time>
               </div>
+              {!isProject && (
+                <div className="flex items-center gap-1">
+                  <FaClock className="w-3 h-3" />
+                  <span>{readTime} min read</span>
+                </div>
+              )}
             </div>
 
             {/* Tags */}
-            {frontmatter.tags && frontmatter.tags.length > 0 && (
+            {uniqueTags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-3" role="group" aria-label={`${isProject ? 'Technologies' : 'Tags'} used`}>
-                {frontmatter.tags.slice(0, 3).map((tag) => (
+                {uniqueTags.slice(0, 3).map((tag) => (
                   <div key={tag} className="flex items-center gap-1.5 bg-secondary px-2 py-1 rounded-full text-xs font-medium text-secondary-foreground">
-                    {isProject && techIconMap[tag] ? techIconMap[tag] : <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`${isProject ? 'Technology' : 'Tag'}: ${tag}`}>{tag}</Badge>}
+                    {isProject && techIconMap[tag] ? <span className="text-sm">{techIconMap[tag]}</span> : <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`${isProject ? 'Technology' : 'Tag'}: ${tag}`}>{tag}</Badge>}
                     {!isProject && <span>{tag}</span>}
                   </div>
                 ))}
-                {frontmatter.tags.length > 3 && (
-                  <Badge variant="secondary" className="text-xs" role="note" aria-label={`${frontmatter.tags.length - 3} more ${isProject ? 'technologies' : 'tags'}`}>
-                    +{frontmatter.tags.length - 3}
+                {uniqueTags.length > 3 && (
+                  <Badge variant="secondary" className="text-xs" role="note" aria-label={`${uniqueTags.length - 3} more ${isProject ? 'technologies' : 'tags'}`}>
+                    +{uniqueTags.length - 3}
                   </Badge>
                 )}
               </div>

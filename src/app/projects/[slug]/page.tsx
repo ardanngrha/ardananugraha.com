@@ -118,21 +118,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                 <div className="lg:col-span-3 order-2 lg:order-1">
                   <article className="prose prose-neutral dark:prose-invert max-w-none prose-base sm:prose-lg
                     prose-headings:scroll-mt-20 prose-headings:font-bold prose-headings:tracking-tight
-                    prose-h1:text-2xl sm:prose-h1:text-3xl prose-h1:mb-4 sm:prose-h1:mb-6 prose-h1:mt-6 sm:prose-h1:mt-8
-                    prose-h2:text-xl sm:prose-h2:text-2xl prose-h2:mb-3 sm:prose-h2:mb-4 prose-h2:mt-6 sm:prose-h2:mt-8 prose-h2:border-b prose-h2:border-border prose-h2:pb-2
-                    prose-h3:text-lg sm:prose-h3:text-xl prose-h3:mb-2 sm:prose-h3:mb-3 prose-h3:mt-4 sm:prose-h3:mt-6
-                    prose-p:mb-3 sm:prose-p:mb-4 prose-p:leading-relaxed prose-p:text-sm sm:prose-p:text-base
-                    prose-ul:my-3 sm:prose-ul:my-4 prose-ul:space-y-1 sm:prose-ul:space-y-2
-                    prose-ol:my-3 sm:prose-ol:my-4 prose-ol:space-y-1 sm:prose-ol:space-y-2
-                    prose-li:my-1 prose-li:text-sm sm:prose-li:text-base
-                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-3 sm:prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-sm sm:prose-blockquote:text-base
-                    prose-code:bg-muted prose-code:px-1 sm:prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-xs sm:prose-code:text-sm
-                    prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:text-xs sm:prose-pre:text-sm prose-pre:p-3 sm:prose-pre:p-4 prose-pre:overflow-x-auto prose-pre:-mx-4 sm:prose-pre:mx-0
-                    prose-img:rounded-lg prose-img:shadow-md prose-img:my-4 sm:prose-img:my-6 prose-img:-mx-4 sm:prose-img:mx-0
+                    prose-h1:text-3xl sm:prose-h1:text-4xl prose-h1:mb-6 sm:prose-h1:mb-8 prose-h1:mt-8 sm:prose-h1:mt-12
+                    prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mb-4 sm:prose-h2:mb-6 prose-h2:mt-8 sm:prose-h2:mt-10 prose-h2:border-b prose-h2:border-border prose-h2:pb-2
+                    prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mb-3 sm:prose-h3:mb-4 prose-h3:mt-6 sm:prose-h3:mt-8
+                    prose-p:text-base sm:prose-p:text-lg prose-p:leading-relaxed prose-p:mb-4 sm:prose-p:mb-6
+                    prose-ul:my-4 sm:prose-ul:my-6 prose-ul:space-y-2 prose-li:text-base sm:prose-li:text-lg
+                    prose-ol:my-4 sm:prose-ol:my-6 prose-ol:space-y-2
+                    prose-li:my-2 prose-li:text-base sm:prose-li:text-lg
+                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 sm:prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-base sm:prose-blockquote:text-lg
+                    prose-code:bg-muted prose-code:px-1.5 sm:prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm sm:prose-code:text-base
+                    prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:text-sm sm:prose-pre:text-base prose-pre:p-4 sm:prose-pre:p-6 prose-pre:overflow-x-auto prose-pre:-mx-6 sm:prose-pre:mx-0
+                    prose-img:rounded-xl prose-img:shadow-lg prose-img:my-6 sm:prose-img:my-8 prose-img:-mx-6 sm:prose-img:mx-0
                     prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:break-words
                     prose-strong:font-semibold prose-strong:text-foreground
                     prose-em:italic prose-em:text-muted-foreground
-                    prose-table:text-xs sm:prose-table:text-sm prose-table:overflow-x-auto prose-table:-mx-4 sm:prose-table:mx-0">
+                    prose-table:text-base sm:prose-table:text-lg prose-table:overflow-x-auto prose-table:-mx-6 sm:prose-table:mx-0">
                     <MDXErrorBoundary
                       contentType="project"
                       contentTitle={project.frontmatter.title}

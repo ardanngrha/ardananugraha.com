@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FaTimes, FaFilter } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
+import { techIconMap } from '@/components/projects/project-card'; // Import the icon map
 
 interface TagListProps {
   tags: string[];
@@ -112,13 +113,14 @@ export function TagList({
         {tags.map((tag) => {
           const isSelected = selectedTags.includes(tag);
           const isClickable = variant !== 'default' || onTagClick;
+          const Icon = techIconMap[tag];
 
           return (
             <Badge
               key={tag}
               variant={isSelected ? 'default' : 'secondary'}
               className={cn(
-                'transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2',
+                'transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center gap-1.5',
                 isClickable && 'cursor-pointer hover:scale-105',
                 variant === 'interactive' && 'hover:bg-primary hover:text-primary-foreground',
                 (variant === 'filter' || isFilterMode) && [
@@ -143,7 +145,8 @@ export function TagList({
               }
               aria-pressed={isClickable && (variant === 'filter' || isFilterMode) ? isSelected : undefined}
             >
-              {tag}
+              {Icon && <span className="text-lg">{Icon}</span>}
+              <span>{tag}</span>
               {(variant === 'filter' || isFilterMode) && isSelected && (
                 <FaTimes
                   className="w-3 h-3 ml-1"
@@ -169,7 +172,6 @@ export function TagList({
     </div>
   );
 }
-
 // Utility component for simple tag display
 export function SimpleTags({
   tags,

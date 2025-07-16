@@ -8,6 +8,8 @@ import {
   FaNodeJs,
   FaGithub,
   FaExternalLinkAlt,
+  FaPython,
+  FaJava,
 } from "react-icons/fa";
 import {
   SiTailwindcss,
@@ -15,6 +17,9 @@ import {
   SiRedux,
   SiSocketdotio,
   SiMongodb,
+  SiTypescript,
+  SiJavascript,
+  SiNextdotjs,
 } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { ContentItem } from "@/components/home/projects/types";
@@ -22,16 +27,18 @@ import { ContentItem } from "@/components/home/projects/types";
 // Maps tech stack names to their corresponding icons with colors
 export const techIconMap: { [key: string]: React.ReactNode } = {
   "React.js": <FaReact className="text-blue-500" />,
-  "React": <FaReact className="text-blue-500" />,
+  React: <FaReact className="text-blue-500" />,
   "Tailwind CSS": <SiTailwindcss className="text-cyan-500" />,
   "Node.js": <FaNodeJs className="text-green-600" />,
   "Express.js": <SiExpress className="text-gray-700 dark:text-gray-300" />,
   "Redux Toolkit": <SiRedux className="text-purple-600" />,
   "Socket.IO": <SiSocketdotio className="text-gray-800 dark:text-white" />,
   MongoDB: <SiMongodb className="text-green-500" />,
-  TypeScript: <span className="text-blue-600 font-bold text-xs">TS</span>,
-  JavaScript: <span className="text-yellow-500 font-bold text-xs">JS</span>,
-  "Next.js": <span className="text-black dark:text-white font-bold text-xs">▲</span>,
+  TypeScript: <SiTypescript className="text-blue-600" />,
+  JavaScript: <SiJavascript className="text-yellow-500" />,
+  "Next.js": <SiNextdotjs className="text-black dark:text-white" />,
+  Python: <FaPython className="text-blue-400" />,
+  Java: <FaJava className="text-red-500" />,
 };
 
 interface ProjectCardProps {
@@ -95,10 +102,11 @@ export function ProjectPageCard({ project }: ProjectCardProps) {
                 {summary}
               </p>
               {/* Bullet Points */}
-              <ul className="list-disc list-inside">
+              <ul className="space-y-2">
                 {bulletPoints?.map((point, index) => (
-                  <li key={index} className="text-muted-foreground">
-                    {point}
+                  <li key={index} className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0" />
+                    <span className="text-muted-foreground">{point}</span>
                   </li>
                 )) || []}
               </ul>

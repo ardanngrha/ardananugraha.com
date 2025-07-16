@@ -4,24 +4,25 @@ import { PageHeader } from "@/components/page-header";
 
 export default function AttributionPage() {
   const inspirations = [
-    { name: "Theodorus Clarence", url: "https://theodorusclarence.com/" },
-    { name: "Wiscaksono", url: "https://wiscaksono.com/" },
+    { name: "Theodorus Clarence", url: "https://theodorusclarence.com/", reason: "for the portfolio design inspiration." },
+    { name: "Wiscaksono", url: "https://wiscaksono.com/", reason: "for creative layout and guestbook ideas." },
   ];
 
   return (
     <div>
       <PageHeader
         title="Attribution"
-        description="Journey to build this website. A special thanks to the creative minds who inspired this website."
+        description="This website was made possible by the inspiration and work of many talented individuals and projects."
         background={<AttributionBg />}
       />
-      <div className="max-w-2xl mx-auto px-4 py-16">
-        <ul className="space-y-4">
+      <div className=" mx-auto py-16">
+        <ul className="text-left">
           {inspirations.map((inspiration) => (
-            <li key={inspiration.name} className="text-center">
-              <Link href={inspiration.url} target="_blank" rel="noopener noreferrer" className="text-xl font-semibold hover:underline">
+            <li key={inspiration.name} className="text-lg">
+              <Link href={inspiration.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">
                 {inspiration.name}
               </Link>
+              <span className="text-muted-foreground"> - {inspiration.reason}</span>
             </li>
           ))}
         </ul>

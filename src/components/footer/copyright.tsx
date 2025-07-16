@@ -88,7 +88,6 @@ export default function Copyright() {
           <Link href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Next.js</Link>
           <Link href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Tailwind</Link>
           <Link href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">shadcn/ui</Link>
-          <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Vercel</Link>
           <Link href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Motion</Link>
         </div>
       </div>

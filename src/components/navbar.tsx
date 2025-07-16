@@ -7,18 +7,17 @@ import { useNavbarScroll } from "@/hooks/use-navbar-scroll"
 import { usePathname } from "next/navigation"
 
 export default function Navbar() {
-  const { isVisible, isMounted } = useNavbarScroll()
+  const { isVisible } = useNavbarScroll()
   const pathname = usePathname()
-
   const isDetailPage = pathname.includes('/projects/') || pathname.includes('/writings/')
-
-  if (!isMounted || isDetailPage) {
-    return null
-  }
 
   return (
     <>
-      <DesktopTabs navigationTabs={navigationTabs} isVisible={isVisible} />
+      {/* Desktop navbar will be hidden on detail pages to maximize content visibility */}
+      {!isDetailPage && (
+        <DesktopTabs navigationTabs={navigationTabs} isVisible={isVisible} />
+      )}
+      {/* Mobile navbar is always visible */}
       <MobileTabs navigationTabs={navigationTabs} />
     </>
   )

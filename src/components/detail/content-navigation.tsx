@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { FaChevronRight, FaHome } from 'react-icons/fa';
+import { FaChevronRight } from 'react-icons/fa';
+import { HiOutlineHome } from 'react-icons/hi';
 import { cn } from '@/lib/utils';
 
 interface BreadcrumbItem {
@@ -40,7 +41,7 @@ export function ContentNavigation({
       <div className="flex items-center space-x-1 text-xs sm:text-sm text-muted-foreground overflow-x-auto scrollbar-hide">
         {allBreadcrumbs.map((item, index) => (
           <div key={item.href} className="flex items-center flex-shrink-0">
-            {index === 0 && <FaHome className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />}
+            {index === 0 && <HiOutlineHome className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />}
             <Link
               href={item.href}
               className="hover:text-foreground transition-colors whitespace-nowrap min-h-[44px] flex items-center touch-manipulation"
