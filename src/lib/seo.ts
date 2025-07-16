@@ -17,7 +17,7 @@ interface SEOData {
 
 const SITE_CONFIG = {
   name: 'Ardana Nugraha',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.dev',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.com',
   description: 'Full-stack developer and software engineer',
   author: 'Ardana Nugraha',
   twitter: '@ardananugraha', // Replace with actual Twitter handle

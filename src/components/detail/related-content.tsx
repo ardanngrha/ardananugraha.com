@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Clock, ExternalLink, Github } from 'lucide-react';
+import { FaCalendar, FaClock, FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { EnhancedProject, EnhancedWriting } from '@/lib/types';
 import { CardImageWithLoading } from './image-with-loading';
@@ -170,7 +170,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
             {/* Metadata */}
             <div className="flex items-center gap-3 text-xs text-muted-foreground" role="group" aria-label="Content metadata">
               <div className="flex items-center gap-1">
-                <Calendar className="w-3 h-3" aria-hidden="true" />
+                <FaCalendar className="w-3 h-3" aria-hidden="true" />
                 <time dateTime={frontmatter.date} aria-label={`Published ${new Date(frontmatter.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`}>
                   {new Date(frontmatter.date).toLocaleDateString('en-US', {
                     month: 'short',
@@ -180,7 +180,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
                 </time>
               </div>
               <div className="flex items-center gap-1">
-                <Clock className="w-3 h-3" aria-hidden="true" />
+                <FaClock className="w-3 h-3" aria-hidden="true" />
                 <span aria-label={`${readTime} minute read`}>{readTime} min read</span>
               </div>
             </div>
@@ -214,7 +214,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
                     }}
                     aria-label={`View source code for ${frontmatter.title} (opens in new tab)`}
                   >
-                    <Github className="w-3 h-3" aria-hidden="true" />
+                    <FaGithub className="w-3 h-3" aria-hidden="true" />
                     Code
                   </button>
                 )}
@@ -228,7 +228,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
                     }}
                     aria-label={`View live demo of ${frontmatter.title} (opens in new tab)`}
                   >
-                    <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                    <FaExternalLinkAlt className="w-3 h-3" aria-hidden="true" />
                     Demo
                   </button>
                 )}

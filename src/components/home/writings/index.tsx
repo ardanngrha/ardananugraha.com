@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
-import { PencilLine } from "lucide-react";
+import { FaPencilAlt } from "react-icons/fa";
 import { WritingCard } from "./card";
 import { ContentItem } from "./types";
 
@@ -34,7 +34,7 @@ export default function WritingsSection({
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
-          <PencilLine className="w-8 h-8" />
+          <FaPencilAlt className="w-8 h-8" />
           Featured <span className="gradient-text">Writings</span>
         </h2>
         {/* -- MORE BUTTON FOR DESKTOP -- */}

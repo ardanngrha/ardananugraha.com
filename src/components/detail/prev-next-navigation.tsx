@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { EnhancedProject, EnhancedWriting } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -10,11 +10,11 @@ interface PrevNextNavigationProps {
   className?: string
 }
 
-export function PrevNextNavigation({ 
-  prev, 
-  next, 
-  contentType, 
-  className 
+export function PrevNextNavigation({
+  prev,
+  next,
+  contentType,
+  className
 }: PrevNextNavigationProps) {
   const basePath = contentType === 'project' ? '/projects' : '/writings'
 
@@ -23,7 +23,7 @@ export function PrevNextNavigation({
   }
 
   return (
-    <nav 
+    <nav
       className={cn(
         'flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 py-6 sm:py-8 border-t border-border',
         className
@@ -38,7 +38,7 @@ export function PrevNextNavigation({
             className="group flex items-center gap-3 p-4 sm:p-5 rounded-lg border border-border hover:border-primary/50 hover:bg-muted/50 transition-all duration-200 min-h-[80px] touch-manipulation"
           >
             <div className="flex-shrink-0">
-              <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+              <FaChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors" />
             </div>
             <div className="min-w-0 flex-1">
               <div className="text-xs sm:text-sm text-muted-foreground mb-1 font-medium">
@@ -82,7 +82,7 @@ export function PrevNextNavigation({
               )}
             </div>
             <div className="flex-shrink-0 sm:order-2">
-              <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+              <FaChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors" />
             </div>
           </Link>
         ) : (

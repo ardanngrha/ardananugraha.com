@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getProjectWithContent, getAllProjects, getRelatedProjects, getProjectNavigation } from '@/lib/posts';
 import { generateSEOMetadata, generateStructuredData } from '@/lib/seo';
@@ -32,7 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   const { frontmatter } = project;
-  
+
   return generateSEOMetadata({
     title: frontmatter.title,
     description: frontmatter.summary,
@@ -51,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 // The main page component
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  
+
   try {
     const project = await getProjectWithContent(slug);
 
@@ -91,11 +90,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               __html: JSON.stringify(structuredData),
             }}
           />
-          
+
           {/* Navigation */}
           <div className="container mx-auto px-4 py-6">
-            <ContentNavigation 
-              type="project" 
+            <ContentNavigation
+              type="project"
               title={project.frontmatter.title}
             />
           </div>
@@ -103,8 +102,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           {/* Hero Section */}
           <div className="container mx-auto px-4 pb-8">
             <ErrorBoundary>
-              <DetailHero 
-                item={project} 
+              <DetailHero
+                item={project}
                 type="project"
                 className="mb-12"
               />
@@ -134,8 +133,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     prose-strong:font-semibold prose-strong:text-foreground
                     prose-em:italic prose-em:text-muted-foreground
                     prose-table:text-xs sm:prose-table:text-sm prose-table:overflow-x-auto prose-table:-mx-4 sm:prose-table:mx-0">
-                    <MDXErrorBoundary 
-                      contentType="project" 
+                    <MDXErrorBoundary
+                      contentType="project"
                       contentTitle={project.frontmatter.title}
                     >
                       <MDXRemote source={project.content} />
@@ -193,7 +192,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                   className="flex items-center gap-2 text-sm text-primary hover:underline"
                                 >
                                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
                                   </svg>
                                   View Source
                                 </a>
@@ -223,32 +222,30 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                         <h3 className="font-semibold mb-4 text-sm uppercase tracking-wide text-muted-foreground">
                           Technologies
                         </h3>
-                        <InteractiveTags 
-                          tags={project.frontmatter.tags} 
+                        <InteractiveTags
+                          tags={project.frontmatter.tags}
                           contentType="project"
                         />
                       </div>
                     )}
-
-                    {/* Share Section */}
-                    <div className="bg-muted/30 rounded-lg p-6 border border-border">
-                      <ShareButtons
-                        title={project.frontmatter.title}
-                        url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.dev'}/projects/${project.slug}`}
-                        description={project.frontmatter.summary}
-                      />
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
+          {/* Share Section */}
+          <div className="my-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
+            <ShareButtons
+              title={project.frontmatter.title}
+              url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.dev'}/projects/${project.slug}`}
+              description={project.frontmatter.summary}
+            />
+          </div>
           {/* Previous/Next Navigation */}
           <div className="container mx-auto px-4 pb-8">
             <div className="max-w-4xl mx-auto">
               <ErrorBoundary>
-                <PrevNextNavigation 
+                <PrevNextNavigation
                   prev={navigation.prev}
                   next={navigation.next}
                   contentType="project"
@@ -262,7 +259,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <div className="container mx-auto px-4 pb-16">
               <div className="max-w-6xl mx-auto">
                 <ErrorBoundary>
-                  <RelatedProjects 
+                  <RelatedProjects
                     projects={relatedProjects}
                     className="border-t border-border pt-16"
                   />

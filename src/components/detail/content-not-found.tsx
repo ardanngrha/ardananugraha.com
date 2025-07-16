@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Home, Search, FileX } from 'lucide-react';
+import { FaArrowLeft, FaHome, FaSearch, FaFileExcel } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 
 interface ContentNotFoundProps {
@@ -23,7 +23,7 @@ export function ContentNotFound({ type, slug, className }: ContentNotFoundProps)
           <div className="flex justify-center" role="img" aria-label="Content not found illustration">
             <div className="relative">
               <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center">
-                <FileX className="w-12 h-12 text-muted-foreground" aria-hidden="true" />
+                <FaFileExcel className="w-12 h-12 text-muted-foreground" aria-hidden="true" />
               </div>
               <div className="absolute -top-2 -right-2 w-8 h-8 bg-destructive rounded-full flex items-center justify-center" role="img" aria-label="Error indicator">
                 <span className="text-destructive-foreground text-sm font-bold" aria-hidden="true">!</span>
@@ -37,7 +37,7 @@ export function ContentNotFound({ type, slug, className }: ContentNotFoundProps)
               {contentType} Not Found
             </h1>
             <p className="text-xl text-muted-foreground" role="status">
-              {slug 
+              {slug
                 ? `The ${contentType.toLowerCase()} "${slug}" doesn't exist or has been moved.`
                 : `The ${contentType.toLowerCase()} you're looking for doesn't exist.`
               }
@@ -54,7 +54,7 @@ export function ContentNotFound({ type, slug, className }: ContentNotFoundProps)
               </li>
               <li className="flex items-start gap-2" role="listitem">
                 <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" aria-hidden="true" />
-                <span>Browse all {listingLabel.toLowerCase()} to find what you're looking for</span>
+                <span>Browse all {listingLabel.toLowerCase()} to find what you&apos;re looking for</span>
               </li>
               <li className="flex items-start gap-2" role="listitem">
                 <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" aria-hidden="true" />
@@ -71,14 +71,14 @@ export function ContentNotFound({ type, slug, className }: ContentNotFoundProps)
           <nav className="flex flex-col sm:flex-row gap-4 justify-center" aria-label="Navigation options">
             <Button asChild size="lg" className="flex items-center gap-2 min-h-[44px] touch-manipulation">
               <Link href={listingPath} aria-label={`Browse all ${listingLabel.toLowerCase()}`}>
-                <Search className="w-4 h-4" aria-hidden="true" />
+                <FaSearch className="w-4 h-4" aria-hidden="true" />
                 Browse All {listingLabel}
               </Link>
             </Button>
-            
+
             <Button asChild variant="outline" size="lg" className="flex items-center gap-2 min-h-[44px] touch-manipulation">
               <Link href="/" aria-label="Go to homepage">
-                <Home className="w-4 h-4" aria-hidden="true" />
+                <FaHome className="w-4 h-4" aria-hidden="true" />
                 Go to Homepage
               </Link>
             </Button>
@@ -86,14 +86,14 @@ export function ContentNotFound({ type, slug, className }: ContentNotFoundProps)
 
           {/* Back Navigation */}
           <div className="pt-8 border-t border-border">
-            <Button 
-              asChild 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              asChild
+              variant="ghost"
+              size="sm"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground min-h-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             >
               <Link href={listingPath} aria-label={`Back to ${listingLabel} listing`}>
-                <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+                <FaArrowLeft className="w-4 h-4" aria-hidden="true" />
                 Back to {listingLabel}
               </Link>
             </Button>

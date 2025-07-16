@@ -6,7 +6,7 @@ import { WritingCard } from '@/components/writings/writing-card';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Writing } from '@/lib/posts';
-import { ChevronDown, Tag } from 'lucide-react';
+import { FaChevronDown, FaTag } from 'react-icons/fa';
 
 type SortOption = 'newest' | 'oldest' | 'a-z' | 'z-a';
 
@@ -95,7 +95,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
               <Button variant="outline" className="w-full h-auto text-left flex-col items-start px-4 py-3">
                 <span className="w-full flex justify-between items-center">
                   {sortLabels[sortOrder]}
-                  <ChevronDown className="h-4 w-4" />
+                  <FaChevronDown className="h-4 w-4" />
                 </span>
                 <p className="text-xs text-muted-foreground mt-1">
                   Sort posts by date or title
@@ -116,7 +116,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
         {/* Topics Filter */}
         <div>
           <h3 className="font-semibold text-base mb-3 flex items-center gap-2">
-            <Tag className="h-5 w-5" />
+            <FaTag className="h-5 w-5" />
             Topics
           </h3>
           <div className="flex flex-wrap gap-2">

@@ -1,5 +1,12 @@
+'use client';
+
 import { Badge } from '@/components/ui/badge';
-import { Calendar, Clock, ExternalLink, Github } from 'lucide-react';
+import {
+  FiCalendar,
+  FiClock,
+  FiExternalLink,
+  FiGithub,
+} from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { EnhancedProject, EnhancedWriting } from '@/lib/types';
@@ -15,6 +22,7 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
   const { frontmatter } = item;
   const isProject = type === 'project';
   const projectData = isProject ? (item as EnhancedProject).frontmatter : null;
+  const writingData = !isProject ? (item as EnhancedWriting).frontmatter : null;
 
   return (
     <header className={cn('relative overflow-hidden', className)} role="banner">
@@ -34,8 +42,8 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
         {/* Status and Featured Badges */}
         <div className="flex flex-wrap gap-2" role="group" aria-label="Content status and badges">
           {frontmatter.featured && (
-            <Badge 
-              variant="secondary" 
+            <Badge
+              variant="secondary"
               className="bg-yellow-500/10 text-yellow-500 border-yellow-500/20"
               role="status"
               aria-label="This content is featured"
@@ -44,7 +52,7 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
             </Badge>
           )}
           {isProject && projectData?.status && (
-            <Badge 
+            <Badge
               variant="outline"
               className={cn(
                 'capitalize',
@@ -75,7 +83,7 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
         {/* Metadata */}
         <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm sm:text-base text-muted-foreground" role="group" aria-label="Content metadata">
           <div className="flex items-center gap-1">
-            <Calendar className="w-4 h-4" aria-hidden="true" />
+            <FiCalendar className="w-4 h-4" aria-hidden="true" />
             <time dateTime={frontmatter.date} aria-label={`Published on ${new Date(frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}>
               {new Date(frontmatter.date).toLocaleDateString('en-US', {
                 year: 'numeric',
@@ -84,22 +92,19 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
               })}
             </time>
           </div>
-          
+
           {/* Read Time */}
           <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" aria-hidden="true" />
-            <span aria-label={`Estimated reading time: ${isProject ? item.readTime : (frontmatter as any).readTime || item.readTime} minutes`}>
-              {isProject 
-                ? `${item.readTime} min read`
-                : (frontmatter as any).readTime || `${item.readTime} min read`
-              }
+            <FiClock className="w-4 h-4" aria-hidden="true" />
+            <span aria-label={`Estimated reading time: ${item.readTime} minutes`}>
+              {`${item.readTime} min read`}
             </span>
           </div>
 
           {/* Writing Category */}
-          {!isProject && (frontmatter as any).category && (
-            <Badge variant="outline" className="text-xs" role="note" aria-label={`Category: ${(frontmatter as any).category}`}>
-              {(frontmatter as any).category}
+          {!isProject && writingData?.category && (
+            <Badge variant="outline" className="text-xs" role="note" aria-label={`Category: ${writingData.category}`}>
+              {writingData.category}
             </Badge>
           )}
         </div>
@@ -109,28 +114,28 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4" role="group" aria-label="Project links and actions">
             {projectData.githubUrl && (
               <Button asChild variant="default" size="default" className="min-h-[44px] touch-manipulation">
-                <a 
-                  href={projectData.githubUrl} 
-                  target="_blank" 
+                <a
+                  href={projectData.githubUrl}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-6 py-3"
                   aria-label={`View source code for ${frontmatter.title} on GitHub (opens in new tab)`}
                 >
-                  <Github className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                  <FiGithub className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                   <span className="font-medium">View Code</span>
                 </a>
               </Button>
             )}
             {projectData.liveUrl && (
               <Button asChild variant="outline" size="default" className="min-h-[44px] touch-manipulation">
-                <a 
-                  href={projectData.liveUrl} 
-                  target="_blank" 
+                <a
+                  href={projectData.liveUrl}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 px-6 py-3"
                   aria-label={`View live demo of ${frontmatter.title} (opens in new tab)`}
                 >
-                  <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                  <FiExternalLink className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                   <span className="font-medium">Live Demo</span>
                 </a>
               </Button>

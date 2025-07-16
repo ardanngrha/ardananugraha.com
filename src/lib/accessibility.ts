@@ -136,9 +136,11 @@ export function handleKeyboardNavigation(
 }
 
 // Color contrast utilities
-export function getContrastRatio(color1: string, color2: string): number {
-  // This is a simplified version - in a real app you'd use a proper color contrast library
+export function getContrastRatio(): number {
+  // This is a simplified version - will use a proper color contrast library
   // For now, we'll return a placeholder value
+  // TODO
+
   return 4.5; // WCAG AA standard
 }
 
@@ -147,7 +149,7 @@ export function meetsContrastRequirements(
   background: string,
   level: 'AA' | 'AAA' = 'AA'
 ): boolean {
-  const ratio = getContrastRatio(foreground, background);
+  const ratio = getContrastRatio();
   const requiredRatio = level === 'AAA' ? 7 : 4.5;
   return ratio >= requiredRatio;
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
-import { AppWindow } from "lucide-react";
+import { FaWindowRestore } from "react-icons/fa";
 import { ProjectCard } from "./card";
 import { ContentItem } from "./types";
 
@@ -34,7 +34,7 @@ export default function ProjectsSection({
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
-          <AppWindow className="w-8 h-8" />
+          <FaWindowRestore className="w-8 h-8" />
           Featured <span className="gradient-text">Works</span>
         </h2>
         {/* -- MORE BUTTON FOR DESKTOP -- */}

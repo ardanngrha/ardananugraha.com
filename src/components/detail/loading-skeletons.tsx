@@ -21,39 +21,39 @@ export function DetailHeroSkeleton({ className }: { className?: string }) {
     <div className={cn('space-y-6', className)}>
       {/* Hero Image Skeleton */}
       <Skeleton className="w-full h-64 md:h-80 lg:h-96 rounded-lg" />
-      
+
       {/* Badges Skeleton */}
       <div className="flex gap-2">
         <Skeleton className="h-6 w-16" />
         <Skeleton className="h-6 w-20" />
       </div>
-      
+
       {/* Title Skeleton */}
       <div className="space-y-2">
         <Skeleton className="h-8 md:h-10 lg:h-12 w-3/4" />
         <Skeleton className="h-8 md:h-10 lg:h-12 w-1/2" />
       </div>
-      
+
       {/* Summary Skeleton */}
       <div className="space-y-2">
         <Skeleton className="h-5 w-full" />
         <Skeleton className="h-5 w-4/5" />
         <Skeleton className="h-5 w-3/5" />
       </div>
-      
+
       {/* Metadata Skeleton */}
       <div className="flex gap-4">
         <Skeleton className="h-4 w-24" />
         <Skeleton className="h-4 w-20" />
         <Skeleton className="h-4 w-16" />
       </div>
-      
+
       {/* Action Buttons Skeleton */}
       <div className="flex gap-3">
         <Skeleton className="h-9 w-24" />
         <Skeleton className="h-9 w-20" />
       </div>
-      
+
       {/* Tags Skeleton */}
       <div className="flex flex-wrap gap-2">
         <Skeleton className="h-5 w-16" />
@@ -61,7 +61,7 @@ export function DetailHeroSkeleton({ className }: { className?: string }) {
         <Skeleton className="h-5 w-14" />
         <Skeleton className="h-5 w-18" />
       </div>
-      
+
       {/* Key Features Skeleton (for projects) */}
       <div className="bg-muted/50 rounded-lg p-6 space-y-3">
         <Skeleton className="h-5 w-24" />
@@ -86,10 +86,10 @@ export function ContentSkeleton({ className }: { className?: string }) {
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-5/6" />
       </div>
-      
+
       {/* Heading */}
       <Skeleton className="h-7 w-2/3 mt-8" />
-      
+
       {/* More paragraphs */}
       <div className="space-y-3">
         <Skeleton className="h-4 w-full" />
@@ -97,20 +97,20 @@ export function ContentSkeleton({ className }: { className?: string }) {
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-3/4" />
       </div>
-      
+
       {/* Code block */}
       <Skeleton className="h-32 w-full rounded-lg" />
-      
+
       {/* More content */}
       <div className="space-y-3">
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-5/6" />
         <Skeleton className="h-4 w-4/5" />
       </div>
-      
+
       {/* Another heading */}
       <Skeleton className="h-7 w-1/2 mt-8" />
-      
+
       {/* List items */}
       <div className="space-y-2">
         <Skeleton className="h-4 w-4/5" />
@@ -143,7 +143,7 @@ export function SidebarSkeleton({ className }: { className?: string }) {
             <Skeleton className="h-4 w-18" />
           </div>
         </div>
-        
+
         {/* Links section */}
         <div className="pt-2 border-t border-border space-y-2">
           <Skeleton className="h-3 w-10 mb-3" />
@@ -151,7 +151,7 @@ export function SidebarSkeleton({ className }: { className?: string }) {
           <Skeleton className="h-4 w-16" />
         </div>
       </div>
-      
+
       {/* Technologies Card */}
       <div className="bg-muted/30 rounded-lg p-6 border border-border space-y-4">
         <Skeleton className="h-4 w-20" />
@@ -162,7 +162,7 @@ export function SidebarSkeleton({ className }: { className?: string }) {
           <Skeleton className="h-5 w-18" />
         </div>
       </div>
-      
+
       {/* Share Section */}
       <div className="bg-muted/30 rounded-lg p-6 border border-border space-y-4">
         <Skeleton className="h-4 w-12" />
@@ -178,11 +178,10 @@ export function SidebarSkeleton({ className }: { className?: string }) {
 }
 
 // Related content skeleton loader
-export function RelatedContentSkeleton({ 
-  title = "Related Content",
+export function RelatedContentSkeleton({
   itemCount = 3,
-  className 
-}: { 
+  className
+}: {
   title?: string;
   itemCount?: number;
   className?: string;
@@ -194,7 +193,7 @@ export function RelatedContentSkeleton({
         <Skeleton className="h-7 w-40" />
         <Skeleton className="h-6 w-16" />
       </div>
-      
+
       {/* Content Grid */}
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: itemCount }).map((_, index) => (
@@ -211,39 +210,39 @@ function RelatedContentCardSkeleton() {
     <div className="bg-card border rounded-lg overflow-hidden shadow-sm">
       {/* Image */}
       <Skeleton className="aspect-video w-full" />
-      
+
       <div className="p-4 space-y-3">
         {/* Badges */}
         <div className="flex gap-2">
           <Skeleton className="h-5 w-16" />
           <Skeleton className="h-5 w-20" />
         </div>
-        
+
         {/* Title */}
         <div className="space-y-1">
           <Skeleton className="h-5 w-full" />
           <Skeleton className="h-5 w-3/4" />
         </div>
-        
+
         {/* Summary */}
         <div className="space-y-1">
           <Skeleton className="h-4 w-full" />
           <Skeleton className="h-4 w-4/5" />
         </div>
-        
+
         {/* Metadata */}
         <div className="flex gap-3">
           <Skeleton className="h-3 w-16" />
           <Skeleton className="h-3 w-14" />
         </div>
-        
+
         {/* Tags */}
         <div className="flex gap-1">
           <Skeleton className="h-4 w-12" />
           <Skeleton className="h-4 w-16" />
           <Skeleton className="h-4 w-10" />
         </div>
-        
+
         {/* Action buttons */}
         <div className="flex gap-2 pt-2">
           <Skeleton className="h-6 w-12" />
@@ -279,7 +278,7 @@ export function PrevNextNavigationSkeleton({ className }: { className?: string }
           <Skeleton className="h-4 w-3/4" />
         </div>
       </div>
-      
+
       {/* Next */}
       <div className="flex-1 max-w-sm">
         <div className="bg-card border rounded-lg p-4 space-y-2">
@@ -293,10 +292,10 @@ export function PrevNextNavigationSkeleton({ className }: { className?: string }
 }
 
 // Image loading skeleton with fade-in effect
-export function ImageSkeleton({ 
+export function ImageSkeleton({
   className,
   aspectRatio = "aspect-video"
-}: { 
+}: {
   className?: string;
   aspectRatio?: string;
 }) {
@@ -353,7 +352,7 @@ export function DetailPageSkeleton({ type }: { type: 'project' | 'writing' }) {
       {/* Related Content */}
       <div className="container mx-auto px-4 pb-16">
         <div className="max-w-6xl mx-auto">
-          <RelatedContentSkeleton 
+          <RelatedContentSkeleton
             title={type === 'project' ? 'Related Projects' : 'Related Articles'}
             className="border-t border-border pt-16"
           />

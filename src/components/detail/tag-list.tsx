@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { X, Filter } from 'lucide-react';
+import { FaTimes, FaFilter } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 
 interface TagListProps {
@@ -81,7 +81,7 @@ export function TagList({
               isFilterMode && 'text-primary'
             )}
           >
-            <Filter className="w-3 h-3" />
+            <FaFilter className="w-3 h-3" />
             {isFilterMode ? 'Exit Filter' : 'Filter Mode'}
           </Button>
         </div>
@@ -100,7 +100,7 @@ export function TagList({
                 onClick={() => handleRemoveTag(tag, {} as React.MouseEvent)}
               >
                 {tag}
-                <X className="w-3 h-3" />
+                <FaTimes className="w-3 h-3" />
               </Badge>
             ))}
           </div>
@@ -112,7 +112,7 @@ export function TagList({
         {tags.map((tag) => {
           const isSelected = selectedTags.includes(tag);
           const isClickable = variant !== 'default' || onTagClick;
-          
+
           return (
             <Badge
               key={tag}
@@ -137,7 +137,7 @@ export function TagList({
                 }
               } : undefined}
               aria-label={
-                isClickable 
+                isClickable
                   ? `${isSelected ? 'Remove' : 'Add'} ${tag} tag filter`
                   : `Tag: ${tag}`
               }
@@ -145,8 +145,8 @@ export function TagList({
             >
               {tag}
               {(variant === 'filter' || isFilterMode) && isSelected && (
-                <X 
-                  className="w-3 h-3 ml-1" 
+                <FaTimes
+                  className="w-3 h-3 ml-1"
                   onClick={(e) => handleRemoveTag(tag, e)}
                 />
               )}
@@ -171,36 +171,36 @@ export function TagList({
 }
 
 // Utility component for simple tag display
-export function SimpleTags({ 
-  tags, 
-  className 
-}: { 
-  tags: string[]; 
-  className?: string; 
+export function SimpleTags({
+  tags,
+  className
+}: {
+  tags: string[];
+  className?: string;
 }) {
   return (
-    <TagList 
-      tags={tags} 
-      variant="default" 
+    <TagList
+      tags={tags}
+      variant="default"
       className={className}
     />
   );
 }
 
 // Utility component for interactive tags that navigate
-export function InteractiveTags({ 
-  tags, 
-  contentType, 
-  className 
-}: { 
-  tags: string[]; 
+export function InteractiveTags({
+  tags,
+  contentType,
+  className
+}: {
+  tags: string[];
   contentType: 'project' | 'writing';
-  className?: string; 
+  className?: string;
 }) {
   return (
-    <TagList 
-      tags={tags} 
-      variant="interactive" 
+    <TagList
+      tags={tags}
+      variant="interactive"
       contentType={contentType}
       className={className}
     />
@@ -208,22 +208,22 @@ export function InteractiveTags({
 }
 
 // Utility component for filterable tags
-export function FilterableTags({ 
-  tags, 
-  selectedTags, 
-  onTagSelect, 
-  onTagRemove, 
-  className 
-}: { 
-  tags: string[]; 
+export function FilterableTags({
+  tags,
+  selectedTags,
+  onTagSelect,
+  onTagRemove,
+  className
+}: {
+  tags: string[];
   selectedTags: string[];
   onTagSelect: (tag: string) => void;
   onTagRemove: (tag: string) => void;
-  className?: string; 
+  className?: string;
 }) {
   return (
-    <TagList 
-      tags={tags} 
+    <TagList
+      tags={tags}
       selectedTags={selectedTags}
       onTagClick={onTagSelect}
       onTagRemove={onTagRemove}
