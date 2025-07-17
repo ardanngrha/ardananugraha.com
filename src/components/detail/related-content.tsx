@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FaCalendar, FaExternalLinkAlt, FaGithub, FaClock } from 'react-icons/fa';
@@ -118,11 +118,11 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
         <article className="bg-card border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-primary/30 h-full flex flex-col">
           {/* Image */}
           {frontmatter.image && (
-            <div className="group flex-shrink-0" role="img" aria-label={`Featured image for ${frontmatter.title}`}>
+            <div className="group flex-shrink-0 relative aspect-video overflow-hidden" role="img" aria-label={`Featured image for ${frontmatter.title}`}>
               <CardImageWithLoading
                 src={frontmatter.image}
                 alt={`Featured image for ${frontmatter.title}`}
-                className="transition-transform duration-300 group-hover:scale-105 h-40 sm:h-48"
+                className="transition-transform duration-300 group-hover:scale-105"
               />
             </div>
           )}
@@ -194,8 +194,8 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
               <div className="flex flex-wrap gap-2 mt-3" role="group" aria-label={`${isProject ? 'Technologies' : 'Tags'} used`}>
                 {uniqueTags.slice(0, 3).map((tag) => (
                   <div key={tag} className="flex items-center gap-1.5 bg-secondary px-2 py-1 rounded-full text-xs font-medium text-secondary-foreground">
-                    {isProject && techIconMap[tag] ? <span className="text-sm">{techIconMap[tag]}</span> : <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`${isProject ? 'Technology' : 'Tag'}: ${tag}`}>{tag}</Badge>}
-                    {!isProject && <span>{tag}</span>}
+                    {isProject && techIconMap[tag] ? <span className="text-sm">{techIconMap[tag]}</span> : !isProject ? <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`Tag: ${tag}`}>{tag}</Badge> : null}
+                    {isProject && <span>{tag}</span>}
                   </div>
                 ))}
                 {uniqueTags.length > 3 && (

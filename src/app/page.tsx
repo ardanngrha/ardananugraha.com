@@ -5,6 +5,7 @@ import Hero from "@/components/home/hero"
 import ProjectsSection from "@/components/home/projects"
 import WritingsSection from "@/components/home/writings"
 import TestimonialsSection from "@/components/home/testimonials"
+import { toast } from "sonner"
 
 // Types for the content
 interface ContentItem {
@@ -25,6 +26,14 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const timer = setTimeout(() => {
+      toast.warning("Under Construction", {
+        description: "This website is still a work in progress. Feel free to explore!",
+        closeButton: true,
+        duration: 10000, // Show for 10 seconds
+      });
+    }, 1000);
+
     async function fetchFeaturedContent() {
       try {
         // Fetch featured projects and writings
@@ -48,6 +57,7 @@ export default function Home() {
     }
 
     fetchFeaturedContent();
+    return () => clearTimeout(timer);
   }, []);
 
   return (
