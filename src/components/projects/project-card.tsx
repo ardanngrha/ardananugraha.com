@@ -64,7 +64,7 @@ export function ProjectPageCard({ project }: ProjectCardProps) {
       variants={cardVariants}
       className="bg-card/30 border rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-primary/10 hover:border-primary/30"
     >
-      <div className="p-6">
+      <div className="p-6 group">
         {/* Project Title - Top */}
         <h3 className="text-2xl font-bold text-primary mb-6">{title}</h3>
 
@@ -78,7 +78,7 @@ export function ProjectPageCard({ project }: ProjectCardProps) {
                     src={image as string}
                     alt={`${title} screenshot`}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105 grayscale group-hover:grayscale-0"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 ) : (
@@ -115,9 +115,9 @@ export function ProjectPageCard({ project }: ProjectCardProps) {
 
             <div className="flex flex-col flex-wrap gap-3 mt-6 pt-4 border-t border-border/50">
               {/* Tech Stack Tags */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 grayscale group-hover:grayscale-0">
                 {tags?.map((tag) => (
-                  <Badge key={tag} variant="secondary">
+                  <Badge key={tag} variant="secondary" className="gap-2">
                     {techIconMap[tag]} {tag}
                   </Badge>
                 ))}

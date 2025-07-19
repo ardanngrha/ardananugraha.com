@@ -32,7 +32,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 src={project.frontmatter.image as string}
                 alt={project.frontmatter.title}
                 fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                className="object-cover transition-transform duration-300 group-hover:scale-105 grayscale group-hover:grayscale-0"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             ) : (
@@ -44,7 +44,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             )}
           </div>
           <div className="p-6 flex flex-col flex-grow">
-            <div className="flex gap-2 flex-wrap mb-4">
+            <div className="flex gap-2 flex-wrap mb-4 grayscale group-hover:grayscale-0">
               {project.frontmatter.tags?.map((tag: string) => (
                 <div
                   key={tag}

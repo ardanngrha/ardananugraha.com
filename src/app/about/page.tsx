@@ -3,6 +3,7 @@ import { PageHeader } from "@/components/page-header";
 import { ImageCarousel } from "@/components/about/image";
 import { TechStack } from "@/components/about/tech-stack";
 import { ExperienceTimeline } from "@/components/about/experiences";
+import { TechTools } from "@/components/about/tech-tools";
 
 export default function AboutPage() {
   return (
@@ -42,6 +43,11 @@ export default function AboutPage() {
         <div className="my-16">
           <h2 className="text-3xl font-bold text-center mb-12">My Experiences</h2>
           <ExperienceTimeline />
+        </div>
+
+        <div className="my-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Tech and Tools I Use</h2>
+          <TechTools />
         </div>
       </div>
     </div>
