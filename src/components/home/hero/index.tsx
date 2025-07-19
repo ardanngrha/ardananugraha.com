@@ -1,20 +1,13 @@
 "use client"
 
-import { RoughNotation, RoughNotationGroup } from "react-rough-notation"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "motion/react"
 import HeroBackground from "./background"
 
 export default function Hero() {
-  const [isMounted, setIsMounted] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsMounted(true), 500)
-    return () => clearTimeout(timer)
-  }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -63,39 +56,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.7 }}
           className="relative text-lg font-medium max-w-lg"
         >
-          I work with{" "}
-          <RoughNotationGroup show={isMounted}>
-            <RoughNotation
-              type="underline"
-              color="#34D399" // Green
-              strokeWidth={2}
-              order={1}
-              animationDuration={500}
-            >
-              Python
-            </RoughNotation>
-            ,{" "}
-            <RoughNotation
-              type="underline"
-              color="#60A5FA" // Blue
-              strokeWidth={2}
-              order={2}
-              animationDuration={500}
-            >
-              Typescript
-            </RoughNotation>
-            , and{" "}
-            <RoughNotation
-              type="underline"
-              color="#F87171" // Red
-              strokeWidth={2}
-              order={3}
-              animationDuration={500}
-            >
-              Java
-            </RoughNotation>
-          </RoughNotationGroup>{" "}
-          to build applications.
+          I work with Python, Typescript, and Java to build applications.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -1,9 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { FaChevronRight } from 'react-icons/fa';
 import { HiOutlineHome } from 'react-icons/hi';
 import { cn } from '@/lib/utils';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbList, BreadcrumbSeparator } from '../ui/breadcrumb';
 
 interface BreadcrumbItem {
   label: string;
@@ -38,30 +38,22 @@ export function ContentNavigation({
   return (
     <nav className={cn('space-y-3 sm:space-y-4', className)} aria-label="Content navigation">
       {/* Breadcrumbs */}
-      <div className="flex items-center space-x-1 text-xs sm:text-sm text-muted-foreground overflow-x-auto scrollbar-hide">
-        {allBreadcrumbs.map((item, index) => (
-          <div key={item.href} className="flex items-center flex-shrink-0">
-            {index === 0 && <HiOutlineHome className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />}
-            <Link
-              href={item.href}
-              className="hover:text-foreground transition-colors whitespace-nowrap min-h-[44px] flex items-center touch-manipulation"
-              aria-label={`Maps to ${item.label}`}
-            >
-              {item.label}
-            </Link>
-            {index < allBreadcrumbs.length - 1 && (
-              <FaChevronRight className="w-3 h-3 sm:w-4 sm:h-4 mx-1 flex-shrink-0" aria-hidden="true" />
-            )}
-          </div>
-        ))}
-        {/* Current page */}
-        <div className="flex items-center flex-shrink-0">
-          <FaChevronRight className="w-3 h-3 sm:w-4 sm:h-4 mx-1" aria-hidden="true" />
-          <span className="text-foreground font-medium truncate max-w-[150px] sm:max-w-xs" title={title}>
-            {title}
-          </span>
-        </div>
-      </div>
+      <Breadcrumb>
+        <BreadcrumbList>
+          {allBreadcrumbs.map((item, index) => (
+            <BreadcrumbItem key={item.href}>
+              {index === 0 && <HiOutlineHome className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />}
+              <BreadcrumbLink asChild>
+                <Link href={item.href}>{item.label}</Link>
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          ))}
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{title}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
     </nav>
   );
 }

@@ -30,7 +30,7 @@ export default function Home() {
       toast.warning("Under Construction", {
         description: "This website is still a work in progress. Feel free to explore!",
         closeButton: true,
-        duration: 10000, // Show for 10 seconds
+        duration: 5000, // Show for 5 seconds
       });
     }, 1000);
 
