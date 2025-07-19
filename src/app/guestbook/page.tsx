@@ -5,9 +5,14 @@ import { PageHeader } from "@/components/page-header";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import Image from "next/image";
 import { FaGithub } from "react-icons/fa";
+import { Input } from "@/components/ui/input"
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@/components/ui/avatar"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface Comment {
   id: number;
@@ -85,28 +90,15 @@ export default function GuestbookPage() {
       />
 
       <div className="max-w-4xl mx-auto border rounded-lg bg-background font-mono p-4 my-16">
-        <div ref={commentsContainerRef} className="h-80 md:h-96 overflow-y-auto flex flex-col p-3 md:p-4 mb-4 border rounded-md">
+        <ScrollArea className="h-80 md:h-96 rounded-md border p-4">
           <div className="flex-grow" />
           <div className="space-y-3 md:space-y-4">
             {comments.map((comment) => (
               <div key={comment.id} className="flex items-start gap-2 md:gap-3">
-                <div className="flex-shrink-0 w-6 h-6 rounded-full overflow-hidden bg-muted">
-                  {comment.author.image ? (
-                    <Image
-                      src={comment.author.image}
-                      alt={comment.author.username}
-                      className="w-full h-full object-cover"
-                      width={24}
-                      height={24}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-xs font-bold text-primary">
-                        {comment.author.username.charAt(0).toUpperCase()}
-                      </span>
-                    </div>
-                  )}
-                </div>
+                <Avatar>
+                  <AvatarImage src={comment.author.image || ""} />
+                  <AvatarFallback>{comment.author.username.charAt(0).toUpperCase()}</AvatarFallback>
+                </Avatar>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <span className="text-primary font-medium text-sm">
@@ -123,29 +115,16 @@ export default function GuestbookPage() {
               </div>
             ))}
           </div>
-        </div>
+        </ScrollArea>
 
         {session ? (
           <div className="p-3 md:p-4">
             <form onSubmit={handleSubmit} className="space-y-3">
               <div className="flex items-center gap-2 md:gap-3">
-                <div className="flex-shrink-0 w-6 h-6 rounded-full overflow-hidden bg-muted">
-                  {session.user?.image ? (
-                    <Image
-                      src={session.user.image}
-                      alt={session.user.username || 'User'}
-                      className="w-full h-full object-cover"
-                      width={24}
-                      height={24}
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-xs font-bold text-primary">
-                        {(session.user?.username || 'U').charAt(0).toUpperCase()}
-                      </span>
-                    </div>
-                  )}
-                </div>
+                <Avatar>
+                  <AvatarImage src={session.user?.image || ""} />
+                  <AvatarFallback>{(session.user?.username || 'U').charAt(0).toUpperCase()}</AvatarFallback>
+                </Avatar>
                 <span className="text-primary font-medium text-sm">
                   {`~/${session.user?.username || 'user'}`}
                 </span>
@@ -173,6 +152,6 @@ export default function GuestbookPage() {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 }

@@ -2,6 +2,12 @@
 
 import { motion } from "motion/react";
 import { FaPython, FaJs, FaJava, FaReact } from "react-icons/fa";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const techStack = [
   {
@@ -28,22 +34,24 @@ const techStack = [
 
 export function TechStack() {
   return (
-    <div className="flex flex-wrap gap-4">
-      {techStack.map((tech) => (
-        <motion.div
-          key={tech.name}
-          className="relative group"
-          whileHover={{ scale: 1.1, zIndex: 10 }}
-        >
-          <div className="bg-secondary rounded-lg p-4">
-            {tech.icon}
-          </div>
-          <div className="absolute bottom-full mb-2 w-64 bg-background border p-4 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <h4 className="font-bold">{tech.name}</h4>
-            <p className="text-sm text-muted-foreground">{tech.reason}</p>
-          </div>
-        </motion.div>
-      ))}
-    </div>
+    <TooltipProvider>
+      <div className="flex flex-wrap gap-4">
+        {techStack.map((tech) => (
+          <Tooltip key={tech.name}>
+            <TooltipTrigger asChild>
+              <motion.div
+                whileHover={{ scale: 1.1, zIndex: 10 }}
+              >
+                <div className="bg-secondary rounded-lg p-4">{tech.icon}</div>
+              </motion.div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <h4>{tech.name}</h4>
+              <p>{tech.reason}</p>
+            </TooltipContent>
+          </Tooltip>
+        ))}
+      </div>
+    </TooltipProvider>
   );
 }

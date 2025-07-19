@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Writing } from '@/lib/posts';
 import { FaChevronDown, FaTag } from 'react-icons/fa';
+import { Separator } from "@/components/ui/separator"
 
 type SortOption = 'newest' | 'oldest' | 'a-z' | 'z-a';
 
@@ -78,7 +79,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
               <div key={post.slug}>
                 <WritingCard writing={post} />
                 {index < filteredAndSortedPosts.length - 1 && (
-                  <hr className="my-10 border-border/40" />
+                  <Separator className="my-10" />
                 )}
               </div>
             ))}

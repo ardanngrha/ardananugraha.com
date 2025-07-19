@@ -10,6 +10,7 @@ import { PrevNextNavigation } from '@/components/detail/prev-next-navigation';
 import { ShareButtons } from '@/components/detail/share-buttons';
 import { ProjectNotFound } from '@/components/detail/content-not-found';
 import { MDXErrorBoundary, ErrorBoundary } from '@/components/detail/error-boundary';
+import { ReadingProgress } from '@/components/detail/reading-progress';
 
 // This function tells Next.js which routes to pre-render at build time.
 export async function generateStaticParams() {
@@ -83,6 +84,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     return (
       <ErrorBoundary>
         <div className="min-h-screen bg-background">
+          <ReadingProgress />
           {/* Structured Data */}
           <script
             type="application/ld+json"

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
+import { Badge } from "@/components/ui/badge"
 import {
   FaReact,
   FaNodeJs,
@@ -115,14 +116,10 @@ export function ProjectPageCard({ project }: ProjectCardProps) {
             <div className="flex flex-col flex-wrap gap-3 mt-6 pt-4 border-t border-border/50">
               {/* Tech Stack Tags */}
               <div className="flex flex-wrap gap-2">
-                {tags?.map((tag: string) => (
-                  <div
-                    key={tag}
-                    className="flex items-center gap-1.5 bg-secondary hover:bg-secondary/80 px-3 py-1.5 rounded-full text-xs font-medium text-secondary-foreground transition-colors"
-                  >
-                    {techIconMap[tag] || null}
-                    <span>{tag}</span>
-                  </div>
+                {tags?.map((tag) => (
+                  <Badge key={tag} variant="secondary">
+                    {techIconMap[tag]} {tag}
+                  </Badge>
                 ))}
               </div>
               {/* Action Buttons */}

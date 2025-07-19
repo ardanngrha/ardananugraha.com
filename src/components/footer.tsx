@@ -4,10 +4,12 @@ import Newsletter from "./footer/newsletter"
 import Copyright from "./footer/copyright"
 import Socials from "./footer/socials"
 import Contact from "./footer/contact"
+import { Separator } from "./ui/separator"
 
 export default function Footer() {
   return (
-    <footer className="border-t mb-16 md:mb-0">
+    <footer className="mb-16 md:mb-0">
+      <Separator />
       {/* Main Row - 5 columns */}
       <div className="flex flex-col md:flex-row gap-6 py-12 items-center md:items-start">
         {/* Now Playing */}
@@ -38,10 +40,13 @@ export default function Footer() {
         </div>
       </div>
 
+      <Separator />
+
       {/* Copyright Row */}
-      <div className="border-t py-12">
+      <div className="py-12">
         <Copyright />
       </div>
+
     </footer>
   )
 }
