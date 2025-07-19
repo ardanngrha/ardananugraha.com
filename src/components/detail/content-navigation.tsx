@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { HiOutlineHome } from 'react-icons/hi';
 import { cn } from '@/lib/utils';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbList, BreadcrumbSeparator } from '../ui/breadcrumb';
+import React from 'react';
 
 interface BreadcrumbItem {
   label: string;
@@ -41,14 +42,18 @@ export function ContentNavigation({
       <Breadcrumb>
         <BreadcrumbList>
           {allBreadcrumbs.map((item, index) => (
-            <BreadcrumbItem key={item.href}>
-              {index === 0 && <HiOutlineHome className="w-4 h-4 sm:w-5 sm:h-5 mr-1" />}
-              <BreadcrumbLink asChild>
-                <Link href={item.href}>{item.label}</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
+            <React.Fragment key={item.href}>
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={item.href} className="flex items-center gap-1">
+                    {index === 0 && <HiOutlineHome className="w-4 h-4 sm:w-5 sm:h-5" />}
+                    {item.label}
+                  </Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+            </React.Fragment>
           ))}
-          <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbPage>{title}</BreadcrumbPage>
           </BreadcrumbItem>

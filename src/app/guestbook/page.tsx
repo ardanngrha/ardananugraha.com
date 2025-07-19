@@ -138,7 +138,7 @@ export default function GuestbookPage() {
                   className="flex-1 text-sm"
                   autoFocus
                 />
-                <Button type="submit" size="sm" className="px-4 md:px-6 cursor-pointer">
+                <Button type="submit" size="default" variant="outline" className="px-4 md:px-6 cursor-pointer">
                   Submit
                 </Button>
               </div>
@@ -146,8 +146,8 @@ export default function GuestbookPage() {
           </div>
         ) : (
           <div className="text-center p-4 md:p-6">
-            <Button onClick={() => signIn("github")} className="w-full sm:w-auto cursor-pointer">
-              Sign in with GitHub to comment <FaGithub className="inline-block ml-2" />
+            <Button onClick={() => signIn("github")} variant="outline" className="w-full sm:w-auto cursor-pointer">
+              Sign in with <FaGithub className="inline-block mx-1" /> to comment
             </Button>
           </div>
         )}

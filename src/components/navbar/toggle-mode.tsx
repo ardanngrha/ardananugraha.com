@@ -24,25 +24,28 @@ export function ModeToggle({ variant = "default" }: ModeToggleProps) {
   const toggleTheme = () => {
     if (isAnimating) return
 
-    setIsAnimating(true)
+    const isMobileDevice = variant === "mobile" || window.innerWidth < 768;
 
-    // Check if we should apply ripple effect (only on desktop)
-    const shouldApplyRipple = variant === "default" && window.innerWidth >= 768
-
-    if (shouldApplyRipple) {
-      // Get button position for animation origin
-      const button = buttonRef.current
+    if (isMobileDevice) {
+      // On mobile, change theme instantly without transition
+      document.body.style.transition = 'none';
+      const currentTheme = resolvedTheme || theme;
+      setTheme(currentTheme === "dark" ? "light" : "dark");
+      // Restore transition after a short delay
+      setTimeout(() => {
+        document.body.style.transition = '';
+      }, 100);
+    } else {
+      // Ripple effect for desktop
+      setIsAnimating(true);
+      const button = buttonRef.current;
       if (button) {
-        const rect = button.getBoundingClientRect()
-        const x = rect.left + rect.width / 2
-        const y = rect.top + rect.height / 2
-
-        // Use resolvedTheme for accurate current theme
-        const currentTheme = resolvedTheme || theme
-
-        // Create ripple effect
-        const ripple = document.createElement('div')
-        ripple.className = 'theme-transition-overlay'
+        const rect = button.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const currentTheme = resolvedTheme || theme;
+        const ripple = document.createElement('div');
+        ripple.className = 'theme-transition-overlay';
         ripple.style.cssText = `
           position: fixed;
           top: ${y}px;
@@ -55,41 +58,27 @@ export function ModeToggle({ variant = "default" }: ModeToggleProps) {
           pointer-events: none;
           transform: translate(-50%, -50%);
           transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        `
+        `;
+        document.body.appendChild(ripple);
 
-        document.body.appendChild(ripple)
-
-        // Trigger animation
         requestAnimationFrame(() => {
-          const maxDimension = Math.max(window.innerWidth, window.innerHeight)
-          const diagonal = Math.sqrt(Math.pow(maxDimension, 2) + Math.pow(maxDimension, 2))
+          const maxDimension = Math.max(window.innerWidth, window.innerHeight);
+          const diagonal = Math.sqrt(Math.pow(maxDimension, 2) + Math.pow(maxDimension, 2));
+          ripple.style.width = `${diagonal * 2.5}px`;
+          ripple.style.height = `${diagonal * 2.5}px`;
+        });
 
-          ripple.style.width = `${diagonal * 2.5}px`
-          ripple.style.height = `${diagonal * 2.5}px`
-        })
-
-        // Change theme after animation starts
         setTimeout(() => {
-          setTheme(currentTheme === "dark" ? "light" : "dark")
-        }, 400)
+          setTheme(currentTheme === "dark" ? "light" : "dark");
+        }, 400);
 
-        // Clean up
         setTimeout(() => {
           if (document.body.contains(ripple)) {
-            document.body.removeChild(ripple)
+            document.body.removeChild(ripple);
           }
-          setIsAnimating(false)
-        }, 800)
+          setIsAnimating(false);
+        }, 800);
       }
-    } else {
-      // For mobile or when ripple is disabled, just change theme immediately
-      const currentTheme = resolvedTheme || theme
-      setTheme(currentTheme === "dark" ? "light" : "dark")
-
-      // Still need to handle the animation state
-      setTimeout(() => {
-        setIsAnimating(false)
-      }, 300)
     }
   }
 

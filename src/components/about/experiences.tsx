@@ -19,8 +19,8 @@ const experiences = [
       "Collaborating with frontend developers to integrate high-performance real-time dashboards.",
       "Managing deployment and containerization using Docker and Kubernetes."
     ],
-    icon: "https://cdn-icons-png.flaticon.com/512/2111/2111624.png",
-    website: "https://www.dicoding.com/",
+    icon: "https://media.licdn.com/dms/image/v2/C560BAQGF_mWsprjuJg/company-logo_200_200/company-logo_200_200/0/1672910764885/plniconplus_logo?e=1755734400&v=beta&t=AioOcgqmggvwnZoF779yDR4-cwWDjsjYIcLXd4P0Dhs",
+    website: "https://plniconplus.co.id/",
   },
   {
     company: "Dicoding Indonesia",
@@ -34,11 +34,11 @@ const experiences = [
       "Troubleshooting complex issues, optimizing system designs, and ensuring learning objectives were met.",
       "Provided lessons on backend technologies, architecture, and best practices."
     ],
-    icon: "https://cdn-icons-png.flaticon.com/512/2111/2111624.png",
-    website: "https://www.dicoding.com/",
+    icon: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_200_200/company-logo_200_200/0/1660182933847/dicoding_logo?e=1755734400&v=beta&t=X8BAWgpqeWzbqDPW-LlbMxkjHrHyYqZbPYcfnL2I5Zs",
+    website: "https://www.dicoding.com/about",
   },
   {
-    company: "Dicoding Indonesia - Bangkit Academy",
+    company: "Bangkit Academy",
     role: "Machine Learning Mentor",
     period: "Feb 2024 - Aug 2024",
     country: "Indonesia",
@@ -49,8 +49,8 @@ const experiences = [
       "Covering advanced topics in machine learning, data analysis, Al applications, and soft skills.",
       "Provided personalized feedback and support to students."
     ],
-    icon: "https://cdn-icons-png.flaticon.com/512/2111/2111624.png",
-    website: "https://www.dicoding.com/",
+    icon: "https://media.licdn.com/dms/image/v2/D560BAQGVomgVddrtBA/company-logo_200_200/B56ZWOrFbWGUAM-/0/1741855415072/bangkit_academy_logo?e=1755734400&v=beta&t=reBiVHrSPyZ0UgL0T1irzpLhqYlykbfiBEgw2gF_7bY",
+    website: "https://grow.google/intl/id_id/bangkit/",
   },
   {
     company: "PT Bank Negara Indonesia (Persero) Tbk.",
@@ -64,9 +64,25 @@ const experiences = [
       "Streamlining API creation for non-technical users.",
       "Achieved a perfect completion score of 90 (Α)."
     ],
-    icon: "https://cdn-icons-png.flaticon.com/512/2111/2111624.png",
-    website: "https://www.dicoding.com/",
+    icon: "https://media.licdn.com/dms/image/v2/D560BAQGqZzJbCTt-kw/company-logo_200_200/company-logo_200_200/0/1711506407720/pt_bank_negara_indonesia_persero_tbk_logo?e=1755734400&v=beta&t=SJC92Y8KJqjFCPYDyhGP0xEfqXPBMMfGs_BvK-Htv_w",
+    website: "https://www.bni.co.id/id-id/",
   },
+  {
+    company: "Intelligent Computing & Software Engineering Laboratory ITPLN",
+    role: "Laboratory Assistant",
+    period: "Aug 2021 – Feb 2024",
+    country: "Indonesia",
+    jobType: "On Site",
+    description: "Assisted in the management and operation of the laboratory, providing support to both students and lecturers.",
+    tasks: [
+      "Selected as coordinator since March 2023, leading and managing a team of 24 assistants while overseeing the laboratory's day-to-day operations.",
+      "Assisting lecturers in teaching various courses, supporting 30–40 students per class.",
+      "Providing over 10 hours per week of direct assistance to students, addressing their questions, debugging code, and helping them apply theoretical concepts.",
+      "Maintaining and troubleshooting hardware, software, and tools in two laboratories, ensuring seamless operation for 250+ students each semester."
+    ],
+    icon: "https://media.licdn.com/dms/image/v2/C560BAQGFwvJXfWZo_A/company-logo_200_200/company-logo_200_200/0/1630654939373?e=1755734400&v=beta&t=y5ZJEncdew49LeS8NSRKwep7D_44JXKNxL2nJuByMr0",
+    website: "https://www.instagram.com/seic_itpln/",
+  }
 ];
 
 export function ExperienceTimeline() {
@@ -85,7 +101,7 @@ export function ExperienceTimeline() {
             <div>
               <h3 className="font-bold">{exp.role}</h3>
               <div className="flex flex-row items-center gap-2">
-                <Image src={exp.icon} alt={`${exp.company} logo`} width={16} height={16} className="h-4 w-4 object-contain" />
+                <Image src={exp.icon} alt={`${exp.company} logo`} width={16} height={16} className="h-4 w-4 object-contain rounded" />
                 <Link href={exp.website} target="_blank" rel="noopener noreferrer" className="text-primary underline text-sm">
                   {exp.company}
                 </Link>

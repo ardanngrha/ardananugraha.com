@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "motion/react";
-import { FaPython, FaJs, FaJava, FaReact } from "react-icons/fa";
+import { FaPython, FaJava, FaReact } from "react-icons/fa";
+import { SiTypescript } from "react-icons/si";
 import {
   Tooltip,
   TooltipContent,
@@ -17,7 +18,7 @@ const techStack = [
   },
   {
     name: "TypeScript",
-    icon: <FaJs className="h-8 w-8" />,
+    icon: <SiTypescript className="h-8 w-8" />,
     reason: "I love the type safety and developer experience it brings to JavaScript projects, especially in large-scale applications.",
   },
   {
@@ -46,8 +47,8 @@ export function TechStack() {
               </motion.div>
             </TooltipTrigger>
             <TooltipContent>
-              <h4>{tech.name}</h4>
-              <p>{tech.reason}</p>
+              <h4 className="font-bold text-sm mb-1">{tech.name}</h4>
+              <p className="text-xs">{tech.reason}</p>
             </TooltipContent>
           </Tooltip>
         ))}
