@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FaTimes, FaFilter } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
-import { techIconMap } from '@/components/projects/project-card'; // Import the icon map
+import { techIconMap } from '@/components/projects/project-page-card'; // Import the icon map
 
 interface TagListProps {
   tags: string[];

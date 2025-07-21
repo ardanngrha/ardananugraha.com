@@ -8,7 +8,7 @@ import { FaCalendar, FaExternalLinkAlt, FaGithub, FaClock } from 'react-icons/fa
 import { cn } from '@/lib/utils';
 import { EnhancedProject, EnhancedWriting } from '@/lib/types';
 import { CardImageWithLoading } from './image-with-loading';
-import { techIconMap } from '@/components/projects/project-card';
+import { techIconMap } from '@/components/projects/project-page-card';
 
 interface RelatedContentProps {
   items: (EnhancedProject | EnhancedWriting)[];

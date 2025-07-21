@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { FaPencilAlt } from "react-icons/fa";
-import { WritingCard } from "./card";
+import { WritingCard } from "./writing-featured-card";
 import { ContentItem } from "./types";
 
 interface WritingsSectionProps {

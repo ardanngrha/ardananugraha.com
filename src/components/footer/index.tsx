@@ -1,10 +1,10 @@
-import NowPlaying from "./footer/now-playing"
-import Navigation from "./footer/navigation"
-import Newsletter from "./footer/newsletter"
-import Copyright from "./footer/copyright"
-import Socials from "./footer/socials"
-import Contact from "./footer/contact"
-import { Separator } from "./ui/separator"
+import NowPlaying from "./now-playing"
+import Navigation from "./navigation"
+import Newsletter from "./newsletter"
+import Copyright from "./copyright"
+import Socials from "./socials"
+import Contact from "./contact"
+import { Separator } from "../ui/separator"
 
 export default function Footer() {
   return (

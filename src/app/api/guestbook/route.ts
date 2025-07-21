@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/drizzle";
-import { comments, users } from "@/lib/schema";
+import { db } from "@/database/drizzle";
+import { comments, users } from "@/database/schema";
 import { getSession } from "@/lib/auth";
 import { asc, eq } from "drizzle-orm";
 

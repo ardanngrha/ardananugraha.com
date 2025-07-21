@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { FaWindowRestore } from "react-icons/fa";
-import { ProjectCard } from "./card";
+import { ProjectCard } from "./project-featured-card";
 import { ContentItem } from "./types";
 
 interface ProjectsSectionProps {

@@ -1,8 +1,8 @@
 "use client"
 
-import { DesktopTabs } from "./navbar/desktop-tabs"
-import { MobileTabs } from "./navbar/mobile-tabs"
-import { navigationTabs } from "./navbar/constants"
+import { DesktopTabs } from "./desktop-tabs"
+import { MobileTabs } from "./mobile-tabs"
+import { navigationTabs } from "./constants"
 import { useNavbarScroll } from "@/hooks/use-navbar-scroll"
 import { usePathname } from "next/navigation"
 

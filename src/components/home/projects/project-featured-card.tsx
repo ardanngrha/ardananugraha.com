@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { ContentItem } from "./types";
-import { techIconMap } from "@/components/projects/project-card";
+import { techIconMap } from "@/components/projects/project-page-card";
 
 interface ProjectCardProps {
   project: ContentItem;

@@ -4,7 +4,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { PageHeader } from '@/components/page-header';
 import { ProjectsBg } from '@/components/backgrounds/projects-bg';
-import { ProjectPageCard } from '@/components/projects/project-card';
+import { ProjectPageCard } from '@/components/projects/project-page-card';
 import type { ContentItem } from '@/components/home/projects/types';
 
 async function getAllProjects(): Promise<ContentItem[]> {
