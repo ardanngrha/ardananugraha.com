@@ -13,16 +13,7 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { ScrollArea } from "@/components/ui/scroll-area"
-
-interface Comment {
-  id: number;
-  content: string;
-  createdAt: string;
-  author: {
-    username: string;
-    image: string | null;
-  };
-}
+import Comment from "@/types/guestbook";
 
 export default function GuestbookPage() {
   const { data: session } = useSession();

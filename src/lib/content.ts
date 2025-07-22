@@ -6,8 +6,9 @@ import {
   getRelatedProjects,
   getRelatedWritings 
 } from './posts';
-import { EnhancedProject, EnhancedWriting } from './types';
 import { generateSEOMetadata, getFormattedReadTime } from './utils';
+import { EnhancedProject } from '../types/projects';
+import { EnhancedWriting } from '../types/writings';
 
 // Content fetching utilities
 export async function getContentWithMetadata(

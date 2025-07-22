@@ -6,19 +6,7 @@ import ProjectsSection from "@/components/home/projects"
 import WritingsSection from "@/components/home/writings"
 import TestimonialsSection from "@/components/home/testimonials"
 import { toast } from "sonner"
-
-// Types for the content
-interface ContentItem {
-  slug: string;
-  frontmatter: {
-    title: string;
-    summary?: string;
-    date: string;
-    tags?: string[];
-    image?: string | null;
-    [key: string]: unknown;
-  };
-}
+import ContentItem from "@/types/home"
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<ContentItem[]>([]);

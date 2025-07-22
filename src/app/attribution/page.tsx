@@ -1,13 +1,9 @@
 import Link from "next/link";
 import { AttributionBg } from "@/components/backgrounds/attribution-bg";
 import { PageHeader } from "@/components/page-header";
+import inspirations from "@/data/attribution";
 
 export default function AttributionPage() {
-  const inspirations = [
-    { name: "Theodorus Clarence", url: "https://theodorusclarence.com/", reason: "for the portfolio design inspiration." },
-    { name: "Wiscaksono", url: "https://wiscaksono.com/", reason: "for creative layout and guestbook ideas." },
-  ];
-
   return (
     <div>
       <PageHeader
