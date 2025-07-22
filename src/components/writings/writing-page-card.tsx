@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { formatRelativeDate, isRecent } from "@/lib/utils";
-import { Writing } from "@/lib/posts";
+import { Writing } from "@/types/writings";
 import { MdAccessTime } from "react-icons/md";
 
 interface WritingCardProps {

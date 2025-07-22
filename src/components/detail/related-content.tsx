@@ -6,7 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FaCalendar, FaExternalLinkAlt, FaGithub, FaClock } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
-import { EnhancedProject, EnhancedWriting } from '@/lib/types';
+import { EnhancedProject } from '@/types/projects';
+import { EnhancedWriting } from '@/types/writings';
 import { CardImageWithLoading } from './image-with-loading';
 import { techIconMap } from '@/components/projects/project-page-card';
 

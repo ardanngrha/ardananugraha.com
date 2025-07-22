@@ -9,7 +9,8 @@ import {
 } from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { EnhancedProject, EnhancedWriting } from '@/lib/types';
+import { EnhancedProject } from '@/types/projects';
+import { EnhancedWriting } from '@/types/writings';
 import { HeroImageWithLoading } from './image-with-loading';
 
 interface DetailHeroProps {

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { EnhancedProject, EnhancedWriting } from '@/lib/types'
+import { EnhancedProject } from '@/types/projects';
+import { EnhancedWriting } from '@/types/writings';
 import { cn } from '@/lib/utils'
 
 interface PrevNextNavigationProps {
