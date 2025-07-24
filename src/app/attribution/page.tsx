@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { AttributionBg } from "@/components/backgrounds/attribution-bg";
 import { PageHeader } from "@/components/page-header";
-import inspirations from "@/data/attribution";
+import inspirations from "@/data/attributions";
 
 export default function AttributionPage() {
   return (

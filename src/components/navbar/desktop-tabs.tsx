@@ -4,16 +4,7 @@ import { AnimatePresence, motion } from "motion/react"
 import Image from "next/image"
 import { Tabs } from "@/components/navbar/navigation-tabs"
 import { ModeToggle } from "./toggle-mode"
-
-interface DesktopTabsProps {
-  navigationTabs: Array<{
-    id: string
-    label: string
-    href: string
-    logo: React.ReactNode
-  }>
-  isVisible: boolean
-}
+import { DesktopTabsProps } from "@/types/navbar"
 
 export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
   return (

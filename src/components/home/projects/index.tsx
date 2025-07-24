@@ -3,10 +3,10 @@ import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { FaWindowRestore } from "react-icons/fa";
 import { ProjectCard } from "./project-featured-card";
-import { ContentItem } from "./types";
+import { ProjectContentItem } from "@/types/projects";
 
 interface ProjectsSectionProps {
-  projects: ContentItem[];
+  projects: ProjectContentItem[];
   loading: boolean;
 }
 

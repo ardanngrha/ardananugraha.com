@@ -1,5 +1,3 @@
-import { ContentItem } from './content';
-
 export interface WritingFrontmatter {
   title: string;
   date: string;
@@ -12,13 +10,12 @@ export interface WritingFrontmatter {
   [key: string]: unknown;
 }
 
-export interface EnhancedWriting extends ContentItem {
-  content: string;
+export interface WritingContentItem {
+  slug: string;
   frontmatter: WritingFrontmatter;
 }
 
-export interface Writing {
-    slug: string;
-    frontmatter: WritingFrontmatter;
-    readTime: number;
+export interface EnhancedWriting extends WritingContentItem {
+  content?: string;
+  readTime?: number;
 }

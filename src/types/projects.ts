@@ -1,5 +1,3 @@
-import { ContentItem } from './content';
-
 export interface ProjectFrontmatter {
   title: string;
   summary: string;
@@ -14,7 +12,13 @@ export interface ProjectFrontmatter {
   [key: string]: unknown;
 }
 
-export interface EnhancedProject extends ContentItem {
-  content: string;
+export interface ProjectContentItem {
+  slug: string;
   frontmatter: ProjectFrontmatter;
 }
+
+export interface EnhancedProject extends ProjectContentItem {
+  content: string;
+  readTime?: number;
+}
+

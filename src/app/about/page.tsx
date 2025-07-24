@@ -1,9 +1,9 @@
 import { AboutBg } from "@/components/backgrounds/about-bg";
 import { PageHeader } from "@/components/page-header";
-import { ImageCarousel } from "@/components/about/image";
-import { TechStack } from "@/components/about/tech-stack";
+import { ImageCarousel } from "@/components/about/images";
+import { FavStack } from "@/components/about/fav-stack";
 import { ExperienceTimeline } from "@/components/about/experiences";
-import { TechTools } from "@/components/about/tech-tools";
+import { TechStack } from "@/components/about/tech-stack";
 
 export default function AboutPage() {
   return (
@@ -35,7 +35,7 @@ export default function AboutPage() {
               <p>
                 Here are some of the technologies I&apos;m currently excited about:
               </p>
-              <TechStack />
+              <FavStack />
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function AboutPage() {
 
         <div className="my-16">
           <h2 className="text-3xl font-bold text-center mb-12">Tech and Tools I Use</h2>
-          <TechTools />
+          <TechStack />
         </div>
       </div>
     </div>

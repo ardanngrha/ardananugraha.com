@@ -2,15 +2,7 @@
 
 import { Tabs } from "@/components/navbar/navigation-tabs"
 import { ModeToggle } from "./toggle-mode"
-
-interface MobileTabsProps {
-  navigationTabs: Array<{
-    id: string
-    label: string
-    href: string
-    logo: React.ReactNode
-  }>
-}
+import { MobileTabsProps } from "@/types/navbar"
 
 export function MobileTabs({ navigationTabs }: MobileTabsProps) {
   return (

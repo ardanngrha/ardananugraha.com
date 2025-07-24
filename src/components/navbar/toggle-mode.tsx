@@ -6,10 +6,7 @@ import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { MdOutlineWbSunny } from "react-icons/md";
 import { cn } from "@/lib/utils"
-
-interface ModeToggleProps {
-  variant?: "default" | "mobile"
-}
+import { ModeToggleProps } from "@/types/navbar"
 
 export function ModeToggle({ variant = "default" }: ModeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme()

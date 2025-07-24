@@ -154,7 +154,7 @@ export default async function WritingPage({
                   contentType="writing"
                   contentTitle={frontmatter.title}
                 >
-                  <MDXRemote source={content} />
+                  {content && <MDXRemote source={content} />}
                 </MDXErrorBoundary>
               </article>
 

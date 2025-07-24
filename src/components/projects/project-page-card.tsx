@@ -23,11 +23,10 @@ import {
   SiNextdotjs,
 } from "react-icons/si";
 import { Button } from "@/components/ui/button";
-import { ContentItem } from "@/components/home/projects/types";
+import { ProjectContentItem } from "@/types/projects";
 
 // Maps tech stack names to their corresponding icons with colors
 export const techIconMap: { [key: string]: React.ReactNode } = {
-  "React.js": <FaReact className="text-blue-500" />,
   React: <FaReact className="text-blue-500" />,
   "Tailwind CSS": <SiTailwindcss className="text-cyan-500" />,
   "Node.js": <FaNodeJs className="text-green-600" />,
@@ -43,7 +42,7 @@ export const techIconMap: { [key: string]: React.ReactNode } = {
 };
 
 interface ProjectCardProps {
-  project: ContentItem;
+  project: ProjectContentItem;
 }
 
 const cardVariants = {

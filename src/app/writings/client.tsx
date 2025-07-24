@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { WritingCard } from '@/components/writings/writing-page-card';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Writing } from '@/types/writings';
+import { EnhancedWriting } from '@/types/writings';
 import { FaChevronDown, FaTag } from 'react-icons/fa';
 import { Separator } from "@/components/ui/separator"
 
 type SortOption = 'newest' | 'oldest' | 'a-z' | 'z-a';
 
 interface WritingsClientPageProps {
-  allPosts: Writing[];
+  allPosts: EnhancedWriting[];
   allTopics: string[];
 }
 
@@ -35,7 +35,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
         selectedTopics.some(topic => post.frontmatter.tags.includes(topic))
       );
 
-    const sorter = (a: Writing, b: Writing) => {
+    const sorter = (a: EnhancedWriting, b: EnhancedWriting) => {
       switch (sortOrder) {
         case 'oldest':
           return new Date(a.frontmatter.date).getTime() - new Date(b.frontmatter.date).getTime();

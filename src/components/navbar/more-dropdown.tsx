@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link"
+import { MoreDropdownProps } from "@/types/navbar"
 
 const dropdownItems = [
   {
@@ -26,16 +27,6 @@ const dropdownItems = [
     icon: <HiOutlineInformationCircle className="w-4 h-4" />,
   },
 ]
-
-interface MoreDropdownProps {
-  isActive: boolean
-  isHovered: boolean
-  onMouseEnterAction: () => void
-  onMouseLeaveAction: () => void
-  onOpenChangeAction: (open: boolean) => void
-  showLabel?: boolean
-  className?: string
-}
 
 export function MoreDropdown({
   isActive,

@@ -5,9 +5,9 @@ import matter from 'gray-matter';
 import { PageHeader } from '@/components/page-header';
 import { ProjectsBg } from '@/components/backgrounds/projects-bg';
 import { ProjectPageCard } from '@/components/projects/project-page-card';
-import type { ContentItem } from '@/components/home/projects/types';
+import { ProjectContentItem } from '@/types/projects';
 
-async function getAllProjects(): Promise<ContentItem[]> {
+async function getAllProjects(): Promise<ProjectContentItem[]> {
   const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
   const filenames = await fs.readdir(projectsDirectory);
 
@@ -19,7 +19,7 @@ async function getAllProjects(): Promise<ContentItem[]> {
 
       return {
         slug: filename.replace(/\.mdx$/, ''),
-        frontmatter: data as ContentItem['frontmatter'],
+        frontmatter: data as ProjectContentItem['frontmatter'],
       };
     })
   );

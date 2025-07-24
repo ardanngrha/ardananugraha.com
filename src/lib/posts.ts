@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { calculateReadTime } from './utils';
 import { ProjectFrontmatter, EnhancedProject } from '@/types/projects';
-import { WritingFrontmatter, EnhancedWriting, Writing } from '@/types/writings';
+import { WritingFrontmatter, EnhancedWriting } from '@/types/writings';
 
 // Enhanced utility functions for projects
 export async function getAllProjects(): Promise<EnhancedProject[]> {
@@ -96,7 +96,7 @@ export async function getAllProjectTags(): Promise<string[]> {
 }
 
 // Enhanced utility functions for writings
-export async function getAllWritings(): Promise<Writing[]> {
+export async function getAllWritings(): Promise<EnhancedWriting[]> {
   const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
   
   try {

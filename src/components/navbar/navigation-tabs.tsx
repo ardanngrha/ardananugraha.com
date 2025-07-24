@@ -5,19 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { MoreDropdown } from "./more-dropdown"
-
-interface Tab {
-  id: string
-  label: string
-  href: string
-  logo: React.ReactNode
-  isDropdown?: boolean
-}
-
-interface TabsProps {
-  tabs: Tab[]
-  showLabels?: boolean
-}
+import { TabsProps } from "@/types/navbar"
 
 export function Tabs({ tabs, showLabels = true }: TabsProps) {
   const pathname = usePathname()

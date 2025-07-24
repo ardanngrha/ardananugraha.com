@@ -1,57 +1,83 @@
-"use client"
+"use client";
 
-import { motion } from "motion/react";
-import { FaPython, FaJava, FaReact } from "react-icons/fa";
-import { SiTypescript } from "react-icons/si";
+import { motion, useAnimationFrame, useMotionValue } from "motion/react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-
-const techStack = [
-  {
-    name: "Python",
-    icon: <FaPython className="h-8 w-8" />,
-    reason: "Its versatility and extensive libraries make it my go-to for backend development and machine learning.",
-  },
-  {
-    name: "TypeScript",
-    icon: <SiTypescript className="h-8 w-8" />,
-    reason: "I love the type safety and developer experience it brings to JavaScript projects, especially in large-scale applications.",
-  },
-  {
-    name: "Java",
-    icon: <FaJava className="h-8 w-8" />,
-    reason: "A robust and reliable language that I enjoy using for building scalable and high-performance enterprise applications.",
-  },
-  {
-    name: "React",
-    icon: <FaReact className="h-8 w-8" />,
-    reason: "Its component-based architecture and declarative nature make building complex UIs a breeze. The ecosystem is fantastic!",
-  },
-];
+import { useEffect, useRef, useState } from "react";
+import tech_stack from "@/data/about-tech-stack";
 
 export function TechStack() {
+  const duplicatedTools = [...tech_stack, ...tech_stack];
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const x = useMotionValue(0);
+  const isDragging = useRef(false);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setContentWidth(contentRef.current.scrollWidth / 2);
+    }
+  }, []);
+
+  useAnimationFrame((time, delta) => {
+    if (isDragging.current || isHovering || !contentWidth) return;
+
+    let currentX = x.get();
+    const speed = -70; // pixels per second
+    const moveBy = speed * (delta / 1000);
+
+    if (currentX <= -contentWidth) {
+      currentX += contentWidth;
+      x.set(currentX);
+    }
+
+    x.set(currentX + moveBy);
+  });
+
   return (
     <TooltipProvider>
-      <div className="flex flex-wrap gap-4">
-        {techStack.map((tech) => (
-          <Tooltip key={tech.name}>
-            <TooltipTrigger asChild>
-              <motion.div
-                whileHover={{ scale: 1.1, zIndex: 10 }}
-              >
-                <div className="bg-secondary rounded-lg p-4">{tech.icon}</div>
-              </motion.div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <h4 className="font-bold text-sm mb-1">{tech.name}</h4>
-              <p className="text-xs">{tech.reason}</p>
-            </TooltipContent>
-          </Tooltip>
-        ))}
+      <div
+        ref={containerRef}
+        className="w-full overflow-hidden cursor-grab py-4"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
+        <motion.div
+          ref={contentRef}
+          className="flex"
+          style={{ x }}
+          drag="x"
+          dragConstraints={{
+            left: -contentWidth,
+            right: 0,
+          }}
+          onDragStart={() => { isDragging.current = true; }}
+          onDragEnd={() => { isDragging.current = false; }}
+          whileTap={{ cursor: "grabbing" }}
+        >
+          {duplicatedTools.map((tool, index) => (
+            <Tooltip key={index}>
+              <TooltipTrigger asChild>
+                <motion.div
+                  className="flex-shrink-0 mx-4 text-4xl text-center"
+                  whileHover={{ scale: 1.2, y: -5, transition: { duration: 0.2 } }}
+                >
+                  {tool.icon}
+                </motion.div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{tool.name}</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
+        </motion.div>
       </div>
     </TooltipProvider>
   );

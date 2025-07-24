@@ -2,20 +2,8 @@
 
 import React from "react"
 import { motion } from "motion/react"
+import { PageHeaderProps } from "@/types/shared"
 
-interface PageHeaderProps {
-  title: string
-  description: string
-  background: React.ReactNode
-}
-
-/**
- * A reusable component for page title sections.
- * It includes a title, description, and a decorative background element.
- * @param {string} title - The main title of the page.
- * @param {string} description - A short description or subtitle.
- * @param {React.ReactNode} background - A React component (ideally an SVG) to be used as the background.
- */
 export const PageHeader: React.FC<PageHeaderProps> = ({
   title,
   description,
