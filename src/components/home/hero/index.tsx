@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "motion/react"
@@ -10,6 +10,12 @@ import { toast } from "sonner"
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currentTime, setCurrentTime] = useState("")
+  const [currentLanguage, setCurrentLanguage] = useState("")
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [languageIndex, setLanguageIndex] = useState(0)
+
+  // Memoize the languages array to prevent unnecessary re-renders
+  const languages = useMemo(() => ["Python", "JavaScript", "Java"], [])
 
   // Update time every minute
   useEffect(() => {
@@ -27,6 +33,39 @@ export default function Hero() {
 
     return () => clearInterval(interval)
   }, [])
+
+  // Typewriter effect for programming languages
+  useEffect(() => {
+    const currentLang = languages[languageIndex]
+    let timeout: NodeJS.Timeout
+
+    if (!isDeleting) {
+      // Typing effect
+      if (currentLanguage.length < currentLang.length) {
+        timeout = setTimeout(() => {
+          setCurrentLanguage(currentLang.substring(0, currentLanguage.length + 1))
+        }, 100) // Typing speed
+      } else {
+        // Pause before deleting
+        timeout = setTimeout(() => {
+          setIsDeleting(true)
+        }, 2000) // Display time
+      }
+    } else {
+      // Deleting effect
+      if (currentLanguage.length > 0) {
+        timeout = setTimeout(() => {
+          setCurrentLanguage(currentLanguage.substring(0, currentLanguage.length - 1))
+        }, 50) // Deleting speed (faster than typing)
+      } else {
+        // Move to next language
+        setIsDeleting(false)
+        setLanguageIndex((prev) => (prev + 1) % languages.length)
+      }
+    }
+
+    return () => clearTimeout(timeout)
+  }, [currentLanguage, isDeleting, languageIndex, languages])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect()
@@ -70,7 +109,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-8 w-full max-w-lg relative"
+          className="mt-8 w-full max-w-2xl relative"
         >
           {/* Main Card */}
           <div className="bg-card/90 backdrop-blur-sm rounded-4xl p-6 border relative z-10 shadow-lg">
@@ -159,7 +198,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.0 }}
-          className="mt-20 text-4xl md:text-5xl max-w-lg"
+          className="mt-20 text-4xl md:text-5xl"
         >
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -167,7 +206,18 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="relative font-bold"
           >
-            I work with Python, Typescript, and Java to build applications.
+            I work with <span className="text-primary relative">
+              <span className="invisible">JavaScript</span>
+              <span className="absolute left-0 top-1">{currentLanguage}<span className="animate-pulse">|</span></span>
+            </span>
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="relative font-bold mt-3"
+          >
+            to build applications.
           </motion.p>
         </motion.div>
       </motion.div>
