@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { TestimonialCard } from "./card";
-import { testimonials } from "./data";
+import { testimonials } from "@/data/testimonials";
 
 const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 

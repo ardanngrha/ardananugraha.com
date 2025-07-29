@@ -11,6 +11,7 @@ import { ShareButtons } from '@/components/detail/share-buttons';
 import { ProjectNotFound } from '@/components/detail/content-not-found';
 import { MDXErrorBoundary, ErrorBoundary } from '@/components/detail/error-boundary';
 import { ReadingProgress } from '@/components/detail/reading-progress';
+import { mdxComponents } from '@/lib/mdx';
 
 // This function tells Next.js which routes to pre-render at build time.
 export async function generateStaticParams() {
@@ -118,28 +119,21 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
               <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 xl:gap-12">
                 {/* Main Article Content */}
                 <div className="lg:col-span-3 order-2 lg:order-1">
-                  <article className="prose prose-neutral dark:prose-invert max-w-none prose-base sm:prose-lg
-                    prose-headings:scroll-mt-20 prose-headings:font-bold prose-headings:tracking-tight
-                    prose-h1:text-3xl sm:prose-h1:text-4xl prose-h1:mb-6 sm:prose-h1:mb-8 prose-h1:mt-8 sm:prose-h1:mt-12
-                    prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:mb-4 sm:prose-h2:mb-6 prose-h2:mt-8 sm:prose-h2:mt-10 prose-h2:border-b prose-h2:border-border prose-h2:pb-2
-                    prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:mb-3 sm:prose-h3:mb-4 prose-h3:mt-6 sm:prose-h3:mt-8
-                    prose-p:text-base sm:prose-p:text-lg prose-p:leading-relaxed prose-p:mb-4 sm:prose-p:mb-6
-                    prose-ul:my-4 sm:prose-ul:my-6 prose-ul:space-y-2 prose-li:text-base sm:prose-li:text-lg
-                    prose-ol:my-4 sm:prose-ol:my-6 prose-ol:space-y-2
-                    prose-li:my-2 prose-li:text-base sm:prose-li:text-lg
-                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-4 sm:prose-blockquote:pl-6 prose-blockquote:italic prose-blockquote:text-base sm:prose-blockquote:text-lg
-                    prose-code:bg-muted prose-code:px-1.5 sm:prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-code:text-sm sm:prose-code:text-base
-                    prose-pre:bg-muted prose-pre:border prose-pre:border-border prose-pre:text-sm sm:prose-pre:text-base prose-pre:p-4 sm:prose-pre:p-6 prose-pre:overflow-x-auto prose-pre:-mx-6 sm:prose-pre:mx-0
-                    prose-img:rounded-xl prose-img:shadow-lg prose-img:my-6 sm:prose-img:my-8 prose-img:-mx-6 sm:prose-img:mx-0
-                    prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:break-words
-                    prose-strong:font-semibold prose-strong:text-foreground
-                    prose-em:italic prose-em:text-muted-foreground
-                    prose-table:text-base sm:prose-table:text-lg prose-table:overflow-x-auto prose-table:-mx-6 sm:prose-table:mx-0">
+                  <article className="prose prose-lg max-w-none dark:prose-invert">
                     <MDXErrorBoundary
                       contentType="project"
                       contentTitle={project.frontmatter.title}
                     >
-                      <MDXRemote source={project.content} />
+                      <MDXRemote
+                        source={project.content}
+                        options={{
+                          mdxOptions: {
+                            remarkPlugins: [],
+                            rehypePlugins: [],
+                          },
+                        }}
+                        components={mdxComponents}
+                      />
                     </MDXErrorBoundary>
                   </article>
                 </div>

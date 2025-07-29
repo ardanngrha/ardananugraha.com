@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import Image from "next/image";
-import { Testimonial } from "./types";
+import { Testimonial } from "@/types/testimonial";
 
 export function TestimonialCard({
   testimonial,

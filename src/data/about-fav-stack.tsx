@@ -1,26 +1,31 @@
 import { FaPython, FaJava, FaReact } from "react-icons/fa";
-import { SiTypescript } from "react-icons/si";
+import { SiTypescript, SiTensorflow } from "react-icons/si";
 
 const favStack = [
   {
     name: "Python",
     icon: <FaPython className="h-8 w-8" />,
-    reason: "Its versatility and extensive libraries make it my go-to for backend development and machine learning.",
+    reason: "My go-to language for machine learning, data science, and backend development. Its versatility and extensive libraries make it perfect for everything from ML models to web APIs.",
   },
   {
     name: "TypeScript",
     icon: <SiTypescript className="h-8 w-8" />,
-    reason: "I love the type safety and developer experience it brings to JavaScript projects, especially in large-scale applications.",
+    reason: "I love the type safety and developer experience it brings to JavaScript projects, especially in large-scale applications. Essential for maintainable code.",
   },
   {
     name: "Java",
     icon: <FaJava className="h-8 w-8" />,
-    reason: "A robust and reliable language that I enjoy using for building scalable and high-performance enterprise applications.",
+    reason: "A robust and reliable language that I enjoy using for building scalable and high-performance enterprise applications. Great for backend systems.",
   },
   {
     name: "React",
     icon: <FaReact className="h-8 w-8" />,
-    reason: "Its component-based architecture and declarative nature make building complex UIs a breeze. The ecosystem is fantastic!",
+    reason: "Its component-based architecture and declarative nature make building complex UIs a breeze. The ecosystem is fantastic for modern web development!",
+  },
+  {
+    name: "TensorFlow",
+    icon: <SiTensorflow className="h-8 w-8" />,
+    reason: "My preferred framework for machine learning and deep learning projects. From recommendation systems to computer vision, it handles everything beautifully.",
   },
 ];
 
