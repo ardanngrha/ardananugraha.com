@@ -33,9 +33,9 @@ export default function ProjectsSection({
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3">
+        <h2 className="text-3xl md:text-5xl font-bold flex items-center gap-3 gradient-text pb-2">
           <FaWindowRestore className="w-8 h-8" />
-          Featured <span className="gradient-text">Works</span>
+          Featured Works
         </h2>
         {/* -- MORE BUTTON FOR DESKTOP -- */}
         <Button variant="outline" className="hidden md:inline-flex">

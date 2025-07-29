@@ -112,7 +112,7 @@ export default function Hero() {
           className="mt-8 w-full max-w-2xl relative"
         >
           {/* Main Card */}
-          <div className="bg-card/90 backdrop-blur-sm rounded-4xl p-6 border relative z-10 shadow-lg">
+          <div className="bg-card/90 backdrop-blur-sm rounded-4xl px-6 pt-6 pb-2 md:py-6 border relative z-10 shadow-lg">
             {/* Status indicator */}
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">

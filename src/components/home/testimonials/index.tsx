@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { TestimonialCard } from "./card";
 import { testimonials } from "@/data/testimonials";
+import { FaFeatherAlt } from "react-icons/fa";
 
 const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 
@@ -93,8 +94,9 @@ export default function TestimonialsSection() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-3xl font-bold mb-8">
-        Some <span className="gradient-text">Words</span>
+      <h2 className="text-3xl md:text-5xl flex items-center gap-3 font-bold mb-8 gradient-text">
+        <FaFeatherAlt className="w-8 h-8" />
+        Some Words
       </h2>
       <div className="relative w-full max-w-4xl h-[450px] flex items-center justify-center">
         <AnimatePresence initial={false} custom={direction}>
