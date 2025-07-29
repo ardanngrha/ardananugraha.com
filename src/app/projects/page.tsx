@@ -4,8 +4,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import { PageHeader } from '@/components/page-header';
 import { ProjectsBg } from '@/components/backgrounds/projects-bg';
-import { ProjectPageCard } from '@/components/projects/project-page-card';
 import { ProjectContentItem } from '@/types/projects';
+import { ProjectsClientPage } from './client';
 
 async function getAllProjects(): Promise<ProjectContentItem[]> {
   const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
@@ -40,11 +40,7 @@ export default async function ProjectsPage() {
         description="Here are some of the projects I'm proud of. They range from web development to data science."
         background={<ProjectsBg />}
       />
-      <div className="flex flex-col max-w-5xl mx-auto px-4 py-16 gap-12">
-        {allProjects.map((project) => (
-          <ProjectPageCard key={project.slug} project={project} />
-        ))}
-      </div>
+      <ProjectsClientPage projects={allProjects} />
     </div>
   );
 }

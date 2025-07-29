@@ -1,55 +1,153 @@
-import { AboutBg } from "@/components/backgrounds/about-bg";
+"use client";
+
+import { motion } from "motion/react";
 import { PageHeader } from "@/components/page-header";
-import { ImageCarousel } from "@/components/about/images";
-import { FavStack } from "@/components/about/fav-stack";
+import { AboutBg } from "@/components/backgrounds/about-bg";
 import { ExperienceTimeline } from "@/components/about/experiences";
 import { TechStack } from "@/components/about/tech-stack";
+import { FavStack } from "@/components/about/fav-stack";
+import { ImageCarousel } from "@/components/about/images";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const sectionVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    scale: 0.98
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+      duration: 0.6,
+    },
+  },
+};
+
+const textVariants = {
+  hidden: {
+    opacity: 0,
+    y: 20
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 120,
+      damping: 15,
+    },
+  },
+};
 
 export default function AboutPage() {
   return (
-    <div>
+    <motion.div
+      className="min-h-screen"
+      initial="hidden"
+      animate="visible"
+      key="about-page" // Key ensures animation runs on navigation
+    >
       <PageHeader
         title="About Me"
-        description="A little bit about my journey, my skills, and what I'm passionate about."
+        description="Get to know more about my journey, experiences, and the technologies I work with."
         background={<AboutBg />}
       />
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
-            <ImageCarousel />
-          </div>
-          <div className="flex flex-col gap-4 prose dark:prose-invert">
-            <p>
-              Hello! I&apos;m Ardana, a software developer with a passion for
-              building beautiful and functional applications. My journey into the
-              world of code started years ago, and since then, I&apos;ve been
-              honing my skills in various technologies.
-            </p>
-            <p>
-              I specialize in Python, Typescript, and Java, and I have experience
-              working with a wide range of frameworks and libraries. I enjoy the
-              challenge of solving complex problems and the satisfaction of seeing
-              my work come to life.
-            </p>
-            <div className="space-y-4">
-              <p>
-                Here are some of the technologies I&apos;m currently excited about:
-              </p>
-              <FavStack />
-            </div>
-          </div>
-        </div>
 
-        <div className="my-16">
-          <h2 className="text-3xl font-bold text-center mb-12">My Experiences</h2>
+      <motion.div
+        className="container mx-auto px-4 py-16"
+        variants={containerVariants}
+      >
+        {/* Introduction Section */}
+        <motion.div
+          className="max-w-4xl mx-auto"
+          variants={sectionVariants}
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+            <motion.div variants={textVariants}>
+              <motion.div className="space-y-4 text-muted-foreground leading-relaxed">
+                <motion.p variants={textVariants}>
+                  I&apos;m a passionate software developer with a love for creating
+                  meaningful digital experiences. My journey in tech started with
+                  curiosity and has evolved into a career focused on building
+                  robust, user-friendly applications.
+                </motion.p>
+                <motion.p variants={textVariants}>
+                  When I&apos;m not coding, you&apos;ll find me exploring new
+                  technologies, contributing to open-source projects, or sharing
+                  knowledge with the developer community. I believe in the power of
+                  technology to solve real-world problems and make people&apos;s lives
+                  better.
+                </motion.p>
+                <motion.p variants={textVariants}>
+                  My approach to development is simple: write clean, maintainable
+                  code, prioritize user experience, and never stop learning. Every
+                  project is an opportunity to grow and create something that can
+                  make a difference.
+                </motion.p>
+              </motion.div>
+              <motion.div
+                className="space-y-4 mt-6"
+                variants={textVariants}
+              >
+                <motion.p variants={textVariants}>
+                  Here are some of the technologies I&apos;m currently excited about:
+                </motion.p>
+                <FavStack />
+              </motion.div>
+            </motion.div>
+
+            <motion.div
+              className="flex justify-center"
+              variants={sectionVariants}
+            >
+              <ImageCarousel />
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Experiences Section */}
+        <motion.div
+          className="my-16"
+          variants={sectionVariants}
+        >
+          <motion.h2
+            className="text-3xl font-bold text-center mb-12"
+            variants={textVariants}
+          >
+            My Experiences
+          </motion.h2>
           <ExperienceTimeline />
-        </div>
+        </motion.div>
 
-        <div className="my-16">
-          <h2 className="text-3xl font-bold text-center mb-12">Tech and Tools I Use</h2>
+        {/* Tech Stack Section */}
+        <motion.div
+          className="my-16"
+          variants={sectionVariants}
+        >
+          <motion.h2
+            className="text-3xl font-bold text-center mb-12"
+            variants={textVariants}
+          >
+            Tech and Tools I Use
+          </motion.h2>
           <TechStack />
-        </div>
-      </div>
-    </div>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
