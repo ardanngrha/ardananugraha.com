@@ -39,20 +39,20 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 5,
-    name: "David Lee",
-    role: "Software Engineer",
+    name: "Muhammad Mamad",
+    role: "Frontend Engineer",
     content:
       "I've learned so much from working with Ardana. He's a great mentor and is always willing to share his knowledge and help others grow.",
     avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      "https://media.licdn.com/dms/image/v2/D5603AQEsBh-WWi0aQQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1723913445769?e=1756944000&v=beta&t=CI-B4RurfUG-jr1qaA51hmM9SZ3Tz-DUCe1vBEhaBr4",
   },
   {
     id: 6,
-    name: "Jessica Brown",
-    role: "Marketing Director",
+    name: "Dwi Samsiarto",
+    role: "Frontend Engineer",
     content:
       "Ardana's ability to quickly grasp our marketing needs and translate them into effective technical solutions has been a game-changer for our campaigns.",
     avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      "https://media.licdn.com/dms/image/v2/C5603AQFeW9U7DXTkPw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1659454011082?e=1756944000&v=beta&t=M6bZJ-9ifGzSpTukzTok-_1kYcJCSgK1Negxn7V3jGU",
   },
 ];
