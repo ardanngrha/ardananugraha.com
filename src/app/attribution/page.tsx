@@ -28,7 +28,7 @@ const itemVariants = {
     y: 0,
     scale: 1,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 100,
       damping: 12,
       duration: 0.6,
@@ -48,18 +48,18 @@ export default function AttributionPage() {
         description="This website was made possible by the inspiration and work of many talented individuals and projects."
         background={<AttributionBg />}
       />
-      
-      <motion.div 
+
+      <motion.div
         className="mx-auto py-16"
         variants={containerVariants}
       >
-        <motion.ul 
+        <motion.ul
           className="text-left space-y-6"
           variants={containerVariants}
         >
-          {inspirations.map((inspiration, index) => (
-            <motion.li 
-              key={inspiration.name} 
+          {inspirations.map((inspiration) => (
+            <motion.li
+              key={inspiration.name}
               className="text-lg"
               variants={itemVariants}
               whileHover={{
@@ -72,10 +72,10 @@ export default function AttributionPage() {
                 },
               }}
             >
-              <Link 
-                href={inspiration.url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <Link
+                href={inspiration.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-semibold text-primary hover:underline custom-cursor"
               >
                 {inspiration.name}

@@ -17,7 +17,7 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 120,
       damping: 15,
       duration: 0.4
@@ -28,7 +28,7 @@ const cardVariants = {
     scale: 1.02,
     boxShadow: "0px 10px 30px -5px rgba(0, 0, 0, 0.3)",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 20
     },
@@ -39,7 +39,7 @@ const imageVariants = {
   hover: {
     scale: 1.05,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 15
     }
