@@ -113,6 +113,7 @@ export async function getAllWritings(): Promise<EnhancedWriting[]> {
           return {
             slug: filename.replace(/\.mdx$/, ''),
             frontmatter: data as WritingFrontmatter,
+            content,
             readTime: calculateReadTime(content),
           };
         })
