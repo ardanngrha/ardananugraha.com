@@ -251,7 +251,7 @@
     -webkit-line-clamp: 3;
   }
   .gradient-text {
-    background: linear-gradient(90deg, #6190e8 0%, #a7bfe8 100%);
+    background: linear-gradient(90deg, #ACCAD5 0%, #EACFA3 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

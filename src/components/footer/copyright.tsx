@@ -63,11 +63,10 @@ export default function Copyright() {
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <span>Built with</span>
           <div className="flex items-center gap-1 flex-wrap font-mono">
-            <Link href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Next.js</Link>
-            <Link href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Tailwind</Link>
-            <Link href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">shadcn/ui</Link>
-            <Link href="https://vercel.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Vercel</Link>
-            <Link href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Motion</Link>
+            <Link href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">Next.js</Link>
+            <Link href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">Tailwind</Link>
+            <Link href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">shadcn/ui</Link>
+            <Link href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">Motion</Link>
           </div>
         </div>
         <p className="text-xs text-muted-foreground font-mono">
@@ -85,10 +84,10 @@ export default function Copyright() {
       <div className="flex flex-col md:flex-row items-center gap-2 text-xs text-muted-foreground">
         <span>Built with</span>
         <div className="flex items-center gap-1 flex-wrap font-mono">
-          <Link href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Next.js</Link>
-          <Link href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Tailwind</Link>
-          <Link href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">shadcn/ui</Link>
-          <Link href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80 transition-colors">Motion</Link>
+          <Link href="https://nextjs.org" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">Next.js</Link>
+          <Link href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">Tailwind</Link>
+          <Link href="https://ui.shadcn.com" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">shadcn/ui</Link>
+          <Link href="https://motion.dev" target="_blank" rel="noopener noreferrer" className="px-1.5 py-0.5 bg-secondary rounded text-xs hover:bg-secondary/80  custom-cursor">Motion</Link>
         </div>
       </div>
       <p className="font-handwriting">

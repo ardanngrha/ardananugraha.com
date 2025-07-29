@@ -16,7 +16,7 @@ export default function Navigation() {
           <Link
             key={link.href}
             href={link.href}
-            className="text-sm transition-colors custom-cursor hover:text-primary hover:underline"
+            className="text-sm transition-colors hover:text-primary hover:underline"
           >
             {link.label}
           </Link>

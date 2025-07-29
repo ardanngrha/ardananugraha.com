@@ -183,7 +183,7 @@ export default function Hero() {
 
           {/* Stacked Card - Currently Working */}
           <div className="absolute -bottom-10 left-0 right-0 z-0">
-            <div className="bg-gradient-to-r from-blue-400 to-blue-600 dark:from-blue-500 dark:to-blue-700 text-white pt-20 pb-3 px-6 rounded-b-4xl shadow-md">
+            <div className="bg-gradient-to-r from-blue-300 to-blue-500 dark:from-blue-300 dark:to-blue-500 text-white pt-20 pb-3 px-6 rounded-b-4xl shadow-md">
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm font-medium">Currently Working at PLN Icon Plus</span>
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +208,7 @@ export default function Hero() {
           >
             I work with <span className="text-primary relative">
               <span className="invisible">JavaScript</span>
-              <span className="absolute left-0 top-1">{currentLanguage}<span className="animate-pulse">|</span></span>
+              <span className="absolute left-0 top-1 gradient-text pb-2">{currentLanguage}<span className="animate-pulse">|</span></span>
             </span>
           </motion.p>
           <motion.p

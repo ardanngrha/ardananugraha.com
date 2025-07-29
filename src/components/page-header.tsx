@@ -23,7 +23,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         transition={{ duration: 0.5, delay: 0.2 }}
         className="container relative z-10 mx-auto px-4 text-center"
       >
-        <h1 className="text-4xl font-bold tracking-tight md:text-6xl">
+        <h1 className="text-4xl font-bold tracking-tight md:text-6xl pb-2 gradient-text">
           {title}
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground md:text-xl">

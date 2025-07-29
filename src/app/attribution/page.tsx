@@ -15,7 +15,7 @@ export default function AttributionPage() {
         <ul className="text-left">
           {inspirations.map((inspiration) => (
             <li key={inspiration.name} className="text-lg">
-              <Link href={inspiration.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">
+              <Link href={inspiration.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline custom-cursor">
                 {inspiration.name}
               </Link>
               <span className="text-muted-foreground"> - {inspiration.reason}</span>
