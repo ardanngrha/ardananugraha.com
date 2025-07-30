@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
-import { FaPencilAlt } from "react-icons/fa";
+import { FaFileSignature } from "react-icons/fa";
 import { WritingCard } from "./writing-featured-card";
 import { ContentItem } from "./types";
 
@@ -27,35 +27,16 @@ export default function WritingsSection({
   return (
     <section className="py-16">
       <motion.div
-        className="flex items-center justify-between mb-8"
+        className="flex justify-center mb-8"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl md:text-5xl font-bold flex items-center gap-3 gradient-text pb-2">
-          <FaPencilAlt className="w-8 h-8" />
+          <FaFileSignature className="w-8 h-8" />
           Featured Writings
         </h2>
-        {/* -- MORE BUTTON FOR DESKTOP -- */}
-        <Button variant="outline" className="hidden md:inline-flex">
-          <Link href="/writings" className="inline-flex items-center gap-2">
-            More
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link>
-        </Button>
       </motion.div>
 
       {loading ? (
@@ -84,8 +65,8 @@ export default function WritingsSection({
           ))}
         </motion.div>
       )}
-      {/* -- MORE BUTTON FOR MOBILE -- */}
-      <div className="flex justify-center mt-8 md:hidden">
+      
+      <div className="flex justify-center mt-8">
         <Button variant="outline" asChild>
           <Link href="/writings" className="inline-flex items-center gap-2">
             More

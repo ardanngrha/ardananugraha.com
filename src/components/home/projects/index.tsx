@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
-import { FaWindowRestore } from "react-icons/fa";
+import { CgCodeSlash } from "react-icons/cg";
 import { ProjectCard } from "./project-featured-card";
 import { ProjectContentItem } from "@/types/projects";
 
@@ -27,35 +27,16 @@ export default function ProjectsSection({
   return (
     <section className="py-16">
       <motion.div
-        className="flex items-center justify-between mb-8"
+        className="flex justify-center mb-8"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-3xl md:text-5xl font-bold flex items-center gap-3 gradient-text pb-2">
-          <FaWindowRestore className="w-8 h-8" />
+          <CgCodeSlash className="w-8 h-8" />
           Featured Works
         </h2>
-        {/* -- MORE BUTTON FOR DESKTOP -- */}
-        <Button variant="outline" className="hidden md:inline-flex">
-          <Link href="/projects" className="inline-flex items-center gap-2">
-            More
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link>
-        </Button>
       </motion.div>
 
       {loading ? (
@@ -88,8 +69,9 @@ export default function ProjectsSection({
           ))}
         </motion.div>
       )}
+
       {/* -- MORE BUTTON FOR MOBILE -- */}
-      <div className="flex justify-center mt-8 md:hidden">
+      <div className="flex justify-center mt-8">
         <Button variant="outline" asChild>
           <Link href="/projects" className="inline-flex items-center gap-2">
             More

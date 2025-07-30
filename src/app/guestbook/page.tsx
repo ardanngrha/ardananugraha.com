@@ -27,32 +27,6 @@ const containerVariants = {
   },
 };
 
-const commentVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    scale: 0.95,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    scale: 0.95,
-    transition: {
-      duration: 0.2,
-    },
-  },
-};
-
 const formVariants = {
   hidden: {
     opacity: 0,
@@ -77,8 +51,12 @@ export default function GuestbookPage() {
   const commentsContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
-    if (commentsContainerRef.current) {
-      commentsContainerRef.current.scrollTop = commentsContainerRef.current.scrollHeight;
+    // Target the actual scrollable viewport inside the shadcn/ui component
+    const viewport = commentsContainerRef.current?.querySelector(
+      '[data-radix-scroll-area-viewport]'
+    );
+    if (viewport) {
+      viewport.scrollTop = viewport.scrollHeight;
     }
   };
 
@@ -88,7 +66,6 @@ export default function GuestbookPage() {
       if (response.ok) {
         const data = await response.json();
         setComments(data);
-        setTimeout(scrollToBottom, 100);
       }
     } catch (error) {
       console.error("Failed to fetch comments:", error);
@@ -98,6 +75,16 @@ export default function GuestbookPage() {
   useEffect(() => {
     fetchComments();
   }, [fetchComments]);
+
+  // This effect runs when comments change, waiting for animations to finish
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      scrollToBottom();
+    }, 500); // Delay to allow animations to complete
+
+    // Clean up the timer if the component unmounts or comments change again
+    return () => clearTimeout(timer);
+  }, [comments]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -145,6 +132,7 @@ export default function GuestbookPage() {
         initial="hidden"
         animate="visible"
       >
+        {/* The ref is correctly placed here on the parent component */}
         <ScrollArea className="h-80 md:h-96 rounded-md border p-4" ref={commentsContainerRef}>
           <div className="flex-grow" />
           <motion.div
@@ -156,42 +144,17 @@ export default function GuestbookPage() {
                 <motion.div
                   key={comment.id}
                   className="flex items-start gap-2 md:gap-3"
-                  variants={commentVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  layout
                   custom={index}
-                  whileHover={{
-                    scale: 1.01,
-                    transition: {
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 20,
-                    },
-                  }}
                 >
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 15,
-                      delay: index * 0.05,
-                    }}
-                  >
+                  <div className="mt-3">
                     <Avatar>
                       <AvatarImage src={comment.author.image || ""} />
                       <AvatarFallback>{comment.author.username.charAt(0).toUpperCase()}</AvatarFallback>
                     </Avatar>
-                  </motion.div>
+                  </div>
                   <div className="flex-1 min-w-0">
-                    <motion.div
+                    <div
                       className="flex items-center justify-between gap-2 mb-1"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 + 0.1 }}
                     >
                       <span className="text-primary font-medium text-sm">
                         {`~/${comment.author.username}`}
@@ -199,15 +162,12 @@ export default function GuestbookPage() {
                       <time className="text-xs text-muted-foreground">
                         {formatDateTime(comment.createdAt)}
                       </time>
-                    </motion.div>
-                    <motion.p
+                    </div>
+                    <p
                       className="whitespace-pre-wrap break-words text-sm leading-relaxed"
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 + 0.15 }}
                     >
                       {comment.content}
-                    </motion.p>
+                    </p>
                   </div>
                 </motion.div>
               ))}
