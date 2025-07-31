@@ -1,9 +1,8 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { CgCodeSlash } from "react-icons/cg";
 import { ProjectCard } from "./project-featured-card";
 import { ProjectContentItem } from "@/types/projects";
+import { RippleButton } from "@/components/ui/ripple-button";
 
 interface ProjectsSectionProps {
   projects: ProjectContentItem[];
@@ -70,26 +69,15 @@ export default function ProjectsSection({
         </motion.div>
       )}
 
-      {/* -- MORE BUTTON FOR MOBILE -- */}
       <div className="flex justify-center mt-8">
-        <Button variant="outline" asChild>
-          <Link href="/projects" className="inline-flex items-center gap-2">
-            More
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link>
-        </Button>
+        <RippleButton
+          href="/projects"
+          variant="outline"
+          className="px-6 py-3 w-auto flex-initial"
+          aria-label="View all my projects"
+        >
+          View All My Projects
+        </RippleButton>
       </div>
     </section>
   );

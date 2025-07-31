@@ -105,7 +105,7 @@ export default function AboutPage() {
                 variants={textVariants}
               >
                 <motion.p variants={textVariants}>
-                  Here are some of the technologies I&apos;m currently excited about:
+                  Here are my current favorites tech stack:
                 </motion.p>
                 <FavStack />
               </motion.div>

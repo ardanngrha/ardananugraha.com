@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import images from "@/data/about-images";
+import { Button } from "../ui/button";
 
 const variants = {
   enter: (direction: number) => ({
@@ -53,12 +54,14 @@ export function ImageCarousel() {
     <div className="flex flex-col items-center justify-center w-full py-8">
       <div className="flex items-center justify-center w-full">
         {/* Previous Button (Desktop) */}
-        <button
+        <Button
           onClick={() => paginate(-1)}
-          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mr-2 md:mr-4 flex-shrink-0"
+          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mr-2 md:mr-4 flex-shrink-0 cursor-pointer"
+          variant="ghost"
+          size="icon"
         >
           <FaChevronLeft className="h-8 w-8" />
-        </button>
+        </Button>
 
         {/* Carousel Container */}
         <div className="relative w-full max-w-sm h-[420px] m:h-[480px] sm:max-w-xs flex items-center justify-center overflow-hidden">
@@ -107,28 +110,34 @@ export function ImageCarousel() {
         </div>
 
         {/* Next Button (Desktop) */}
-        <button
+        <Button
           onClick={() => paginate(1)}
-          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 ml-2 md:ml-4 flex-shrink-0"
+          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 ml-2 md:ml-4 flex-shrink-0 cursor-pointer"
+          variant="ghost"
+          size="icon"
         >
           <FaChevronRight className="h-8 w-8" />
-        </button>
+        </Button>
       </div>
 
       {/* Arrow Buttons (Mobile) */}
       <div className="sm:hidden flex items-center justify-center mt-4">
-        <button
+        <Button
           onClick={() => paginate(-1)}
-          className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mx-6"
+          className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mx-6 cursor-pointer"
+          variant="ghost"
+          size="icon"
         >
           <FaChevronLeft className="h-8 w-8" />
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => paginate(1)}
-          className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mx-6"
+          className="text-primary p-2 rounded-full transition-colors hover:bg-primary/10 mx-6 cursor-pointer"
+          variant="ghost"
+          size="icon"
         >
           <FaChevronRight className="h-8 w-8" />
-        </button>
+        </Button>
       </div>
     </div>
   );

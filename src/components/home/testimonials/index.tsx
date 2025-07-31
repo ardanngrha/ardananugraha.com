@@ -2,7 +2,8 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { TestimonialCard } from "./card";
 import { testimonials } from "@/data/testimonials";
-import { FaFeatherAlt } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaFeatherAlt } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
 
 const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 
@@ -20,7 +21,7 @@ export default function TestimonialsSection() {
   const variants = {
     enter: (direction: number) => ({
       x: direction > 0 ? "100%" : "-100%",
-      rotate: direction > 0 ? 30 : -30,
+      rotate: 0,
       opacity: 0,
       scale: 0.8,
     }),
@@ -37,7 +38,7 @@ export default function TestimonialsSection() {
     exit: (direction: number) => ({
       zIndex: 1,
       x: direction < 0 ? "100%" : "-100%",
-      rotate: direction < 0 ? 30 : -30,
+      rotate: 0,
       opacity: 0,
       scale: 0.8,
       transition: { type: "spring" as const, stiffness: 300, damping: 25 },
@@ -46,7 +47,7 @@ export default function TestimonialsSection() {
       zIndex: 2,
       x: "-80%",
       y: 30,
-      rotate: -15,
+      rotate: 0,
       opacity: 0.6,
       scale: 0.9,
       filter: "grayscale(0.7)",
@@ -56,7 +57,7 @@ export default function TestimonialsSection() {
       zIndex: 2,
       x: "80%",
       y: 30,
-      rotate: 15,
+      rotate: 0,
       opacity: 0.6,
       scale: 0.9,
       filter: "grayscale(0.7)",
@@ -99,6 +100,15 @@ export default function TestimonialsSection() {
         Some Words
       </h2>
       <div className="relative w-full max-w-4xl h-[450px] flex items-center justify-center">
+        <Button
+          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 left-0 z-10 mr-2 absolute cursor-pointer"
+          aria-label="Previous testimonial"
+          onClick={() => paginate(-1)}
+          variant="ghost"
+          size="icon"
+        >
+          <FaChevronLeft className="h-8 w-8" />
+        </Button>
         <AnimatePresence initial={false} custom={direction}>
           {visibleCards.map(({ pos, index }) => (
             <motion.div
@@ -126,6 +136,15 @@ export default function TestimonialsSection() {
             </motion.div>
           ))}
         </AnimatePresence>
+        <Button
+          className="hidden sm:flex text-primary p-2 rounded-full transition-colors hover:bg-primary/10 right-0 z-10 absolute cursor-pointer"
+          aria-label="Next testimonial"
+          onClick={() => paginate(1)}
+          variant="ghost"
+          size="icon"
+        >
+          <FaChevronRight className="h-8 w-8" />
+        </Button>
       </div>
 
       <div className="flex space-x-2 mt-6">
@@ -137,7 +156,7 @@ export default function TestimonialsSection() {
               const direction = newIndex > getIndex(current) ? 1 : -1;
               setCurrent([index, direction]);
             }}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${index === getIndex(current)
+            className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${index === getIndex(current)
               ? "bg-primary scale-125"
               : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
               }`}

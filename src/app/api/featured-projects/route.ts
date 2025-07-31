@@ -21,13 +21,13 @@ export async function GET() {
       })
     );
 
-    // Filter featured projects (add a 'featured' field to your MDX frontmatter)
     const featuredProjects = projects
       .filter(project => project.frontmatter.featured)
-      .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
-      .slice(0, 3); // Show only 3 featured projects
+      .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 
-    return NextResponse.json(featuredProjects);
+    // Ensure multiple of 2
+    const evenCount = featuredProjects.length - (featuredProjects.length % 2);
+    return NextResponse.json(featuredProjects.slice(0, evenCount > 0 ? evenCount : 2));
   } catch (error) {
     console.error('Error fetching featured projects:', error);
     return NextResponse.json([], { status: 500 });

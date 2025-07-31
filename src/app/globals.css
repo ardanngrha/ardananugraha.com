@@ -81,6 +81,28 @@
   --sidebar-ring: oklch(0.708 0 0);
   --gradient-from: #0192C6;
   --gradient-to: #004499;
+  
+  /* Interactive effects colors - Light mode */
+  --ripple-primary: rgba(59, 130, 246, 0.12);
+  --ripple-secondary: rgba(59, 130, 246, 0.06);
+  --ripple-click: rgba(59, 130, 246, 0.2);
+  --shadow-gradient-start: #3b82f6;
+  --shadow-gradient-end: #ec4899;
+  --shadow-gradient-mid: #8b5cf6;
+  --shadow-opacity: 0.3;
+  --shadow-blur: 12px;
+  --shadow-spread: 8px;
+  
+  /* Expandable button colors */
+  --expandable-bg-hover: rgba(59, 130, 246, 0.05);
+  --expandable-border-hover: rgba(59, 130, 246, 0.2);
+  --expandable-scale: 1.4;
+  
+  /* Performance optimization values */
+  --animation-duration-fast: 0.15s;
+  --animation-duration-normal: 0.3s;
+  --animation-duration-slow: 0.6s;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark {
@@ -115,6 +137,28 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  
+  /* Interactive effects colors - Dark mode */
+  --ripple-primary: rgba(6, 182, 212, 0.15);
+  --ripple-secondary: rgba(6, 182, 212, 0.08);
+  --ripple-click: rgba(6, 182, 212, 0.25);
+  --shadow-gradient-start: #3b82f6;
+  --shadow-gradient-end: #ec4899;
+  --shadow-gradient-mid: #8b5cf6;
+  --shadow-opacity: 0.4;
+  --shadow-blur: 12px;
+  --shadow-spread: 8px;
+  
+  /* Expandable button colors - dark mode */
+  --expandable-bg-hover: rgba(6, 182, 212, 0.08);
+  --expandable-border-hover: rgba(6, 182, 212, 0.3);
+  --expandable-scale: 1.4;
+  
+  /* Performance optimization values remain the same */
+  --animation-duration-fast: 0.15s;
+  --animation-duration-normal: 0.3s;
+  --animation-duration-slow: 0.6s;
+  --animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer base {
@@ -194,7 +238,7 @@
     }
   }
 
-  /* Reduced motion support */
+  /* Comprehensive reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -203,6 +247,45 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+    }
+    
+    /* Disable all interactive effects for reduced motion */
+    .ripple-effect,
+    .ripple-container,
+    .gradient-shadow,
+    .gradient-shadow-card,
+    .expandable-button {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+      will-change: auto !important;
+    }
+    
+    /* Remove pseudo-element effects */
+    .gradient-shadow::before,
+    .gradient-shadow-card::before {
+      opacity: 0 !important;
+      animation: none !important;
+      transition: none !important;
+      filter: none !important;
+    }
+    
+    /* Provide alternative feedback for interactive elements */
+    .ripple-container:hover,
+    .ripple-container:focus-visible {
+      background-color: var(--ripple-primary);
+    }
+    
+    .expandable-button:hover,
+    .expandable-button:focus-visible {
+      background-color: var(--expandable-bg-hover);
+      border-color: var(--expandable-border-hover);
+    }
+    
+    .gradient-shadow-card:hover,
+    .gradient-shadow-card:focus-visible {
+      outline: 2px solid var(--shadow-gradient-start);
+      outline-offset: 2px;
     }
   }
 
@@ -453,6 +536,218 @@
   .custom-hover-effect {
     @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
   }
+
+  /* Interactive effects base styles with performance optimizations */
+  .ripple-container {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    /* Performance optimizations */
+    contain: layout style;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: ripple-expand var(--animation-duration-slow) var(--animation-easing) forwards;
+    /* Performance optimizations */
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Ripple background effect for hover */
+  .ripple-background {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--ripple-primary) 0%,
+      var(--ripple-secondary) 40%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity var(--animation-duration-normal) var(--animation-easing);
+    pointer-events: none;
+    will-change: opacity;
+    /* Performance optimizations */
+    contain: layout style paint;
+    transform: translateZ(0);
+  }
+
+  .ripple-container:hover .ripple-background {
+    opacity: 1;
+  }
+
+  .gradient-shadow {
+    position: relative;
+    will-change: box-shadow;
+    transition: box-shadow var(--animation-duration-normal) var(--animation-easing);
+    /* Performance optimizations */
+    contain: layout style;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .gradient-shadow::before {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--shadow-spread));
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+      135deg,
+      var(--shadow-gradient-start),
+      var(--shadow-gradient-mid),
+      var(--shadow-gradient-end)
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    opacity: 0;
+    transition: opacity var(--animation-duration-normal) var(--animation-easing);
+    pointer-events: none;
+    z-index: -1;
+    will-change: opacity;
+    /* Performance optimizations */
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .gradient-shadow:hover::before {
+    opacity: var(--shadow-opacity);
+  }
+
+ .gradient-shadow-card {
+  position: relative;
+  isolation: isolate;
+  /* Performance optimizations */
+  contain: layout style;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.gradient-shadow-card::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--shadow-spread));
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--shadow-gradient-start),
+    var(--shadow-gradient-mid),
+    var(--shadow-gradient-end)
+  );
+  opacity: 0;
+  filter: blur(var(--shadow-blur));
+  transition: opacity var(--animation-duration-normal) var(--animation-easing);
+  pointer-events: none;
+  z-index: -1;
+  will-change: opacity;
+  /* Performance optimizations */
+  contain: layout style paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.gradient-shadow-card:hover::before {
+  opacity: var(--shadow-opacity);
+}
+
+/* Ensure inner content doesn't get gradient effects */
+.gradient-shadow-card > * {
+  position: relative;
+  z-index: 1;
+  background: inherit;
+}
+
+  /* Intensity variants using CSS custom properties */
+  .gradient-shadow-light {
+    --shadow-blur: 8px;
+    --shadow-spread: 6px;
+    --shadow-opacity: 0.2;
+  }
+
+  .gradient-shadow-medium {
+    --shadow-blur: 12px;
+    --shadow-spread: 8px;
+    --shadow-opacity: 0.25;
+  }
+
+  .gradient-shadow-strong {
+    --shadow-blur: 16px;
+    --shadow-spread: 10px;
+    --shadow-opacity: 0.35;
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .gradient-shadow-card::before {
+      opacity: 0 !important;
+    }
+    
+    .gradient-shadow-card:hover {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-shadow-card,
+    .gradient-shadow-card::before {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+      filter: none !important;
+    }
+    
+    .gradient-shadow-card::before {
+      opacity: 0 !important;
+    }
+  }
+
+  .gpu-accelerated {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .contain-layout {
+    contain: layout style paint;
+  }
+
+  .contain-strict {
+    contain: strict;
+  }
+
+  /* Optimized transitions for theme switching */
+  .theme-transition {
+    transition: 
+      background-color var(--animation-duration-normal) var(--animation-easing),
+      border-color var(--animation-duration-normal) var(--animation-easing),
+      color var(--animation-duration-normal) var(--animation-easing),
+      box-shadow var(--animation-duration-normal) var(--animation-easing);
+  }
+
+  /* Ensure interactive effects work well with existing animations */
+  .motion-safe {
+    /* Only apply animations if motion is not reduced */
+    animation-duration: var(--animation-duration-normal);
+    transition-duration: var(--animation-duration-normal);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe {
+      animation-duration: 0.01ms;
+      transition-duration: 0.01ms;
+    }
+  }
 }
 
 /* Custom keyframes for theme transition */
@@ -464,6 +759,31 @@
   to {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0;
+  }
+}
+
+@keyframes ripple-expand {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.6;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+/* Click ripple effect - more intense */
+@keyframes ripple-click {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+    background-color: var(--ripple-click);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+    background-color: transparent;
   }
 }
 
@@ -490,5 +810,47 @@
 }
 
 .theme-transition-overlay {
-  animation: ripple 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: ripple 1.2s var(--animation-easing) forwards;
+}
+
+/* Additional utility classes for interactive effects */
+.ripple-click-effect {
+  animation: ripple-click var(--animation-duration-slow) var(--animation-easing) forwards;
+}
+
+/* Ensure proper stacking context for interactive effects */
+.interactive-stack {
+  position: relative;
+  z-index: 1;
+}
+
+.interactive-stack::before,
+.interactive-stack::after {
+  z-index: -1;
+}
+
+/* High performance mode for devices with limited resources */
+@media (prefers-reduced-data: reduce) {
+  .gradient-shadow-card::before,
+  .gradient-shadow::before,
+  .expandable-button::before {
+    filter: none !important;
+    background: var(--shadow-gradient-start) !important;
+    opacity: calc(var(--shadow-opacity) * 0.5) !important;
+  }
+}
+
+/* Print styles - disable all interactive effects */
+@media print {
+  .ripple-effect,
+  .ripple-background,
+  .gradient-shadow::before,
+  .gradient-shadow-card::before,
+  .expandable-button::before {
+    display: none !important;
+  }
+  
+  .expandable-button {
+    transform: none !important;
+  }
 }

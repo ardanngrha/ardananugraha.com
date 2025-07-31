@@ -21,13 +21,13 @@ export async function GET() {
       })
     );
 
-    // Filter featured writings (add a 'featured' field to your MDX frontmatter)
     const featuredWritings = writings
       .filter(writing => writing.frontmatter.featured)
-      .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
-      .slice(0, 3); // Show only 3 featured writings
+      .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 
-    return NextResponse.json(featuredWritings);
+    // Ensure multiple of 2
+    const evenCount = featuredWritings.length - (featuredWritings.length % 2);
+    return NextResponse.json(featuredWritings.slice(0, evenCount > 0 ? evenCount : 2));
   } catch (error) {
     console.error('Error fetching featured writings:', error);
     return NextResponse.json([], { status: 500 });

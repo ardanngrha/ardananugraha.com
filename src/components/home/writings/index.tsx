@@ -1,9 +1,8 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
 import { FaFileSignature } from "react-icons/fa";
 import { WritingCard } from "./writing-featured-card";
 import { ContentItem } from "./types";
+import { RippleButton } from "@/components/ui/ripple-button";
 
 interface WritingsSectionProps {
   writings: ContentItem[];
@@ -65,26 +64,16 @@ export default function WritingsSection({
           ))}
         </motion.div>
       )}
-      
-      <div className="flex justify-center mt-8">
-        <Button variant="outline" asChild>
-          <Link href="/writings" className="inline-flex items-center gap-2">
-            More
-            <svg
-              className="w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link>
-        </Button>
+
+      <div className="flex justify-center mt-8 ">
+        <RippleButton
+          href="/writings"
+          variant="outline"
+          className="px-6 py-3 w-auto flex-initial"
+          aria-label="Read all my writings"
+        >
+          Read All My Writings
+        </RippleButton>
       </div>
     </section>
   );

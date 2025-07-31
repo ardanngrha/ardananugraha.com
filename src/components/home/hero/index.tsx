@@ -1,14 +1,13 @@
 "use client"
 
 import { useState, useEffect, useMemo } from "react"
-import Link from "next/link"
 import Image from "next/image"
 import { motion } from "motion/react"
 import HeroBackground from "./background"
 import { toast } from "sonner"
+import { RippleButton } from "@/components/ui/ripple-button"
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currentTime, setCurrentTime] = useState("")
   const [currentLanguage, setCurrentLanguage] = useState("")
   const [isDeleting, setIsDeleting] = useState(false)
@@ -66,14 +65,6 @@ export default function Hero() {
 
     return () => clearTimeout(timeout)
   }, [currentLanguage, isDeleting, languageIndex, languages])
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    })
-  }
 
   const handleCopyEmail = async () => {
     try {
@@ -141,43 +132,31 @@ export default function Hero() {
 
             {/* Action buttons */}
             <div className="flex gap-3 mb-4">
-              <Link
+              <RippleButton
                 href="/about"
-                className="group relative flex-1 bg-secondary/80 hover:bg-secondary text-foreground py-3 px-4 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 overflow-hidden border border-border/50 hover:border-primary/30"
-                onMouseMove={handleMouseMove}
+                variant="secondary"
+                aria-label="Learn more about me"
+                className="flex-1"
               >
-                {/* Mouse-following ripple effect */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle 70px at ${mousePosition.x}px ${mousePosition.y}px, rgba(var(--primary), 0.1) 0%, rgba(var(--primary), 0.05) 40%, transparent 70%)`
-                  }}
-                />
-                <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-                <span className="relative z-10">
+                <span>
                   <span className="hidden sm:inline">More About Me</span>
                   <span className="sm:hidden">About Me</span>
                 </span>
-              </Link>
-              <button
+              </RippleButton>
+              <RippleButton
                 onClick={handleCopyEmail}
-                className="group relative flex-1 bg-secondary/80 hover:bg-secondary text-foreground py-3 px-4 rounded-2xl transition-all duration-200 flex items-center justify-center gap-2 overflow-hidden border border-border/50 hover:border-primary/30 cursor-pointer"
-                onMouseMove={handleMouseMove}
+                variant="secondary"
+                aria-label="Copy email address to clipboard"
+                className="cursor-pointer flex-1"
               >
-                {/* Mouse-following ripple effect */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle 70px at ${mousePosition.x}px ${mousePosition.y}px, rgba(var(--primary), 0.1) 0%, rgba(var(--primary), 0.05) 40%, transparent 70%)`
-                  }}
-                />
-                <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
-                <span className="relative z-10">Copy Email</span>
-              </button>
+                <span>Copy Email</span>
+              </RippleButton>
             </div>
           </div>
 
