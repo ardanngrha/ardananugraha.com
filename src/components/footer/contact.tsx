@@ -16,7 +16,7 @@ export default function Contact() {
         <Link
           href="/resume.pdf"
           download
-          className="inline-flex text-sm transition-colors custom-cursor hover:text-primary hover:underline"
+          className="inline-flex text-sm transition-colors hover:text-primary hover:underline"
         >
           Download Resume
         </Link>

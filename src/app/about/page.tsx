@@ -6,7 +6,7 @@ import { AboutBg } from "@/components/backgrounds/about-bg";
 import { ExperienceTimeline } from "@/components/about/experiences";
 import { TechStack } from "@/components/about/tech-stack";
 import { FavStack } from "@/components/about/fav-stack";
-import { ImageCarousel } from "@/components/about/images";
+import { AboutImage } from "@/components/about/images";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -79,21 +79,17 @@ export default function AboutPage() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <motion.div variants={textVariants}>
-              <motion.div className="space-y-4 text-muted-foreground leading-relaxed">
-                <motion.p variants={textVariants}>
+              <motion.div className="space-y-4 leading-relaxed">
+                <motion.p variants={textVariants} className="font-semibold">
+                  Hi There! Ardan here 👋🏻
+                </motion.p>
+                <motion.p variants={textVariants} className="text-muted-foreground">
                   I&apos;m a passionate software developer with a love for creating
                   meaningful digital experiences. My journey in tech started with
                   curiosity and has evolved into a career focused on building
                   robust, user-friendly applications.
                 </motion.p>
-                <motion.p variants={textVariants}>
-                  When I&apos;m not coding, you&apos;ll find me exploring new
-                  technologies, contributing to open-source projects, or sharing
-                  knowledge with the developer community. I believe in the power of
-                  technology to solve real-world problems and make people&apos;s lives
-                  better.
-                </motion.p>
-                <motion.p variants={textVariants}>
+                <motion.p variants={textVariants} className="text-muted-foreground">
                   My approach to development is simple: write clean, maintainable
                   code, prioritize user experience, and never stop learning. Every
                   project is an opportunity to grow and create something that can
@@ -115,7 +111,7 @@ export default function AboutPage() {
               className="flex justify-center"
               variants={sectionVariants}
             >
-              <ImageCarousel />
+              <AboutImage />
             </motion.div>
           </div>
         </motion.div>

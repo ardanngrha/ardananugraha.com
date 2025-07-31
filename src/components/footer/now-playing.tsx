@@ -3,12 +3,14 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import getNowPlayingItem from "@/lib/spotify"
+import Link from "next/link"
 
 interface CurrentTrack {
   name: string
   artist: string
   isPlaying: boolean
   albumImageUrl: string
+  songUrl: string
 }
 
 // Sound waves component
@@ -54,7 +56,8 @@ export default function NowPlaying() {
             name: track.title,
             artist: track.artist,
             isPlaying: track.isPlaying,
-            albumImageUrl: track.albumImageUrl
+            albumImageUrl: track.albumImageUrl,
+            songUrl: track.songUrl,
           });
         } else {
           // No track is currently playing or available
@@ -95,7 +98,7 @@ export default function NowPlaying() {
       <p className="text-sm text-muted-foreground italic">&quot;stay foolish, stay hungry&quot;</p>
 
       {currentTrack ? (
-        <div className="flex items-center gap-2 pt-4">
+        <Link className="flex items-center gap-2 custom-cursor" href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer">
           <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
             {currentTrack.albumImageUrl ? (
               <Image
@@ -120,7 +123,7 @@ export default function NowPlaying() {
             </div>
           </div>
           <SoundWaves isPlaying={currentTrack.isPlaying} />
-        </div>
+        </Link>
       ) : (
         <></>
         // No track is currently playing

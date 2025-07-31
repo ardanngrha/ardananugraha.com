@@ -34,7 +34,7 @@ const swipePower = (offset: number, velocity: number) => {
   return Math.abs(offset) * velocity;
 };
 
-export function ImageCarousel() {
+export function AboutImage() {
   const [[page, direction], setPage] = useState([0, 0]);
 
   // Correctly wrap the index to create an infinite loop
@@ -64,11 +64,11 @@ export function ImageCarousel() {
         </Button>
 
         {/* Carousel Container */}
-        <div className="relative w-full max-w-sm h-[420px] m:h-[480px] sm:max-w-xs flex items-center justify-center overflow-hidden">
+        <div className="relative w-full max-w-xs h-[380px] sm:h-[420px] flex items-center justify-center overflow-hidden">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
-              key={page} // Use page state for re-rendering
-              className="absolute w-full h-full p-2 sm:p-4 bg-card border rounded-2xl shadow-lg cursor-grab active:cursor-grabbing"
+              key={page}
+              className="absolute w-full h-full p-4 bg-card border rounded-2xl shadow-lg cursor-grab active:cursor-grabbing overflow-hidden"
               custom={direction}
               variants={variants}
               initial="enter"
@@ -90,19 +90,21 @@ export function ImageCarousel() {
               whileHover={{ y: -10, scale: 1.05, transition: { duration: 0.2 } }}
             >
               <div className="flex flex-col h-full pointer-events-none">
-                <div className="relative w-full aspect-square rounded-lg overflow-hidden">
-                  <Image
-                    src={currentImage.src}
-                    alt={currentImage.description}
-                    fill
-                    className="object-cover"
-                    priority={imageIndex === 0}
-                    sizes="(max-width: 640px) 100vw, 320px"
-                  />
+                <div className="relative w-full aspect-square rounded-lg overflow-visible flex items-center justify-center bg-transparent">
+                  <div className="relative w-65 h-65 mx-auto">
+                    <Image
+                      src={currentImage.src}
+                      alt={currentImage.description}
+                      fill
+                      className="object-contain shadow-2xl"
+                      priority={imageIndex === 0}
+                      sizes="(max-width: 640px) 180px, 220px"
+                    />
+                  </div>
                 </div>
-                <div className="text-center flex-grow flex flex-col justify-center">
-                  <p className="font-handwriting text-lg md:text-xl font-bold">{currentImage.description}</p>
-                  <p className="font-handwriting text-base font-bold">{currentImage.year}</p>
+                <div className="text-center flex-grow flex flex-col justify-center px-2">
+                  <p className="font-handwriting text sm:text-lg md:text-xl font-bold mb-1 line-clamp-2">{currentImage.description}</p>
+                  <p className="font-handwriting text sm:text-lg font-bold text-muted-foreground">{currentImage.year}</p>
                 </div>
               </div>
             </motion.div>

@@ -66,8 +66,13 @@ export function TechStack() {
             <Tooltip key={index}>
               <TooltipTrigger asChild>
                 <motion.div
-                  className="flex-shrink-0 mx-4 text-4xl text-center"
-                  whileHover={{ scale: 1.2, y: -5, transition: { duration: 0.2 } }}
+                  className="flex-shrink-0 mx-4 text-4xl text-center grayscale hover:grayscale-0 transition-all duration-300"
+                  whileHover={{
+                    scale: 1.2,
+                    y: -5,
+                    filter: "grayscale(0)",
+                    transition: { duration: 0.2 }
+                  }}
                 >
                   {tool.icon}
                 </motion.div>
