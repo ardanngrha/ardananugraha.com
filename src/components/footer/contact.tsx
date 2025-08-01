@@ -15,10 +15,11 @@ export default function Contact() {
       <div>
         <Link
           href="/resume.pdf"
-          download
-          className="inline-flex text-sm transition-colors hover:text-primary hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm transition-colors custom-cursor hover:text-primary hover:underline"
         >
-          Download Resume
+          Resume
         </Link>
       </div>
     </div>
