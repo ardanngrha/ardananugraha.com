@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FaTimes, FaFilter } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
-import { techIconMap } from '@/components/projects/project-page-card'; // Import the icon map
+import { getTechIcon } from '@/lib/tech-icons';
 
 interface TagListProps {
   tags: string[];
@@ -113,7 +113,7 @@ export function TagList({
         {tags.map((tag) => {
           const isSelected = selectedTags.includes(tag);
           const isClickable = variant !== 'default' || onTagClick;
-          const Icon = techIconMap[tag];
+          const Icon = getTechIcon(tag);
 
           return (
             <Badge

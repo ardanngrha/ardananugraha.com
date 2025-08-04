@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ProjectPageCard } from '@/components/projects/project-page-card';
+import { ProjectCard } from '@/components/projects/project-card';
 import { ProjectContentItem } from "@/types/projects";
 
 interface ProjectsClientPageProps {
@@ -46,7 +46,7 @@ export function ProjectsClientPage({ projects }: ProjectsClientPageProps) {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        key="projects-page" // Key ensures animation runs on navigation
+        key="projects-page"
       >
         {projects.map((project, index) => (
           <motion.div
@@ -54,7 +54,7 @@ export function ProjectsClientPage({ projects }: ProjectsClientPageProps) {
             variants={itemVariants}
             custom={index}
           >
-            <ProjectPageCard project={project} />
+            <ProjectCard project={project} variant="page" />
           </motion.div>
         ))}
       </motion.div>

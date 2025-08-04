@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { EnhancedProject } from '@/types/projects';
 import { EnhancedWriting } from '@/types/writings';
 import { CardImageWithLoading } from './image-with-loading';
-import { techIconMap } from '@/components/projects/project-page-card';
+import { getTechIcon } from '@/lib/tech-icons';
 
 interface RelatedContentProps {
   items: (EnhancedProject | EnhancedWriting)[];
@@ -195,7 +195,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
               <div className="flex flex-wrap gap-2 mt-3" role="group" aria-label={`${isProject ? 'Technologies' : 'Tags'} used`}>
                 {uniqueTags.slice(0, 3).map((tag) => (
                   <div key={tag} className="flex items-center gap-1.5 bg-secondary px-2 py-1 rounded-full text-xs font-medium text-secondary-foreground">
-                    {isProject && techIconMap[tag] ? <span className="text-sm">{techIconMap[tag]}</span> : !isProject ? <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`Tag: ${tag}`}>{tag}</Badge> : null}
+                    {isProject && getTechIcon(tag) ? <span className="text-sm">{getTechIcon(tag)}</span> : !isProject ? <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`Tag: ${tag}`}>{tag}</Badge> : null}
                     {isProject && <span>{tag}</span>}
                   </div>
                 ))}

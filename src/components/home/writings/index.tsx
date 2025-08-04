@@ -1,11 +1,11 @@
 import { motion } from "motion/react";
 import { FaFileSignature } from "react-icons/fa";
 import { WritingCard } from "./writing-featured-card";
-import { ContentItem } from "./types";
+import { WritingContentItem } from "@/types/writings";
 import { RippleButton } from "@/components/ui/ripple-button";
 
 interface WritingsSectionProps {
-  writings: ContentItem[];
+  writings: WritingContentItem[];
   loading: boolean;
 }
 
@@ -18,7 +18,6 @@ const containerVariants = {
     },
   },
 };
-
 export default function WritingsSection({
   writings,
   loading,
@@ -39,7 +38,7 @@ export default function WritingsSection({
       </motion.div>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-6">
           {[1, 2].map((i) => (
             <div
               key={i}
@@ -53,7 +52,7 @@ export default function WritingsSection({
         </div>
       ) : (
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="space-y-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -65,7 +64,7 @@ export default function WritingsSection({
         </motion.div>
       )}
 
-      <div className="flex justify-center mt-8 ">
+      <div className="flex justify-center mt-8">
         <RippleButton
           href="/writings"
           variant="outline"

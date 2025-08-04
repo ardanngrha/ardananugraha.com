@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { CgCodeSlash } from "react-icons/cg";
-import { ProjectCard } from "./project-featured-card";
+import { ProjectCard } from "@/components/projects/project-card";
 import { ProjectContentItem } from "@/types/projects";
 import { RippleButton } from "@/components/ui/ripple-button";
 
@@ -39,32 +39,41 @@ export default function ProjectsSection({
       </motion.div>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="space-y-8">
           {[1, 2].map((i) => (
             <div
               key={i}
-              className="bg-gray-50 dark:bg-zinc-800/50 rounded-2xl p-4 animate-pulse"
+              className="flex flex-col md:flex-row bg-card rounded-2xl overflow-hidden min-h-[280px] animate-pulse"
             >
-              <div className="flex gap-2 mb-4">
+              <div className="flex-1 p-6 md:p-8 space-y-4">
                 <div className="h-6 w-20 bg-muted rounded-full"></div>
-                <div className="h-6 w-24 bg-muted rounded-full"></div>
+                <div className="h-8 bg-muted rounded w-3/4"></div>
+                <div className="h-16 bg-muted rounded w-full"></div>
+                <div className="flex gap-2">
+                  <div className="h-6 w-16 bg-muted rounded-full"></div>
+                  <div className="h-6 w-20 bg-muted rounded-full"></div>
+                  <div className="h-6 w-18 bg-muted rounded-full"></div>
+                </div>
+                <div className="flex gap-3 pt-4">
+                  <div className="h-10 bg-muted rounded flex-1"></div>
+                  <div className="h-10 w-10 bg-muted rounded"></div>
+                  <div className="h-10 w-10 bg-muted rounded"></div>
+                </div>
               </div>
-              <div className="aspect-[16/10] bg-muted rounded-lg mb-4"></div>
-              <div className="h-6 bg-muted rounded mb-2 w-3/4"></div>
-              <div className="h-10 bg-muted rounded w-full"></div>
+              <div className="md:w-[45%] lg:w-[40%] bg-muted order-first md:order-last"></div>
             </div>
           ))}
         </div>
       ) : (
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="space-y-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
           {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+            <ProjectCard key={project.slug} project={project} variant="featured" />
           ))}
         </motion.div>
       )}

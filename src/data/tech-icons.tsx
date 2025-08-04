@@ -1,12 +1,12 @@
 import {
-  FaJs, FaReact, FaNodeJs, FaPython, FaJava, FaDocker, FaGitAlt, FaGithub, FaAws, FaLinux
+  FaJs, FaReact, FaNodeJs, FaPython, FaJava, FaDocker, FaGitAlt, FaGithub, FaAws, FaLinux, FaAndroid
 } from 'react-icons/fa';
 import {
-  SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion
+  SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion, SiFastapi
 } from 'react-icons/si';
 import { VscAzure } from "react-icons/vsc";
 
-const tech_stack = [
+const tech_icons = [
   { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
   { name: 'TypeScript', icon: <SiTypescript className="text-blue-500" /> },
   { name: 'Python', icon: <FaPython className="text-blue-400" /> },
@@ -33,6 +33,8 @@ const tech_stack = [
   { name: 'TensorFlow', icon: <SiTensorflow className="text-orange-500" /> },
   { name: 'Discord', icon: <SiDiscord className="text-indigo-500" /> },
   { name: 'Notion', icon: <SiNotion className="text-black dark:text-white" /> },
+  { name: 'Android', icon: <FaAndroid className="text-green-400" /> },
+  { name: 'FastAPI', icon: <SiFastapi className="text-green-500" /> },
 ];
 
-export default tech_stack;
+export default tech_icons;

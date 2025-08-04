@@ -108,7 +108,7 @@ export default function Hero() {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-muted-foreground text-sm">Available for work</span>
+                <span className="text-muted-foreground text-sm">Available for opportunities</span>
               </div>
               <span className="text-muted-foreground text-sm">{currentTime}</span>
             </div>

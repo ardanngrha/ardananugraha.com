@@ -8,10 +8,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useEffect, useRef, useState } from "react";
-import tech_stack from "@/data/about-tech-stack";
+import tech_icons from "@/data/tech-icons";
 
 export function TechStack() {
-  const duplicatedTools = [...tech_stack, ...tech_stack];
+  const duplicatedTools = [...tech_icons, ...tech_icons];
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentWidth, setContentWidth] = useState(0);
