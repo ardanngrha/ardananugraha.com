@@ -92,7 +92,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-4xl md:text-5xl font-bold"
+          className="text-3xl md:text-5xl font-bold"
         >
           Hey it&apos;s,
         </motion.p>
@@ -143,7 +143,7 @@ export default function Hero() {
                 </svg>
                 <span>
                   <span className="hidden sm:inline">More About Me</span>
-                  <span className="sm:hidden">About Me</span>
+                  <span className="text-sm whitespace-nowrap sm:hidden">About Me</span>
                 </span>
               </RippleButton>
               <RippleButton
@@ -155,7 +155,7 @@ export default function Hero() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
-                <span>Copy Email</span>
+                  <span className="text-sm md:text-base whitespace-nowrap">Copy Email</span>
               </RippleButton>
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.0 }}
-          className="mt-20 text-4xl md:text-5xl"
+          className="mt-20 text-3xl md:text-5xl"
         >
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -185,10 +185,8 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.7 }}
             className="relative font-bold"
           >
-            I work with <span className="text-primary relative">
-              <span className="invisible">JavaScript</span>
-              <span className="absolute left-0 top-1 gradient-text pb-2">{currentLanguage}<span className="animate-pulse">|</span></span>
-            </span>
+            I work with
+              <span className="absolute gradient-text pl-2 md:pb-2">{currentLanguage}</span>
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

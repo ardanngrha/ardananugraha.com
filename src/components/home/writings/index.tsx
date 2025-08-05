@@ -1,11 +1,11 @@
 import { motion } from "motion/react";
 import { FaFileSignature } from "react-icons/fa";
-import { WritingCard } from "./writing-featured-card";
-import { WritingContentItem } from "@/types/writings";
+import { WritingCard} from "@/components/writings/writing-card";
+import {EnhancedWriting} from "@/types/writings";
 import { RippleButton } from "@/components/ui/ripple-button";
 
 interface WritingsSectionProps {
-  writings: WritingContentItem[];
+  writings: EnhancedWriting[];
   loading: boolean;
 }
 
@@ -59,7 +59,7 @@ export default function WritingsSection({
           viewport={{ once: true, amount: 0.2 }}
         >
           {writings.map((writing) => (
-            <WritingCard key={writing.slug} writing={writing} />
+            <WritingCard key={writing.slug} writing={writing} variant="featured" />
           ))}
         </motion.div>
       )}

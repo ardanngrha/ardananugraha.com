@@ -7,11 +7,11 @@ import WritingsSection from "@/components/home/writings"
 import TestimonialsSection from "@/components/home/testimonials"
 import { toast } from "sonner"
 import { ProjectContentItem } from "@/types/projects"
-import { WritingContentItem } from "@/types/writings"
+import {EnhancedWriting } from "@/types/writings"
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<ProjectContentItem[]>([]);
-  const [featuredWritings, setFeaturedWritings] = useState<WritingContentItem[]>([]);
+  const [featuredWritings, setFeaturedWritings] = useState<EnhancedWriting[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

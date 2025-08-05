@@ -9,6 +9,7 @@ import { MdAccessTime } from "react-icons/md";
 
 interface WritingCardProps {
   writing: EnhancedWriting;
+  variant?: 'featured' | 'page';
 }
 
 const cardVariants = {
@@ -46,15 +47,15 @@ const imageVariants = {
   }
 };
 
-export function WritingCard({ writing }: WritingCardProps) {
+export function WritingCard({ writing, variant = 'featured' }: WritingCardProps) {
   const { slug, frontmatter, readTime } = writing;
   const recent = isRecent(frontmatter.date);
 
   return (
     <motion.div
       variants={cardVariants}
-      initial="initial"
-      animate="animate"
+      initial={variant === 'page' ? 'hidden' : undefined}
+      animate={variant === 'page' ? 'visible' : undefined}
       whileHover="hover"
       className="rounded-2xl"
       layout
@@ -75,6 +76,7 @@ export function WritingCard({ writing }: WritingCardProps) {
                   fill
                   className="object-cover transition-all duration-300 group-hover:brightness-110"
                   sizes="(max-width: 768px) 100vw, 33vw"
+                  priority={variant === 'featured'}
                 />
               ) : (
                 <div className="w-full h-full bg-secondary flex items-center justify-center">
