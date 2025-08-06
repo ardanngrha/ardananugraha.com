@@ -127,13 +127,13 @@ export default function GuestbookPage() {
       />
 
       <motion.div
-        className="max-w-4xl mx-auto border rounded-lg bg-background font-mono p-4 my-16"
+        className="max-w-5xl mx-auto bg-background border rounded-2xl font-mono my-16"
         variants={formVariants}
         initial="hidden"
         animate="visible"
       >
         {/* The ref is correctly placed here on the parent component */}
-        <ScrollArea className="h-80 md:h-96 rounded-md border p-4" ref={commentsContainerRef}>
+        <ScrollArea className="h-96 md:h-96 rounded-md p-4" ref={commentsContainerRef}>
           <div className="flex-grow" />
           <motion.div
             className="space-y-3 md:space-y-4"

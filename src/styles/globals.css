@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-/* @import "./satoshi.css"; */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -47,6 +46,11 @@
 }
 
 :root {
+    --font-inter: 'Inter', sans-serif;
+    --font-space-mono: 'Space Mono', monospace;
+    --font-oooh-baby: 'Oooh Baby', cursive;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -81,7 +85,7 @@
   --sidebar-ring: oklch(0.708 0 0);
   --gradient-from: #0192C6;
   --gradient-to: #004499;
-  
+
   /* Interactive effects colors - Light mode */
   --ripple-primary: rgba(59, 130, 246, 0.12);
   --ripple-secondary: rgba(59, 130, 246, 0.06);
@@ -92,12 +96,12 @@
   --shadow-opacity: 0.3;
   --shadow-blur: 12px;
   --shadow-spread: 8px;
-  
+
   /* Expandable button colors */
   --expandable-bg-hover: rgba(59, 130, 246, 0.05);
   --expandable-border-hover: rgba(59, 130, 246, 0.2);
   --expandable-scale: 1.4;
-  
+
   /* Performance optimization values */
   --animation-duration-fast: 0.15s;
   --animation-duration-normal: 0.3s;
@@ -137,7 +141,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  
+
   /* Interactive effects colors - Dark mode */
   --ripple-primary: rgba(6, 182, 212, 0.15);
   --ripple-secondary: rgba(6, 182, 212, 0.08);
@@ -148,12 +152,12 @@
   --shadow-opacity: 0.4;
   --shadow-blur: 12px;
   --shadow-spread: 8px;
-  
+
   /* Expandable button colors - dark mode */
   --expandable-bg-hover: rgba(6, 182, 212, 0.08);
   --expandable-border-hover: rgba(6, 182, 212, 0.3);
   --expandable-scale: 1.4;
-  
+
   /* Performance optimization values remain the same */
   --animation-duration-fast: 0.15s;
   --animation-duration-normal: 0.3s;
@@ -165,17 +169,17 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   html {
     transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   body {
     @apply bg-background text-foreground;
     transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     /* font-family: 'Satoshi-Regular'; */
   }
-  
+
   /* Smooth transitions for all theme-aware elements */
   * {
     transition-property: background-color, border-color, color, fill, stroke;
@@ -184,7 +188,7 @@
   }
 
   /* Accessibility Enhancements */
-  
+
   /* Screen reader only content */
   .sr-only {
     position: absolute;
@@ -224,15 +228,15 @@
   }
 
   /* High contrast mode support */
-  @media (prefers-contrast: high) {
+  @media (prefers-contrast: more) {
     .border {
       border-width: 2px;
     }
-    
+
     .shadow-sm {
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
-    
+
     .shadow-md {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     }
@@ -248,7 +252,7 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
-    
+
     /* Disable all interactive effects for reduced motion */
     .ripple-effect,
     .ripple-container,
@@ -260,7 +264,7 @@
       transform: none !important;
       will-change: auto !important;
     }
-    
+
     /* Remove pseudo-element effects */
     .gradient-shadow::before,
     .gradient-shadow-card::before {
@@ -269,19 +273,19 @@
       transition: none !important;
       filter: none !important;
     }
-    
+
     /* Provide alternative feedback for interactive elements */
     .ripple-container:hover,
     .ripple-container:focus-visible {
       background-color: var(--ripple-primary);
     }
-    
+
     .expandable-button:hover,
     .expandable-button:focus-visible {
       background-color: var(--expandable-bg-hover);
       border-color: var(--expandable-border-hover);
     }
-    
+
     .gradient-shadow-card:hover,
     .gradient-shadow-card:focus-visible {
       outline: 2px solid var(--shadow-gradient-start);
@@ -311,7 +315,7 @@
     height: 100%;
     z-index: 0;
   }
-  
+
   /* Line clamp utilities */
   .line-clamp-1 {
     overflow: hidden;
@@ -319,14 +323,14 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
   }
-  
+
   .line-clamp-2 {
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
   }
-  
+
   .line-clamp-3 {
     overflow: hidden;
     display: -webkit-box;
@@ -342,13 +346,13 @@
     background-size: 100%;
     display: inline-block;
   }
-  
+
   /* Enhanced reading experience for writing content */
   .writing-content {
     line-height: 1.75;
     font-size: 1.125rem;
   }
-  
+
   .writing-content h1,
   .writing-content h2,
   .writing-content h3,
@@ -358,7 +362,7 @@
     scroll-margin-top: 5rem;
     position: relative;
   }
-  
+
   .writing-content h1:hover .heading-anchor,
   .writing-content h2:hover .heading-anchor,
   .writing-content h3:hover .heading-anchor,
@@ -367,7 +371,7 @@
   .writing-content h6:hover .heading-anchor {
     opacity: 1;
   }
-  
+
   .heading-anchor {
     position: absolute;
     left: -1.5rem;
@@ -377,11 +381,11 @@
     text-decoration: none;
     font-weight: normal;
   }
-  
+
   .heading-anchor:hover {
     color: hsl(var(--primary));
   }
-  
+
   /* Code block enhancements */
   .writing-content pre {
     position: relative;
@@ -389,68 +393,68 @@
     border: 1px solid hsl(var(--border));
     background: hsl(var(--muted));
   }
-  
+
   .writing-content pre::-webkit-scrollbar {
     height: 8px;
   }
-  
+
   .writing-content pre::-webkit-scrollbar-track {
     background: transparent;
   }
-  
+
   .writing-content pre::-webkit-scrollbar-thumb {
     background: hsl(var(--border));
     border-radius: 4px;
   }
-  
+
   .writing-content pre::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--muted-foreground));
   }
-  
+
   /* Table enhancements */
   .writing-content table {
     border-collapse: separate;
     border-spacing: 0;
     overflow: hidden;
   }
-  
+
   .writing-content table th:first-child,
   .writing-content table td:first-child {
     border-left: 1px solid hsl(var(--border));
   }
-  
+
   .writing-content table th:last-child,
   .writing-content table td:last-child {
     border-right: 1px solid hsl(var(--border));
   }
-  
+
   .writing-content table tr:first-child th {
     border-top: 1px solid hsl(var(--border));
   }
-  
+
   .writing-content table tr:last-child td {
     border-bottom: 1px solid hsl(var(--border));
   }
-  
+
   /* Responsive typography */
   @media (max-width: 640px) {
     .writing-content {
       font-size: 1rem;
       line-height: 1.7;
     }
-    
+
     .writing-content h1 {
       font-size: 2rem;
     }
-    
+
     .writing-content h2 {
       font-size: 1.75rem;
     }
-    
+
     .writing-content h3 {
       font-size: 1.5rem;
     }
-    
+
     .writing-content pre {
       margin-left: -1rem;
       margin-right: -1rem;
@@ -459,7 +463,7 @@
       border-right: none;
     }
   }
-  
+
   .font-handwriting {
     font-family: var(--font-oooh-baby), 'Oooh Baby', cursive;
   }
@@ -643,6 +647,7 @@
     var(--shadow-gradient-mid),
     var(--shadow-gradient-end)
   );
+    mix-blend-mode: normal;
   opacity: 0;
   filter: blur(var(--shadow-blur));
   transition: opacity var(--animation-duration-normal) var(--animation-easing);
@@ -690,7 +695,7 @@
     .gradient-shadow-card::before {
       opacity: 0 !important;
     }
-    
+
     .gradient-shadow-card:hover {
       outline: 2px solid currentColor;
       outline-offset: 2px;
@@ -706,7 +711,7 @@
       transform: none !important;
       filter: none !important;
     }
-    
+
     .gradient-shadow-card::before {
       opacity: 0 !important;
     }
@@ -728,7 +733,7 @@
 
   /* Optimized transitions for theme switching */
   .theme-transition {
-    transition: 
+    transition:
       background-color var(--animation-duration-normal) var(--animation-easing),
       border-color var(--animation-duration-normal) var(--animation-easing),
       color var(--animation-duration-normal) var(--animation-easing),
@@ -849,7 +854,7 @@
   .expandable-button::before {
     display: none !important;
   }
-  
+
   .expandable-button {
     transform: none !important;
   }

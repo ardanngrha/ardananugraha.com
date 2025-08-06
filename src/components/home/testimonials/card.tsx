@@ -52,7 +52,7 @@ export function TestimonialCard({
               <div className="font-semibold text-foreground text-sm px-1 py-0.5">
                 {testimonial.name}
               </div>
-              <div className="text-muted-foreground text-[11px] px-1 pb-0.5">
+              <div className="text-muted-foreground text-sm px-1 pb-0.5">
                 {testimonial.role}
               </div>
             </div>

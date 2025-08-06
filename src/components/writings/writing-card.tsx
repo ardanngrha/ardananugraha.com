@@ -129,10 +129,13 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <div className="flex items-center gap-2">
+              <motion.div className="flex items-center gap-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}>
                 <MdAccessTime className="inline-block text-muted-foreground text-base" />
                 <span className="text-muted-foreground whitespace-nowrap text-xs">{readTime} min read</span>
-              </div>
+              </motion.div>
               <div className="flex gap-2 flex-wrap justify-start md:justify-end text-xs">
                 {frontmatter.tags.map((tag, index) => (
                   <motion.span

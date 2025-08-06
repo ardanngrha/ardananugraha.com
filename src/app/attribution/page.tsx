@@ -6,71 +6,31 @@ import { AttributionBg } from "@/components/backgrounds/attribution-bg";
 import { PageHeader } from "@/components/page-header";
 import inspirations from "@/data/attributions";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    scale: 0.95,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 12,
-      duration: 0.6,
-    },
-  },
-};
-
 export default function AttributionPage() {
   return (
     <motion.div
       initial="hidden"
       animate="visible"
-      variants={containerVariants}
     >
       <PageHeader
         title="Attribution"
         description="This website was made possible by the inspiration and work of many talented individuals and projects."
         background={<AttributionBg />}
       />
-
       <motion.div
-        className="mx-auto py-16"
-        variants={containerVariants}
+        className="mx-auto flex flex-col gap-10 py-10"
       >
+          <motion.div>
+            <motion.p>
+                The journey of   creating this website was greatly influenced by the following inspirations. Each of these projects and individuals has contributed to the design, functionality, or overall vision of this site. A heartfelt thank you to all of them!
+            </motion.p>
+          </motion.div>
         <motion.ul
-          className="text-left space-y-6"
-          variants={containerVariants}
+          className="text-left space-y-2"
         >
           {inspirations.map((inspiration) => (
             <motion.li
               key={inspiration.name}
-              className="text-lg"
-              variants={itemVariants}
-              whileHover={{
-                scale: 1.02,
-                x: 10,
-                transition: {
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 20,
-                },
-              }}
             >
               <Link
                 href={inspiration.url}

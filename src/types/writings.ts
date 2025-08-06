@@ -17,5 +17,5 @@ export interface WritingContentItem {
 
 export interface EnhancedWriting extends WritingContentItem {
   content: string;
-  readTime?: number;
+  readTime: number;
 }

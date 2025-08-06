@@ -2,6 +2,8 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { NextResponse } from 'next/server';
+import { calculateReadTime } from '@/lib/utils';
+import { WritingFrontmatter } from '@/types/writings';
 
 export async function GET() {
   try {
@@ -12,11 +14,13 @@ export async function GET() {
       filenames.map(async (filename) => {
         const filePath = path.join(writingsDirectory, filename);
         const fileContents = await fs.readFile(filePath, 'utf8');
-        const { data } = matter(fileContents);
+        const { data, content } = matter(fileContents);
 
         return {
           slug: filename.replace(/\.mdx$/, ''),
-          frontmatter: data,
+          frontmatter: data as WritingFrontmatter,
+          content,
+          readTime: calculateReadTime(content)
         };
       })
     );

@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { FaFileSignature } from "react-icons/fa";
 import { WritingCard} from "@/components/writings/writing-card";
-import {EnhancedWriting} from "@/types/writings";
+import { EnhancedWriting } from "@/types/writings";
 import { RippleButton } from "@/components/ui/ripple-button";
 
 interface WritingsSectionProps {
