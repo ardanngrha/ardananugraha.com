@@ -15,7 +15,6 @@ import { mdxComponents } from '@/lib/mdx';
 
 // This function tells Next.js which routes to pre-render at build time.
 export async function generateStaticParams() {
-  // Import here to avoid build issues
   const { getAllEnhancedWritings } = await import('@/lib/posts');
   const writings = await getAllEnhancedWritings();
 
@@ -140,8 +139,6 @@ export default async function WritingPage({
                   />
                 </MDXErrorBoundary>
               </article>
-
-              {/* Reading progress indicator could go here in future */}
             </div>
 
             {/* Share Section */}

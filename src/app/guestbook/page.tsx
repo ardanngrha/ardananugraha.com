@@ -2,7 +2,7 @@
 
 import { GuestbookBg } from "@/components/backgrounds/guestbook-bg";
 import { PageHeader } from "@/components/page-header";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, FormEvent } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { motion, AnimatePresence } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -73,7 +73,10 @@ export default function GuestbookPage() {
   }, []);
 
   useEffect(() => {
-    fetchComments();
+    fetchComments().then(() => {
+			// Scroll to bottom after fetching comments
+			scrollToBottom();
+    });
   }, [fetchComments]);
 
   // This effect runs when comments change, waiting for animations to finish
@@ -86,7 +89,7 @@ export default function GuestbookPage() {
     return () => clearTimeout(timer);
   }, [comments]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!newComment.trim()) return;
 
@@ -101,7 +104,7 @@ export default function GuestbookPage() {
 
       if (response.ok) {
         setNewComment("");
-        fetchComments(); // Refresh comments after posting
+        await fetchComments(); // Refresh comments after posting
       }
     } catch (error) {
       console.error("Failed to post comment:", error);
