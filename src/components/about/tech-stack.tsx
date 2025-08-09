@@ -16,6 +16,7 @@ export function TechStack() {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentWidth, setContentWidth] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const x = useMotionValue(0);
   const isDragging = useRef(false);
@@ -27,7 +28,7 @@ export function TechStack() {
   }, []);
 
   useAnimationFrame((time, delta) => {
-    if (isDragging.current || isHovering || !contentWidth) return;
+    if (isDragging.current || isHovering || activeIndex !== null || !contentWidth) return;
 
     let currentX = x.get();
     const speed = -70; // pixels per second
@@ -40,6 +41,12 @@ export function TechStack() {
 
     x.set(currentX + moveBy);
   });
+
+  // Resume auto-scroll after tooltip closes (touch end/cancel)
+  useEffect(() => {
+    if (activeIndex !== null) return;
+    // When tooltip closes, auto-scroll resumes via useAnimationFrame
+  }, [activeIndex]);
 
   return (
     <TooltipProvider>
@@ -62,26 +69,42 @@ export function TechStack() {
           onDragEnd={() => { isDragging.current = false; }}
           whileTap={{ cursor: "grabbing" }}
         >
-          {duplicatedTools.map((tool, index) => (
-            <Tooltip key={index}>
-              <TooltipTrigger asChild>
-                <motion.div
-                  className="flex-shrink-0 mx-4 text-4xl text-center grayscale hover:grayscale-0 transition-all duration-300"
-                  whileHover={{
-                    scale: 1.2,
-                    y: -5,
-                    filter: "grayscale(0)",
-                    transition: { duration: 0.2 }
-                  }}
-                >
-                  {tool.icon}
-                </motion.div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{tool.name}</p>
-              </TooltipContent>
-            </Tooltip>
-          ))}
+          {duplicatedTools.map((tool, index) => {
+            const isActive = activeIndex === index;
+            return (
+              <Tooltip key={index} open={isActive ? true : undefined}>
+                <TooltipTrigger asChild>
+                  <motion.div
+                    className="flex-shrink-0 mx-4 text-4xl text-center grayscale hover:grayscale-0 transition-all duration-300 select-none"
+                    whileHover={{
+                      scale: 1.2,
+                      y: -5,
+                      filter: "grayscale(0)",
+                      transition: { duration: 0.2 }
+                    }}
+                    animate={isActive ? { scale: 1.2, y: -5, filter: "grayscale(0)" } : {}}
+                    onTouchStart={() => {
+                      setActiveIndex(index);
+                      setIsHovering(true); // Stop auto-scroll
+                    }}
+                    onTouchEnd={() => {
+                      setActiveIndex(null);
+                      setIsHovering(false); // Resume auto-scroll
+                    }}
+                    onTouchCancel={() => {
+                      setActiveIndex(null);
+                      setIsHovering(false); // Resume auto-scroll
+                    }}
+                  >
+                    {tool.icon}
+                  </motion.div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{tool.name}</p>
+                </TooltipContent>
+              </Tooltip>
+            )
+          })}
         </motion.div>
       </div>
     </TooltipProvider>

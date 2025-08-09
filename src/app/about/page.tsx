@@ -84,10 +84,9 @@ export default function AboutPage() {
                   Hi There! Ardan here 👋🏻
                 </motion.p>
                 <motion.p variants={textVariants} className="text-muted-foreground">
-                  I&apos;m a passionate software developer with a love for creating
-                  meaningful digital experiences. My journey in tech started with
-                  curiosity and has evolved into a career focused on building
-                  robust, user-friendly applications.
+                  I&apos;m a software engineer who loves building cool things with code.
+                  I started coding out of curiosity and now I spend my time creating
+                  applications that people actually want to use.
                 </motion.p>
                 <motion.p variants={textVariants} className="text-muted-foreground">
                   My approach to development is simple: write clean, maintainable

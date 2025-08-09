@@ -156,21 +156,6 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
             ))}
           </div>
         )}
-
-        {/* Project Bullet Points */}
-        {isProject && projectData?.bulletPoints && projectData.bulletPoints.length > 0 && (
-          <section className="bg-muted/50 rounded-lg p-6" aria-labelledby="key-features-heading">
-            <h3 id="key-features-heading" className="font-semibold mb-3">Key Features</h3>
-            <ul className="space-y-2" role="list">
-              {projectData.bulletPoints.map((point, index) => (
-                <li key={index} className="flex items-start gap-2" role="listitem">
-                  <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" aria-hidden="true" />
-                  <span className="text-sm">{point}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
       </div>
     </header>
   );

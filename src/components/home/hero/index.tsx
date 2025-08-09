@@ -79,13 +79,14 @@ export default function Hero() {
   }
 
   return (
-    <div className="relative flex flex-col min-h-[calc(100vh-100px)] justify-center items-center p-4 md:p-0">
+    <div className="relative flex flex-col justify-center items-center p-4 md:p-0 min-h-[calc(100vh-100px)] max-h-screen overflow-y-auto"
+      style={{ boxSizing: 'border-box' }}>
       <HeroBackground />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex flex-col gap-1 z-10"
+        className="flex flex-col gap-1 z-10 w-full max-w-2xl"
       >
         {/* Profile Card */}
         <motion.p
@@ -155,7 +156,7 @@ export default function Hero() {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
                 </svg>
-                  <span className="text-sm md:text-base whitespace-nowrap">Copy Email</span>
+                <span className="text-sm md:text-base whitespace-nowrap">Copy Email</span>
               </RippleButton>
             </div>
           </div>
@@ -186,7 +187,7 @@ export default function Hero() {
             className="relative font-bold"
           >
             I work with
-              <span className="absolute gradient-text pl-2 md:pb-2">{currentLanguage}</span>
+            <span className="absolute gradient-text pl-2 md:pb-2">{currentLanguage}</span>
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

@@ -1,5 +1,4 @@
-import { FaPython, FaJava, FaReact } from "react-icons/fa";
-import { SiTypescript, SiTensorflow } from "react-icons/si";
+import { FaPython, SiTypescript, FaReact, SiTensorflow } from "./tech-icons";
 
 const favStack = [
   {
@@ -11,11 +10,6 @@ const favStack = [
     name: "TypeScript",
     icon: <SiTypescript className="h-8 w-8 text-blue-500" />,
     reason: "I love the type safety and developer experience it brings to JavaScript projects, especially in large-scale applications. Essential for maintainable code.",
-  },
-  {
-    name: "Java",
-    icon: <FaJava className="h-8 w-8 text-red-500" />,
-    reason: "A robust and reliable language that I enjoy using for building scalable and high-performance enterprise applications. Great for backend systems.",
   },
   {
     name: "React",

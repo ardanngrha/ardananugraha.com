@@ -38,3 +38,10 @@ const tech_icons = [
 ];
 
 export default tech_icons;
+
+export {
+  FaPython,
+  SiTypescript,
+  FaReact,
+  SiTensorflow,
+};
