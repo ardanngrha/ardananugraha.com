@@ -74,8 +74,8 @@ export default function GuestbookPage() {
 
   useEffect(() => {
     fetchComments().then(() => {
-			// Scroll to bottom after fetching comments
-			scrollToBottom();
+      // Scroll to bottom after fetching comments
+      scrollToBottom();
     });
   }, [fetchComments]);
 
@@ -157,7 +157,7 @@ export default function GuestbookPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div
-                      className="flex items-center justify-between gap-2 mb-1"
+                      className="flex items-center justify-between"
                     >
                       <span className="text-primary font-medium text-sm">
                         {`~/${comment.author.username}`}

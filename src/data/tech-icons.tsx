@@ -1,5 +1,5 @@
 import {
-  FaJs, FaReact, FaNodeJs, FaPython, FaJava, FaDocker, FaGitAlt, FaGithub, FaAws, FaLinux, FaAndroid
+  FaJs, FaReact, FaNodeJs, FaPython, FaJava, FaDocker, FaGitAlt, FaGithub, FaAws, FaLinux, FaAndroid, FaSwift
 } from 'react-icons/fa';
 import {
   SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion, SiFastapi
@@ -12,13 +12,13 @@ const tech_icons = [
   { name: 'Python', icon: <FaPython className="text-blue-400" /> },
   { name: 'Java', icon: <FaJava className="text-red-500" /> },
   { name: 'Node.js', icon: <FaNodeJs className="text-green-600" /> },
-  { name: 'Express.js', icon: <SiExpress className="text-gray-800 dark:text-gray-200" /> },
+  { name: 'Express', icon: <SiExpress className="text-gray-800 dark:text-gray-200" /> },
   { name: 'Spring Boot', icon: <SiSpringboot className="text-green-700" /> },
   { name: 'PostgreSQL', icon: <SiPostgresql className="text-blue-700" /> },
   { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
   { name: 'Redis', icon: <SiRedis className="text-red-500" /> },
   { name: 'Nginx', icon: <SiNginx className="text-green-700" /> },
-  { name: 'React.js', icon: <FaReact className="text-blue-400" /> },
+  { name: 'React', icon: <FaReact className="text-blue-400" /> },
   { name: 'Next.js', icon: <SiNextdotjs className="text-black dark:text-white" /> },
   { name: 'HTML', icon: <SiHtml5 className="text-orange-600" /> },
   { name: 'CSS', icon: <SiCss3 className="text-blue-600" /> },
@@ -35,6 +35,7 @@ const tech_icons = [
   { name: 'Notion', icon: <SiNotion className="text-black dark:text-white" /> },
   { name: 'Android', icon: <FaAndroid className="text-green-400" /> },
   { name: 'FastAPI', icon: <SiFastapi className="text-green-500" /> },
+  { name: 'Swift', icon: <FaSwift className="text-orange-500" /> }
 ];
 
 export default tech_icons;
