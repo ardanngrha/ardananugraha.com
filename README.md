@@ -6,12 +6,6 @@ First, run the development server:
 
 ```bash
 bun dev
-# or
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 
 ```
 
