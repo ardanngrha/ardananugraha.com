@@ -66,12 +66,16 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
 
   // Determine which tab should show the background
   const getBackgroundTab = () => {
-    // If More dropdown is open, show background on More tab
+    // Fix: Prioritize hovered tab even when dropdown is open
+    if (hoveredTab) {
+      return hoveredTab
+    }
+    // If More dropdown is open and no hover, show background on More tab
     if (moreDropdownOpen) {
       return tabs.find(tab => tab.isDropdown)?.id || null
     }
-    // Otherwise, prioritize hovered tab over active tab
-    return hoveredTab || activeTab
+    // Otherwise, show active tab
+    return activeTab
   }
 
   const backgroundPosition = getTabPosition(getBackgroundTab())
@@ -105,6 +109,8 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
                 onMouseLeaveAction={() => setHoveredTab(null)}
                 onOpenChangeAction={setMoreDropdownOpen}
                 showLabel={showLabels}
+                // Pass information about whether any other tab is hovered
+                isAnyTabHovered={hoveredTab !== null && hoveredTab !== tab.id}
               />
             </div>
           )
@@ -118,8 +124,8 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
             data-tab={tab.id}
             className={cn(
               "relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200",
-              // Fix: Check if this tab should have the background (either hovered or active when not hovering)
-              (hoveredTab === tab.id || (!hoveredTab && !moreDropdownOpen && activeTab === tab.id))
+              // Fix: Check if this specific tab should have white/black text
+              (hoveredTab === tab.id || (hoveredTab === null && !moreDropdownOpen && activeTab === tab.id))
                 ? "text-white dark:text-black"
                 : "text-muted-foreground hover:text-foreground",
               // Adjust padding when labels are hidden

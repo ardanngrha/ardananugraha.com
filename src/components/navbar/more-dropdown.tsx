@@ -36,6 +36,7 @@ export function MoreDropdown({
   onOpenChangeAction,
   showLabel = true,
   className,
+  isAnyTabHovered = false, // Add this new prop
 }: MoreDropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -50,7 +51,8 @@ export function MoreDropdown({
         <motion.div
           className={cn(
             "relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 outline-none cursor-pointer",
-            isOpen || isHovered || isActive
+            // Fix: Show white/black text only when this tab is hovered, or when it's active and no other tab is hovered
+            (isHovered || (isActive && !isAnyTabHovered && !isOpen))
               ? "text-white dark:text-black"
               : "text-muted-foreground hover:text-foreground",
             !showLabel && "px-3",

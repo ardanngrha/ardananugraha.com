@@ -25,6 +25,7 @@ export interface MoreDropdownProps {
   onOpenChangeAction: (open: boolean) => void
   showLabel?: boolean
   className?: string
+  isAnyTabHovered?: boolean
 }
 
 interface Tab {
