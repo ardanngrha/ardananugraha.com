@@ -75,7 +75,7 @@ export function TechStack() {
               <Tooltip key={index} open={isActive ? true : undefined}>
                 <TooltipTrigger asChild>
                   <motion.div
-                    className="flex-shrink-0 mx-4 text-4xl text-center grayscale hover:grayscale-0 transition-all duration-300 select-none"
+                    className="flex-shrink-0 mx-4 text-4xl text-center grayscale hover:grayscale-0 transition-all duration-50 select-none"
                     whileHover={{
                       scale: 1.2,
                       y: -5,

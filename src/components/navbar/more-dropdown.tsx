@@ -81,7 +81,7 @@ export function MoreDropdown({
             <DropdownMenuItem key={item.id} asChild>
               <Link
                 href={item.href}
-                className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+                className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
               >
                 {item.icon}
                 {item.label}
