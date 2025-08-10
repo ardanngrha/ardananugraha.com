@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
-import { HiOutlineDotsHorizontal, HiOutlineBookOpen, HiOutlineInformationCircle } from "react-icons/hi"
+import { HiOutlineChevronDown, HiOutlineChevronUp, HiOutlineBookOpen, HiOutlineInformationCircle } from "react-icons/hi"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -61,7 +61,22 @@ export function MoreDropdown({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <HiOutlineDotsHorizontal className="w-5 h-5" />
+          {/* Mobile: Down when closed, Up when opened */}
+          {/* Desktop (md+): Up when closed, Down when opened */}
+          <div className="md:hidden">
+            {isOpen ? (
+              <HiOutlineChevronUp className="w-5 h-5" />
+            ) : (
+              <HiOutlineChevronDown className="w-5 h-5" />
+            )}
+          </div>
+          <div className="hidden md:block">
+            {isOpen ? (
+              <HiOutlineChevronDown className="w-5 h-5" />
+            ) : (
+              <HiOutlineChevronUp className="w-5 h-5" />
+            )}
+          </div>
           {showLabel && "More"}
         </motion.div>
       </DropdownMenuTrigger>
