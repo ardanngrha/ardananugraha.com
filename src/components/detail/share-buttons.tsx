@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import {
   FiShare2,
-  FiTwitter,
   FiLinkedin,
   FiFacebook,
   FiLink,
   FiCheck,
+  FiInstagram,
 } from "react-icons/fi"
+import { FaThreads, FaXTwitter } from "react-icons/fa6";
 
 interface ShareButtonsProps {
   title: string
@@ -67,15 +68,11 @@ export function ShareButtons({
   }
 
   const shareUrls = {
-    twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-      title
-    )}&url=${encodeURIComponent(url)}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-      url
-    )}`,
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      url
-    )}`,
+    twitter: `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+    instagram: `https://www.instagram.com/create/story/?url=${encodeURIComponent(url)}`, // Instagram Stories (opens story creation)
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(title)}%20${encodeURIComponent(url)}`,
   }
 
   const openShareWindow = (url: string) => {
@@ -92,7 +89,6 @@ export function ShareButtons({
     >
       <span className="text-sm font-medium text-muted-foreground">Share:</span>
 
-      {/* Update this conditional rendering */}
       {showNativeShare && (
         <Button
           variant="outline"
@@ -100,7 +96,7 @@ export function ShareButtons({
           onClick={handleNativeShare}
           className="sm:hidden min-h-[44px] touch-manipulation w-full sm:w-auto"
         >
-          <FiShare2 className="size-4 mr-2" />
+          <FiShare2 className="size-4 mr-1" />
           Share
         </Button>
       )}
@@ -110,19 +106,29 @@ export function ShareButtons({
           variant="outline"
           size="default"
           onClick={() => openShareWindow(shareUrls.twitter)}
-          className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation"
+          className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation cursor-pointer"
         >
-          <FiTwitter className="size-4 mr-2" />
-          <span className="hidden md:inline">Twitter</span>
+          <FaXTwitter className="size-4 mr-1" />
+          <span className="hidden md:inline">X</span>
+        </Button>
+
+        <Button
+          variant="outline"
+          size="default"
+          onClick={() => openShareWindow(shareUrls.instagram)}
+          className="hover:bg-pink-50 hover:border-pink-200 dark:hover:bg-pink-950/20 min-h-[44px] touch-manipulation cursor-pointer"
+        >
+          <FiInstagram className="size-4 mr-1" />
+          <span className="hidden md:inline">Instagram</span>
         </Button>
 
         <Button
           variant="outline"
           size="default"
           onClick={() => openShareWindow(shareUrls.linkedin)}
-          className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation"
+          className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation cursor-pointer"
         >
-          <FiLinkedin className="size-4 mr-2" />
+          <FiLinkedin className="size-4 mr-1" />
           <span className="hidden md:inline">LinkedIn</span>
         </Button>
 
@@ -130,10 +136,20 @@ export function ShareButtons({
           variant="outline"
           size="default"
           onClick={() => openShareWindow(shareUrls.facebook)}
-          className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation"
+          className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation cursor-pointer"
         >
-          <FiFacebook className="size-4 mr-2" />
+          <FiFacebook className="size-4 mr-1" />
           <span className="hidden md:inline">Facebook</span>
+        </Button>
+
+        <Button
+          variant="outline"
+          size="default"
+          onClick={() => openShareWindow(shareUrls.threads)}
+          className="hover:bg-gray-50 hover:border-gray-200 dark:hover:bg-gray-950/20 min-h-[44px] touch-manipulation cursor-pointer"
+        >
+          <FaThreads className="size-4 mr-1" />
+          <span className="hidden md:inline">Threads</span>
         </Button>
       </div>
 
@@ -141,19 +157,19 @@ export function ShareButtons({
         variant="outline"
         size="default"
         onClick={handleCopyLink}
-        className={`transition-colors min-h-[44px] touch-manipulation w-full sm:w-auto ${copied
+        className={`transition-colors min-h-[44px] touch-manipulation w-full sm:w-auto cursor-pointer ${copied
           ? "bg-green-50 border-green-200 text-green-700 dark:bg-green-950/20 dark:border-green-800 dark:text-green-400"
           : "hover:bg-gray-50 dark:hover:bg-gray-800"
           }`}
       >
         {copied ? (
           <>
-            <FiCheck className="size-4 mr-2" />
+            <FiCheck className="size-4 mr-1" />
             Copied!
           </>
         ) : (
           <>
-            <FiLink className="size-4 mr-2" />
+            <FiLink className="size-4 mr-1" />
             Copy Link
           </>
         )}

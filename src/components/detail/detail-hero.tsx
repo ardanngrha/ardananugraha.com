@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { EnhancedProject } from '@/types/projects';
 import { EnhancedWriting } from '@/types/writings';
 import { HeroImageWithLoading } from './image-with-loading';
+import { SimpleTags } from './tag-list';
 
 interface DetailHeroProps {
   item: EnhancedProject | EnhancedWriting;
@@ -114,34 +115,46 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
 
         {/* Project Actions */}
         {isProject && projectData && (
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4" role="group" aria-label="Project links and actions">
-            {projectData.githubUrl && (
-              <Button asChild variant="default" size="default" className="min-h-[44px] touch-manipulation">
-                <a
-                  href={projectData.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3"
-                  aria-label={`View source code for ${frontmatter.title} on GitHub (opens in new tab)`}
-                >
-                  <FiGithub className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-                  <span className="font-medium">View Code</span>
-                </a>
-              </Button>
-            )}
-            {projectData.liveUrl && (
-              <Button asChild variant="outline" size="default" className="min-h-[44px] touch-manipulation">
-                <a
-                  href={projectData.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3"
-                  aria-label={`View live demo of ${frontmatter.title} (opens in new tab)`}
-                >
-                  <FiExternalLink className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-                  <span className="font-medium">Live Demo</span>
-                </a>
-              </Button>
+          <div>
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4" role="group" aria-label="Project links and actions">
+              {projectData.githubUrl && (
+                <Button asChild variant="default" size="default" className="min-h-[44px] touch-manipulation">
+                  <a
+                    href={projectData.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-6 py-3"
+                    aria-label={`View source code for ${frontmatter.title} on GitHub (opens in new tab)`}
+                  >
+                    <FiGithub className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                    <span className="font-medium">View Code</span>
+                  </a>
+                </Button>
+              )}
+              {projectData.liveUrl && (
+                <Button asChild variant="outline" size="default" className="min-h-[44px] touch-manipulation">
+                  <a
+                    href={projectData.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-6 py-3"
+                    aria-label={`View live demo of ${frontmatter.title} (opens in new tab)`}
+                  >
+                    <FiExternalLink className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                    <span className="font-medium">Live Demo</span>
+                  </a>
+                </Button>
+              )}
+            </div>
+
+            {/* Technologies for projects */}
+            {projectData.tags && projectData.tags.length > 0 && (
+              <div className="mt-6">
+                <SimpleTags
+                  tags={projectData.tags}
+                  className="pointer-events-none select-none"
+                />
+              </div>
             )}
           </div>
         )}

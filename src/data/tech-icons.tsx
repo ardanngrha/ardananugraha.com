@@ -2,7 +2,7 @@ import {
   FaJs, FaReact, FaNodeJs, FaPython, FaJava, FaDocker, FaGitAlt, FaGithub, FaAws, FaLinux, FaAndroid, FaSwift
 } from 'react-icons/fa';
 import {
-  SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion, SiFastapi
+  SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion, SiFastapi, SiBootstrap, SiJquery
 } from 'react-icons/si';
 import { VscAzure } from "react-icons/vsc";
 
@@ -35,7 +35,9 @@ const tech_icons = [
   { name: 'Notion', icon: <SiNotion className="text-black dark:text-white" /> },
   { name: 'Android', icon: <FaAndroid className="text-green-400" /> },
   { name: 'FastAPI', icon: <SiFastapi className="text-green-500" /> },
-  { name: 'Swift', icon: <FaSwift className="text-orange-500" /> }
+  { name: 'Swift', icon: <FaSwift className="text-orange-500" /> },
+  { name: 'Bootstrap', icon: <SiBootstrap className="text-purple-600" /> },
+  { name: 'jQuery', icon: <SiJquery className="text-blue-400" /> }
 ];
 
 export default tech_icons;

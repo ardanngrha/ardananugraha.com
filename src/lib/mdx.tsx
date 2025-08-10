@@ -2,27 +2,107 @@ import { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
+// Helper function to generate heading IDs
+const generateHeadingId = (children: React.ReactNode): string => {
+  const text = typeof children === 'string' ? children : '';
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .trim();
+};
+
 export const mdxComponents: MDXComponents = {
-  h1: ({ children, ...props }) => (
-    <h1 className="text-3xl font-bold tracking-tight mt-8 mb-4 first:mt-0" {...props}>
-      {children}
-    </h1>
-  ),
-  h2: ({ children, ...props }) => (
-    <h2 className="text-2xl font-bold tracking-tight mt-8 mb-4 pb-2 border-b border-border" {...props}>
-      {children}
-    </h2>
-  ),
-  h3: ({ children, ...props }) => (
-    <h3 className="text-xl font-semibold tracking-tight mt-6 mb-3" {...props}>
-      {children}
-    </h3>
-  ),
-  h4: ({ children, ...props }) => (
-    <h4 className="text-lg font-semibold tracking-tight mt-4 mb-2" {...props}>
-      {children}
-    </h4>
-  ),
+  h1: ({ children, ...props }) => {
+    const id = generateHeadingId(children);
+    return (
+      <h1
+        id={id}
+        className="text-3xl font-bold tracking-tight mt-8 mb-4 first:mt-0 scroll-mt-20"
+        {...props}
+      >
+        <a href={`#${id}`} className="heading-anchor" aria-label={`Link to ${children}`}>
+          #
+        </a>
+        {children}
+      </h1>
+    );
+  },
+  h2: ({ children, ...props }) => {
+    const id = generateHeadingId(children);
+    return (
+      <h2
+        id={id}
+        className="text-2xl font-bold tracking-tight mt-8 mb-4 pb-2 border-b border-border scroll-mt-20"
+        {...props}
+      >
+        <a href={`#${id}`} className="heading-anchor" aria-label={`Link to ${children}`}>
+          #
+        </a>
+        {children}
+      </h2>
+    );
+  },
+  h3: ({ children, ...props }) => {
+    const id = generateHeadingId(children);
+    return (
+      <h3
+        id={id}
+        className="text-xl font-semibold tracking-tight mt-6 mb-3 scroll-mt-20"
+        {...props}
+      >
+        <a href={`#${id}`} className="heading-anchor" aria-label={`Link to ${children}`}>
+          #
+        </a>
+        {children}
+      </h3>
+    );
+  },
+  h4: ({ children, ...props }) => {
+    const id = generateHeadingId(children);
+    return (
+      <h4
+        id={id}
+        className="text-lg font-semibold tracking-tight mt-4 mb-2 scroll-mt-20"
+        {...props}
+      >
+        <a href={`#${id}`} className="heading-anchor" aria-label={`Link to ${children}`}>
+          #
+        </a>
+        {children}
+      </h4>
+    );
+  },
+  h5: ({ children, ...props }) => {
+    const id = generateHeadingId(children);
+    return (
+      <h5
+        id={id}
+        className="text-base font-semibold tracking-tight mt-3 mb-1 scroll-mt-20"
+        {...props}
+      >
+        <a href={`#${id}`} className="heading-anchor" aria-label={`Link to ${children}`}>
+          #
+        </a>
+        {children}
+      </h5>
+    );
+  },
+  h6: ({ children, ...props }) => {
+    const id = generateHeadingId(children);
+    return (
+      <h6
+        id={id}
+        className="text-sm font-semibold tracking-tight mt-2 mb-1 scroll-mt-20"
+        {...props}
+      >
+        <a href={`#${id}`} className="heading-anchor" aria-label={`Link to ${children}`}>
+          #
+        </a>
+        {children}
+      </h6>
+    );
+  },
   p: ({ children, ...props }) => (
     <p className="text-base leading-7 mb-4 text-foreground" {...props}>
       {children}

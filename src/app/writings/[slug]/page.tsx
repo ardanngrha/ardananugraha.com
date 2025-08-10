@@ -12,6 +12,7 @@ import { MDXErrorBoundary, ErrorBoundary } from '@/components/detail/error-bound
 import { Metadata } from 'next';
 import { ReadingProgress } from '@/components/detail/reading-progress';
 import { mdxComponents } from '@/lib/mdx';
+import { TableOfContents } from '@/components/detail/table-of-contents';
 
 // This function tells Next.js which routes to pre-render at build time.
 export async function generateStaticParams() {
@@ -103,7 +104,7 @@ export default async function WritingPage({
             }}
           />
 
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-5xl">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl">
             {/* Navigation */}
             <ContentNavigation
               type="writing"
@@ -120,25 +121,38 @@ export default async function WritingPage({
               />
             </ErrorBoundary>
 
-            {/* Article Content */}
-            <div className="relative">
-              <article className="prose prose-neutral dark:prose-invert">
-                <MDXErrorBoundary
-                  contentType="writing"
-                  contentTitle={frontmatter.title}
-                >
-                  <MDXRemote
-                    source={writing.content}
-                    options={{
-                      mdxOptions: {
-                        remarkPlugins: [],
-                        rehypePlugins: [],
-                      },
-                    }}
-                    components={mdxComponents}
-                  />
-                </MDXErrorBoundary>
-              </article>
+            {/* Main Content */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 xl:gap-12">
+              {/* Article Content */}
+              <div className="lg:col-span-3 order-2 lg:order-1">
+                <article className="prose prose-lg max-w-none dark:prose-invert">
+                  <MDXErrorBoundary
+                    contentType="writing"
+                    contentTitle={frontmatter.title}
+                  >
+                    <MDXRemote
+                      source={writing.content}
+                      options={{
+                        mdxOptions: {
+                          remarkPlugins: [],
+                          rehypePlugins: [],
+                        },
+                      }}
+                      components={mdxComponents}
+                    />
+                  </MDXErrorBoundary>
+                </article>
+              </div>
+
+              {/* Sidebar - Table of Contents */}
+              <div className="lg:col-span-1 order-1 lg:order-2 hidden md:block">
+                <div className="lg:sticky lg:top-8 space-y-4 sm:space-y-6">
+                  {/* Table of Contents */}
+                  <div className="bg-muted/30 rounded-lg p-6 border border-border">
+                    <TableOfContents content={writing.content} />
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Share Section */}

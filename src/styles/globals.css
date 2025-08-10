@@ -436,6 +436,62 @@
     border-bottom: 1px solid hsl(var(--border));
   }
 
+  .writing-content ul,
+  .writing-content ol,
+  .project-content ul,
+  .project-content ol,
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5rem;
+  }
+
+  .writing-content li,
+  .project-content li,
+  .prose li {
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .writing-content ul li,
+  .project-content ul li,
+  .prose ul li {
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  .writing-content ol li,
+  .project-content ol li,
+  .prose ol li {
+    list-style-type: decimal;
+    list-style-position: outside;
+  }
+
+  /* Ensure nested lists maintain proper spacing */
+  .writing-content ul ul,
+  .writing-content ol ol,
+  .writing-content ul ol,
+  .writing-content ol ul,
+  .project-content ul ul,
+  .project-content ol ol,
+  .project-content ul ol,
+  .project-content ol ul,
+  .prose ul ul,
+  .prose ol ol,
+  .prose ul ol,
+  .prose ol ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+  .prose > :first-child {
+    margin-top: 0 !important;
+  }
+
+  .project-content > :first-child {
+    margin-top: 0 !important;
+  }
+
   /* Responsive typography */
   @media (max-width: 640px) {
     .writing-content {
