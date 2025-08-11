@@ -13,6 +13,7 @@ import { EnhancedProject } from '@/types/projects';
 import { EnhancedWriting } from '@/types/writings';
 import { HeroImageWithLoading } from './image-with-loading';
 import { SimpleTags } from './tag-list';
+import { ViewCounter } from './view-counter';
 
 interface DetailHeroProps {
   item: EnhancedProject | EnhancedWriting;
@@ -96,7 +97,7 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
           </div>
 
           {/* Read Time */}
-          {!isProject && (
+          {item.readTime && (
             <div className="flex items-center gap-1">
               <FiClock className="w-4 h-4" aria-hidden="true" />
               <span aria-label={`Estimated reading time: ${item.readTime} minutes`}>
@@ -104,6 +105,9 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
               </span>
             </div>
           )}
+
+          {/* Views */}
+          <ViewCounter slug={item.slug} type={type} />
 
           {/* Writing Category */}
           {!isProject && writingData?.category && (

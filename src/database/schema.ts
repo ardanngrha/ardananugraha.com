@@ -6,6 +6,7 @@ import {
   serial,
   integer,
   primaryKey,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -58,6 +59,20 @@ export const comments = pgTable("comments", {
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const contentViews = pgTable(
+  "content_views",
+  {
+    id: serial("id").primaryKey(),
+    type: text("type").notNull(),          // 'project' | 'writing'
+    slug: text("slug").notNull(),
+    count: integer("count").notNull().default(0),
+    lastViewedAt: timestamp("last_viewed_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    typeSlugIdx: uniqueIndex("content_views_type_slug_idx").on(t.type, t.slug),
+  })
+);
 
 export const usersRelations = relations(users, ({ many }) => ({
   comments: many(comments),
