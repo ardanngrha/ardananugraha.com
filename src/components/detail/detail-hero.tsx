@@ -100,14 +100,16 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
           {item.readTime && (
             <div className="flex items-center gap-1">
               <FiClock className="w-4 h-4" aria-hidden="true" />
-              <span aria-label={`Estimated reading time: ${item.readTime} minutes`}>
+              <span aria-label={`Estimated reading time: ${item.readTime} minutes`} className="text-xs sm:text-base">
                 {`${item.readTime} min read`}
               </span>
             </div>
           )}
 
           {/* Views */}
-          <ViewCounter slug={item.slug} type={type} />
+          <span className="text-xs sm:text-base">
+            <ViewCounter slug={item.slug} type={type} />
+          </span>
 
           {/* Writing Category */}
           {!isProject && writingData?.category && (

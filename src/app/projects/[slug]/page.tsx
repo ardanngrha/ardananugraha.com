@@ -79,7 +79,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       tags: project.frontmatter.tags,
       type: 'project',
       slug: project.slug,
-      readTime: `${project.readTime} min`,
+      readTime: `${project.readTime} min read`,
     });
 
     return (
@@ -95,96 +95,95 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           />
 
           {/* Navigation */}
-          <div className="container mx-auto px-4 py-6">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 max-w-7xl">
             <ContentNavigation
               type="project"
               title={project.frontmatter.title}
+              className="mb-6 sm:mb-8"
             />
-          </div>
 
-          {/* Hero Section */}
-          <div className="container mx-auto px-4 pb-8">
+            {/* Hero Section */}
             <ErrorBoundary>
               <DetailHero
                 item={project}
                 type="project"
-                className="mb-12"
+                className="mb-8 sm:mb-12"
               />
             </ErrorBoundary>
-          </div>
 
-          {/* Main Content */}
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16">
-            <div className="max-w-7xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 xl:gap-12">
-                {/* Main Article Content */}
-                <div className="lg:col-span-3 order-2 lg:order-1">
-                  <article className="prose prose-lg max-w-none dark:prose-invert project-content">
-                    <MDXErrorBoundary
-                      contentType="project"
-                      contentTitle={project.frontmatter.title}
-                    >
-                      <MDXRemote
-                        source={project.content}
-                        options={{
-                          mdxOptions: {
-                            remarkPlugins: [],
-                            rehypePlugins: [],
-                          },
-                        }}
-                        components={mdxComponents}
-                      />
-                    </MDXErrorBoundary>
-                  </article>
-                </div>
+            {/* Main Content */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+              <div className="max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 xl:gap-12">
+                  {/* Main Article Content */}
+                  <div className="lg:col-span-3 order-2 lg:order-1">
+                    <article className="prose prose-lg max-w-none dark:prose-invert project-content">
+                      <MDXErrorBoundary
+                        contentType="project"
+                        contentTitle={project.frontmatter.title}
+                      >
+                        <MDXRemote
+                          source={project.content}
+                          options={{
+                            mdxOptions: {
+                              remarkPlugins: [],
+                              rehypePlugins: [],
+                            },
+                          }}
+                          components={mdxComponents}
+                        />
+                      </MDXErrorBoundary>
+                    </article>
+                  </div>
 
-                {/* Sidebar - Table of Contents */}
-                <div className="lg:col-span-1 order-1 lg:order-2 hidden md:block">
-                  <div className="lg:sticky lg:top-8 space-y-4 sm:space-y-6">
-                    {/* Table of Contents */}
-                    <div className="bg-muted/30 rounded-lg p-6 border border-border">
-                      <TableOfContents content={project.content} />
+                  {/* Sidebar - Table of Contents */}
+                  <div className="lg:col-span-1 order-1 lg:order-2 hidden md:block">
+                    <div className="lg:sticky lg:top-8 space-y-4 sm:space-y-6">
+                      {/* Table of Contents */}
+                      <div className="bg-muted/30 rounded-lg p-6 border border-border">
+                        <TableOfContents content={project.content} />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Share Section */}
-          <div className="my-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
-            <ShareButtons
-              title={project.frontmatter.title}
-              url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.dev'}/projects/${project.slug}`}
-              description={project.frontmatter.summary}
-            />
-          </div>
-          {/* Previous/Next Navigation */}
-          <div className="container mx-auto px-4 pb-8">
-            <div className="max-w-4xl mx-auto">
-              <ErrorBoundary>
-                <PrevNextNavigation
-                  prev={navigation.prev}
-                  next={navigation.next}
-                  contentType="project"
-                />
-              </ErrorBoundary>
+            {/* Share Section */}
+            <div className="my-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
+              <ShareButtons
+                title={project.frontmatter.title}
+                url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.dev'}/projects/${project.slug}`}
+                description={project.frontmatter.summary}
+              />
             </div>
-          </div>
-
-          {/* Related Projects Section */}
-          {relatedProjects.length > 0 && (
-            <div className="container mx-auto px-4 pb-16">
-              <div className="max-w-6xl mx-auto">
+            {/* Previous/Next Navigation */}
+            <div className="container mx-auto px-4 pb-8">
+              <div className="max-w-4xl mx-auto">
                 <ErrorBoundary>
-                  <RelatedProjects
-                    projects={relatedProjects}
-                    className="border-t border-border pt-16"
+                  <PrevNextNavigation
+                    prev={navigation.prev}
+                    next={navigation.next}
+                    contentType="project"
                   />
                 </ErrorBoundary>
               </div>
             </div>
-          )}
+
+            {/* Related Projects Section */}
+            {relatedProjects.length > 0 && (
+              <div className="container mx-auto px-4 pb-16">
+                <div className="max-w-6xl mx-auto">
+                  <ErrorBoundary>
+                    <RelatedProjects
+                      projects={relatedProjects}
+                      className="border-t border-border pt-16"
+                    />
+                  </ErrorBoundary>
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Scroll to Top Button */}
           <ScrollToTop />
