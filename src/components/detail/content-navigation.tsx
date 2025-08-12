@@ -39,7 +39,7 @@ export function ContentNavigation({
   return (
     <nav
       className={cn(
-        'space-y-3 sm:space-y-4',
+        'space-y-3 sm:space-y-4 mt-1 md:mt-4',
         // Ensure the breadcrumb row can calculate shrinking space
         className
       )}

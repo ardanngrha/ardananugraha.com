@@ -17,5 +17,5 @@ export function ReadingProgress() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  return <Progress value={progress} className="fixed top-0 left-0 w-full h-1 rounded-none" />
+  return <Progress value={progress} className="fixed top-0 left-0 w-full h-1 rounded-none z-[9999]" />
 }
