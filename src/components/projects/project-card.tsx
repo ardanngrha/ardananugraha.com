@@ -35,7 +35,7 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
       initial={variant === 'page' ? 'hidden' : undefined}
       animate={variant === 'page' ? 'visible' : undefined}
     >
-      <article className="flex flex-col md:flex-row bg-card rounded-2xl overflow-hidden min-h-[240px] border hover:border-primary/30 transition-all duration-300">
+      <article className="flex flex-col md:flex-row rounded-2xl overflow-hidden min-h-[240px] transition-all duration-300">
         {/* Content Section - Left */}
         <div className="flex-1 p-5 md:p-6 flex flex-col justify-between">
           {/* Header */}
@@ -95,7 +95,7 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
                 <RippleButton
                   href={frontmatter.githubUrl}
                   variant="outline"
-                  className="px-3 py-2 text-xs flex items-center gap-1"
+                  className="px-3 py-2 text-xs flex items-center gap-1 custom-cursor"
                   aria-label="View source code"
                 >
                   <FaGithub className="h-3 w-3" />
@@ -106,7 +106,7 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
                 <RippleButton
                   href={frontmatter.liveUrl}
                   variant="outline"
-                  className="px-3 py-2 text-xs flex items-center gap-1"
+                  className="px-3 py-2 text-xs flex items-center gap-1 custom-cursor"
                   aria-label="View live demo"
                 >
                   <FaExternalLinkAlt className="h-3 w-3" />
@@ -134,7 +134,7 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
                 src={frontmatter.image}
                 alt={`Screenshot of ${frontmatter.title}`}
                 fill
-                className="object-cover"
+                className="object-cover rounded-2xl"
                 sizes="(max-width: 768px) 100vw, 35vw"
                 priority={variant === 'featured'}
               />

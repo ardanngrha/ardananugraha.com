@@ -21,9 +21,9 @@ const dropdownItems = [
     icon: <HiOutlineBookOpen className="w-4 h-4" />,
   },
   {
-    id: "attribution",
-    label: "Attribution",
-    href: "/attribution",
+    id: "credits",
+    label: "Credits",
+    href: "/credits",
     icon: <HiOutlineInformationCircle className="w-4 h-4" />,
   },
 ]
@@ -51,8 +51,7 @@ export function MoreDropdown({
         <motion.div
           className={cn(
             "relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 outline-none cursor-pointer",
-            // Fix: Show white/black text only when this tab is hovered, or when it's active and no other tab is hovered
-            (isHovered || (isActive && !isAnyTabHovered && !isOpen))
+            (isHovered || (isOpen && !isAnyTabHovered) || (isActive && !isAnyTabHovered))
               ? "text-white dark:text-black"
               : "text-muted-foreground hover:text-foreground",
             !showLabel && "px-3",

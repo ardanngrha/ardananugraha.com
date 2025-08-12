@@ -2,20 +2,20 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { AttributionBg } from "@/components/backgrounds/attribution-bg";
+import { CreditsBg } from "@/components/backgrounds/credits-bg";
 import { PageHeader } from "@/components/page-header";
 import inspirations from "@/data/attributions";
 
-export default function AttributionPage() {
+export default function CreditsPage() {
   return (
     <motion.div
       initial="hidden"
       animate="visible"
     >
       <PageHeader
-        title="Attribution"
+        title="Credits"
         description="This website was made possible by the inspiration and work of many talented individuals and projects."
-        background={<AttributionBg />}
+        background={<CreditsBg />}
       />
       <motion.div
         className="mx-auto flex flex-col gap-10 py-10"

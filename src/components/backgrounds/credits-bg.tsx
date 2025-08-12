@@ -3,7 +3,7 @@ import React from "react"
 /**
  * Animated SVG background for the Attribution page, showing interconnected nodes.
  */
-export const AttributionBg = () => (
+export const CreditsBg = () => (
   <svg
     className="h-full w-full"
     preserveAspectRatio="xMidYMid slice"

@@ -22,7 +22,7 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
     if (currentTab) {
       setActiveTab(currentTab?.id || null)
     } else {
-      const dropdownPaths = ['/guestbook', '/attribution']
+      const dropdownPaths = ['/guestbook', '/credits']
       if (dropdownPaths.includes(pathname)) {
         setActiveTab('more')
       } else {
