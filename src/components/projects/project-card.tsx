@@ -54,7 +54,7 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
 
             {/* Title */}
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-lg md:text-xl font-bold text-foreground leading-tight">
+              <h3 className="text-xl font-bold text-foreground leading-tight">
                 {frontmatter.title}
               </h3>
               {frontmatter.status === 'in-progress' && (
@@ -65,7 +65,7 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
             </div>
 
             {/* Description */}
-            <p className="text-muted-foreground leading-relaxed text-sm line-clamp-2">
+            <p className="text-muted-foreground leading-relaxed line-clamp-2">
               {frontmatter.summary}
             </p>
 

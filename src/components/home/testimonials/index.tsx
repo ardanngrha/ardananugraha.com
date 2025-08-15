@@ -95,7 +95,7 @@ export default function TestimonialsSection() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-3xl md:text-5xl flex items-center gap-3 font-bold mb-8 gradient-text">
+      <h2 className="text-3xl md:text-4xl flex items-center gap-3 font-bold mb-8 gradient-text">
         <FaFeatherAlt className="w-8 h-8" />
         Some Words
       </h2>

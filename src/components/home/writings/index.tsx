@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { FaFileSignature } from "react-icons/fa";
-import { WritingCard} from "@/components/writings/writing-card";
+import { WritingCard } from "@/components/writings/writing-card";
 import { EnhancedWriting } from "@/types/writings";
 import { RippleButton } from "@/components/ui/ripple-button";
 
@@ -31,7 +31,7 @@ export default function WritingsSection({
         viewport={{ once: true, amount: 0.5 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl md:text-5xl font-bold flex items-center gap-3 gradient-text pb-2">
+        <h2 className="text-3xl md:text-4xl font-bold flex items-center gap-3 gradient-text pb-2">
           <FaFileSignature className="w-8 h-8" />
           Featured Writings
         </h2>
