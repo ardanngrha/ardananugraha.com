@@ -156,7 +156,7 @@ export default function TestimonialsSection() {
               const direction = newIndex > getIndex(current) ? 1 : -1;
               setCurrent([index, direction]);
             }}
-            className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${index === getIndex(current)
+            className={`dot-button w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${index === getIndex(current)
               ? "bg-primary scale-125"
               : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
               }`}

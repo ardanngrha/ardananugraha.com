@@ -110,6 +110,7 @@ export default function FirstHighlight() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
+
             >
               Every project is an opportunity to push boundaries.
             </motion.p>
@@ -123,12 +124,8 @@ export default function FirstHighlight() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
-            {/* Active skill card */}
+            {/* Active skill card - removed key prop to prevent unmounting */}
             <motion.div
-              key={activeIdx}
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
               className={`relative p-6 rounded-2xl border border-border/50 backdrop-blur-sm ${points[activeIdx].gradient}`}
             >
               <div className="flex items-start gap-4">
@@ -146,17 +143,11 @@ export default function FirstHighlight() {
                 <div className="flex-1">
                   <motion.h3
                     className="font-bold text-lg text-foreground mb-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
                   >
                     {points[activeIdx].label}
                   </motion.h3>
                   <motion.p
                     className="text-muted-foreground"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.3 }}
                   >
                     {points[activeIdx].description}
                   </motion.p>

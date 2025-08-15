@@ -51,7 +51,16 @@ export default function Copyright() {
     // Update every second
     const interval = setInterval(updateTime, 1000)
 
-    return () => clearInterval(interval)
+    return () => {
+      clearInterval(interval)
+      // Stop any ongoing animations
+      seconds.stop()
+      minutes.stop()
+      hours.stop()
+      day.stop()
+      month.stop()
+      year.stop()
+    }
   }, [seconds, minutes, hours, day, month, year])
 
   if (!mounted) {

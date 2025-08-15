@@ -46,11 +46,11 @@
 }
 
 :root {
-    --font-inter: 'Inter', sans-serif;
-    --font-space-mono: 'Space Mono', monospace;
-    --font-oooh-baby: 'Oooh Baby', cursive;
-    --mouse-x: 50%;
-    --mouse-y: 50%;
+  --font-inter: 'Inter', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+  --font-oooh-baby: 'Oooh Baby', cursive;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -96,11 +96,6 @@
   --shadow-opacity: 0.3;
   --shadow-blur: 12px;
   --shadow-spread: 8px;
-
-  /* Expandable button colors */
-  --expandable-bg-hover: rgba(59, 130, 246, 0.05);
-  --expandable-border-hover: rgba(59, 130, 246, 0.2);
-  --expandable-scale: 1.4;
 
   /* Performance optimization values */
   --animation-duration-fast: 0.15s;
@@ -152,11 +147,6 @@
   --shadow-opacity: 0.4;
   --shadow-blur: 12px;
   --shadow-spread: 8px;
-
-  /* Expandable button colors - dark mode */
-  --expandable-bg-hover: rgba(6, 182, 212, 0.08);
-  --expandable-border-hover: rgba(6, 182, 212, 0.3);
-  --expandable-scale: 1.4;
 
   /* Performance optimization values remain the same */
   --animation-duration-fast: 0.15s;
@@ -244,6 +234,7 @@
 
   /* Comprehensive reduced motion support */
   @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
@@ -251,14 +242,19 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
+      transform: none !important;
+    }
+
+    .motion-preserve {
+      animation-duration: 0.01ms;
+      transition-duration: 0.01ms;
     }
 
     /* Disable all interactive effects for reduced motion */
     .ripple-effect,
     .ripple-container,
     .gradient-shadow,
-    .gradient-shadow-card,
-    .expandable-button {
+    .gradient-shadow-card {
       animation: none !important;
       transition: none !important;
       transform: none !important;
@@ -275,15 +271,10 @@
     }
 
     /* Provide alternative feedback for interactive elements */
-    .ripple-container:hover,
-    .ripple-container:focus-visible {
-      background-color: var(--ripple-primary);
-    }
-
-    .expandable-button:hover,
-    .expandable-button:focus-visible {
-      background-color: var(--expandable-bg-hover);
-      border-color: var(--expandable-border-hover);
+    .ripple-container:focus-visible,
+    .ripple-container:hover {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
     }
 
     .gradient-shadow-card:hover,
@@ -295,13 +286,19 @@
 
   /* Touch target improvements */
   @media (pointer: coarse) {
-    button,
-    [role="button"],
+
+    button:not(.dot-button),
+    [role="button"]:not(.dot-button),
     input[type="button"],
     input[type="submit"],
     input[type="reset"] {
       min-height: 44px;
       min-width: 44px;
+    }
+
+    .dot-button {
+      min-height: auto;
+      min-width: auto;
     }
   }
 }
@@ -345,6 +342,20 @@
     -webkit-text-fill-color: transparent;
     background-size: 100%;
     display: inline-block;
+  }
+
+  /* Mobile theme switching optimization */
+  .mobile-theme-switch * {
+    transition: none !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  /* Restore transitions after mobile theme switch */
+  .mobile-theme-switch-restore * {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.1s;
+    /* Faster restoration */
   }
 
   /* Enhanced reading experience for writing content */
@@ -482,13 +493,13 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     padding-left: 1.5rem;
-}
+  }
 
-  .prose > :first-child {
+  .prose> :first-child {
     margin-top: 0 !important;
   }
 
-  .project-content > :first-child {
+  .project-content> :first-child {
     margin-top: 0 !important;
   }
 
@@ -577,8 +588,14 @@
     animation-delay: 0.4s;
   }
 
-  .-rotate-15 { transform: rotate(-15deg); }
-  .rotate-15 { transform: rotate(15deg); }
+  .-rotate-15 {
+    transform: rotate(-15deg);
+  }
+
+  .rotate-15 {
+    transform: rotate(15deg);
+  }
+
   .custom-cursor {
     cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-arrow-up-right'><path d='M7 17L17 7' stroke='%23ffffff' stroke-width='4'/><path d='M7 7h10v10' stroke='%23ffffff' stroke-width='4'/><path d='M7 17L17 7' stroke='%23000000' stroke-width='2'/><path d='M7 7h10v10' stroke='%23000000' stroke-width='2'/></svg>"), auto;
   }
@@ -625,12 +642,10 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: radial-gradient(
-      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      var(--ripple-primary) 0%,
-      var(--ripple-secondary) 40%,
-      transparent 70%
-    );
+    background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        var(--ripple-primary) 0%,
+        var(--ripple-secondary) 40%,
+        transparent 70%);
     opacity: 0;
     transition: opacity var(--animation-duration-normal) var(--animation-easing);
     pointer-events: none;
@@ -660,12 +675,10 @@
     inset: calc(-1 * var(--shadow-spread));
     border-radius: inherit;
     padding: 2px;
-    background: linear-gradient(
-      135deg,
-      var(--shadow-gradient-start),
-      var(--shadow-gradient-mid),
-      var(--shadow-gradient-end)
-    );
+    background: linear-gradient(135deg,
+        var(--shadow-gradient-start),
+        var(--shadow-gradient-mid),
+        var(--shadow-gradient-end));
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: xor;
     opacity: 0;
@@ -683,49 +696,47 @@
     opacity: var(--shadow-opacity);
   }
 
- .gradient-shadow-card {
-  position: relative;
-  isolation: isolate;
-  /* Performance optimizations */
-  contain: layout style;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
+  .gradient-shadow-card {
+    position: relative;
+    isolation: isolate;
+    /* Performance optimizations */
+    contain: layout style;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 
-.gradient-shadow-card::before {
-  content: '';
-  position: absolute;
-  inset: calc(-1 * var(--shadow-spread));
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    var(--shadow-gradient-start),
-    var(--shadow-gradient-mid),
-    var(--shadow-gradient-end)
-  );
+  .gradient-shadow-card::before {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--shadow-spread));
+    border-radius: inherit;
+    background: linear-gradient(135deg,
+        var(--shadow-gradient-start),
+        var(--shadow-gradient-mid),
+        var(--shadow-gradient-end));
     mix-blend-mode: normal;
-  opacity: 0;
-  filter: blur(var(--shadow-blur));
-  transition: opacity var(--animation-duration-normal) var(--animation-easing);
-  pointer-events: none;
-  z-index: -1;
-  will-change: opacity;
-  /* Performance optimizations */
-  contain: layout style paint;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
+    opacity: 0;
+    filter: blur(var(--shadow-blur));
+    transition: opacity var(--animation-duration-normal) var(--animation-easing);
+    pointer-events: none;
+    z-index: -1;
+    will-change: opacity;
+    /* Performance optimizations */
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 
-.gradient-shadow-card:hover::before {
-  opacity: var(--shadow-opacity);
-}
+  .gradient-shadow-card:hover::before {
+    opacity: var(--shadow-opacity);
+  }
 
-/* Ensure inner content doesn't get gradient effects */
-.gradient-shadow-card > * {
-  position: relative;
-  z-index: 1;
-  background: inherit;
-}
+  /* Ensure inner content doesn't get gradient effects */
+  .gradient-shadow-card>* {
+    position: relative;
+    z-index: 1;
+    background: inherit;
+  }
 
   /* Intensity variants using CSS custom properties */
   .gradient-shadow-light {
@@ -760,6 +771,7 @@
 
   /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
+
     .gradient-shadow-card,
     .gradient-shadow-card::before {
       transition: none !important;
@@ -809,6 +821,30 @@
       transition-duration: 0.01ms;
     }
   }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  .theme-transition-overlay {
+    animation: ripple 1.2s var(--animation-easing) forwards;
+  }
+
+  /* Additional utility classes for interactive effects */
+  .ripple-click-effect {
+    animation: ripple-click var(--animation-duration-slow) var(--animation-easing) forwards;
+  }
+
+  /* Ensure proper stacking context for interactive effects */
+  .interactive-stack {
+    position: relative;
+    z-index: 1;
+  }
+
+  .interactive-stack::before,
+  .interactive-stack::after {
+    z-index: -1;
+  }
 }
 
 /* Custom keyframes for theme transition */
@@ -817,6 +853,7 @@
     transform: translate(-50%, -50%) scale(0);
     opacity: 1;
   }
+
   to {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0;
@@ -828,6 +865,7 @@
     transform: translate(-50%, -50%) scale(0);
     opacity: 0.6;
   }
+
   to {
     transform: translate(-50%, -50%) scale(4);
     opacity: 0;
@@ -841,6 +879,7 @@
     opacity: 0.8;
     background-color: var(--ripple-click);
   }
+
   to {
     transform: translate(-50%, -50%) scale(3);
     opacity: 0;
@@ -849,9 +888,12 @@
 }
 
 @keyframes wave {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scaleY(1);
   }
+
   50% {
     transform: scaleY(0.3);
   }
@@ -861,40 +903,17 @@
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
 }
 
-.animate-shimmer {
-  animation: shimmer 2s infinite;
-}
-
-.theme-transition-overlay {
-  animation: ripple 1.2s var(--animation-easing) forwards;
-}
-
-/* Additional utility classes for interactive effects */
-.ripple-click-effect {
-  animation: ripple-click var(--animation-duration-slow) var(--animation-easing) forwards;
-}
-
-/* Ensure proper stacking context for interactive effects */
-.interactive-stack {
-  position: relative;
-  z-index: 1;
-}
-
-.interactive-stack::before,
-.interactive-stack::after {
-  z-index: -1;
-}
-
 /* High performance mode for devices with limited resources */
 @media (prefers-reduced-data: reduce) {
+
   .gradient-shadow-card::before,
-  .gradient-shadow::before,
-  .expandable-button::before {
+  .gradient-shadow::before {
     filter: none !important;
     background: var(--shadow-gradient-start) !important;
     opacity: calc(var(--shadow-opacity) * 0.5) !important;
@@ -903,15 +922,11 @@
 
 /* Print styles - disable all interactive effects */
 @media print {
+
   .ripple-effect,
   .ripple-background,
   .gradient-shadow::before,
-  .gradient-shadow-card::before,
-  .expandable-button::before {
+  .gradient-shadow-card::before {
     display: none !important;
-  }
-
-  .expandable-button {
-    transform: none !important;
   }
 }

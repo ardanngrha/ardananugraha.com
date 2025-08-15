@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback, useRef, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { AnimatePresence } from 'motion/react'
 import { cn } from '@/lib/utils'
@@ -56,7 +56,6 @@ export function RippleButton({
   const [ripples, setRipples] = useState<RippleAnimation[]>([])
   const [isPressed, setIsPressed] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
-  const animationFrameRef = useRef<number | undefined>(undefined)
   const reducedMotion = prefersReducedMotion()
 
   // Base styles for the button with enhanced accessibility
@@ -120,21 +119,49 @@ export function RippleButton({
     }
   }, [disabled, elementRef, onClick, reducedMotion])
 
-  // Handle keyboard interactions
   const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLElement>) => {
     if (disabled) return
 
-    // Handle Enter and Space key presses
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault()
       setIsPressed(true)
 
-      // Trigger click for keyboard users
+      // Provide immediate visual feedback
+      if (!reducedMotion) {
+        // Create ripple effect for keyboard users at center
+        const element = elementRef.current
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          const centerX = rect.width / 2
+          const centerY = rect.height / 2
+
+          const ripplePosition = calculateRipplePosition(
+            centerX,
+            centerY,
+            rect,
+            { maxRadius: Math.max(rect.width, rect.height) / 2 }
+          )
+
+          // Add ripple for keyboard interaction
+          const newRipple: RippleAnimation = {
+            id: createRippleId(),
+            x: ripplePosition.x,
+            y: ripplePosition.y,
+            radius: ripplePosition.radius,
+            startTime: Date.now(),
+            duration: getSafeAnimationDuration(DEFAULT_RIPPLE_CONFIG.duration),
+          }
+
+          setRipples(prev => [...prev, newRipple])
+        }
+      }
+
+      // Trigger click action
       if (onClick) {
         onClick()
       }
     }
-  }, [disabled, onClick])
+  }, [disabled, onClick, reducedMotion, elementRef])
 
   const handleKeyUp = useCallback((event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
@@ -171,8 +198,11 @@ export function RippleButton({
   useEffect(() => {
     if (ripples.length === 0) return
 
+    let animationFrameId: number
+
     const animate = () => {
       const currentTime = Date.now()
+      let hasActiveRipples = false
 
       setRipples(prev => {
         const activeRipples = prev.filter(ripple => {
@@ -181,22 +211,26 @@ export function RippleButton({
             currentTime,
             ripple.duration
           )
+          if (!progress.isComplete) {
+            hasActiveRipples = true
+          }
           return !progress.isComplete
         })
 
         return activeRipples
       })
 
-      if (ripples.length > 0) {
-        animationFrameRef.current = requestAnimationFrame(animate)
+      // Only continue animation if there are active ripples
+      if (hasActiveRipples) {
+        animationFrameId = requestAnimationFrame(animate)
       }
     }
 
-    animationFrameRef.current = requestAnimationFrame(animate)
+    animationFrameId = requestAnimationFrame(animate)
 
     return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId)
       }
     }
   }, [ripples.length])

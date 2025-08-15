@@ -92,7 +92,17 @@ export function TechStack() {
                       filter: "grayscale(0)",
                       transition: { duration: 0.2 }
                     }}
-                    animate={isActive ? { scale: 1.2, y: -5, filter: "grayscale(0)" } : {}}
+                    animate={isActive ? {
+                      scale: 1.2,
+                      y: -5,
+                      filter: "grayscale(0)",
+                      transition: { duration: 0.2, ease: "easeOut" }
+                    } : {
+                      scale: 1,
+                      y: 0,
+                      filter: "grayscale(1)",
+                      transition: { duration: 0.2, ease: "easeOut" }
+                    }}
                     onTouchStart={() => {
                       setActiveIndex(index);
                       setIsHovering(true); // Stop auto-scroll

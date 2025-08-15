@@ -16,16 +16,12 @@ export function useNavbarScroll() {
       const footerRect = footer.getBoundingClientRect()
       const viewportHeight = window.innerHeight
 
-      // Add 100px buffer - navbar will hide when footer is 100px from viewport
       const buffer = 100
       const isFooterVisible = footerRect.top < (viewportHeight + buffer)
       setIsVisible(!isFooterVisible)
     }
 
-    // Initial check
-    handleScroll()
-
-    // Add scroll listener with throttling for performance
+    // passive listeners
     let ticking = false
     const throttledHandleScroll = () => {
       if (!ticking) {
@@ -37,12 +33,19 @@ export function useNavbarScroll() {
       }
     }
 
-    window.addEventListener('scroll', throttledHandleScroll, { passive: true })
+    // Use passive listener for better performance
+    window.addEventListener('scroll', throttledHandleScroll, {
+      passive: true,
+      capture: false
+    })
+
+    // Initial check
+    handleScroll()
 
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll)
     }
-  }, [])
+  }, [isMounted])
 
   return { isVisible, isMounted }
 }

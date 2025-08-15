@@ -26,12 +26,20 @@ export function ModeToggle({ variant = "default" }: ModeToggleProps) {
     if (isMobileDevice) {
       // On mobile, change theme instantly without transition
       document.body.style.transition = 'none';
+      document.documentElement.classList.add('mobile-theme-switch');
+
       const currentTheme = resolvedTheme || theme;
       setTheme(currentTheme === "dark" ? "light" : "dark");
-      // Restore transition after a short delay
+
       setTimeout(() => {
-        document.body.style.transition = '';
-      }, 100);
+        document.documentElement.classList.remove('mobile-theme-switch');
+        document.documentElement.classList.add('mobile-theme-switch-restore');
+
+        // Remove the restore class after transition completes
+        setTimeout(() => {
+          document.documentElement.classList.remove('mobile-theme-switch-restore');
+        }, 100);
+      }, 10);
     } else {
       // Ripple effect for desktop
       setIsAnimating(true);
