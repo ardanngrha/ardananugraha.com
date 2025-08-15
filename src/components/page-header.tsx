@@ -3,12 +3,9 @@
 import React from "react"
 import { motion } from "motion/react"
 import { PageHeaderProps } from "@/types/shared"
+import { containerVariants, itemVariants } from '@/lib/animation-configs';
 
-export const PageHeader: React.FC<PageHeaderProps> = ({
-  title,
-  description,
-  background,
-}) => {
+export function PageHeader({ title, description, background }: PageHeaderProps) {
   return (
     <section className="relative overflow-hidden border-b bg-background/50 pt-12 pb-16 md:pt-28 md:pb-24">
       {/* Background SVG container */}
@@ -18,17 +15,23 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
       {/* Content */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
         className="container relative z-10 mx-auto px-4 text-center"
+        variants={containerVariants.hero}
+        initial="hidden"
+        animate="visible"
       >
-        <h1 className="text-4xl font-bold tracking-tight md:text-6xl pb-2 gradient-text">
+        <motion.h1
+          className="mx-auto max-w-4xl pb-2 text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl gradient-text"
+          variants={itemVariants.text}
+        >
           {title}
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground md:text-xl">
+        </motion.h1>
+        <motion.p
+          className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground md:text-xl"
+          variants={itemVariants.text}
+        >
           {description}
-        </p>
+        </motion.p>
       </motion.div>
     </section>
   )

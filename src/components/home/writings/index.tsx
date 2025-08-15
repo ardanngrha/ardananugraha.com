@@ -1,29 +1,16 @@
 import { motion } from "motion/react";
 import { FaFileSignature } from "react-icons/fa";
 import { WritingCard } from "@/components/writings/writing-card";
-import { EnhancedWriting } from "@/types/writings";
+import { WritingsSectionProps } from "@/types/writings";
 import { RippleButton } from "@/components/ui/ripple-button";
+import { containerVariants } from "@/lib/animation-configs";
 
-interface WritingsSectionProps {
-  writings: EnhancedWriting[];
-  loading: boolean;
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
 export default function WritingsSection({
   writings,
   loading,
 }: WritingsSectionProps) {
   return (
-    <section className="py-16">
+    <motion.section className="py-16">
       <motion.div
         className="flex justify-center mb-8"
         initial={{ opacity: 0, y: -20 }}
@@ -74,6 +61,6 @@ export default function WritingsSection({
           Read All My Writings
         </RippleButton>
       </div>
-    </section>
+    </motion.section>
   );
 }

@@ -7,60 +7,20 @@ import { ExperienceTimeline } from "@/components/about/experiences";
 import { TechStack } from "@/components/about/tech-stack";
 import { FavStack } from "@/components/about/fav-stack";
 import { AboutImage } from "@/components/about/images";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const sectionVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-    scale: 0.98
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
-    },
-  },
-};
-
-const textVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 120,
-      damping: 15,
-    },
-  },
-};
+import {
+  pageVariants,
+  containerVariants,
+  itemVariants
+} from '@/lib/animation-configs';
 
 export default function AboutPage() {
   return (
     <motion.div
       className="min-h-screen"
+      variants={pageVariants.enter}
       initial="hidden"
       animate="visible"
-      key="about-page" // Key ensures animation runs on navigation
+      key="about-page"
     >
       <PageHeader
         title="About Me"
@@ -70,25 +30,25 @@ export default function AboutPage() {
 
       <motion.div
         className="container mx-auto px-4 py-16"
-        variants={containerVariants}
+        variants={containerVariants.basic}
       >
         {/* Introduction Section */}
         <motion.div
           className="max-w-4xl mx-auto"
-          variants={sectionVariants}
+          variants={itemVariants.section}
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
-            <motion.div variants={textVariants}>
+            <motion.div variants={itemVariants.text}>
               <motion.div className="space-y-4 leading-relaxed">
-                <motion.p variants={textVariants} className="font-semibold">
+                <motion.p variants={itemVariants.text} className="font-semibold">
                   Hi There! Ardan here 👋🏻
                 </motion.p>
-                <motion.p variants={textVariants} className="text-muted-foreground">
+                <motion.p variants={itemVariants.text} className="text-muted-foreground">
                   I&apos;m a software engineer who loves building cool things with code.
                   I started coding out of curiosity and now I spend my time creating
                   applications that people actually want to use.
                 </motion.p>
-                <motion.p variants={textVariants} className="text-muted-foreground">
+                <motion.p variants={itemVariants.text} className="text-muted-foreground">
                   My approach to development is simple: write clean, maintainable
                   code, prioritize user experience, and never stop learning. Every
                   project is an opportunity to grow and create something that can
@@ -97,9 +57,9 @@ export default function AboutPage() {
               </motion.div>
               <motion.div
                 className="space-y-4 mt-6"
-                variants={textVariants}
+                variants={itemVariants.text}
               >
-                <motion.p variants={textVariants}>
+                <motion.p variants={itemVariants.text}>
                   Here are my current favorites tech stack:
                 </motion.p>
                 <FavStack />
@@ -108,7 +68,7 @@ export default function AboutPage() {
 
             <motion.div
               className="flex justify-center"
-              variants={sectionVariants}
+              variants={itemVariants.section}
             >
               <AboutImage />
             </motion.div>
@@ -118,11 +78,11 @@ export default function AboutPage() {
         {/* Experiences Section */}
         <motion.div
           className="my-16"
-          variants={sectionVariants}
+          variants={itemVariants.section}
         >
           <motion.h2
             className="text-3xl font-bold text-center mb-12"
-            variants={textVariants}
+            variants={itemVariants.text}
           >
             My Experiences
           </motion.h2>
@@ -132,11 +92,11 @@ export default function AboutPage() {
         {/* Tech Stack Section */}
         <motion.div
           className="my-16"
-          variants={sectionVariants}
+          variants={itemVariants.section}
         >
           <motion.h2
             className="text-3xl font-bold text-center mb-12"
-            variants={textVariants}
+            variants={itemVariants.text}
           >
             Technologies I Work With
           </motion.h2>

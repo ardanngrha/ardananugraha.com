@@ -19,3 +19,13 @@ export interface EnhancedWriting extends WritingContentItem {
   content: string;
   readTime: number;
 }
+
+export interface WritingCardProps {
+  writing: EnhancedWriting;
+  variant?: 'featured' | 'page';
+}
+
+export interface WritingsSectionProps {
+  writings: EnhancedWriting[];
+  loading: boolean;
+}

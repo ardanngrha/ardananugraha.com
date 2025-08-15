@@ -4,48 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
 import { formatRelativeDate, isRecent } from "@/lib/utils";
-import { EnhancedWriting } from "@/types/writings";
+import { WritingCardProps } from "@/types/writings";
 import { MdAccessTime } from "react-icons/md";
-
-interface WritingCardProps {
-  writing: EnhancedWriting;
-  variant?: 'featured' | 'page';
-}
-
-const cardVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 120,
-      damping: 15,
-      duration: 0.4
-    }
-  },
-  hover: {
-    y: -5,
-    scale: 1.02,
-    boxShadow: "0px 10px 30px -5px rgba(0, 0, 0, 0.3)",
-    transition: {
-      type: "spring" as const,
-      stiffness: 300,
-      damping: 20
-    },
-  }
-};
-
-const imageVariants = {
-  hover: {
-    scale: 1.05,
-    transition: {
-      type: "spring" as const,
-      stiffness: 300,
-      damping: 15
-    }
-  }
-};
+import { itemVariants, hoverVariants } from "@/lib/animation-configs";
 
 export function WritingCard({ writing, variant = 'featured' }: WritingCardProps) {
   const { slug, frontmatter, readTime } = writing;
@@ -53,10 +14,10 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
 
   return (
     <motion.div
-      variants={cardVariants}
+      variants={itemVariants.writingCard}
       initial={variant === 'page' ? 'hidden' : undefined}
       animate={variant === 'page' ? 'visible' : undefined}
-      whileHover="hover"
+      whileHover={hoverVariants.liftScale}
       className="rounded-2xl"
       layout
     >
@@ -66,7 +27,7 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
           {/* Image block */}
           <motion.div
             className="col-span-12 md:col-span-4"
-            variants={imageVariants}
+            variants={hoverVariants.imageScale}
           >
             <div className="relative aspect-[16/11] rounded-lg overflow-hidden mb-4 md:mb-0">
               {frontmatter.image ? (

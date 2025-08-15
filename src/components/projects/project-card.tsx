@@ -1,36 +1,19 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ProjectContentItem } from "@/types/projects";
+import { ProjectCardProps } from "@/types/projects";
 import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt, FaArrowRight } from "react-icons/fa";
 import { RippleButton } from "@/components/ui/ripple-button";
 import { getTechIcon } from "@/lib/tech-icons";
-
-interface ProjectCardProps {
-  project: ProjectContentItem;
-  variant?: 'featured' | 'page';
-}
-
-const cardVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      type: "spring" as const,
-      stiffness: 120,
-      damping: 14,
-    },
-  },
-};
+import { itemVariants } from '@/lib/animation-configs';
 
 export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps) {
   const { slug, frontmatter } = project;
 
   return (
     <motion.div
-      variants={cardVariants}
+      variants={itemVariants.projectCard}
       className="w-full"
       initial={variant === 'page' ? 'hidden' : undefined}
       animate={variant === 'page' ? 'visible' : undefined}

@@ -1,30 +1,16 @@
 import { motion } from "motion/react";
 import { CgCodeSlash } from "react-icons/cg";
 import { ProjectCard } from "@/components/projects/project-card";
-import { ProjectContentItem } from "@/types/projects";
+import { ProjectsSectionProps } from "@/types/projects";
 import { RippleButton } from "@/components/ui/ripple-button";
-
-interface ProjectsSectionProps {
-  projects: ProjectContentItem[];
-  loading: boolean;
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+import { containerVariants } from "@/lib/animation-configs";
 
 export default function ProjectsSection({
   projects,
   loading,
 }: ProjectsSectionProps) {
   return (
-    <section className="py-16">
+    <motion.section className="py-16">
       <motion.div
         className="flex justify-center mb-8"
         initial={{ opacity: 0, y: -20 }}
@@ -88,6 +74,6 @@ export default function ProjectsSection({
           View All My Projects
         </RippleButton>
       </div>
-    </section>
+    </motion.section>
   );
 }
