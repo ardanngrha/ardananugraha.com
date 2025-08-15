@@ -138,7 +138,7 @@ export default function AboutPage() {
             className="text-3xl font-bold text-center mb-12"
             variants={textVariants}
           >
-            Tech and Tools I Use
+            Technologies I Work With
           </motion.h2>
           <TechStack />
         </motion.div>

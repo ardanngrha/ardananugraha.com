@@ -37,7 +37,7 @@ export default async function ProjectsPage() {
     <div>
       <PageHeader
         title="Projects"
-        description="Here are some of the projects I'm proud of. They range from web development to data science."
+        description="Here are some of the projects I'm proud of. They range from software engineering to machine learning."
         background={<ProjectsBg />}
       />
       <ProjectsClientPage projects={allProjects} />

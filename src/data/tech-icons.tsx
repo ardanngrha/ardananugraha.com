@@ -5,7 +5,7 @@ import {
   SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion, SiFastapi, SiBootstrap, SiJquery,
   SiFigma
 } from 'react-icons/si';
-import { VscAzure } from "react-icons/vsc";
+import { VscAzure, VscVscode } from "react-icons/vsc";
 
 const tech_icons = [
   { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
@@ -24,7 +24,7 @@ const tech_icons = [
   { name: 'HTML', icon: <SiHtml5 className="text-orange-600" /> },
   { name: 'CSS', icon: <SiCss3 className="text-blue-600" /> },
   { name: 'Git', icon: <FaGitAlt className="text-orange-500" /> },
-  { name: 'Bash Scripting', icon: <SiGnubash className="text-green-700" /> },
+  { name: 'Bash', icon: <SiGnubash className="text-green-700" /> },
   { name: 'Docker', icon: <FaDocker className="text-blue-500" /> },
   { name: 'Linux', icon: <FaLinux className="text-yellow-500" /> },
   { name: 'GitHub Actions', icon: <FaGithub className="text-gray-800 dark:text-gray-200" /> },
@@ -39,7 +39,8 @@ const tech_icons = [
   { name: 'Swift', icon: <FaSwift className="text-orange-500" /> },
   { name: 'Bootstrap', icon: <SiBootstrap className="text-purple-600" /> },
   { name: 'jQuery', icon: <SiJquery className="text-blue-400" /> },
-  { name: 'Figma', icon: <SiFigma className="text-purple-500" /> }
+  { name: 'Figma', icon: <SiFigma className="text-purple-500" /> },
+  { name: 'VSCode', icon: <VscVscode className="text-blue-500" /> }
 ];
 
 export default tech_icons;

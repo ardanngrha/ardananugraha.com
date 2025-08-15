@@ -41,11 +41,10 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
           {/* Header */}
           <div className="space-y-3">
             {/* Status Badge - Only show if not completed */}
-            {frontmatter.status && frontmatter.status !== 'completed' && (
+            {frontmatter.status && frontmatter.status !== 'completed' && frontmatter.status !== 'in-progress' && (
               <div className="flex items-center">
                 <span className={`
                   px-3 py-1 rounded-full text-xs font-medium capitalize
-                  ${frontmatter.status === 'in-progress' ? 'bg-blue-500/10 text-blue-500' : ''}
                   ${frontmatter.status === 'planned' ? 'bg-gray-500/10 text-gray-500' : ''}
                 `}>
                   {frontmatter.status.replace('-', ' ')}
@@ -54,9 +53,16 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
             )}
 
             {/* Title */}
-            <h3 className="text-lg md:text-xl font-bold text-foreground leading-tight">
-              {frontmatter.title}
-            </h3>
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-lg md:text-xl font-bold text-foreground leading-tight">
+                {frontmatter.title}
+              </h3>
+              {frontmatter.status === 'in-progress' && (
+                <span className="px-3 py-1 rounded-full text-xs font-medium capitalize bg-orange-500/10 text-orange-500 border border-orange-500/20">
+                  in progress
+                </span>
+              )}
+            </div>
 
             {/* Description */}
             <p className="text-muted-foreground leading-relaxed text-sm line-clamp-2">

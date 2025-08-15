@@ -11,7 +11,17 @@ import { useEffect, useRef, useState } from "react";
 import tech_icons from "@/data/tech-icons";
 
 export function TechStack() {
-  const duplicatedTools = [...tech_icons, ...tech_icons];
+  const displayedTechs = [
+    'JavaScript', 'TypeScript', 'Python', 'Java', 'React', 'Next.js',
+    'Node.js', 'Express', 'Spring Boot', 'PostgreSQL', 'MongoDB',
+    'Docker', 'AWS', 'GCP', 'Git', 'TensorFlow', 'Linux', 'Redis', 'HTML', 'CSS', 'Bash',
+    'Discord', 'Notion', 'FastAPI', 'Bootstrap', 'VSCode'
+  ];
+
+  // Filter tech_icons to only show selected technologies
+  const filteredTools = tech_icons.filter(tool => displayedTechs.includes(tool.name));
+  const duplicatedTools = [...filteredTools, ...filteredTools];
+
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentWidth, setContentWidth] = useState(0);

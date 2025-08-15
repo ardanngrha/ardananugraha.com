@@ -17,12 +17,14 @@ const dropdownItems = [
   {
     id: "guestbook",
     label: "Guest Book",
+    description: "Leave a message or sign my guest book",
     href: "/guestbook",
     icon: <HiOutlineBookOpen className="w-4 h-4" />,
   },
   {
     id: "credits",
     label: "Credits",
+    description: "Acknowledgments and attributions",
     href: "/credits",
     icon: <HiOutlineInformationCircle className="w-4 h-4" />,
   },
@@ -36,7 +38,7 @@ export function MoreDropdown({
   onOpenChangeAction,
   showLabel = true,
   className,
-  isAnyTabHovered = false, // Add this new prop
+  isAnyTabHovered = false,
 }: MoreDropdownProps) {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -83,7 +85,7 @@ export function MoreDropdown({
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
-        className="w-48 mt-2"
+        className="w-56 mt-2"
         sideOffset={5}
         onCloseAutoFocus={(e) => e.preventDefault()}
       >
@@ -97,10 +99,19 @@ export function MoreDropdown({
             <DropdownMenuItem key={item.id} asChild>
               <Link
                 href={item.href}
-                className="flex items-center gap-2 w-full px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
+                className="group flex items-start gap-3 w-full px-3 py-3 hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
               >
-                {item.icon}
-                {item.label}
+                <div className="flex-shrink-0 mt-0.5">
+                  {item.icon}
+                </div>
+                <div className="flex flex-col gap-1 min-w-0">
+                  <span className="text-sm font-medium group-hover:underline">
+                    {item.label}
+                  </span>
+                  <span className="text-xs text-muted-foreground leading-tight">
+                    {item.description}
+                  </span>
+                </div>
               </Link>
             </DropdownMenuItem>
           ))}

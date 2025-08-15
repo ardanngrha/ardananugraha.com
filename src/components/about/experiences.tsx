@@ -22,7 +22,7 @@ export function ExperienceTimeline() {
               <h3 className="font-bold">{exp.role}</h3>
               <div className="flex flex-row items-center gap-2">
                 <Image src={exp.icon} alt={`${exp.company} logo`} width={16} height={16} className="h-4 w-4 object-contain rounded" />
-                <Link href={exp.website} target="_blank" rel="noopener noreferrer" className="text-primary underline text-sm">
+                <Link href={exp.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm custom-cursor">
                   {exp.company}
                 </Link>
               </div>
