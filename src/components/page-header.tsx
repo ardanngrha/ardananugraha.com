@@ -11,7 +11,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 }) => {
   return (
     <section className="relative overflow-hidden border-b bg-background/50 pt-12 pb-16 md:pt-28 md:pb-24">
-      {/* Background SVG container */}
+      {/* Background SVG */}
       <div className="absolute inset-0 z-0 text-foreground/5 opacit-50 dark:text-foreground/10">
         {background}
       </div>
