@@ -86,7 +86,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex flex-col gap-1 z-10 w-full max-w-2xl"
+        className="flex flex-col gap-1 z-10 w-full max-w-xl"
       >
         {/* Profile Card */}
         <motion.p
