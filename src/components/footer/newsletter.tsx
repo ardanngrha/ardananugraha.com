@@ -9,7 +9,7 @@ export default function Newsletter() {
 
   return (
     <div className="flex flex-col items-center md:items-start gap-2">
-      <h3 className="font-semibold text-lg">Stay Updated</h3>
+      <h3 className="font-semibold text-lg">Newsletter</h3>
       <p className="text-sm text-muted-foreground text-center md:text-left">
         Subscribe to my newsletter for the latest articles and project updates.
       </p>

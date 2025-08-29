@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { useEffect, useState, useMemo } from "react";
-import { FaCode, FaBrain, FaChalkboardTeacher, FaCloud } from "react-icons/fa";
+import { FaCode, FaBrain, FaChalkboardTeacher } from "react-icons/fa";
 
 export default function FirstHighlight() {
   const [progress, setProgress] = useState(0);
@@ -29,14 +29,7 @@ export default function FirstHighlight() {
       color: "from-pink-400 to-red-400",
       description: "Guiding next generation",
       gradient: "bg-gradient-to-r from-pink-500/20 to-red-400/20",
-    },
-    {
-      label: "Cloud Computing",
-      icon: FaCloud,
-      color: "from-cyan-400 to-blue-400",
-      description: "Scaling in the cloud",
-      gradient: "bg-gradient-to-r from-cyan-500/20 to-blue-400/20",
-    },
+    }
   ], []);
 
   useEffect(() => {
@@ -60,19 +53,17 @@ export default function FirstHighlight() {
   }, []);
 
   useEffect(() => {
-    const tolerance = 0.05;
-    let newActiveIdx = activeIdx;
+    // dynamic segment calculation based on number of points
+    const count = points.length;
+    const segment = 1 / count;
+    const idx = Math.round(progress / segment) % count;
 
-    if (progress >= 0 - tolerance && progress <= 0 + tolerance) newActiveIdx = 0;
-    else if (progress >= 0.25 - tolerance && progress <= 0.25 + tolerance) newActiveIdx = 1;
-    else if (progress >= 0.5 - tolerance && progress <= 0.5 + tolerance) newActiveIdx = 2;
-    else if (progress >= 0.75 - tolerance && progress <= 0.75 + tolerance) newActiveIdx = 3;
-
-    if (newActiveIdx !== activeIdx) {
-      setActiveIdx(newActiveIdx);
+    if (idx !== activeIdx) {
+      setActiveIdx(idx);
     }
-  }, [progress, activeIdx]);
+  }, [progress, points.length, activeIdx]);
 
+  // ...existing code...
   return (
     <section className="py-16 px-4 overflow-hidden">
       <div className="container mx-auto">
@@ -182,3 +173,4 @@ export default function FirstHighlight() {
     </section>
   );
 }
+// ...existing

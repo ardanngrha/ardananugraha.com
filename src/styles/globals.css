@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,11 +46,11 @@
 }
 
 :root {
-    --font-inter: 'Inter', sans-serif;
-    --font-space-mono: 'Space Mono', monospace;
-    --font-oooh-baby: 'Oooh Baby', cursive;
-    --mouse-x: 50%;
-    --mouse-y: 50%;
+  --font-inter: 'Inter', sans-serif;
+  --font-space-mono: 'Space Mono', monospace;
+  --font-oooh-baby: 'Oooh Baby', cursive;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -83,7 +83,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --gradient-from: #0192C6;
+  --gradient-from: #0192c6;
   --gradient-to: #004499;
 
   /* Interactive effects colors - Light mode */
@@ -176,7 +176,8 @@
 
   body {
     @apply bg-background text-foreground;
-    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     /* font-family: 'Satoshi-Regular'; */
   }
 
@@ -296,10 +297,10 @@
   /* Touch target improvements */
   @media (pointer: coarse) {
     button,
-    [role="button"],
-    input[type="button"],
-    input[type="submit"],
-    input[type="reset"] {
+    [role='button'],
+    input[type='button'],
+    input[type='submit'],
+    input[type='reset'] {
       min-height: 44px;
       min-width: 44px;
     }
@@ -339,7 +340,11 @@
   }
 
   .gradient-text {
-    background: linear-gradient(90deg, var(--gradient-from) 0%, var(--gradient-to) 100%);
+    background: linear-gradient(
+      90deg,
+      var(--gradient-from) 0%,
+      var(--gradient-to) 100%
+    );
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -482,7 +487,7 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     padding-left: 1.5rem;
-}
+  }
 
   .prose > :first-child {
     margin-top: 0 !important;
@@ -577,10 +582,16 @@
     animation-delay: 0.4s;
   }
 
-  .-rotate-15 { transform: rotate(-15deg); }
-  .rotate-15 { transform: rotate(15deg); }
+  .-rotate-15 {
+    transform: rotate(-15deg);
+  }
+  .rotate-15 {
+    transform: rotate(15deg);
+  }
+
   .custom-cursor {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-arrow-up-right'><path d='M7 17L17 7' stroke='%23ffffff' stroke-width='4'/><path d='M7 7h10v10' stroke='%23ffffff' stroke-width='4'/><path d='M7 17L17 7' stroke='%23000000' stroke-width='2'/><path d='M7 7h10v10' stroke='%23000000' stroke-width='2'/></svg>"), auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-arrow-up-right'><path d='M7 17L17 7' stroke='%23ffffff' stroke-width='4'/><path d='M7 7h10v10' stroke='%23ffffff' stroke-width='4'/><path d='M7 17L17 7' stroke='%23000000' stroke-width='2'/><path d='M7 7h10v10' stroke='%23000000' stroke-width='2'/></svg>"),
+      auto;
   }
 
   /* Scrollbar hiding utility */
@@ -613,7 +624,8 @@
     border-radius: 50%;
     pointer-events: none;
     will-change: transform, opacity;
-    animation: ripple-expand var(--animation-duration-slow) var(--animation-easing) forwards;
+    animation: ripple-expand var(--animation-duration-slow)
+      var(--animation-easing) forwards;
     /* Performance optimizations */
     contain: layout style paint;
     transform: translateZ(0);
@@ -647,7 +659,8 @@
   .gradient-shadow {
     position: relative;
     will-change: box-shadow;
-    transition: box-shadow var(--animation-duration-normal) var(--animation-easing);
+    transition: box-shadow var(--animation-duration-normal)
+      var(--animation-easing);
     /* Performance optimizations */
     contain: layout style;
     transform: translateZ(0);
@@ -683,49 +696,49 @@
     opacity: var(--shadow-opacity);
   }
 
- .gradient-shadow-card {
-  position: relative;
-  isolation: isolate;
-  /* Performance optimizations */
-  contain: layout style;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
+  .gradient-shadow-card {
+    position: relative;
+    isolation: isolate;
+    /* Performance optimizations */
+    contain: layout style;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 
-.gradient-shadow-card::before {
-  content: '';
-  position: absolute;
-  inset: calc(-1 * var(--shadow-spread));
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    var(--shadow-gradient-start),
-    var(--shadow-gradient-mid),
-    var(--shadow-gradient-end)
-  );
+  .gradient-shadow-card::before {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--shadow-spread));
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--shadow-gradient-start),
+      var(--shadow-gradient-mid),
+      var(--shadow-gradient-end)
+    );
     mix-blend-mode: normal;
-  opacity: 0;
-  filter: blur(var(--shadow-blur));
-  transition: opacity var(--animation-duration-normal) var(--animation-easing);
-  pointer-events: none;
-  z-index: -1;
-  will-change: opacity;
-  /* Performance optimizations */
-  contain: layout style paint;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
+    opacity: 0;
+    filter: blur(var(--shadow-blur));
+    transition: opacity var(--animation-duration-normal) var(--animation-easing);
+    pointer-events: none;
+    z-index: -1;
+    will-change: opacity;
+    /* Performance optimizations */
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
 
-.gradient-shadow-card:hover::before {
-  opacity: var(--shadow-opacity);
-}
+  .gradient-shadow-card:hover::before {
+    opacity: var(--shadow-opacity);
+  }
 
-/* Ensure inner content doesn't get gradient effects */
-.gradient-shadow-card > * {
-  position: relative;
-  z-index: 1;
-  background: inherit;
-}
+  /* Ensure inner content doesn't get gradient effects */
+  .gradient-shadow-card > * {
+    position: relative;
+    z-index: 1;
+    background: inherit;
+  }
 
   /* Intensity variants using CSS custom properties */
   .gradient-shadow-light {
@@ -789,8 +802,8 @@
 
   /* Optimized transitions for theme switching */
   .theme-transition {
-    transition:
-      background-color var(--animation-duration-normal) var(--animation-easing),
+    transition: background-color var(--animation-duration-normal)
+        var(--animation-easing),
       border-color var(--animation-duration-normal) var(--animation-easing),
       color var(--animation-duration-normal) var(--animation-easing),
       box-shadow var(--animation-duration-normal) var(--animation-easing);
@@ -849,7 +862,8 @@
 }
 
 @keyframes wave {
-  0%, 100% {
+  0%,
+  100% {
     transform: scaleY(1);
   }
   50% {
@@ -876,7 +890,8 @@
 
 /* Additional utility classes for interactive effects */
 .ripple-click-effect {
-  animation: ripple-click var(--animation-duration-slow) var(--animation-easing) forwards;
+  animation: ripple-click var(--animation-duration-slow) var(--animation-easing)
+    forwards;
 }
 
 /* Ensure proper stacking context for interactive effects */

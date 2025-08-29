@@ -98,7 +98,7 @@ export default function NowPlaying() {
       <p className="text-sm text-muted-foreground italic">&quot;stay foolish, stay hungry&quot;</p>
 
       {currentTrack ? (
-        <Link className="flex items-center gap-2 custom-cursor" href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer">
+        <Link className="flex items-center gap-2 custom-cursor mt-2" href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer">
           <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
             {currentTrack.albumImageUrl ? (
               <Image
@@ -112,22 +112,22 @@ export default function NowPlaying() {
               <span className="text-muted-foreground text-xs">♪</span>
             )}
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="font-medium text-sm truncate">{currentTrack.name}</p>
-            <p className="text-muted-foreground text-xs truncate">{currentTrack.artist}</p>
-            <div className="flex items-center gap-1">
-              <div className={`w-1 h-1 rounded-full ${currentTrack.isPlaying ? 'bg-green-500' : 'bg-muted-foreground'}`} />
-              <span className="text-xs text-muted-foreground">
-                {currentTrack.isPlaying ? 'Now Playing' : 'Last Played'}
-              </span>
-            </div>
+
+          <div className="flex-1 min-w-0 ml-1">
+            <p className="font-medium text-sm whitespace-nowrap truncate md:max-w-[200px]">
+              {currentTrack.name}
+            </p>
+            <p className="text-muted-foreground text-xs whitespace-nowrap truncate md:max-w-[200px]">
+              {currentTrack.artist}
+            </p>
           </div>
-          <SoundWaves isPlaying={currentTrack.isPlaying} />
+          <div className="flex-shrink-0">
+            <SoundWaves isPlaying={currentTrack.isPlaying} />
+          </div>
         </Link>
       ) : (
         <></>
         // No track is currently playing
-
       )}
     </div>
   )

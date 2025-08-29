@@ -10,6 +10,12 @@ export function useNavbarScroll() {
     setIsMounted(true)
 
     const handleScroll = () => {
+      // If the user is at the very top of the page, always show the navbar
+      if (window.scrollY === 0) {
+        setIsVisible(true)
+        return
+      }
+
       const footer = document.querySelector('footer')
       if (!footer) return
 
