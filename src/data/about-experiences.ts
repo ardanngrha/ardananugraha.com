@@ -12,7 +12,7 @@ const experiences = [
       "Collaborating with frontend developers to integrate high-performance real-time dashboards for monitoring and control.",
       "Managing deployment and containerization using Docker and Kubernetes on-premises."
     ],
-    icon: "https://media.licdn.com/dms/image/v2/C560BAQGF_mWsprjuJg/company-logo_200_200/company-logo_200_200/0/1672910764885/plniconplus_logo?e=1755734400&v=beta&t=AioOcgqmggvwnZoF779yDR4-cwWDjsjYIcLXd4P0Dhs",
+    icon: "/images/experiences/pln_icon_plus_logo.jpeg",
     website: "https://plniconplus.co.id/",
   },
   {
@@ -27,7 +27,7 @@ const experiences = [
       "Achieved a 4.47/5 facilitator rating in the first batch, ranking among the top mentors.",
       "Provided lessons on backend technologies, architecture, and best practices."
     ],
-    icon: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_200_200/company-logo_200_200/0/1660182933847/dicoding_logo?e=1755734400&v=beta&t=X8BAWgpqeWzbqDPW-LlbMxkjHrHyYqZbPYcfnL2I5Zs",
+    icon: "/images/experiences/dicoding_logo.jpeg",
     website: "https://www.dicoding.com/about",
   },
   {
@@ -41,7 +41,7 @@ const experiences = [
       "Designed and facilitated engaging Instructor-Led Training sessions covering advanced topics in machine learning, data analysis, AI applications, and soft skills.",
       "Provided personalized feedback and support to help students overcome challenges and excel in their projects."
     ],
-    icon: "https://media.licdn.com/dms/image/v2/D560BAQGVomgVddrtBA/company-logo_200_200/B56ZWOrFbWGUAM-/0/1741855415072/bangkit_academy_logo?e=1755734400&v=beta&t=reBiVHrSPyZ0UgL0T1irzpLhqYlykbfiBEgw2gF_7bY",
+    icon: "/images/experiences/bangkit_logo.jpeg",
     website: "https://grow.google/intl/id_id/bangkit/",
   },
   {
@@ -55,7 +55,7 @@ const experiences = [
       "Designed and implemented a drag-and-drop interface to streamline API creation for non-technical users.",
       "Delivered the project with a perfect completion score of 90 (A)."
     ],
-    icon: "https://media.licdn.com/dms/image/v2/D560BAQGqZzJbCTt-kw/company-logo_200_200/company-logo_200_200/0/1711506407720/pt_bank_negara_indonesia_persero_tbk_logo?e=1755734400&v=beta&t=SJC92Y8KJqjFCPYDyhGP0xEfqXPBMMfGs_BvK-Htv_w",
+    icon: "/images/experiences/bni_logo.jpeg",
     website: "https://www.bni.co.id/id-id/",
   },
   {
@@ -71,7 +71,7 @@ const experiences = [
       "Provided over 10 hours per week of direct assistance to students, helping with debugging and application of theoretical concepts.",
       "Maintained and troubleshot hardware, software, and tools for two laboratories, supporting 250+ students per semester."
     ],
-    icon: "https://media.licdn.com/dms/image/v2/C560BAQGFwvJXfWZo_A/company-logo_200_200/company-logo_200_200/0/1630654939373?e=1755734400&v=beta&t=y5ZJEncdew49LeS8NSRKwep7D_44JXKNxL2nJuByMr0",
+    icon: "/images/experiences/itpln_logo.jpeg",
     website: "https://www.instagram.com/seic_itpln/",
   }
 ];

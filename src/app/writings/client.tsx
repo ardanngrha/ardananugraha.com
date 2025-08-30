@@ -93,7 +93,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
         <div>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full h-auto text-left flex-col items-start px-4 py-3">
+              <Button variant="outline" className="w-full h-auto text-left flex-col items-start px-4 py-3 cursor-pointer">
                 <span className="w-full flex justify-between items-center">
                   {sortLabels[sortOrder]}
                   <FaChevronDown className="h-4 w-4" />
@@ -105,10 +105,10 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[calc(100vw-2rem)] sm:w-56">
               <DropdownMenuRadioGroup value={sortOrder} onValueChange={(value) => setSortOrder(value as SortOption)}>
-                <DropdownMenuRadioItem value="newest">Newest First</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="oldest">Oldest First</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="a-z">A-Z</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="z-a">Z-A</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="newest" className="cursor-pointer">Newest First</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="oldest" className="cursor-pointer">Oldest First</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="a-z" className="cursor-pointer">A-Z</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="z-a" className="cursor-pointer">Z-A</DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -125,7 +125,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
               variant={selectedTopics.length === 0 ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedTopics([])}
-              className="transition-all"
+              className="transition-all cursor-pointer"
             >
               All
             </Button>
@@ -135,7 +135,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
                 variant={selectedTopics.includes(topic) ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => handleTopicClick(topic)}
-                className="capitalize transition-all"
+                className="capitalize transition-all cursor-pointer"
               >
                 {topic}
               </Button>

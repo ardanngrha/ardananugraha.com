@@ -25,8 +25,6 @@ const cardVariants = {
     }
   },
   hover: {
-    y: -5,
-    scale: 1.02,
     boxShadow: "0px 10px 30px -5px rgba(0, 0, 0, 0.3)",
     transition: {
       type: "spring" as const,
@@ -38,7 +36,6 @@ const cardVariants = {
 
 const imageVariants = {
   hover: {
-    scale: 1.05,
     transition: {
       type: "spring" as const,
       stiffness: 300,
@@ -74,7 +71,7 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
                   src={frontmatter.image}
                   alt={frontmatter.title}
                   fill
-                  className="object-cover transition-all duration-300 group-hover:brightness-110"
+                  className="object-cover transition-all duration-300"
                   sizes="(max-width: 768px) 100vw, 33vw"
                   priority={variant === 'featured'}
                 />
@@ -108,7 +105,7 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
               )}
             </motion.div>
             <motion.h2
-              className="text-xl font-bold group-hover:text-primary transition-colors duration-300 mb-2"
+              className="text-xl font-bold group-hover:text-primary group-hover:underline transition-colors duration-300 mb-2"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}

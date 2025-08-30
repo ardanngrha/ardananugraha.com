@@ -123,7 +123,7 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
               <CardImageWithLoading
                 src={frontmatter.image}
                 alt={`Featured image for ${frontmatter.title}`}
-                className="transition-transform duration-300 group-hover:scale-105"
+                className="transition-transform duration-300"
               />
             </div>
           )}

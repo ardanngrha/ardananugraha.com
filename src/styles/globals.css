@@ -83,8 +83,8 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --gradient-from: #0192c6;
-  --gradient-to: #004499;
+  --gradient-from: #3b82f6;
+  --gradient-to: #ec4899;
 
   /* Interactive effects colors - Light mode */
   --ripple-primary: rgba(59, 130, 246, 0.12);

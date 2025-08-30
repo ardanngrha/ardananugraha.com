@@ -47,7 +47,7 @@ export default function Connect() {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 text-sm transition-colors text-center md:text-left custom-cursor hover:text-primary hover:underline"
+            className="flex items-center gap-2 text-sm transition-colors text-center justify-center md:justify-normal md:text-left custom-cursor hover:text-primary hover:underline"
           >
             {link.icon}
             {link.label}
