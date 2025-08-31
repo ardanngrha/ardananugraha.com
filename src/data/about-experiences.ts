@@ -7,7 +7,7 @@ const experiences = [
     jobType: "On-site",
     description: "Building GRITA, an Advanced Distribution Management System (ADMS) for PLN’s power grids, ensuring high performance and reliability in real-time operations.",
     tasks: [
-      "Building microservices that connect 500+ field devices via Modbus TCP, IEC104, and ICCP protocols, processing millions of real-time data points within milliseconds.",
+      "Building microservices that connect 500+ field devices via Modbus TCP, IEC104, and ICCP protocols, processing thousands of real-time data points within milliseconds.",
       "Creating web-based server simulators for Modbus TCP and IEC104, enabling comprehensive testing and validation.",
       "Collaborating with frontend developers to integrate high-performance real-time dashboards for monitoring and control.",
       "Managing deployment and containerization using Docker and Kubernetes on-premises."

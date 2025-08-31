@@ -117,29 +117,29 @@ export default function AboutPage() {
 
         {/* Experiences Section */}
         <motion.div
-          className="my-16"
+          className="my-16 w-full flex flex-col items-center"
           variants={sectionVariants}
         >
-          <motion.h2
-            className="text-3xl font-bold text-center mb-12"
+          <motion.p
+            className="text-5xl font-bold text-center mb-12 font-handwriting gradient-text p-2 w-full"
             variants={textVariants}
           >
             My Experiences
-          </motion.h2>
+          </motion.p>
           <ExperienceTimeline />
         </motion.div>
 
         {/* Tech Stack Section */}
         <motion.div
-          className="my-16"
+          className="my-16 w-full flex flex-col items-center"
           variants={sectionVariants}
         >
-          <motion.h2
-            className="text-3xl font-bold text-center mb-12"
+          <motion.p
+            className="text-5xl font-bold text-center mb-12 font-handwriting gradient-text p-2 w-full"
             variants={textVariants}
           >
-            Technologies I Work With
-          </motion.h2>
+            Technologies I&apos;ve been Work With
+          </motion.p>
           <TechStack />
         </motion.div>
       </motion.div>

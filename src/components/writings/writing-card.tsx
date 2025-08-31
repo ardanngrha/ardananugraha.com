@@ -25,7 +25,6 @@ const cardVariants = {
     }
   },
   hover: {
-    boxShadow: "0px 10px 30px -5px rgba(0, 0, 0, 0.3)",
     transition: {
       type: "spring" as const,
       stiffness: 300,

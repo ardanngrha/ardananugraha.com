@@ -95,7 +95,7 @@ export default function TestimonialsSection() {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5 }}
     >
-      <h2 className="text-3xl md:text-4xl flex items-center gap-3 font-bold mb-8 gradient-text">
+      <h2 className="text-4xl md:text-5xl flex items-center gap-3 font-bold mb-8 gradient-text font-handwriting pr-2">
         <FaFeatherAlt className="w-8 h-8" />
         Some Words
       </h2>
@@ -147,19 +147,25 @@ export default function TestimonialsSection() {
         </Button>
       </div>
 
-      <div className="flex space-x-2 mt-6">
+      <div className="flex justify-center mt-6 gap-2">
         {testimonials.map((_, index) => (
-          <button
+          <motion.button
             key={index}
+            className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${index === getIndex(current)
+                ? 'bg-primary w-8'
+                : 'bg-muted w-3 hover:bg-muted-foreground/50'
+              }`}
             onClick={() => {
               const newIndex = getIndex(index);
               const direction = newIndex > getIndex(current) ? 1 : -1;
               setCurrent([index, direction]);
             }}
-            className={`w-2 h-2 cursor-pointer rounded-full transition-all duration-300 ${index === getIndex(current)
-              ? "bg-primary scale-125"
-              : "bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500"
-              }`}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            animate={{
+              scale: index === getIndex(current) ? 1.1 : 1
+            }}
+            aria-label={`Go to testimonial ${index + 1}`}
           />
         ))}
       </div>

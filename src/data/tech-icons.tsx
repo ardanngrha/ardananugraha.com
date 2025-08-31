@@ -3,7 +3,12 @@ import {
 } from 'react-icons/fa';
 import {
   SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion, SiFastapi, SiBootstrap, SiJquery,
-  SiFigma
+  SiFigma,
+  SiFlask,
+  SiKubernetes,
+  SiDjango,
+  SiRabbitmq,
+  SiApachekafka
 } from 'react-icons/si';
 import { VscAzure, VscVscode } from "react-icons/vsc";
 
@@ -40,7 +45,12 @@ const tech_icons = [
   { name: 'Bootstrap', icon: <SiBootstrap className="text-purple-600" /> },
   { name: 'jQuery', icon: <SiJquery className="text-blue-400" /> },
   { name: 'Figma', icon: <SiFigma className="text-purple-500" /> },
-  { name: 'VSCode', icon: <VscVscode className="text-blue-500" /> }
+  { name: 'VSCode', icon: <VscVscode className="text-blue-500" /> },
+  { name: 'Flask', icon: <SiFlask className="text-blue-500" /> },
+  { name: 'Kubernetes', icon: <SiKubernetes className="text-blue-500" /> },
+  { name: 'Django', icon: <SiDjango className="text-green-500" /> },
+  { name: 'RabbitMQ', icon: <SiRabbitmq className="text-orange-500" /> },
+  { name: 'Kafka', icon: <SiApachekafka className="text-purple-500" /> }
 ];
 
 export default tech_icons;

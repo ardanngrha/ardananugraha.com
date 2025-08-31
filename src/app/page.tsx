@@ -9,6 +9,7 @@ import { toast } from "sonner"
 import { ProjectContentItem } from "@/types/projects"
 import { EnhancedWriting } from "@/types/writings"
 import FirstHighlight from "@/components/home/highlights/first"
+import SecondHighlight from "@/components/home/highlights/second"
 
 export default function Home() {
   const [featuredProjects, setFeaturedProjects] = useState<ProjectContentItem[]>([]);
@@ -54,6 +55,7 @@ export default function Home() {
     <div>
       <Hero />
       <FirstHighlight />
+      <SecondHighlight />
       <ProjectsSection projects={featuredProjects} loading={loading} />
       <WritingsSection writings={featuredWritings} loading={loading} />
       <TestimonialsSection />

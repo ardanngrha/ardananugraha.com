@@ -14,7 +14,7 @@ export default function Hero() {
   const [languageIndex, setLanguageIndex] = useState(0)
 
   // Memoize the languages array to prevent unnecessary re-renders
-  const languages = useMemo(() => ["Python", "JavaScript", "Java"], [])
+  const languages = useMemo(() => ["Python", "JavaScript"], [])
 
   // Update time every minute
   useEffect(() => {

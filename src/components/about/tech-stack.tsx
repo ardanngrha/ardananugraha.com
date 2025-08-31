@@ -15,7 +15,7 @@ export function TechStack() {
     'JavaScript', 'TypeScript', 'Python', 'Java', 'React', 'Next.js',
     'Node.js', 'Express', 'Spring Boot', 'PostgreSQL', 'MongoDB',
     'Docker', 'AWS', 'GCP', 'Git', 'TensorFlow', 'Linux', 'Redis', 'HTML', 'CSS', 'Bash',
-    'Discord', 'Notion', 'FastAPI', 'Bootstrap', 'VSCode'
+    'Discord', 'Notion', 'FastAPI', 'Bootstrap', 'VSCode', 'Kafka', 'Kubernetes', 'Flask', 'RabbitMQ'
   ];
 
   // Filter tech_icons to only show selected technologies
