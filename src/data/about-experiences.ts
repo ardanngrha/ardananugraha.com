@@ -1,4 +1,4 @@
-const experiences = [
+export const experiences = [
   {
     company: "PLN Icon Plus",
     role: "Software Engineer",
@@ -75,5 +75,3 @@ const experiences = [
     website: "https://www.instagram.com/seic_itpln/",
   }
 ];
-
-export default experiences;

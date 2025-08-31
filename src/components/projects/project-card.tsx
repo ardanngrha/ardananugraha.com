@@ -5,7 +5,7 @@ import { ProjectContentItem } from "@/types/projects";
 import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt, FaArrowRight } from "react-icons/fa";
 import { RippleButton } from "@/components/ui/ripple-button";
-import { getTechIcon } from "@/lib/tech-icons";
+import { getTechIcon } from "@/lib/icons";
 
 interface ProjectCardProps {
   project: ProjectContentItem;

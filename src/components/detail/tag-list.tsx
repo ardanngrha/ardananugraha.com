@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { FaTimes, FaFilter } from 'react-icons/fa';
 import { cn } from '@/lib/utils';
-import { getTechIcon } from '@/lib/tech-icons';
+import { getTechIcon } from '@/lib/icons';
 
 interface TagListProps {
   tags: string[];

@@ -8,18 +8,18 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useEffect, useRef, useState } from "react";
-import tech_icons from "@/data/tech-icons";
+import { icons } from "@/data/icons";
 
 export function TechStack() {
   const displayedTechs = [
     'JavaScript', 'TypeScript', 'Python', 'Java', 'React', 'Next.js',
     'Node.js', 'Express', 'Spring Boot', 'PostgreSQL', 'MongoDB',
     'Docker', 'AWS', 'GCP', 'Git', 'TensorFlow', 'Linux', 'Redis', 'HTML', 'CSS', 'Bash',
-    'Discord', 'Notion', 'FastAPI', 'Bootstrap', 'VSCode', 'Kafka', 'Kubernetes', 'Flask', 'RabbitMQ'
+    'Discord', 'Notion', 'FastAPI', 'Bootstrap', 'VSCode', 'Kafka', 'Kubernetes', 'Flask', 'RabbitMQ', 'GitHub'
   ];
 
   // Filter tech_icons to only show selected technologies
-  const filteredTools = tech_icons.filter(tool => displayedTechs.includes(tool.name));
+  const filteredTools = icons.filter(tool => displayedTechs.includes(tool.name));
   const duplicatedTools = [...filteredTools, ...filteredTools];
 
   const containerRef = useRef<HTMLDivElement>(null);

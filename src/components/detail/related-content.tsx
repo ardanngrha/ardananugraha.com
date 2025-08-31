@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { EnhancedProject } from '@/types/projects';
 import { EnhancedWriting } from '@/types/writings';
 import { CardImageWithLoading } from './image-with-loading';
-import { getTechIcon } from '@/lib/tech-icons';
+import { getTechIcon } from '@/lib/icons';
 
 interface RelatedContentProps {
   items: (EnhancedProject | EnhancedWriting)[];

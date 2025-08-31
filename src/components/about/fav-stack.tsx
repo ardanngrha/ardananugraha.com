@@ -7,7 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import favStack from "@/data/about-fav-stack";
+import { favStack } from "@/data/about-fav-stack";
 import { useState } from "react";
 
 export function FavStack() {

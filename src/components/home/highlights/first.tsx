@@ -2,119 +2,7 @@
 
 import { motion, AnimatePresence, useInView } from "motion/react";
 import { useRef, useState, useEffect } from "react";
-import { FaCode, FaRocket, FaBrain, FaUsers, FaServer } from "react-icons/fa";
-
-interface JourneyStep {
-  year: string;
-  title: string;
-  description: string;
-  icon: React.ComponentType<{ className?: string }>;
-  code: string;
-  language: string;
-  color: string;
-}
-
-const journeySteps: JourneyStep[] = [
-  {
-    year: "2020",
-    title: "Hello World!",
-    description: "Started my Computer Science degree, diving into Object-Oriented Programming and core concepts.",
-    icon: FaCode,
-    code: `#include <iostream>
-using namespace std;
-
-int main() {
-    cout << "Hello, World!" << endl;
-    // Started Computer Science
-    // Learning OOP concepts
-    return 0;
-}`,
-    language: "cpp",
-    color: "from-slate-600 via-slate-700 to-slate-800 dark:from-slate-700 dark:via-slate-800 dark:to-slate-900"
-  },
-  {
-    year: "2021",
-    title: "Entering Web Development",
-    description: "Started working as a Laboratory Assistant for courses and joined communities.",
-    icon: FaRocket,
-    code: `// Lab Assistant for Web Programming
-function createWebsite() {
-  const skills = ['HTML', 'CSS', 'JS'];
-  console.log('Building websites!');
-  return skills;
-}
-
-createWebsite();`,
-    language: "javascript",
-    color: "from-emerald-600 via-emerald-700 to-teal-800 dark:from-emerald-700 dark:via-emerald-800 dark:to-teal-900"
-  },
-  {
-    year: "2022",
-    title: "Exploring Backend Engineering",
-    description: "Explored backend systems and cloud architecture. Completed Dicoding's course and earned Backend Expert certification.",
-    icon: FaServer,
-    code: `import express from 'express';
-
-const app = express();
-// Backend Expert Certified
-app.get('/', (req, res) => {
-  res.send('Backend running!');
-});
-
-app.listen(3000);`,
-    language: "typescript",
-    color: "from-amber-600 via-orange-700 to-red-800 dark:from-amber-700 dark:via-orange-800 dark:to-red-900"
-  },
-  {
-    year: "2023",
-    title: "Deep Dive into AI/ML",
-    description: "Graduated with distinction from Bangkit's ML program and earned a TensorFlow Developer certification.",
-    icon: FaBrain,
-    code: `import tensorflow as tf
-
-# Bangkit ML Graduate
-model = tf.keras.Sequential([
-  tf.keras.layers.Dense(64, activation='relu'),
-  tf.keras.layers.Dense(10, activation='softmax')
-])
-
-model.compile(optimizer='adam')`,
-    language: "python",
-    color: "from-purple-600 via-violet-700 to-indigo-800 dark:from-purple-700 dark:via-violet-800 dark:to-indigo-900"
-  },
-  {
-    year: "2024",
-    title: "Become a Software Engineer",
-    description: "Building large-scale microservices at PLN Icon Plus and mentoring students at Bangkit Academy and Dicoding.",
-    icon: FaUsers,
-    code: `from fastapi import FastAPI
-
-app = FastAPI()
-
-# PLN microservices
-@app.get("/data")
-async def get_data():
-    return {"status": "OK", "points": 2500}`,
-    language: "python",
-    color: "from-rose-600 via-pink-700 to-red-800 dark:from-rose-700 dark:via-pink-800 dark:to-red-900"
-  },
-  {
-    year: "2025",
-    title: "Continuing Growth",
-    description: "Continuing to learn and grow as a software engineer. Staying updated with industry trends and best practices.",
-    icon: FaRocket,
-    code: `
-interface Growth {
-  scale: 'national';
-  tech: ['K8s', 'Kafka', 'React'];
-}
-
-const future = (g: Growth) => 
-  \`Scaling with \${g.tech.join(', ')}\`;`,
-    language: "typescript",
-    color: "from-cyan-600 via-blue-700 to-indigo-800 dark:from-cyan-700 dark:via-blue-800 dark:to-indigo-900"
-  }
-];
+import { journeySteps } from "@/data/home-highlights";
 
 const MAX_VISIBLE_CARDS = 6;
 
@@ -247,29 +135,70 @@ export default function SecondHighlight() {
               return (
                 <motion.div
                   key={step.year}
-                  className={`absolute w-11/12 h-52 p-8 flex flex-col justify-between rounded-2xl shadow-2xl cursor-pointer text-white bg-gradient-to-br ${step.color}`}
+                  className="absolute w-11/12 h-52 rounded-2xl shadow-2xl cursor-pointer overflow-hidden bg-card border border-border"
                   onClick={() => handleStepClick(index)}
                   initial={false}
                   animate={{ y, scale, opacity, zIndex }}
                   transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
                   whileHover={{ y: y - 10, scale: scale + 0.02 }}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <div className="text-white/70 text-sm font-medium mb-1">
-                        {step.year}
+                  {/* Animated gradient background */}
+                  <motion.div
+                    className={`absolute inset-0 opacity-10 bg-gradient-to-br ${step.gradient}`}
+                    animate={{
+                      background: [
+                        `linear-gradient(45deg, ${step.gradient})`,
+                        `linear-gradient(135deg, ${step.gradient})`,
+                        `linear-gradient(225deg, ${step.gradient})`,
+                        `linear-gradient(315deg, ${step.gradient})`,
+                        `linear-gradient(45deg, ${step.gradient})`
+                      ]
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
+
+                  {/* Subtle animated border gradient */}
+                  <motion.div
+                    className={`absolute inset-0 rounded-2xl opacity-20`}
+                    style={{
+                      background: `linear-gradient(45deg, transparent, ${step.gradient.split(' ')[1]}, transparent)`,
+                      padding: '1px'
+                    }}
+                    animate={{
+                      rotate: [0, 360]
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  >
+                    <div className="w-full h-full bg-card rounded-2xl" />
+                  </motion.div>
+
+                  {/* Content */}
+                  <div className="relative z-10 p-8 flex flex-col justify-between h-full text-foreground">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <div className="text-muted-foreground text-sm font-medium mb-1">
+                          {step.year}
+                        </div>
+                        <h3 className="text-xl font-bold leading-tight">
+                          {step.title}
+                        </h3>
                       </div>
-                      <h3 className="text-xl font-bold leading-tight">
-                        {step.title}
-                      </h3>
+                      <div className={`flex-shrink-0 p-2 rounded-lg backdrop-blur-sm bg-gradient-to-br ${step.gradient} bg-opacity-20`}>
+                        <step.icon className="w-5 h-5" />
+                      </div>
                     </div>
-                    <div className="flex-shrink-0 p-2 bg-white/10 rounded-lg backdrop-blur-sm">
-                      <step.icon className="w-5 h-5" />
-                    </div>
+                    <p className="text-muted-foreground text-sm leading-relaxed flex-1">
+                      {step.description}
+                    </p>
                   </div>
-                  <p className="text-white/90 text-sm leading-relaxed flex-1">
-                    {step.description}
-                  </p>
                 </motion.div>
               );
             })}
@@ -284,20 +213,20 @@ export default function SecondHighlight() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="bg-[#1e1e1e] rounded-2xl p-6 shadow-2xl border border-border/50 overflow-hidden relative">
+              <div className="bg-background border-2 border-border rounded-2xl p-6 shadow-2xl overflow-hidden relative">
                 {/* Terminal Header */}
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-500"></div>
                     <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
                     <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span className="ml-4 text-gray-400 text-sm font-mono">
+                    <span className="ml-4 text-muted-foreground text-sm font-mono">
                       {journeySteps[activeStep].language}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${typingComplete ? 'bg-green-400' : isTyping ? 'bg-blue-400 animate-pulse' : 'bg-gray-600'}`}></div>
-                    <span className="text-gray-500 text-xs">
+                    <div className={`w-2 h-2 rounded-full ${typingComplete ? 'bg-green-400' : isTyping ? 'bg-blue-400 animate-pulse' : 'bg-muted-foreground/50'}`}></div>
+                    <span className="text-muted-foreground text-xs">
                       {Math.round((typedCode.length / journeySteps[activeStep].code.length) * 100)}%
                     </span>
                   </div>
@@ -308,7 +237,7 @@ export default function SecondHighlight() {
                   <AnimatePresence mode="wait">
                     <motion.pre
                       key={activeStep}
-                      className="text-gray-300 whitespace-pre-wrap"
+                      className="text-foreground whitespace-pre-wrap"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
@@ -317,7 +246,7 @@ export default function SecondHighlight() {
                         {typedCode}
                         {isTyping && (
                           <motion.span
-                            className="inline-block w-2 h-5 bg-green-400 ml-1"
+                            className="inline-block w-2 h-5 bg-primary ml-1"
                             animate={{ opacity: [0, 1, 0] }}
                             transition={{ duration: 1, repeat: Infinity }}
                           />
@@ -326,8 +255,6 @@ export default function SecondHighlight() {
                     </motion.pre>
                   </AnimatePresence>
                 </div>
-
-                {/* Effects can remain the same */}
               </div>
             </motion.div>
           </div>

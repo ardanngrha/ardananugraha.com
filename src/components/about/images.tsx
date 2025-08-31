@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import images from "@/data/about-images";
+import { images } from "@/data/about-images";
 import { Button } from "../ui/button";
 
 const variants = {

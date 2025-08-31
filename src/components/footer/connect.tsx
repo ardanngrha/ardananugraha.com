@@ -1,36 +1,37 @@
+import { getTechIcon } from "@/lib/icons"
 import Link from "next/link"
-import { FaTwitter, FaInstagram, FaGithub, FaLinkedin, FaEnvelope, FaFileDownload } from "react-icons/fa"
+
 
 const connectLinks = [
   {
     label: "X (Twitter)",
     href: "https://x.com/ardanngrha",
-    icon: <FaTwitter className="w-4 h-4" />
+    icon: getTechIcon("XTwitter", "w-4 h-4")
   },
   {
     label: "Instagram",
     href: "https://instagram.com/adanngrha",
-    icon: <FaInstagram className="w-4 h-4" />
+    icon: getTechIcon("Instagram", "w-4 h-4")
   },
   {
     label: "GitHub",
     href: "https://github.com/ardanngrha",
-    icon: <FaGithub className="w-4 h-4" />
+    icon: getTechIcon("GitHub", "w-4 h-4")
   },
   {
     label: "LinkedIn",
     href: "https://linkedin.com/in/ardana-nugraha",
-    icon: <FaLinkedin className="w-4 h-4" />
+    icon: getTechIcon("LinkedIn", "w-4 h-4")
   },
   {
     label: "Email",
     href: "mailto:contact.ardana@gmail.com",
-    icon: <FaEnvelope className="w-4 h-4" />
+    icon: getTechIcon("Email", "w-4 h-4")
   },
   {
     label: "Resume",
     href: "/resume.pdf",
-    icon: <FaFileDownload className="w-4 h-4" />
+    icon: getTechIcon("Resume", "w-4 h-4")
   }
 ]
 

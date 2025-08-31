@@ -1,5 +1,5 @@
 
-const images = [
+export const images = [
   {
     src: "/images/me.jpeg",
     description: "Portrait of myself.",
@@ -37,5 +37,3 @@ const images = [
     rotation: 2,
   },
 ];
-
-export default images;

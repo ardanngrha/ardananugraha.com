@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { CreditsBg } from "@/components/backgrounds/credits-bg";
 import { PageHeader } from "@/components/page-header";
-import inspirations from "@/data/attributions";
+import { inspirations } from "@/data/credits";
 
 export default function CreditsPage() {
   return (

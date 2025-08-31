@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import experiences from "@/data/about-experiences";
+import { experiences } from "@/data/about-experiences";
 
 export function ExperienceTimeline() {
   return (

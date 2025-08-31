@@ -11,8 +11,11 @@ import {
   SiApachekafka
 } from 'react-icons/si';
 import { VscAzure, VscVscode } from "react-icons/vsc";
+import { MdAccessTime } from "react-icons/md";
+import { FaInstagram, FaLinkedin, FaEnvelope, FaFileDownload } from "react-icons/fa"
+import { FaXTwitter } from "react-icons/fa6";
 
-const tech_icons = [
+export const icons = [
   { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
   { name: 'TypeScript', icon: <SiTypescript className="text-blue-500" /> },
   { name: 'Python', icon: <FaPython className="text-blue-400" /> },
@@ -32,7 +35,7 @@ const tech_icons = [
   { name: 'Bash', icon: <SiGnubash className="text-green-700" /> },
   { name: 'Docker', icon: <FaDocker className="text-blue-500" /> },
   { name: 'Linux', icon: <FaLinux className="text-yellow-500" /> },
-  { name: 'GitHub Actions', icon: <FaGithub className="text-gray-800 dark:text-gray-200" /> },
+  { name: 'GitHub', icon: <FaGithub className="text-gray-800 dark:text-gray-200" /> },
   { name: 'GCP', icon: <SiGooglecloud className="text-blue-600" /> },
   { name: 'AWS', icon: <FaAws className="text-orange-400" /> },
   { name: 'Azure', icon: <VscAzure className="text-blue-700" /> },
@@ -50,14 +53,11 @@ const tech_icons = [
   { name: 'Kubernetes', icon: <SiKubernetes className="text-blue-500" /> },
   { name: 'Django', icon: <SiDjango className="text-green-500" /> },
   { name: 'RabbitMQ', icon: <SiRabbitmq className="text-orange-500" /> },
-  { name: 'Kafka', icon: <SiApachekafka className="text-purple-500" /> }
+  { name: 'Kafka', icon: <SiApachekafka className="text-purple-500" /> },
+  { name: 'Time', icon: <MdAccessTime className="text-gray-500" /> },
+  { name: 'XTwitter', icon: <FaXTwitter className="" /> },
+  { name: 'Instagram', icon: <FaInstagram className="" /> },
+  { name: 'LinkedIn', icon: <FaLinkedin className="" /> },
+  { name: 'Email', icon: <FaEnvelope className="" /> },
+  { name: 'Resume', icon: <FaFileDownload className="" /> }
 ];
-
-export default tech_icons;
-
-export {
-  FaPython,
-  SiTypescript,
-  FaReact,
-  SiTensorflow,
-};

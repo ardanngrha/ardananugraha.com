@@ -2,77 +2,8 @@
 
 import { motion, AnimatePresence, useInView } from "motion/react";
 import { useState, useEffect, useRef } from "react";
-import { FaLaptopCode, FaBrain, FaServer, FaDatabase } from "react-icons/fa";
-import { MdScreenshotMonitor } from "react-icons/md";
-import { TiMessages } from "react-icons/ti";
-import { getTechIcon } from "@/lib/tech-icons";
-
-interface StackCategory {
-  id: string;
-  title: string;
-  icon: React.ComponentType<{ className?: string }>;
-  technologies: string[];
-  words: string[];
-  gradient: string;
-  activeGradient: string;
-}
-
-const stackCategories: StackCategory[] = [
-  {
-    id: "frontend",
-    title: "Frontend",
-    icon: MdScreenshotMonitor,
-    technologies: ["React", "Next.js", "JavaScript", "TypeScript", "HTML", "CSS"],
-    words: ["pixel-perfect interfaces", "seamless user journeys", "interactive experiences"],
-    gradient: "from-blue-400 to-purple-500",
-    activeGradient: "from-blue-400 via-purple-500 to-pink-500"
-  },
-  {
-    id: "backend",
-    title: "Backend",
-    icon: FaLaptopCode,
-    technologies: ["Node.js", "Express", "Spring Boot", "FastAPI", "Flask", "Django", "JavaScript", "TypeScript", "Java", "Python"],
-    words: ["robust APIs", "distributed systems", "high-performance servers"],
-    gradient: "from-green-400 to-blue-500",
-    activeGradient: "from-green-400 via-teal-500 to-blue-500"
-  },
-  {
-    id: "ai-ml",
-    title: "AI & ML",
-    icon: FaBrain,
-    technologies: ["TensorFlow", "Python"],
-    words: ["intelligent algorithms", "machine learning", "data-driven insights"],
-    gradient: "from-purple-400 to-pink-500",
-    activeGradient: "from-purple-400 via-pink-500 to-red-500"
-  },
-  {
-    id: "database",
-    title: "Database",
-    icon: FaDatabase,
-    technologies: ["PostgreSQL", "MongoDB", "Redis"],
-    words: ["efficient data storage", "optimized queries", "real-time caching"],
-    gradient: "from-indigo-400 to-blue-500",
-    activeGradient: "from-indigo-400 via-blue-500 to-teal-500"
-  },
-  {
-    id: "messaging",
-    title: "Messaging",
-    icon: TiMessages,
-    technologies: ["Kafka", "RabbitMQ"],
-    words: ["event-driven architecture", "reliable message queues", "real-time data streaming"],
-    gradient: "from-yellow-400 to-orange-500",
-    activeGradient: "from-yellow-400 via-orange-500 to-red-500"
-  },
-  {
-    id: "infrastructure",
-    title: "Infrastructure",
-    icon: FaServer,
-    technologies: ["AWS", "GCP", "Docker", "Kubernetes", "Linux", "Nginx"],
-    words: ["scalable cloud solutions", "automated deployments", "system reliability"],
-    gradient: "from-orange-400 to-red-500",
-    activeGradient: "from-orange-400 via-red-500 to-pink-500"
-  }
-];
+import { getTechIcon } from "@/lib/icons";
+import { stackCategories } from "@/data/home-highlights";
 
 export default function SecondHighlight() {
   const [activeCard, setActiveCard] = useState(0);

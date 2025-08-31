@@ -48,6 +48,7 @@ export default function GuestbookPage() {
   const { data: session } = useSession();
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const commentsContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -62,6 +63,7 @@ export default function GuestbookPage() {
 
   const fetchComments = useCallback(async () => {
     try {
+      setIsLoading(true);
       const response = await fetch("/api/guestbook");
       if (response.ok) {
         const data = await response.json();
@@ -69,6 +71,8 @@ export default function GuestbookPage() {
       }
     } catch (error) {
       console.error("Failed to fetch comments:", error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -138,44 +142,86 @@ export default function GuestbookPage() {
         {/* The ref is correctly placed here on the parent component */}
         <ScrollArea className="h-96 md:h-96 rounded-md p-4" ref={commentsContainerRef}>
           <div className="flex-grow" />
-          <motion.div
-            className="space-y-3 md:space-y-4"
-            variants={containerVariants}
-          >
-            <AnimatePresence>
-              {comments.map((comment, index) => (
-                <motion.div
-                  key={comment.id}
-                  className="flex items-start gap-2 md:gap-3"
-                  custom={index}
-                >
-                  <div className="mt-3">
-                    <Avatar>
-                      <AvatarImage src={comment.author.image || ""} />
-                      <AvatarFallback>{comment.author.username.charAt(0).toUpperCase()}</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div
-                      className="flex items-center justify-between"
-                    >
-                      <span className="text-primary font-medium text-sm">
-                        {`~/${comment.author.username}`}
-                      </span>
-                      <time className="text-xs text-muted-foreground">
-                        {formatDateTime(comment.createdAt)}
-                      </time>
+
+          <AnimatePresence mode="wait">
+            {isLoading ? (
+              <motion.div
+                key="loading"
+                className="space-y-3 md:space-y-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Loading skeletons */}
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex items-start gap-2 md:gap-3"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <div className="mt-3">
+                      <div className="w-10 h-10 rounded-full bg-muted animate-pulse" />
                     </div>
-                    <p
-                      className="whitespace-pre-wrap break-words text-sm leading-relaxed"
+                    <div className="flex-1 min-w-0 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="h-4 bg-muted rounded animate-pulse w-24" />
+                        <div className="h-3 bg-muted rounded animate-pulse w-16" />
+                      </div>
+                      <div className="space-y-1">
+                        <div className="h-4 bg-muted rounded animate-pulse w-full" />
+                        <div className="h-4 bg-muted rounded animate-pulse w-3/4" />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            ) : (
+              <motion.div
+                key="comments"
+                className="space-y-3 md:space-y-4"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <AnimatePresence>
+                  {comments.map((comment, index) => (
+                    <motion.div
+                      key={comment.id}
+                      className="flex items-start gap-2 md:gap-3"
+                      custom={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
                     >
-                      {comment.content}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                      {/* ...existing comment rendering code... */}
+                      <div className="mt-3">
+                        <Avatar>
+                          <AvatarImage src={comment.author.image || ""} />
+                          <AvatarFallback>{comment.author.username.charAt(0).toUpperCase()}</AvatarFallback>
+                        </Avatar>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <span className="text-primary font-medium text-sm">
+                            {`~/${comment.author.username}`}
+                          </span>
+                          <time className="text-xs text-muted-foreground">
+                            {formatDateTime(comment.createdAt)}
+                          </time>
+                        </div>
+                        <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">
+                          {comment.content}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </ScrollArea>
 
         <AnimatePresence mode="wait">

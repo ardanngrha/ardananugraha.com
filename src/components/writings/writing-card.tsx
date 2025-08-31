@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { formatRelativeDate, isRecent } from "@/lib/utils";
 import { EnhancedWriting } from "@/types/writings";
-import { MdAccessTime } from "react-icons/md";
+import { getTechIcon } from "@/lib/icons";
 
 interface WritingCardProps {
   writing: EnhancedWriting;
@@ -129,7 +129,7 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2 }}>
-                <MdAccessTime className="inline-block text-muted-foreground text-base" />
+                {getTechIcon('Time', 'inline-block text-muted-foreground text-base')}
                 <span className="text-muted-foreground whitespace-nowrap text-xs">{readTime} min read</span>
               </motion.div>
               <div className="flex gap-2 flex-wrap justify-start md:justify-end text-xs">

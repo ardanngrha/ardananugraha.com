@@ -5,13 +5,9 @@ import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 import {
   FiShare2,
-  FiLinkedin,
-  FiFacebook,
-  FiLink,
   FiCheck,
-  FiInstagram,
 } from "react-icons/fi"
-import { FaThreads, FaXTwitter } from "react-icons/fa6";
+import { FaThreads, FaXTwitter, FaLinkedin, FaFacebook, FaLink, FaInstagram } from "react-icons/fa6";
 
 interface ShareButtonsProps {
   title: string
@@ -118,7 +114,7 @@ export function ShareButtons({
           onClick={() => openShareWindow(shareUrls.instagram)}
           className="hover:bg-pink-50 hover:border-pink-200 dark:hover:bg-pink-950/20 min-h-[44px] touch-manipulation cursor-pointer"
         >
-          <FiInstagram className="size-4 mr-1" />
+          <FaInstagram className="size-4 mr-1" />
           <span className="hidden md:inline">Instagram</span>
         </Button>
 
@@ -128,7 +124,7 @@ export function ShareButtons({
           onClick={() => openShareWindow(shareUrls.linkedin)}
           className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation cursor-pointer"
         >
-          <FiLinkedin className="size-4 mr-1" />
+          <FaLinkedin className="size-4 mr-1" />
           <span className="hidden md:inline">LinkedIn</span>
         </Button>
 
@@ -138,7 +134,7 @@ export function ShareButtons({
           onClick={() => openShareWindow(shareUrls.facebook)}
           className="hover:bg-blue-50 hover:border-blue-200 dark:hover:bg-blue-950/20 min-h-[44px] touch-manipulation cursor-pointer"
         >
-          <FiFacebook className="size-4 mr-1" />
+          <FaFacebook className="size-4 mr-1" />
           <span className="hidden md:inline">Facebook</span>
         </Button>
 
@@ -169,7 +165,7 @@ export function ShareButtons({
           </>
         ) : (
           <>
-            <FiLink className="size-4 mr-1" />
+            <FaLink className="size-4 mr-1" />
             Copy Link
           </>
         )}
