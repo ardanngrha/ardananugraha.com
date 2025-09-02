@@ -1,36 +1,36 @@
 'use client';
 
 import Link from 'next/link';
-import { HiOutlineHome } from 'react-icons/hi';
+import { getIcon } from '@/lib/icons';
 import { cn } from '@/lib/utils';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbList, BreadcrumbSeparator } from '../ui/breadcrumb';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from '../ui/breadcrumb';
 import React from 'react';
+import { ContentNavigationProps } from '@/types/shared';
 
 interface BreadcrumbItem {
   label: string;
   href: string;
 }
 
-interface ContentNavigationProps {
-  type: 'project' | 'writing';
-  title: string;
-  breadcrumbs?: BreadcrumbItem[];
-  className?: string;
-}
-
 export function ContentNavigation({
   type,
   title,
   breadcrumbs = [],
-  className
+  className,
 }: ContentNavigationProps) {
-
   // Default breadcrumbs based on content type
   const defaultBreadcrumbs: BreadcrumbItem[] = [
     { label: 'Home', href: '/' },
     {
       label: type === 'project' ? 'Projects' : 'Writings',
-      href: type === 'project' ? '/projects' : '/writings'
+      href: type === 'project' ? '/projects' : '/writings',
     },
   ];
 
@@ -41,7 +41,7 @@ export function ContentNavigation({
       className={cn(
         'space-y-3 sm:space-y-4 mt-1 md:mt-4',
         // Ensure the breadcrumb row can calculate shrinking space
-        className
+        className,
       )}
       aria-label="Content navigation"
     >
@@ -56,7 +56,7 @@ export function ContentNavigation({
                     className="flex items-center gap-1 whitespace-nowrap"
                   >
                     {index === 0 && (
-                      <HiOutlineHome className="w-4 h-4 sm:w-5 sm:h-5" />
+                      <>{getIcon('HomeOutlined', 'w-4 h-4 sm:w-5 sm:h-5')}</>
                     )}
                     {item.label}
                   </Link>

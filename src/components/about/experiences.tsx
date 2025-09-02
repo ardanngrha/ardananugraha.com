@@ -1,9 +1,9 @@
-"use client"
+'use client';
 
-import { motion } from "motion/react";
-import Image from "next/image";
-import Link from "next/link";
-import { experiences } from "@/data/about-experiences";
+import { motion } from 'motion/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { experiences } from '@/data/about-experiences';
 
 export function ExperienceTimeline() {
   return (
@@ -21,13 +21,26 @@ export function ExperienceTimeline() {
             <div>
               <h3 className="font-bold">{exp.role}</h3>
               <div className="flex flex-row items-center gap-2">
-                <Image src={exp.icon} alt={`${exp.company} logo`} width={16} height={16} className="h-4 w-4 object-contain rounded" />
-                <Link href={exp.website} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm custom-cursor">
+                <Image
+                  src={exp.icon}
+                  alt={`${exp.company} logo`}
+                  width={16}
+                  height={16}
+                  className="h-4 w-4 object-contain rounded"
+                />
+                <Link
+                  href={exp.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline text-sm custom-cursor"
+                >
                   {exp.company}
                 </Link>
               </div>
               <p className="text-sm text-muted-foreground mt-1">{exp.period}</p>
-              <p className="text-sm text-muted-foreground">{exp.country} • {exp.jobType}</p>
+              <p className="text-sm text-muted-foreground">
+                {exp.country} • {exp.jobType}
+              </p>
             </div>
           </div>
           <div className="md:col-span-3">

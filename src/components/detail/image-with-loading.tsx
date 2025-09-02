@@ -4,20 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { ImageSkeleton } from './loading-skeletons';
-
-interface ImageWithLoadingProps {
-  src: string;
-  alt: string;
-  fill?: boolean;
-  width?: number;
-  height?: number;
-  className?: string;
-  aspectRatio?: string;
-  priority?: boolean;
-  sizes?: string;
-  onLoad?: () => void;
-  onError?: () => void;
-}
+import { ImageWithLoadingProps } from '@/types/shared';
 
 export function ImageWithLoading({
   src,
@@ -26,7 +13,7 @@ export function ImageWithLoading({
   width,
   height,
   className,
-  aspectRatio = "aspect-video",
+  aspectRatio = 'aspect-video',
   priority = false,
   sizes,
   onLoad,
@@ -48,11 +35,11 @@ export function ImageWithLoading({
 
   if (hasError) {
     return (
-      <div 
+      <div
         className={cn(
           'relative overflow-hidden rounded-lg bg-muted flex items-center justify-center',
           aspectRatio,
-          className
+          className,
         )}
         role="img"
         aria-label={`Failed to load image: ${alt}`}
@@ -72,21 +59,29 @@ export function ImageWithLoading({
               d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
-          <p className="text-sm" role="status">Failed to load image</p>
+          <p className="text-sm" role="status">
+            Failed to load image
+          </p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className={cn('relative overflow-hidden rounded-lg', aspectRatio, className)}>
+    <div
+      className={cn(
+        'relative overflow-hidden rounded-lg',
+        aspectRatio,
+        className,
+      )}
+    >
       {isLoading && (
-        <ImageSkeleton 
-          className="absolute inset-0 z-10" 
+        <ImageSkeleton
+          className="absolute inset-0 z-10"
           aspectRatio={aspectRatio}
         />
       )}
-      
+
       <Image
         src={src}
         alt={alt}
@@ -95,14 +90,14 @@ export function ImageWithLoading({
         height={!fill ? height : undefined}
         className={cn(
           'object-cover transition-opacity duration-300',
-          isLoading ? 'opacity-0' : 'opacity-100'
+          isLoading ? 'opacity-0' : 'opacity-100',
         )}
         priority={priority}
         sizes={sizes}
         onLoad={handleLoad}
         onError={handleError}
       />
-      
+
       {!isLoading && !hasError && (
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       )}

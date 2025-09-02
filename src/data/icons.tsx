@@ -1,19 +1,73 @@
 import {
-  FaJs, FaReact, FaNodeJs, FaPython, FaJava, FaDocker, FaGitAlt, FaGithub, FaAws, FaLinux, FaAndroid, FaSwift
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaPython,
+  FaJava,
+  FaDocker,
+  FaGitAlt,
+  FaGithub,
+  FaAws,
+  FaLinux,
+  FaAndroid,
+  FaSwift,
+  FaChevronRight,
+  FaChevronLeft,
+  FaHome,
+  FaArrowLeft,
+  FaArrowRight,
+  FaFileExcel,
+  FaSearch,
+  FaTimes,
+  FaFilter,
+  FaArrowUp,
+  FaExclamationTriangle,
+  FaSync,
 } from 'react-icons/fa';
 import {
-  SiTypescript, SiExpress, SiSpringboot, SiPostgresql, SiMongodb, SiRedis, SiNginx, SiNextdotjs, SiHtml5, SiCss3, SiGnubash, SiGooglecloud, SiTensorflow, SiDiscord, SiNotion, SiFastapi, SiBootstrap, SiJquery,
+  SiTypescript,
+  SiExpress,
+  SiSpringboot,
+  SiPostgresql,
+  SiMongodb,
+  SiRedis,
+  SiNginx,
+  SiNextdotjs,
+  SiHtml5,
+  SiCss3,
+  SiGnubash,
+  SiGooglecloud,
+  SiTensorflow,
+  SiDiscord,
+  SiNotion,
+  SiFastapi,
+  SiBootstrap,
+  SiJquery,
   SiFigma,
   SiFlask,
   SiKubernetes,
   SiDjango,
   SiRabbitmq,
-  SiApachekafka
+  SiApachekafka,
 } from 'react-icons/si';
-import { VscAzure, VscVscode } from "react-icons/vsc";
-import { MdAccessTime } from "react-icons/md";
-import { FaInstagram, FaLinkedin, FaEnvelope, FaFileDownload } from "react-icons/fa"
-import { FaXTwitter } from "react-icons/fa6";
+import { VscAzure, VscVscode } from 'react-icons/vsc';
+import { MdAccessTime } from 'react-icons/md';
+import {
+  FaInstagram,
+  FaLinkedin,
+  FaEnvelope,
+  FaFileDownload,
+} from 'react-icons/fa';
+import { FaThreads, FaXTwitter } from 'react-icons/fa6';
+import { HiOutlineHome } from 'react-icons/hi';
+import {
+  FiCalendar,
+  FiCheck,
+  FiClock,
+  FiExternalLink,
+  FiEye,
+  FiShare2,
+} from 'react-icons/fi';
 
 export const icons = [
   { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
@@ -21,21 +75,30 @@ export const icons = [
   { name: 'Python', icon: <FaPython className="text-blue-400" /> },
   { name: 'Java', icon: <FaJava className="text-red-500" /> },
   { name: 'Node.js', icon: <FaNodeJs className="text-green-600" /> },
-  { name: 'Express', icon: <SiExpress className="text-gray-800 dark:text-gray-200" /> },
+  {
+    name: 'Express',
+    icon: <SiExpress className="text-gray-800 dark:text-gray-200" />,
+  },
   { name: 'Spring Boot', icon: <SiSpringboot className="text-green-700" /> },
   { name: 'PostgreSQL', icon: <SiPostgresql className="text-blue-700" /> },
   { name: 'MongoDB', icon: <SiMongodb className="text-green-500" /> },
   { name: 'Redis', icon: <SiRedis className="text-red-500" /> },
   { name: 'Nginx', icon: <SiNginx className="text-green-700" /> },
   { name: 'React', icon: <FaReact className="text-blue-400" /> },
-  { name: 'Next.js', icon: <SiNextdotjs className="text-black dark:text-white" /> },
+  {
+    name: 'Next.js',
+    icon: <SiNextdotjs className="text-black dark:text-white" />,
+  },
   { name: 'HTML', icon: <SiHtml5 className="text-orange-600" /> },
   { name: 'CSS', icon: <SiCss3 className="text-blue-600" /> },
   { name: 'Git', icon: <FaGitAlt className="text-orange-500" /> },
   { name: 'Bash', icon: <SiGnubash className="text-green-700" /> },
   { name: 'Docker', icon: <FaDocker className="text-blue-500" /> },
   { name: 'Linux', icon: <FaLinux className="text-yellow-500" /> },
-  { name: 'GitHub', icon: <FaGithub className="text-gray-800 dark:text-gray-200" /> },
+  {
+    name: 'GitHub',
+    icon: <FaGithub className="text-gray-800 dark:text-gray-200" />,
+  },
   { name: 'GCP', icon: <SiGooglecloud className="text-blue-600" /> },
   { name: 'AWS', icon: <FaAws className="text-orange-400" /> },
   { name: 'Azure', icon: <VscAzure className="text-blue-700" /> },
@@ -58,6 +121,26 @@ export const icons = [
   { name: 'XTwitter', icon: <FaXTwitter className="" /> },
   { name: 'Instagram', icon: <FaInstagram className="" /> },
   { name: 'LinkedIn', icon: <FaLinkedin className="" /> },
+  { name: 'Threads', icons: <FaThreads className="" /> },
   { name: 'Email', icon: <FaEnvelope className="" /> },
-  { name: 'Resume', icon: <FaFileDownload className="" /> }
+  { name: 'Resume', icon: <FaFileDownload className="" /> },
+  { name: 'ChevronLeft', icon: <FaChevronLeft className="" /> },
+  { name: 'ChevronRight', icon: <FaChevronRight className="" /> },
+  { name: 'HomeOutlined', icon: <HiOutlineHome className="" /> },
+  { name: 'Home', icon: <FaHome className="" /> },
+  { name: 'ArrowUp', icon: <FaArrowUp className="" /> },
+  { name: 'ArrowLeft', icon: <FaArrowLeft className="" /> },
+  { name: 'ArrowRight', icon: <FaArrowRight className="" /> },
+  { name: 'Search', icon: <FaSearch className="" /> },
+  { name: 'FileExcel', icon: <FaFileExcel className="" /> },
+  { name: 'Times', icon: <FaTimes className="" /> },
+  { name: 'Filter', icon: <FaFilter className="" /> },
+  { name: 'Eye', icon: <FiEye className="" /> },
+  { name: 'Share', icon: <FiShare2 className=" " /> },
+  { name: 'Check', icon: <FiCheck className="" /> },
+  { name: 'ExclamationTriangle', icon: <FaExclamationTriangle className="" /> },
+  { name: 'Sync', icon: <FaSync className="" /> },
+  { name: 'Calendar', icon: <FiCalendar className="" /> },
+  { name: 'Clock', icon: <FiClock className="" /> },
+  { name: 'ExternalLink', icon: <FiExternalLink className="" /> },
 ];

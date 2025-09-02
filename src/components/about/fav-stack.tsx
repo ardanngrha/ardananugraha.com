@@ -1,14 +1,14 @@
-"use client"
+'use client';
 
-import { motion } from "motion/react";
+import { motion } from 'motion/react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { favStack } from "@/data/about-fav-stack";
-import { useState } from "react";
+} from '@/components/ui/tooltip';
+import { favStack } from '@/data/about-fav-stack';
+import { useState } from 'react';
 
 export function FavStack() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -23,10 +23,10 @@ export function FavStack() {
           >
             <TooltipTrigger asChild>
               <motion.div
-                whileHover={{ scale: 1.1, zIndex: 10, filter: "grayscale(0)" }}
+                whileHover={{ scale: 1.1, zIndex: 10, filter: 'grayscale(0)' }}
                 animate={
                   activeIndex === idx
-                    ? { scale: 1.1, zIndex: 10, filter: "grayscale(0)" }
+                    ? { scale: 1.1, zIndex: 10, filter: 'grayscale(0)' }
                     : {}
                 }
                 className="grayscale hover:grayscale-0 transition-all duration-50 select-none"

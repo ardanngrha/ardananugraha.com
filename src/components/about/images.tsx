@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "motion/react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { images } from "@/data/about-images";
-import { Button } from "../ui/button";
+import { useState } from 'react';
+import Image from 'next/image';
+import { motion, AnimatePresence } from 'motion/react';
+import { getIcon } from '@/lib/icons';
+import { images } from '@/data/about-images';
+import { Button } from '../ui/button';
 
 const variants = {
   enter: (direction: number) => ({
@@ -37,7 +37,6 @@ const swipePower = (offset: number, velocity: number) => {
 export function AboutImage() {
   const [[page, direction], setPage] = useState([0, 0]);
 
-  // Correctly wrap the index to create an infinite loop
   const imageIndex = ((page % images.length) + images.length) % images.length;
 
   const paginate = (newDirection: number) => {
@@ -60,7 +59,7 @@ export function AboutImage() {
           variant="ghost"
           size="icon"
         >
-          <FaChevronLeft className="h-8 w-8" />
+          {getIcon('ChevronLeft', 'h-8 w-8')}
         </Button>
 
         {/* Carousel Container */}
@@ -75,9 +74,9 @@ export function AboutImage() {
               animate={{ ...variants.center, rotate: currentImage.rotation }}
               exit="exit"
               transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
+                x: { type: 'spring', stiffness: 300, damping: 30 },
                 opacity: { duration: 0.2 },
-                rotate: { type: "spring", stiffness: 300, damping: 30 },
+                rotate: { type: 'spring', stiffness: 300, damping: 30 },
               }}
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
@@ -87,7 +86,11 @@ export function AboutImage() {
                 if (swipe < -swipeConfidenceThreshold) paginate(1);
                 else if (swipe > swipeConfidenceThreshold) paginate(-1);
               }}
-              whileHover={{ y: -10, scale: 1.05, transition: { duration: 0.2 } }}
+              whileHover={{
+                y: -10,
+                scale: 1.05,
+                transition: { duration: 0.2 },
+              }}
             >
               <div className="flex flex-col h-full pointer-events-none">
                 <div className="relative w-full aspect-square rounded-lg overflow-visible flex items-center justify-center bg-transparent">
@@ -103,8 +106,12 @@ export function AboutImage() {
                   </div>
                 </div>
                 <div className="text-center flex-grow flex flex-col justify-center px-2">
-                  <p className="font-handwriting text sm:text-lg md:text-xl font-bold mb-1 line-clamp-2">{currentImage.description}</p>
-                  <p className="font-handwriting text sm:text-lg font-bold text-muted-foreground">{currentImage.year}</p>
+                  <p className="font-handwriting text sm:text-lg md:text-xl font-bold mb-1 line-clamp-2">
+                    {currentImage.description}
+                  </p>
+                  <p className="font-handwriting text sm:text-lg font-bold text-muted-foreground">
+                    {currentImage.year}
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -118,7 +125,7 @@ export function AboutImage() {
           variant="ghost"
           size="icon"
         >
-          <FaChevronRight className="h-8 w-8" />
+          {getIcon('ChevronRight', 'h-8 w-8')}
         </Button>
       </div>
 
@@ -130,7 +137,7 @@ export function AboutImage() {
           variant="ghost"
           size="icon"
         >
-          <FaChevronLeft className="h-8 w-8" />
+          {getIcon('ChevronLeft', 'h-8 w-8')}
         </Button>
         <Button
           onClick={() => paginate(1)}
@@ -138,7 +145,7 @@ export function AboutImage() {
           variant="ghost"
           size="icon"
         >
-          <FaChevronRight className="h-8 w-8" />
+          {getIcon('ChevronRight', 'h-8 w-8')}
         </Button>
       </div>
     </div>

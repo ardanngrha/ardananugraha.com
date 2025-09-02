@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { motion, AnimatePresence, useInView } from "motion/react";
-import { useState, useEffect, useRef } from "react";
-import { getTechIcon } from "@/lib/icons";
-import { stackCategories } from "@/data/home-highlights";
+import { motion, AnimatePresence, useInView } from 'motion/react';
+import { useState, useEffect, useRef } from 'react';
+import { getIcon } from '@/lib/icons';
+import { stackCategories } from '@/data/home-highlights';
 
 export default function SecondHighlight() {
   const [activeCard, setActiveCard] = useState(0);
@@ -52,7 +52,10 @@ export default function SecondHighlight() {
   const currentCategory = stackCategories[activeCard];
 
   return (
-    <section ref={sectionRef} className="py-20 px-4 overflow-hidden bg-gradient-to-br from-background via-background/80 to-background">
+    <section
+      ref={sectionRef}
+      className="py-20 px-4 overflow-hidden bg-gradient-to-br from-background via-background/80 to-background"
+    >
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
@@ -72,7 +75,9 @@ export default function SecondHighlight() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            From beautiful interfaces and robust APIs to intelligent models, reliable databases, scalable infrastructure, and real-time messaging—covering the full stack, end to end.
+            From beautiful interfaces and robust APIs to intelligent models,
+            reliable databases, scalable infrastructure, and real-time
+            messaging—covering the full stack, end to end.
           </motion.p>
         </div>
 
@@ -95,7 +100,7 @@ export default function SecondHighlight() {
                 transition={{ duration: 0.5 }}
               >
                 {currentCategory.technologies.map((tech, index) => {
-                  const Icon = getTechIcon(tech);
+                  const Icon = getIcon(tech);
                   return (
                     <motion.div
                       key={tech}
@@ -104,20 +109,18 @@ export default function SecondHighlight() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
                         delay: index * 0.1,
-                        type: "spring",
+                        type: 'spring',
                         stiffness: 300,
-                        damping: 20
+                        damping: 20,
                       }}
                       whileHover={{
                         scale: 1.2,
-                        transition: { duration: 0.3 }
+                        transition: { duration: 0.3 },
                       }}
                       onMouseEnter={() => setHoveredTech(tech)}
                       onMouseLeave={() => setHoveredTech(null)}
                     >
-                      <div className="text-3xl md:text-4xl">
-                        {Icon}
-                      </div>
+                      <div className="text-3xl md:text-4xl">{Icon}</div>
 
                       {/* Tooltip */}
                       <AnimatePresence>
@@ -166,9 +169,9 @@ export default function SecondHighlight() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{
                       delay: index * 0.1,
-                      type: "spring",
+                      type: 'spring',
                       stiffness: 200,
-                      damping: 15
+                      damping: 15,
                     }}
                   >
                     {word}
@@ -195,9 +198,10 @@ export default function SecondHighlight() {
                   key={category.id}
                   className={`
                     relative p-6 rounded-2xl cursor-pointer transition-all duration-300
-                    ${isActive
-                      ? 'bg-card border-2 border-primary/50 shadow-2xl'
-                      : 'bg-card/50 border border-border/50 hover:border-primary/30'
+                    ${
+                      isActive
+                        ? 'bg-card border-2 border-primary/50 shadow-2xl'
+                        : 'bg-card/50 border border-border/50 hover:border-primary/30'
                     }
                   `}
                   onClick={() => handleCardClick(index)}
@@ -219,7 +223,9 @@ export default function SecondHighlight() {
                     <div
                       className="absolute inset-0 rounded-2xl opacity-50"
                       style={{
-                        background: `linear-gradient(45deg, ${category.activeGradient.split(' ')[1]}, ${category.activeGradient.split(' ')[3]})`,
+                        background: `linear-gradient(45deg, ${
+                          category.activeGradient.split(' ')[1]
+                        }, ${category.activeGradient.split(' ')[3]})`,
                         padding: '1px',
                       }}
                     >
@@ -232,9 +238,10 @@ export default function SecondHighlight() {
                     <motion.div
                       className={`
                         p-3 rounded-xl transition-all duration-300
-                        ${isActive
-                          ? `bg-gradient-to-br ${category.gradient} text-white shadow-lg`
-                          : 'bg-muted text-muted-foreground'
+                        ${
+                          isActive
+                            ? `bg-gradient-to-br ${category.gradient} text-white shadow-lg`
+                            : 'bg-muted text-muted-foreground'
                         }
                       `}
                     >
@@ -242,10 +249,12 @@ export default function SecondHighlight() {
                     </motion.div>
 
                     <div>
-                      <h3 className={`
+                      <h3
+                        className={`
                         font-semibold text-sm md:text-base transition-colors duration-300
                         ${isActive ? 'text-primary' : 'text-foreground'}
-                      `}>
+                      `}
+                      >
                         {category.title}
                       </h3>
                     </div>
@@ -257,12 +266,12 @@ export default function SecondHighlight() {
                       className="absolute inset-0 rounded-2xl border-2 border-primary/30"
                       animate={{
                         scale: [1, 1.05, 1],
-                        opacity: [0.5, 0.8, 0.5]
+                        opacity: [0.5, 0.8, 0.5],
                       }}
                       transition={{
                         duration: 2,
                         repeat: Infinity,
-                        ease: "easeInOut"
+                        ease: 'easeInOut',
                       }}
                     />
                   )}
@@ -282,17 +291,18 @@ export default function SecondHighlight() {
             {stackCategories.map((_, index) => (
               <motion.button
                 key={index}
-                className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${index === activeCard
-                  ? 'bg-primary w-8'
-                  : index < activeCard
+                className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${
+                  index === activeCard
+                    ? 'bg-primary w-8'
+                    : index < activeCard
                     ? 'bg-blue-500 w-3'
                     : 'bg-muted w-3'
-                  }`}
+                }`}
                 onClick={() => handleCardClick(index)}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.8 }}
                 animate={{
-                  scale: index === activeCard ? 1.1 : 1
+                  scale: index === activeCard ? 1.1 : 1,
                 }}
               />
             ))}

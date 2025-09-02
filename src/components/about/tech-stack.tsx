@@ -1,25 +1,54 @@
-"use client";
+'use client';
 
-import { motion, useAnimationFrame, useMotionValue } from "motion/react";
+import { motion, useAnimationFrame, useMotionValue } from 'motion/react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useEffect, useRef, useState } from "react";
-import { icons } from "@/data/icons";
+} from '@/components/ui/tooltip';
+import { useEffect, useRef, useState } from 'react';
+import { icons } from '@/data/icons';
 
 export function TechStack() {
   const displayedTechs = [
-    'JavaScript', 'TypeScript', 'Python', 'Java', 'React', 'Next.js',
-    'Node.js', 'Express', 'Spring Boot', 'PostgreSQL', 'MongoDB',
-    'Docker', 'AWS', 'GCP', 'Git', 'TensorFlow', 'Linux', 'Redis', 'HTML', 'CSS', 'Bash',
-    'Discord', 'Notion', 'FastAPI', 'Bootstrap', 'VSCode', 'Kafka', 'Kubernetes', 'Flask', 'RabbitMQ', 'GitHub'
+    'JavaScript',
+    'TypeScript',
+    'Python',
+    'Java',
+    'React',
+    'Next.js',
+    'Node.js',
+    'Express',
+    'Spring Boot',
+    'PostgreSQL',
+    'MongoDB',
+    'Docker',
+    'AWS',
+    'GCP',
+    'Git',
+    'TensorFlow',
+    'Linux',
+    'Redis',
+    'HTML',
+    'CSS',
+    'Bash',
+    'Discord',
+    'Notion',
+    'FastAPI',
+    'Bootstrap',
+    'VSCode',
+    'Kafka',
+    'Kubernetes',
+    'Flask',
+    'RabbitMQ',
+    'GitHub',
   ];
 
   // Filter tech_icons to only show selected technologies
-  const filteredTools = icons.filter(tool => displayedTechs.includes(tool.name));
+  const filteredTools = icons.filter((tool) =>
+    displayedTechs.includes(tool.name),
+  );
   const duplicatedTools = [...filteredTools, ...filteredTools];
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,7 +67,13 @@ export function TechStack() {
   }, []);
 
   useAnimationFrame((time, delta) => {
-    if (isDragging.current || isHovering || activeIndex !== null || !contentWidth) return;
+    if (
+      isDragging.current ||
+      isHovering ||
+      activeIndex !== null ||
+      !contentWidth
+    )
+      return;
 
     let currentX = x.get();
     const speed = -70; // pixels per second
@@ -75,9 +110,13 @@ export function TechStack() {
             left: -contentWidth,
             right: 0,
           }}
-          onDragStart={() => { isDragging.current = true; }}
-          onDragEnd={() => { isDragging.current = false; }}
-          whileTap={{ cursor: "grabbing" }}
+          onDragStart={() => {
+            isDragging.current = true;
+          }}
+          onDragEnd={() => {
+            isDragging.current = false;
+          }}
+          whileTap={{ cursor: 'grabbing' }}
         >
           {duplicatedTools.map((tool, index) => {
             const isActive = activeIndex === index;
@@ -89,10 +128,14 @@ export function TechStack() {
                     whileHover={{
                       scale: 1.2,
                       y: -5,
-                      filter: "grayscale(0)",
-                      transition: { duration: 0.2 }
+                      filter: 'grayscale(0)',
+                      transition: { duration: 0.2 },
                     }}
-                    animate={isActive ? { scale: 1.2, y: -5, filter: "grayscale(0)" } : {}}
+                    animate={
+                      isActive
+                        ? { scale: 1.2, y: -5, filter: 'grayscale(0)' }
+                        : {}
+                    }
                     onTouchStart={() => {
                       setActiveIndex(index);
                       setIsHovering(true); // Stop auto-scroll
@@ -113,7 +156,7 @@ export function TechStack() {
                   <p>{tool.name}</p>
                 </TooltipContent>
               </Tooltip>
-            )
+            );
           })}
         </motion.div>
       </div>

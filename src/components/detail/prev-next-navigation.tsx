@@ -1,33 +1,25 @@
-import Link from 'next/link'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { EnhancedProject } from '@/types/projects';
-import { EnhancedWriting } from '@/types/writings';
-import { cn } from '@/lib/utils'
-
-interface PrevNextNavigationProps {
-  prev: EnhancedProject | EnhancedWriting | null
-  next: EnhancedProject | EnhancedWriting | null
-  contentType: 'project' | 'writing'
-  className?: string
-}
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { PrevNextNavigationProps } from '@/types/shared';
+import { getIcon } from '@/lib/icons';
 
 export function PrevNextNavigation({
   prev,
   next,
   contentType,
-  className
+  className,
 }: PrevNextNavigationProps) {
-  const basePath = contentType === 'project' ? '/projects' : '/writings'
+  const basePath = contentType === 'project' ? '/projects' : '/writings';
 
   if (!prev && !next) {
-    return null
+    return null;
   }
 
   return (
     <nav
       className={cn(
         'flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4 py-6 sm:py-8 border-t border-border',
-        className
+        className,
       )}
       aria-label="Previous and next navigation"
     >
@@ -39,7 +31,10 @@ export function PrevNextNavigation({
             className="group flex items-center gap-3 p-4 sm:p-5 rounded-lg border border-border hover:border-primary/50 hover:bg-muted/50 transition-all duration-200 min-h-[80px] touch-manipulation"
           >
             <div className="flex-shrink-0">
-              <FaChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+              {getIcon(
+                'ChevronLeft',
+                'h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors',
+              )}
             </div>
             <div className="min-w-0 flex-1">
               <div className="text-xs sm:text-sm text-muted-foreground mb-1 font-medium">
@@ -83,7 +78,10 @@ export function PrevNextNavigation({
               )}
             </div>
             <div className="flex-shrink-0 sm:order-2">
-              <FaChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors" />
+              {getIcon(
+                'ChevronRight',
+                'h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground group-hover:text-primary transition-colors',
+              )}
             </div>
           </Link>
         ) : (
@@ -93,5 +91,5 @@ export function PrevNextNavigation({
         )}
       </div>
     </nav>
-  )
+  );
 }

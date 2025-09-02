@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Image from "next/image";
-import { motion } from "motion/react";
-import { formatRelativeDate, isRecent } from "@/lib/utils";
-import { EnhancedWriting } from "@/types/writings";
-import { getTechIcon } from "@/lib/icons";
+import Link from 'next/link';
+import Image from 'next/image';
+import { motion } from 'motion/react';
+import { formatRelativeDate, isRecent } from '@/lib/utils';
+import { EnhancedWriting } from '@/types/writings';
+import { getIcon } from '@/lib/icons';
 
 interface WritingCardProps {
   writing: EnhancedWriting;
@@ -18,32 +18,35 @@ const cardVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 120,
       damping: 15,
-      duration: 0.4
-    }
+      duration: 0.4,
+    },
   },
   hover: {
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 300,
-      damping: 20
+      damping: 20,
     },
-  }
+  },
 };
 
 const imageVariants = {
   hover: {
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 300,
-      damping: 15
-    }
-  }
+      damping: 15,
+    },
+  },
 };
 
-export function WritingCard({ writing, variant = 'featured' }: WritingCardProps) {
+export function WritingCard({
+  writing,
+  variant = 'featured',
+}: WritingCardProps) {
   const { slug, frontmatter, readTime } = writing;
   const recent = isRecent(frontmatter.date);
 
@@ -58,7 +61,6 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
     >
       <Link href={`/writings/${slug}`} className="group block">
         <article className="grid grid-cols-1 md:grid-cols-12 gap-x-6 items-center p-4">
-
           {/* Image block */}
           <motion.div
             className="col-span-12 md:col-span-4"
@@ -76,7 +78,9 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
                 />
               ) : (
                 <div className="w-full h-full bg-secondary flex items-center justify-center">
-                  <span className="text-muted-foreground text-sm">No image</span>
+                  <span className="text-muted-foreground text-sm">
+                    No image
+                  </span>
                 </div>
               )}
             </div>
@@ -90,14 +94,25 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
             >
-              <span>{new Date(frontmatter.date).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+              <span>
+                {new Date(frontmatter.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })}
+              </span>
               <span>({formatRelativeDate(frontmatter.date)})</span>
               {recent && (
                 <motion.span
                   className="text-green-500 bg-green-500/10 px-2 py-0.5 rounded-full text-xs font-semibold"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15, delay: 0.2 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 300,
+                    damping: 15,
+                    delay: 0.2,
+                  }}
                 >
                   Recently released
                 </motion.span>
@@ -125,12 +140,19 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <motion.div className="flex items-center gap-2"
+              <motion.div
+                className="flex items-center gap-2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}>
-                {getTechIcon('Time', 'inline-block text-muted-foreground text-base')}
-                <span className="text-muted-foreground whitespace-nowrap text-xs">{readTime} min read</span>
+                transition={{ delay: 0.2 }}
+              >
+                {getIcon(
+                  'Time',
+                  'inline-block text-muted-foreground text-base',
+                )}
+                <span className="text-muted-foreground whitespace-nowrap text-xs">
+                  {readTime} min read
+                </span>
               </motion.div>
               <div className="flex gap-2 flex-wrap justify-start md:justify-end text-xs">
                 {frontmatter.tags.map((tag, index) => (
@@ -140,10 +162,10 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{
-                      delay: 0.25 + (index * 0.05),
-                      type: "spring",
+                      delay: 0.25 + index * 0.05,
+                      type: 'spring',
                       stiffness: 200,
-                      damping: 15
+                      damping: 15,
                     }}
                   >
                     {tag}
@@ -152,7 +174,6 @@ export function WritingCard({ writing, variant = 'featured' }: WritingCardProps)
               </div>
             </motion.div>
           </div>
-
         </article>
       </Link>
     </motion.div>

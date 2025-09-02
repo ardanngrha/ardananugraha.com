@@ -2,17 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
-
-interface TocItem {
-  id: string;
-  text: string;
-  level: number;
-}
-
-interface TableOfContentsProps {
-  content: string;
-  className?: string;
-}
+import { TocItem, TableOfContentsProps } from '@/types/shared';
 
 export function TableOfContents({ content, className }: TableOfContentsProps) {
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
@@ -53,26 +43,39 @@ export function TableOfContents({ content, className }: TableOfContentsProps) {
       {
         rootMargin: '-100px 0px -66%',
         threshold: 0.1,
-      }
+      },
     );
 
     // Wait for DOM to be ready and find all headings
     const findAndObserveHeadings = () => {
-      const headingElements = tocItems.map(item => {
-        // Try different selectors to find the heading
-        const element = document.getElementById(item.id) ||
-          document.querySelector(`[id="${item.id}"]`) ||
-          document.querySelector(`h1, h2, h3, h4, h5, h6`)?.querySelector(`[id*="${item.id}"]`) ||
-          Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).find(el =>
-            el.textContent?.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim() === item.id
-          );
-        return element as HTMLElement;
-      }).filter(Boolean);
+      const headingElements = tocItems
+        .map((item) => {
+          // Try different selectors to find the heading
+          const element =
+            document.getElementById(item.id) ||
+            document.querySelector(`[id="${item.id}"]`) ||
+            document
+              .querySelector(`h1, h2, h3, h4, h5, h6`)
+              ?.querySelector(`[id*="${item.id}"]`) ||
+            Array.from(
+              document.querySelectorAll('h1, h2, h3, h4, h5, h6'),
+            ).find(
+              (el) =>
+                el.textContent
+                  ?.toLowerCase()
+                  .replace(/[^\w\s-]/g, '')
+                  .replace(/\s+/g, '-')
+                  .replace(/-+/g, '-')
+                  .trim() === item.id,
+            );
+          return element as HTMLElement;
+        })
+        .filter(Boolean);
 
-      headingElements.forEach(el => el && observer.observe(el));
+      headingElements.forEach((el) => el && observer.observe(el));
 
       return () => {
-        headingElements.forEach(el => el && observer.unobserve(el));
+        headingElements.forEach((el) => el && observer.unobserve(el));
       };
     };
 
@@ -99,19 +102,32 @@ export function TableOfContents({ content, className }: TableOfContentsProps) {
 
     if (!element) {
       // Try finding by text content match
-      const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'));
-      element = headings.find(el =>
-        el.textContent?.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim() === id
+      const headings = Array.from(
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6'),
+      );
+      element = headings.find(
+        (el) =>
+          el.textContent
+            ?.toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim() === id,
       ) as HTMLElement;
     }
 
     if (!element) {
       // Try finding by partial text match
-      const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6'));
-      const tocItem = tocItems.find(item => item.id === id);
+      const headings = Array.from(
+        document.querySelectorAll('h1, h2, h3, h4, h5, h6'),
+      );
+      const tocItem = tocItems.find((item) => item.id === id);
       if (tocItem) {
-        element = headings.find(el =>
-          el.textContent?.trim().toLowerCase().includes(tocItem.text.toLowerCase())
+        element = headings.find((el) =>
+          el.textContent
+            ?.trim()
+            .toLowerCase()
+            .includes(tocItem.text.toLowerCase()),
         ) as HTMLElement;
       }
     }
@@ -119,11 +135,12 @@ export function TableOfContents({ content, className }: TableOfContentsProps) {
     if (element) {
       // Add some offset to account for fixed headers
       const yOffset = -20;
-      const elementTop = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const elementTop =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({
         top: elementTop,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
 
       // Update active state immediately
@@ -137,7 +154,7 @@ export function TableOfContents({ content, className }: TableOfContentsProps) {
     <nav
       className={cn(
         'space-y-2', // Hide on mobile, show on md+
-        className
+        className,
       )}
       aria-label="Table of contents"
     >
@@ -155,13 +172,11 @@ export function TableOfContents({ content, className }: TableOfContentsProps) {
             item.level === 3 && 'ml-3 text-xs',
             item.level === 4 && 'ml-5 text-xs',
             item.level === 5 && 'ml-7 text-xs',
-            item.level === 6 && 'ml-9 text-xs'
+            item.level === 6 && 'ml-9 text-xs',
           )}
           title={item.text}
         >
-          <span className="line-clamp-2 leading-tight">
-            {item.text}
-          </span>
+          <span className="line-clamp-2 leading-tight">{item.text}</span>
         </button>
       ))}
     </nav>

@@ -1,12 +1,6 @@
 'use client';
 
 import { Badge } from '@/components/ui/badge';
-import {
-  FiCalendar,
-  FiClock,
-  FiExternalLink,
-  FiGithub,
-} from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { EnhancedProject } from '@/types/projects';
@@ -14,12 +8,8 @@ import { EnhancedWriting } from '@/types/writings';
 import { HeroImageWithLoading } from './image-with-loading';
 import { SimpleTags } from './tag-list';
 import { ViewCounter } from './view-counter';
-
-interface DetailHeroProps {
-  item: EnhancedProject | EnhancedWriting;
-  type: 'project' | 'writing';
-  className?: string;
-}
+import { DetailHeroProps } from '@/types/shared';
+import { getIcon } from '@/lib/icons';
 
 export function DetailHero({ item, type, className }: DetailHeroProps) {
   const { frontmatter } = item;
@@ -31,7 +21,11 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
     <header className={cn('relative overflow-hidden', className)} role="banner">
       {/* Hero Image */}
       {frontmatter.image && (
-        <div className="mb-8" role="img" aria-label={`Featured image for ${frontmatter.title}`}>
+        <div
+          className="mb-8"
+          role="img"
+          aria-label={`Featured image for ${frontmatter.title}`}
+        >
           <HeroImageWithLoading
             src={frontmatter.image}
             alt={`Featured image for ${frontmatter.title}`}
@@ -43,7 +37,11 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
       {/* Content */}
       <div className="space-y-6">
         {/* Status and Featured Badges */}
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Content status and badges">
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-label="Content status and badges"
+        >
           {frontmatter.featured && (
             <Badge
               variant="secondary"
@@ -59,12 +57,18 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
               variant="outline"
               className={cn(
                 'capitalize',
-                projectData.status === 'completed' && 'bg-green-500/10 text-green-500 border-green-500/20',
-                projectData.status === 'in-progress' && 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-                projectData.status === 'planned' && 'bg-gray-500/10 text-gray-500 border-gray-500/20'
+                projectData.status === 'completed' &&
+                  'bg-green-500/10 text-green-500 border-green-500/20',
+                projectData.status === 'in-progress' &&
+                  'bg-blue-500/10 text-blue-500 border-blue-500/20',
+                projectData.status === 'planned' &&
+                  'bg-gray-500/10 text-gray-500 border-gray-500/20',
               )}
               role="status"
-              aria-label={`Project status: ${projectData.status.replace('-', ' ')}`}
+              aria-label={`Project status: ${projectData.status.replace(
+                '-',
+                ' ',
+              )}`}
             >
               {projectData.status.replace('-', ' ')}
             </Badge>
@@ -84,14 +88,27 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
         )}
 
         {/* Metadata */}
-        <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm sm:text-base text-muted-foreground" role="group" aria-label="Content metadata">
+        <div
+          className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm sm:text-base text-muted-foreground"
+          role="group"
+          aria-label="Content metadata"
+        >
           <div className="flex items-center gap-1">
-            <FiCalendar className="w-4 h-4" aria-hidden="true" />
-            <time dateTime={frontmatter.date} aria-label={`Published on ${new Date(frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}>
+            {getIcon('Calendar', 'w-4 h-4')}
+            <time
+              dateTime={frontmatter.date}
+              aria-label={`Published on ${new Date(
+                frontmatter.date,
+              ).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}`}
+            >
               {new Date(frontmatter.date).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric'
+                day: 'numeric',
               })}
             </time>
           </div>
@@ -99,8 +116,11 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
           {/* Read Time */}
           {item.readTime && (
             <div className="flex items-center gap-1">
-              <FiClock className="w-4 h-4" aria-hidden="true" />
-              <span aria-label={`Estimated reading time: ${item.readTime} minutes`} className="text-xs sm:text-base">
+              {getIcon('Clock', 'w-4 h-4')}
+              <span
+                aria-label={`Estimated reading time: ${item.readTime} minutes`}
+                className="text-xs sm:text-base"
+              >
                 {`${item.readTime} min read`}
               </span>
             </div>
@@ -113,7 +133,12 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
 
           {/* Writing Category */}
           {!isProject && writingData?.category && (
-            <Badge variant="outline" className="text-xs" role="note" aria-label={`Category: ${writingData.category}`}>
+            <Badge
+              variant="outline"
+              className="text-xs"
+              role="note"
+              aria-label={`Category: ${writingData.category}`}
+            >
               {writingData.category}
             </Badge>
           )}
@@ -122,9 +147,18 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
         {/* Project Actions */}
         {isProject && projectData && (
           <div>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4" role="group" aria-label="Project links and actions">
+            <div
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+              role="group"
+              aria-label="Project links and actions"
+            >
               {projectData.githubUrl && (
-                <Button asChild variant="default" size="default" className="min-h-[44px] touch-manipulation">
+                <Button
+                  asChild
+                  variant="default"
+                  size="default"
+                  className="min-h-[44px] touch-manipulation"
+                >
                   <a
                     href={projectData.githubUrl}
                     target="_blank"
@@ -132,13 +166,18 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
                     className="flex items-center justify-center gap-2 px-6 py-3"
                     aria-label={`View source code for ${frontmatter.title} on GitHub (opens in new tab)`}
                   >
-                    <FiGithub className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                    {getIcon('GitHub', 'w-4 h-4 sm:w-5 sm:h-5')}
                     <span className="font-medium">View Code</span>
                   </a>
                 </Button>
               )}
               {projectData.liveUrl && (
-                <Button asChild variant="outline" size="default" className="min-h-[44px] touch-manipulation">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="default"
+                  className="min-h-[44px] touch-manipulation"
+                >
                   <a
                     href={projectData.liveUrl}
                     target="_blank"
@@ -146,7 +185,7 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
                     className="flex items-center justify-center gap-2 px-6 py-3"
                     aria-label={`View live demo of ${frontmatter.title} (opens in new tab)`}
                   >
-                    <FiExternalLink className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+                    {getIcon('ExternalLink', 'w-4 h-4 sm:w-5 sm:h-5')}
                     <span className="font-medium">Live Demo</span>
                   </a>
                 </Button>
@@ -167,9 +206,19 @@ export function DetailHero({ item, type, className }: DetailHeroProps) {
 
         {/* Tags for writings */}
         {!isProject && frontmatter.tags && frontmatter.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Tags for this article">
+          <div
+            className="flex flex-wrap gap-2"
+            role="group"
+            aria-label="Tags for this article"
+          >
             {frontmatter.tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`Tag: ${tag}`}>
+              <Badge
+                key={tag}
+                variant="secondary"
+                className="text-xs"
+                role="note"
+                aria-label={`Tag: ${tag}`}
+              >
                 {tag}
               </Badge>
             ))}

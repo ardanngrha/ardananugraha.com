@@ -4,12 +4,17 @@ import Link from 'next/link';
 import { motion } from 'motion/react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { FaCalendar, FaExternalLinkAlt, FaGithub, FaClock } from 'react-icons/fa';
+import {
+  FaCalendar,
+  FaExternalLinkAlt,
+  FaGithub,
+  FaClock,
+} from 'react-icons/fa';
 import { cn } from '@/lib/utils';
 import { EnhancedProject } from '@/types/projects';
 import { EnhancedWriting } from '@/types/writings';
 import { CardImageWithLoading } from './image-with-loading';
-import { getTechIcon } from '@/lib/icons';
+import { getIcon } from '@/lib/icons';
 
 interface RelatedContentProps {
   items: (EnhancedProject | EnhancedWriting)[];
@@ -24,12 +29,12 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring" as const, stiffness: 100, damping: 12 },
+    transition: { type: 'spring' as const, stiffness: 100, damping: 12 },
   },
   hover: {
     y: -2,
-    transition: { type: "spring" as const, stiffness: 300, damping: 20 },
-  }
+    transition: { type: 'spring' as const, stiffness: 300, damping: 20 },
+  },
 };
 
 const containerVariants = {
@@ -47,7 +52,7 @@ export function RelatedContent({
   type,
   title,
   maxItems = 3,
-  className
+  className,
 }: RelatedContentProps) {
   if (!items || items.length === 0) {
     return null;
@@ -59,10 +64,16 @@ export function RelatedContent({
   const viewAllLink = isProjects ? '/projects' : '/writings';
 
   return (
-    <section className={cn('space-y-6', className)} aria-labelledby="related-content-heading">
+    <section
+      className={cn('space-y-6', className)}
+      aria-labelledby="related-content-heading"
+    >
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 id="related-content-heading" className="text-2xl font-bold tracking-tight">
+        <h2
+          id="related-content-heading"
+          className="text-2xl font-bold tracking-tight"
+        >
           {title || defaultTitle}
         </h2>
         {items.length > maxItems && (
@@ -86,11 +97,7 @@ export function RelatedContent({
         className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       >
         {displayItems.map((item) => (
-          <RelatedContentCard
-            key={item.slug}
-            item={item}
-            type={type}
-          />
+          <RelatedContentCard key={item.slug} item={item} type={type} />
         ))}
       </motion.div>
     </section>
@@ -119,7 +126,11 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
         <article className="bg-card border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 hover:border-primary/30 h-full flex flex-col">
           {/* Image */}
           {frontmatter.image && (
-            <div className="group flex-shrink-0 relative aspect-video overflow-hidden" role="img" aria-label={`Featured image for ${frontmatter.title}`}>
+            <div
+              className="group flex-shrink-0 relative aspect-video overflow-hidden"
+              role="img"
+              aria-label={`Featured image for ${frontmatter.title}`}
+            >
               <CardImageWithLoading
                 src={frontmatter.image}
                 alt={`Featured image for ${frontmatter.title}`}
@@ -130,7 +141,11 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
 
           <div className="p-4 sm:p-5 space-y-3 flex-1 flex flex-col">
             {/* Status and Featured Badges */}
-            <div className="flex flex-wrap gap-2" role="group" aria-label="Content status">
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Content status"
+            >
               {frontmatter.featured && (
                 <Badge
                   variant="secondary"
@@ -146,12 +161,18 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
                   variant="outline"
                   className={cn(
                     'capitalize text-xs',
-                    projectData.status === 'completed' && 'bg-green-500/10 text-green-500 border-green-500/20',
-                    projectData.status === 'in-progress' && 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-                    projectData.status === 'planned' && 'bg-gray-500/10 text-gray-500 border-gray-500/20'
+                    projectData.status === 'completed' &&
+                      'bg-green-500/10 text-green-500 border-green-500/20',
+                    projectData.status === 'in-progress' &&
+                      'bg-blue-500/10 text-blue-500 border-blue-500/20',
+                    projectData.status === 'planned' &&
+                      'bg-gray-500/10 text-gray-500 border-gray-500/20',
                   )}
                   role="status"
-                  aria-label={`Project status: ${projectData.status.replace('-', ' ')}`}
+                  aria-label={`Project status: ${projectData.status.replace(
+                    '-',
+                    ' ',
+                  )}`}
                 >
                   {projectData.status.replace('-', ' ')}
                 </Badge>
@@ -171,14 +192,27 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
             )}
 
             {/* Metadata */}
-            <div className="flex items-center gap-3 text-xs text-muted-foreground mt-auto" role="group" aria-label="Content metadata">
+            <div
+              className="flex items-center gap-3 text-xs text-muted-foreground mt-auto"
+              role="group"
+              aria-label="Content metadata"
+            >
               <div className="flex items-center gap-1">
                 <FaCalendar className="w-3 h-3" aria-hidden="true" />
-                <time dateTime={frontmatter.date} aria-label={`Published ${new Date(frontmatter.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`}>
+                <time
+                  dateTime={frontmatter.date}
+                  aria-label={`Published ${new Date(
+                    frontmatter.date,
+                  ).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}`}
+                >
                   {new Date(frontmatter.date).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
-                    year: 'numeric'
+                    year: 'numeric',
                   })}
                 </time>
               </div>
@@ -192,15 +226,41 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
 
             {/* Tags */}
             {uniqueTags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-3" role="group" aria-label={`${isProject ? 'Technologies' : 'Tags'} used`}>
+              <div
+                className="flex flex-wrap gap-2 mt-3"
+                role="group"
+                aria-label={`${isProject ? 'Technologies' : 'Tags'} used`}
+              >
                 {uniqueTags.slice(0, 3).map((tag) => (
-                  <div key={tag} className="flex items-center gap-1.5 bg-secondary px-2 py-1 rounded-full text-xs font-medium text-secondary-foreground">
-                    {isProject && getTechIcon(tag) ? <span className="text-sm">{getTechIcon(tag)}</span> : !isProject ? <Badge key={tag} variant="secondary" className="text-xs" role="note" aria-label={`Tag: ${tag}`}>{tag}</Badge> : null}
+                  <div
+                    key={tag}
+                    className="flex items-center gap-1.5 bg-secondary px-2 py-1 rounded-full text-xs font-medium text-secondary-foreground"
+                  >
+                    {isProject && getIcon(tag) ? (
+                      <span className="text-sm">{getIcon(tag)}</span>
+                    ) : !isProject ? (
+                      <Badge
+                        key={tag}
+                        variant="secondary"
+                        className="text-xs"
+                        role="note"
+                        aria-label={`Tag: ${tag}`}
+                      >
+                        {tag}
+                      </Badge>
+                    ) : null}
                     {isProject && <span>{tag}</span>}
                   </div>
                 ))}
                 {uniqueTags.length > 3 && (
-                  <Badge variant="secondary" className="text-xs" role="note" aria-label={`${uniqueTags.length - 3} more ${isProject ? 'technologies' : 'tags'}`}>
+                  <Badge
+                    variant="secondary"
+                    className="text-xs"
+                    role="note"
+                    aria-label={`${uniqueTags.length - 3} more ${
+                      isProject ? 'technologies' : 'tags'
+                    }`}
+                  >
                     +{uniqueTags.length - 3}
                   </Badge>
                 )}
@@ -208,38 +268,55 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
             )}
 
             {/* Project Actions */}
-            {isProject && projectData && (projectData.githubUrl || projectData.liveUrl) && (
-              <div className="flex gap-2 pt-2 mt-auto" role="group" aria-label="Project links">
-                {projectData.githubUrl && (
-                  <button
-                    className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-8 px-2 text-xs rounded-md gap-1"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      window.open(projectData.githubUrl, '_blank', 'noopener,noreferrer');
-                    }}
-                    aria-label={`View source code for ${frontmatter.title} (opens in new tab)`}
-                  >
-                    <FaGithub className="w-3 h-3" aria-hidden="true" />
-                    Code
-                  </button>
-                )}
-                {projectData.liveUrl && (
-                  <button
-                    className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-8 px-2 text-xs rounded-md gap-1"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      window.open(projectData.liveUrl, '_blank', 'noopener,noreferrer');
-                    }}
-                    aria-label={`View live demo of ${frontmatter.title} (opens in new tab)`}
-                  >
-                    <FaExternalLinkAlt className="w-3 h-3" aria-hidden="true" />
-                    Demo
-                  </button>
-                )}
-              </div>
-            )}
+            {isProject &&
+              projectData &&
+              (projectData.githubUrl || projectData.liveUrl) && (
+                <div
+                  className="flex gap-2 pt-2 mt-auto"
+                  role="group"
+                  aria-label="Project links"
+                >
+                  {projectData.githubUrl && (
+                    <button
+                      className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-8 px-2 text-xs rounded-md gap-1"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open(
+                          projectData.githubUrl,
+                          '_blank',
+                          'noopener,noreferrer',
+                        );
+                      }}
+                      aria-label={`View source code for ${frontmatter.title} (opens in new tab)`}
+                    >
+                      <FaGithub className="w-3 h-3" aria-hidden="true" />
+                      Code
+                    </button>
+                  )}
+                  {projectData.liveUrl && (
+                    <button
+                      className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-8 px-2 text-xs rounded-md gap-1"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open(
+                          projectData.liveUrl,
+                          '_blank',
+                          'noopener,noreferrer',
+                        );
+                      }}
+                      aria-label={`View live demo of ${frontmatter.title} (opens in new tab)`}
+                    >
+                      <FaExternalLinkAlt
+                        className="w-3 h-3"
+                        aria-hidden="true"
+                      />
+                      Demo
+                    </button>
+                  )}
+                </div>
+              )}
           </div>
         </article>
       </Link>
@@ -247,13 +324,12 @@ function RelatedContentCard({ item, type }: RelatedContentCardProps) {
   );
 }
 
-
 // Utility components for specific use cases
 export function RelatedProjects({
   projects,
   title,
   maxItems,
-  className
+  className,
 }: {
   projects: EnhancedProject[];
   title?: string;
@@ -275,7 +351,7 @@ export function RelatedWritings({
   writings,
   title,
   maxItems,
-  className
+  className,
 }: {
   writings: EnhancedWriting[];
   title?: string;

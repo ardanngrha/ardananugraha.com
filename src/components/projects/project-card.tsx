@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { motion } from "motion/react";
-import { ProjectContentItem } from "@/types/projects";
-import Image from "next/image";
-import { FaGithub, FaExternalLinkAlt, FaArrowRight } from "react-icons/fa";
-import { RippleButton } from "@/components/ui/ripple-button";
-import { getTechIcon } from "@/lib/icons";
+import { motion } from 'motion/react';
+import { ProjectContentItem } from '@/types/projects';
+import Image from 'next/image';
+import { FaGithub, FaExternalLinkAlt, FaArrowRight } from 'react-icons/fa';
+import { RippleButton } from '@/components/ui/ripple-button';
+import { getIcon } from '@/lib/icons';
 
 interface ProjectCardProps {
   project: ProjectContentItem;
@@ -18,14 +18,17 @@ const cardVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 120,
       damping: 14,
     },
   },
 };
 
-export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps) {
+export function ProjectCard({
+  project,
+  variant = 'featured',
+}: ProjectCardProps) {
   const { slug, frontmatter } = project;
 
   return (
@@ -41,16 +44,24 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
           {/* Header */}
           <div className="space-y-3">
             {/* Status Badge - Only show if not completed */}
-            {frontmatter.status && frontmatter.status !== 'completed' && frontmatter.status !== 'in-progress' && (
-              <div className="flex items-center">
-                <span className={`
+            {frontmatter.status &&
+              frontmatter.status !== 'completed' &&
+              frontmatter.status !== 'in-progress' && (
+                <div className="flex items-center">
+                  <span
+                    className={`
                   px-3 py-1 rounded-full text-xs font-medium capitalize
-                  ${frontmatter.status === 'planned' ? 'bg-gray-500/10 text-gray-500' : ''}
-                `}>
-                  {frontmatter.status.replace('-', ' ')}
-                </span>
-              </div>
-            )}
+                  ${
+                    frontmatter.status === 'planned'
+                      ? 'bg-gray-500/10 text-gray-500'
+                      : ''
+                  }
+                `}
+                  >
+                    {frontmatter.status.replace('-', ' ')}
+                  </span>
+                </div>
+              )}
 
             {/* Title */}
             <div className="flex items-center gap-2 flex-wrap">
@@ -78,8 +89,8 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
                       key={tech}
                       className="flex items-center gap-1 px-2 py-1 bg-secondary rounded text-xs font-medium"
                     >
-                      {getTechIcon(tech) && (
-                        <span className="text-sm">{getTechIcon(tech)}</span>
+                      {getIcon(tech) && (
+                        <span className="text-sm">{getIcon(tech)}</span>
                       )}
                       <span>{tech}</span>
                     </div>
@@ -147,7 +158,9 @@ export function ProjectCard({ project, variant = 'featured' }: ProjectCardProps)
             </div>
           ) : (
             <div className="w-full h-full min-h-[180px] md:min-h-full bg-secondary flex items-center justify-center">
-              <span className="text-muted-foreground text-sm">No preview available</span>
+              <span className="text-muted-foreground text-sm">
+                No preview available
+              </span>
             </div>
           )}
         </div>
