@@ -1,19 +1,5 @@
 import { cn } from '@/lib/utils';
-
-interface SkeletonProps {
-  className?: string;
-}
-
-function Skeleton({ className }: SkeletonProps) {
-  return (
-    <div
-      className={cn(
-        'animate-pulse rounded-md bg-muted',
-        className
-      )}
-    />
-  );
-}
+import { Skeleton } from '@/components/ui/skeleton';
 
 // Hero section skeleton loader
 export function DetailHeroSkeleton({ className }: { className?: string }) {
@@ -180,7 +166,7 @@ export function SidebarSkeleton({ className }: { className?: string }) {
 // Related content skeleton loader
 export function RelatedContentSkeleton({
   itemCount = 3,
-  className
+  className,
 }: {
   title?: string;
   itemCount?: number;
@@ -267,7 +253,11 @@ export function NavigationSkeleton({ className }: { className?: string }) {
 }
 
 // Prev/Next navigation skeleton
-export function PrevNextNavigationSkeleton({ className }: { className?: string }) {
+export function PrevNextNavigationSkeleton({
+  className,
+}: {
+  className?: string;
+}) {
   return (
     <div className={cn('flex justify-between gap-4', className)}>
       {/* Previous */}
@@ -294,13 +284,19 @@ export function PrevNextNavigationSkeleton({ className }: { className?: string }
 // Image loading skeleton with fade-in effect
 export function ImageSkeleton({
   className,
-  aspectRatio = "aspect-video"
+  aspectRatio = 'aspect-video',
 }: {
   className?: string;
   aspectRatio?: string;
 }) {
   return (
-    <div className={cn('relative overflow-hidden rounded-lg', aspectRatio, className)}>
+    <div
+      className={cn(
+        'relative overflow-hidden rounded-lg',
+        aspectRatio,
+        className,
+      )}
+    >
       <Skeleton className="absolute inset-0 w-full h-full" />
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer" />
     </div>

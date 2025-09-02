@@ -1,35 +1,37 @@
-"use client"
+'use client';
 
-import React, { useCallback, useRef, useState, useEffect } from 'react'
-import Link from 'next/link'
-import { AnimatePresence } from 'motion/react'
-import { cn } from '@/lib/utils'
-import { useMousePosition } from '@/hooks/use-mouse-position'
-import { useThemeColors, createThemeColorProperties } from '@/hooks/use-theme-colors'
+import React, { useCallback, useRef, useState, useEffect } from 'react';
+import Link from 'next/link';
+import { AnimatePresence } from 'motion/react';
+import { cn } from '@/lib/utils';
+import { useMousePosition } from '@/hooks/use-mouse-position';
+import {
+  useThemeColors,
+  createThemeColorProperties,
+} from '@/hooks/use-theme-colors';
 import {
   calculateRipplePosition,
   createRippleId,
   calculateRippleProgress,
   getRippleStyles,
   calculateGradientPosition,
-  getSafeAnimationDuration,
-  prefersReducedMotion,
   DEFAULT_RIPPLE_CONFIG,
   type RippleAnimation,
-} from '@/lib/ripple-utils'
+} from '@/lib/ripple-utils';
+import { getSafeAnimationDuration, prefersReducedMotion } from '@/lib/utils';
 
 export interface RippleButtonProps {
-  children: React.ReactNode
-  onClick?: () => void
-  href?: string
-  className?: string
-  variant?: 'primary' | 'secondary' | 'outline'
-  disabled?: boolean
-  type?: 'button' | 'submit' | 'reset'
-  'aria-label'?: string
-  'aria-describedby'?: string
-  'aria-live'?: 'off' | 'polite' | 'assertive'
-  role?: string
+  children: React.ReactNode;
+  onClick?: () => void;
+  href?: string;
+  className?: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  'aria-label'?: string;
+  'aria-describedby'?: string;
+  'aria-live'?: 'off' | 'polite' | 'assertive';
+  role?: string;
 }
 
 /**
@@ -51,13 +53,13 @@ export function RippleButton({
   role,
   ...props
 }: RippleButtonProps) {
-  const { mousePosition, elementRef } = useMousePosition({ throttleMs: 16 })
-  const themeColors = useThemeColors()
-  const [ripples, setRipples] = useState<RippleAnimation[]>([])
-  const [isPressed, setIsPressed] = useState(false)
-  const [isFocused, setIsFocused] = useState(false)
-  const animationFrameRef = useRef<number | undefined>(undefined)
-  const reducedMotion = prefersReducedMotion()
+  const { mousePosition, elementRef } = useMousePosition({ throttleMs: 16 });
+  const themeColors = useThemeColors();
+  const [ripples, setRipples] = useState<RippleAnimation[]>([]);
+  const [isPressed, setIsPressed] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const animationFrameRef = useRef<number | undefined>(undefined);
+  const reducedMotion = prefersReducedMotion();
 
   // Base styles for the button with enhanced accessibility
   const baseStyles = cn(
@@ -78,176 +80,185 @@ export function RippleButton({
     // Focus state
     isFocused && 'ring-2 ring-primary/50 ring-offset-2',
     {
-      'bg-secondary/80 hover:bg-secondary text-foreground': variant === 'secondary',
-      'bg-primary/80 hover:bg-primary text-primary-foreground': variant === 'primary',
-      'border-border/50 hover:border-primary/30 hover:bg-accent hover:text-accent-foreground': variant === 'outline',
+      'bg-secondary/80 hover:bg-secondary text-foreground':
+        variant === 'secondary',
+      'bg-primary/80 hover:bg-primary text-primary-foreground':
+        variant === 'primary',
+      'border-border/50 hover:border-primary/30 hover:bg-accent hover:text-accent-foreground':
+        variant === 'outline',
     },
-    className
-  )
+    className,
+  );
 
   // Handle click ripple effect with accessibility considerations
-  const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
-    if (disabled) return
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLElement>) => {
+      if (disabled) return;
 
-    const element = elementRef.current
-    if (!element) return
+      const element = elementRef.current;
+      if (!element) return;
 
-    // Only create ripple effect if motion is not reduced
-    if (!reducedMotion) {
-      const rect = element.getBoundingClientRect()
-      const ripplePosition = calculateRipplePosition(
-        event.clientX,
-        event.clientY,
-        rect,
-        { maxRadius: Math.max(rect.width, rect.height) }
-      )
+      // Only create ripple effect if motion is not reduced
+      if (!reducedMotion) {
+        const rect = element.getBoundingClientRect();
+        const ripplePosition = calculateRipplePosition(
+          event.clientX,
+          event.clientY,
+          rect,
+          { maxRadius: Math.max(rect.width, rect.height) },
+        );
 
-      const newRipple: RippleAnimation = {
-        id: createRippleId(),
-        x: ripplePosition.x,
-        y: ripplePosition.y,
-        radius: ripplePosition.radius,
-        startTime: Date.now(),
-        duration: getSafeAnimationDuration(DEFAULT_RIPPLE_CONFIG.duration),
+        const newRipple: RippleAnimation = {
+          id: createRippleId(),
+          x: ripplePosition.x,
+          y: ripplePosition.y,
+          radius: ripplePosition.radius,
+          startTime: Date.now(),
+          duration: getSafeAnimationDuration(DEFAULT_RIPPLE_CONFIG.duration),
+        };
+
+        setRipples((prev) => [...prev, newRipple]);
       }
 
-      setRipples(prev => [...prev, newRipple])
-    }
-
-    // Call the provided onClick handler
-    if (onClick) {
-      onClick()
-    }
-  }, [disabled, elementRef, onClick, reducedMotion])
+      // Call the provided onClick handler
+      if (onClick) {
+        onClick();
+      }
+    },
+    [disabled, elementRef, onClick, reducedMotion],
+  );
 
   // Handle keyboard interactions
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLElement>) => {
-    if (disabled) return
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLElement>) => {
+      if (disabled) return;
 
-    // Handle Enter and Space key presses
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      setIsPressed(true)
+      // Handle Enter and Space key presses
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        setIsPressed(true);
 
-      // Trigger click for keyboard users
-      if (onClick) {
-        onClick()
+        // Trigger click for keyboard users
+        if (onClick) {
+          onClick();
+        }
       }
-    }
-  }, [disabled, onClick])
+    },
+    [disabled, onClick],
+  );
 
   const handleKeyUp = useCallback((event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
-      setIsPressed(false)
+      setIsPressed(false);
     }
-  }, [])
+  }, []);
 
   // Handle focus states
   const handleFocus = useCallback(() => {
-    setIsFocused(true)
-  }, [])
+    setIsFocused(true);
+  }, []);
 
   const handleBlur = useCallback(() => {
-    setIsFocused(false)
-    setIsPressed(false)
-  }, [])
+    setIsFocused(false);
+    setIsPressed(false);
+  }, []);
 
   // Handle mouse states for better interaction feedback
   const handleMouseDown = useCallback(() => {
     if (!disabled) {
-      setIsPressed(true)
+      setIsPressed(true);
     }
-  }, [disabled])
+  }, [disabled]);
 
   const handleMouseUp = useCallback(() => {
-    setIsPressed(false)
-  }, [])
+    setIsPressed(false);
+  }, []);
 
   const handleMouseLeave = useCallback(() => {
-    setIsPressed(false)
-  }, [])
+    setIsPressed(false);
+  }, []);
 
   // Animate ripples
   useEffect(() => {
-    if (ripples.length === 0) return
+    if (ripples.length === 0) return;
 
     const animate = () => {
-      const currentTime = Date.now()
+      const currentTime = Date.now();
 
-      setRipples(prev => {
-        const activeRipples = prev.filter(ripple => {
+      setRipples((prev) => {
+        const activeRipples = prev.filter((ripple) => {
           const progress = calculateRippleProgress(
             ripple.startTime,
             currentTime,
-            ripple.duration
-          )
-          return !progress.isComplete
-        })
+            ripple.duration,
+          );
+          return !progress.isComplete;
+        });
 
-        return activeRipples
-      })
+        return activeRipples;
+      });
 
       if (ripples.length > 0) {
-        animationFrameRef.current = requestAnimationFrame(animate)
+        animationFrameRef.current = requestAnimationFrame(animate);
       }
-    }
+    };
 
-    animationFrameRef.current = requestAnimationFrame(animate)
+    animationFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
       if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current)
+        cancelAnimationFrame(animationFrameRef.current);
       }
-    }
-  }, [ripples.length])
+    };
+  }, [ripples.length]);
 
   // Calculate gradient position for hover effect with reduced motion support
   const gradientStyle = React.useMemo(() => {
     if (reducedMotion || !mousePosition.isWithinBounds || !elementRef.current) {
-      return {}
+      return {};
     }
 
-    const rect = elementRef.current.getBoundingClientRect()
+    const rect = elementRef.current.getBoundingClientRect();
     const { backgroundPosition, backgroundSize } = calculateGradientPosition(
       mousePosition.x,
       mousePosition.y,
       rect.width,
-      rect.height
-    )
+      rect.height,
+    );
 
     return {
       backgroundImage: `radial-gradient(circle 70px at ${backgroundPosition}, ${themeColors.ripple.primary} 0%, ${themeColors.ripple.secondary} 40%, transparent 70%)`,
       backgroundSize,
       backgroundPosition: backgroundPosition,
       backgroundRepeat: 'no-repeat',
-    }
-  }, [mousePosition, themeColors.ripple, reducedMotion, elementRef])
+    };
+  }, [mousePosition, themeColors.ripple, reducedMotion, elementRef]);
 
   // Create CSS custom properties for theme colors
   const themeColorProperties = React.useMemo(() => {
-    return createThemeColorProperties(themeColors)
-  }, [themeColors])
+    return createThemeColorProperties(themeColors);
+  }, [themeColors]);
 
   // Render ripple animations with accessibility considerations
   const renderRipples = () => {
-    if (reducedMotion) return null
+    if (reducedMotion) return null;
 
-    const currentTime = Date.now()
+    const currentTime = Date.now();
 
-    return ripples.map(ripple => {
+    return ripples.map((ripple) => {
       const progress = calculateRippleProgress(
         ripple.startTime,
         currentTime,
-        ripple.duration
-      )
+        ripple.duration,
+      );
 
-      if (progress.isComplete) return null
+      if (progress.isComplete) return null;
 
       const rippleStyles = getRippleStyles(
         { x: ripple.x, y: ripple.y, radius: ripple.radius },
         progress,
-        themeColors.ripple.primary
-      )
+        themeColors.ripple.primary,
+      );
 
       return (
         <div
@@ -256,9 +267,9 @@ export function RippleButton({
           className="ripple-effect"
           aria-hidden="true"
         />
-      )
-    })
-  }
+      );
+    });
+  };
 
   // Common button content with accessibility enhancements
   const buttonContent = (
@@ -273,16 +284,14 @@ export function RippleButton({
       )}
 
       {/* Click ripple effects */}
-      <AnimatePresence>
-        {renderRipples()}
-      </AnimatePresence>
+      <AnimatePresence>{renderRipples()}</AnimatePresence>
 
       {/* Button content */}
       <span className="relative z-10 flex items-center justify-center gap-2">
         {children}
       </span>
     </>
-  )
+  );
 
   // Render as link if href is provided
   if (href && !disabled) {
@@ -309,7 +318,7 @@ export function RippleButton({
       >
         {buttonContent}
       </Link>
-    )
+    );
   }
 
   // Render as button
@@ -337,8 +346,8 @@ export function RippleButton({
     >
       {buttonContent}
     </button>
-  )
+  );
 }
 
 // Export default for easier imports
-export default RippleButton
+export default RippleButton;

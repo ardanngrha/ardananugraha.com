@@ -906,13 +906,34 @@
 }
 
 /* High performance mode for devices with limited resources */
-@media (prefers-reduced-data: reduce) {
+@media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md {
+    backdrop-filter: none !important;
+  }
+
   .gradient-shadow-card::before,
   .gradient-shadow::before,
   .expandable-button::before {
     filter: none !important;
     background: var(--shadow-gradient-start) !important;
     opacity: calc(var(--shadow-opacity) * 0.5) !important;
+  }
+  .ripple-effect,
+  .ripple-background {
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+    opacity: 0 !important;
+    will-change: auto !important;
+  }
+
+  /* Decrease shadow intensity globally */
+  :root {
+    --shadow-blur: 4px;
+    --shadow-spread: 4px;
+    --shadow-opacity: 0.15;
   }
 }
 

@@ -1,6 +1,7 @@
-"use client"
+'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
+import { prefersReducedMotion } from '@/lib/utils';
 
 type Star = {
   x: number;
@@ -30,38 +31,50 @@ const Starfield: React.FC = () => {
     checkTheme();
 
     const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
 
+    const reduced = typeof window !== 'undefined' && prefersReducedMotion();
     const canvas = canvasRef.current;
-    if (!canvas) return () => observer.disconnect();
-
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return () => observer.disconnect();
+    if (!ctx) return;
+
+    // Adaptive settings
+    const NUM_STARS = reduced ? 50 : 200;
+    const FPS = reduced ? 15 : 60;
 
     let stars: Star[] = [];
     const comets: Comet[] = [];
-    const numStars = 200;
+    let animationFrameId = 0;
+    let lastTime = performance.now();
+    let cometInterval: number | undefined;
+
+    const isVisible = () => {
+      if (!canvas) return false;
+      const rect = canvas.getBoundingClientRect();
+      return rect.bottom >= 0 && rect.top <= window.innerHeight;
+    };
 
     const createComet = () => {
+      if (reduced) return;
       comets.push({
         x: Math.random() * canvas.width,
         y: 0,
         radius: Math.random() * 2 + 1,
-        speed: {
-          x: (Math.random() - 0.5) * 10,
-          y: Math.random() * 5 + 5,
-        },
+        speed: { x: (Math.random() - 0.5) * 10, y: Math.random() * 5 + 5 },
         alpha: 1,
         length: Math.random() * 100 + 50,
       });
     };
 
     const resizeCanvas = () => {
-      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       stars = [];
-      for (let i = 0; i < numStars; i++) {
+      for (let i = 0; i < NUM_STARS; i++) {
         stars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
@@ -72,21 +85,35 @@ const Starfield: React.FC = () => {
       }
     };
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    if (!reduced) {
+      cometInterval = window.setInterval(
+        createComet,
+        Math.random() * 10000 + 5000,
+      );
+    }
 
-    // Create comets at random intervals (e.g., every 5-15 seconds)
-    const cometInterval = setInterval(createComet, Math.random() * 10000 + 5000);
+    const animate = (time: number) => {
+      // Pause when tab hidden or canvas offscreen
+      if (document.hidden || !isVisible()) {
+        animationFrameId = requestAnimationFrame(animate);
+        lastTime = time;
+        return;
+      }
 
-    let animationFrameId: number;
+      const elapsed = time - lastTime;
+      if (elapsed < 1000 / FPS) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+      lastTime = time;
 
-    const animate = () => {
-      if (!ctx || !canvas) return;
+      if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const objectColor = isDarkMode ? '255, 255, 255' : '0, 0, 0';
 
-      // Draw stars
-      stars.forEach(star => {
+      // Draw stars (keep updates cheap)
+      for (let i = 0; i < stars.length; i++) {
+        const star = stars[i];
         star.y -= star.speed;
         if (star.y < 0) {
           star.x = Math.random() * canvas.width;
@@ -96,58 +123,55 @@ const Starfield: React.FC = () => {
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${objectColor}, ${star.alpha})`;
         ctx.fill();
-      });
+      }
 
-      // Draw comets and their tails
-      comets.forEach((comet, index) => {
-        comet.x += comet.speed.x;
-        comet.y += comet.speed.y;
-        comet.alpha -= 0.01; // Fade out
-
-        // Remove comet if it's faded or off-screen
-        if (comet.alpha <= 0) {
-          comets.splice(index, 1);
-          return;
+      // Draw comets (skip if reduced)
+      if (!reduced) {
+        for (let i = comets.length - 1; i >= 0; i--) {
+          const comet = comets[i];
+          comet.x += comet.speed.x;
+          comet.y += comet.speed.y;
+          comet.alpha -= 0.01;
+          if (comet.alpha <= 0) {
+            comets.splice(i, 1);
+            continue;
+          }
+          ctx.beginPath();
+          ctx.moveTo(comet.x, comet.y);
+          ctx.lineTo(
+            comet.x - comet.speed.x * (comet.length / 10),
+            comet.y - comet.speed.y * (comet.length / 10),
+          );
+          ctx.strokeStyle = `rgba(${objectColor}, ${comet.alpha})`;
+          ctx.lineWidth = comet.radius;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.arc(comet.x, comet.y, comet.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${objectColor}, ${comet.alpha})`;
+          ctx.fill();
         }
-
-        // Draw tail
-        const gradient = ctx.createLinearGradient(
-          comet.x,
-          comet.y,
-          comet.x - comet.speed.x * (comet.length / 10),
-          comet.y - comet.speed.y * (comet.length / 10)
-        );
-        gradient.addColorStop(0, `rgba(${objectColor}, ${comet.alpha})`);
-        gradient.addColorStop(1, `rgba(${objectColor}, 0)`);
-
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = comet.radius;
-        ctx.beginPath();
-        ctx.moveTo(comet.x, comet.y);
-        ctx.lineTo(comet.x - comet.speed.x * (comet.length / 10), comet.y - comet.speed.y * (comet.length / 10));
-        ctx.stroke();
-
-        // Draw head
-        ctx.beginPath();
-        ctx.arc(comet.x, comet.y, comet.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${objectColor}, ${comet.alpha})`;
-        ctx.fill();
-      });
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      clearInterval(cometInterval);
+      if (cometInterval) clearInterval(cometInterval);
       cancelAnimationFrame(animationFrameId);
-      observer.disconnect();
     };
   }, [isDarkMode]);
 
-  return <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute top-0 left-0 w-full h-full z-0"
+    />
+  );
 };
 
 export default Starfield;

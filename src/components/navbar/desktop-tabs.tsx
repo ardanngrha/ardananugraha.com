@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import { AnimatePresence, motion } from "motion/react"
-import Image from "next/image"
-import { Tabs } from "@/components/navbar/navigation-tabs"
-import { ModeToggle } from "./toggle-mode"
-import { DesktopTabsProps } from "@/types/navbar"
+import { AnimatePresence, motion } from 'motion/react';
+import Image from 'next/image';
+import { Tabs } from '@/components/navbar/navigation-tabs';
+import { ModeToggle } from './toggle-mode';
+import { DesktopTabsProps } from '@/types/navbar';
 
 export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
   return (
@@ -14,7 +14,7 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
           initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
           className="hidden md:block sticky top-5 z-50 container mx-auto"
         >
           {/* Outer glow effect */}
@@ -30,14 +30,14 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
                   {/* Logo section with hover effect */}
                   <motion.div
                     className="flex items-center justify-center w-9 h-9 pl-2"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    whileHover={{ scale: 1.1, rotate: 10 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     <Image
                       src="/images/an-black.png"
                       alt="logo"
-                      width={30}
-                      height={30}
+                      width={32}
+                      height={32}
                       className="w-8 h-8 dark:filter dark:brightness-0 dark:invert"
                     />
                   </motion.div>
@@ -58,5 +58,5 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

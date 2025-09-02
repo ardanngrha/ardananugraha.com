@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { motion, AnimatePresence, useInView } from "motion/react";
-import { useRef, useState, useEffect } from "react";
-import { journeySteps } from "@/data/home-highlights";
+import { motion, AnimatePresence, useInView } from 'motion/react';
+import { useRef, useState, useEffect } from 'react';
+import { journeySteps } from '@/data/home-highlights';
 
 const MAX_VISIBLE_CARDS = 6;
 
 export default function SecondHighlight() {
   const [activeStep, setActiveStep] = useState(0);
-  const [typedCode, setTypedCode] = useState("");
+  const [typedCode, setTypedCode] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
   const [autoAdvanceEnabled, setAutoAdvanceEnabled] = useState(true);
@@ -28,7 +28,7 @@ export default function SecondHighlight() {
     const currentCode = journeySteps[activeStep].code;
     setIsTyping(true);
     setTypingComplete(false);
-    setTypedCode("");
+    setTypedCode('');
 
     let i = 0;
     const typeCharacter = () => {
@@ -97,7 +97,10 @@ export default function SecondHighlight() {
   }, []);
 
   return (
-    <section ref={containerRef} className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <section
+      ref={containerRef}
+      className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+    >
       <div className="container mx-auto">
         <div className="text-center mb-12 lg:mb-16">
           <motion.h2
@@ -116,7 +119,8 @@ export default function SecondHighlight() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: 0.4 }}
           >
-            From first Hello World to become a Software Engineer <br /> Each step shaped who I am today
+            From first Hello World to become a Software Engineer <br /> Each
+            step shaped who I am today
           </motion.p>
         </div>
 
@@ -124,7 +128,9 @@ export default function SecondHighlight() {
           {/* Card Stack */}
           <div className="relative w-full pt-20 h-[350px] md:h-[450px] flex items-center justify-center">
             {journeySteps.map((step, index) => {
-              const position = (index - activeStep + journeySteps.length) % journeySteps.length;
+              const position =
+                (index - activeStep + journeySteps.length) %
+                journeySteps.length;
               const isVisible = position < MAX_VISIBLE_CARDS;
 
               const y = isVisible ? position * -20 : -80;
@@ -151,13 +157,13 @@ export default function SecondHighlight() {
                         `linear-gradient(135deg, ${step.gradient})`,
                         `linear-gradient(225deg, ${step.gradient})`,
                         `linear-gradient(315deg, ${step.gradient})`,
-                        `linear-gradient(45deg, ${step.gradient})`
-                      ]
+                        `linear-gradient(45deg, ${step.gradient})`,
+                      ],
                     }}
                     transition={{
                       duration: 4,
                       repeat: Infinity,
-                      ease: "linear"
+                      ease: 'linear',
                     }}
                   />
 
@@ -165,16 +171,18 @@ export default function SecondHighlight() {
                   <motion.div
                     className={`absolute inset-0 rounded-2xl opacity-20`}
                     style={{
-                      background: `linear-gradient(45deg, transparent, ${step.gradient.split(' ')[1]}, transparent)`,
-                      padding: '1px'
+                      background: `linear-gradient(45deg, transparent, ${
+                        step.gradient.split(' ')[1]
+                      }, transparent)`,
+                      padding: '1px',
                     }}
                     animate={{
-                      rotate: [0, 360]
+                      rotate: [0, 360],
                     }}
                     transition={{
                       duration: 8,
                       repeat: Infinity,
-                      ease: "linear"
+                      ease: 'linear',
                     }}
                   >
                     <div className="w-full h-full bg-card rounded-2xl" />
@@ -191,7 +199,9 @@ export default function SecondHighlight() {
                           {step.title}
                         </h3>
                       </div>
-                      <div className={`flex-shrink-0 p-2 rounded-lg backdrop-blur-sm bg-gradient-to-br ${step.gradient} bg-opacity-20`}>
+                      <div
+                        className={`flex-shrink-0 p-2 rounded-lg backdrop-blur-sm bg-gradient-to-br ${step.gradient} bg-opacity-20`}
+                      >
                         <step.icon className="w-5 h-5" />
                       </div>
                     </div>
@@ -225,9 +235,22 @@ export default function SecondHighlight() {
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${typingComplete ? 'bg-green-400' : isTyping ? 'bg-blue-400 animate-pulse' : 'bg-muted-foreground/50'}`}></div>
+                    <div
+                      className={`w-2 h-2 rounded-full ${
+                        typingComplete
+                          ? 'bg-green-400'
+                          : isTyping
+                          ? 'bg-blue-400 animate-pulse'
+                          : 'bg-muted-foreground/50'
+                      }`}
+                    ></div>
                     <span className="text-muted-foreground text-xs">
-                      {Math.round((typedCode.length / journeySteps[activeStep].code.length) * 100)}%
+                      {Math.round(
+                        (typedCode.length /
+                          journeySteps[activeStep].code.length) *
+                          100,
+                      )}
+                      %
                     </span>
                   </div>
                 </div>
@@ -265,22 +288,23 @@ export default function SecondHighlight() {
           {journeySteps.map((_, index) => (
             <motion.button
               key={index}
-              className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${index === activeStep
-                ? 'bg-primary w-8'
-                : index < activeStep
+              className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${
+                index === activeStep
+                  ? 'bg-primary w-8'
+                  : index < activeStep
                   ? 'bg-green-500 w-3'
                   : 'bg-muted w-3'
-                }`}
+              }`}
               onClick={() => handleStepClick(index)}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.8 }}
               animate={{
-                scale: index === activeStep ? 1.1 : 1
+                scale: index === activeStep ? 1.1 : 1,
               }}
             />
           ))}
         </div>
       </div>
-    </section >
+    </section>
   );
 }

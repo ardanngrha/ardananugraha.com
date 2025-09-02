@@ -1,8 +1,8 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -38,7 +38,7 @@ export function formatRelativeDate(dateString: string): string {
 
   const hours = Math.floor(diffInSeconds / 3600);
   if (hours > 0) return `${hours} hr${hours > 1 ? 's' : ''} ago`;
-  
+
   const minutes = Math.floor(diffInSeconds / 60);
   if (minutes > 0) return `${minutes} min${minutes > 1 ? 's' : ''} ago`;
 
@@ -52,11 +52,11 @@ export function formatRelativeDate(dateString: string): string {
  * @returns A boolean indicating if the post is recent.
  */
 export function isRecent(dateString: string, days = 30): boolean {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInMs = now.getTime() - date.getTime();
-    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
-    return diffInDays <= days;
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInMs = now.getTime() - date.getTime();
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+  return diffInDays <= days;
 }
 
 /**
@@ -100,12 +100,12 @@ export function generateSEOMetadata(item: {
  */
 export function getFormattedReadTime(
   frontmatter: { readTime?: string },
-  content: string
+  content: string,
 ): string {
   if (frontmatter.readTime) {
     return frontmatter.readTime;
   }
-  
+
   const calculatedMinutes = calculateReadTime(content);
   return `${calculatedMinutes} min read`;
 }
@@ -116,7 +116,7 @@ export function getFormattedReadTime(
  * @returns Array of normalized tag strings.
  */
 export function normalizeTags(tags: string[]): string[] {
-  return tags.map(tag => tag.toLowerCase().trim()).filter(Boolean);
+  return tags.map((tag) => tag.toLowerCase().trim()).filter(Boolean);
 }
 
 /**
@@ -128,8 +128,8 @@ export function normalizeTags(tags: string[]): string[] {
 export function findCommonTags(tags1: string[], tags2: string[]): string[] {
   const normalizedTags1 = normalizeTags(tags1);
   const normalizedTags2 = normalizeTags(tags2);
-  
-  return normalizedTags1.filter(tag => normalizedTags2.includes(tag));
+
+  return normalizedTags1.filter((tag) => normalizedTags2.includes(tag));
 }
 
 /**
@@ -141,4 +141,19 @@ export function findCommonTags(tags1: string[], tags2: string[]): string[] {
 export function truncateText(text: string, maxLength: number): string {
   if (text.length <= maxLength) return text;
   return text.slice(0, maxLength).trim() + '...';
+}
+
+/**
+ * Checks if user prefers reduced motion
+ */
+export function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Gets safe animation duration based on user preferences
+ */
+export function getSafeAnimationDuration(duration: number): number {
+  return prefersReducedMotion() ? Math.min(duration * 0.1, 50) : duration;
 }

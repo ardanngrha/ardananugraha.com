@@ -1,24 +1,28 @@
-import { db } from "@/database/drizzle";
-import { users } from "@/database/schema";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import { AuthOptions, getServerSession } from "next-auth";
-import { Adapter } from "next-auth/adapters";
-import GitHubProvider from "next-auth/providers/github";
+import { db } from '@/database/drizzle';
+import { users } from '@/database/schema';
+import { DrizzleAdapter } from '@auth/drizzle-adapter';
+import { AuthOptions, getServerSession } from 'next-auth';
+import { Adapter } from 'next-auth/adapters';
+import GitHubProvider from 'next-auth/providers/github';
+import { User } from '@/types/auth';
 
 export const authOptions: AuthOptions = {
   adapter: {
     ...DrizzleAdapter(db),
-    async createUser(user: { id?: string; name?: string; email?: string; emailVerified?: Date; image?: string; username?: string }) {
+    async createUser(user: User) {
       const { name, email, emailVerified, image, username } = user;
-      
-      const newUser = await db.insert(users).values({
-        name,
-        email: email!,
-        emailVerified,
-        image,
-        username: username || 'user', // Fallback username
-      }).returning();
-      
+
+      const newUser = await db
+        .insert(users)
+        .values({
+          name,
+          email: email!,
+          emailVerified,
+          image,
+          username: username || 'user', // Fallback username
+        })
+        .returning();
+
       return newUser[0];
     },
   } as Adapter,
@@ -30,19 +34,22 @@ export const authOptions: AuthOptions = {
         // Extract user ID from avatar URL
         const avatarUrl = profile.avatar_url;
         const userIdMatch = avatarUrl.match(/\/u\/(\d+)/);
-        
+
         let username = profile.login; // fallback to profile.login
-        
+
         if (userIdMatch) {
           const userId = userIdMatch[1];
           try {
             // Fetch username from GitHub API
-            const response = await fetch(`https://api.github.com/user/${userId}`, {
-              headers: {
-                'User-Agent': 'ardananugraha.com',
+            const response = await fetch(
+              `https://api.github.com/user/${userId}`,
+              {
+                headers: {
+                  'User-Agent': 'ardananugraha.com',
+                },
               },
-            });
-            
+            );
+
             if (response.ok) {
               const userData = await response.json();
               username = userData.login;
