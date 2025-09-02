@@ -115,24 +115,23 @@ export function ModeToggle({ variant = 'default' }: ModeToggleProps) {
       onClick={toggleTheme}
       disabled={isAnimating}
     >
-      {getIcon(
-        'WbSunny',
-        cn(
-          'absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0',
-          isMobile
-            ? 'h-5 w-5 text-muted-foreground'
-            : 'h-[1.2rem] w-[1.2rem] dark:text-gray-800 text-gray-300',
-        ),
-      )}
-      {getIcon(
-        'Moon',
-        cn(
-          'absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0',
-          isMobile
-            ? 'h-5 w-5 text-muted-foreground'
-            : 'h-[1.2rem] w-[1.2rem] dark:text-gray-800 text-gray-300',
-        ),
-      )}
+      {resolvedTheme === 'dark'
+        ? getIcon(
+            'WbSunny',
+            cn(
+              isMobile
+                ? 'h-5 w-5 text-muted-foreground'
+                : 'h-[1.2rem] w-[1.2rem] dark:text-gray-800 text-gray-300',
+            ),
+          )
+        : getIcon(
+            'Moon',
+            cn(
+              isMobile
+                ? 'h-5 w-5 text-muted-foreground'
+                : 'h-[1.2rem] w-[1.2rem] dark:text-gray-800 text-gray-300',
+            ),
+          )}
       <span className="sr-only">Toggle theme</span>
     </Button>
   );

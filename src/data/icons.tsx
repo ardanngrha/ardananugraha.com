@@ -26,6 +26,8 @@ import {
   FaMoon,
   FaFeatherAlt,
   FaFileSignature,
+  FaChevronDown,
+  FaTag,
 } from 'react-icons/fa';
 import {
   SiTypescript,
@@ -141,6 +143,7 @@ export const icons = [
   { name: 'ChevronLeft', icon: <FaChevronLeft className="" /> },
   { name: 'ChevronRight', icon: <FaChevronRight className="" /> },
   { name: 'ChevronDownOutlined', icon: <HiOutlineChevronDown className="" /> },
+  { name: 'ChevronDown', icon: <FaChevronDown className="" /> },
   { name: 'HomeOutlined', icon: <HiOutlineHome className="" /> },
   { name: 'Home', icon: <FaHome className="" /> },
   { name: 'ArrowUp', icon: <FaArrowUp className="" /> },
@@ -171,4 +174,5 @@ export const icons = [
   { name: 'FileSignature', icon: <FaFileSignature className="" /> },
   { name: 'CodeSlash', icon: <CgCodeSlash className="" /> },
   { name: 'FeatherAlt', icon: <FaFeatherAlt className="" /> },
+  { name: 'Tag', icon: <FaTag className="" /> },
 ];

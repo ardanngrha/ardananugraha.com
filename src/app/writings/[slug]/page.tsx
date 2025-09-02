@@ -1,5 +1,9 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getWritingWithContent, getRelatedWritings, getWritingNavigation } from '@/lib/posts';
+import {
+  getWritingWithContent,
+  getRelatedWritings,
+  getWritingNavigation,
+} from '@/lib/posts';
 import { DetailHero } from '@/components/detail/detail-hero';
 import { ContentNavigation } from '@/components/detail/content-navigation';
 import { RelatedWritings } from '@/components/detail/related-content';
@@ -8,7 +12,10 @@ import { PrevNextNavigation } from '@/components/detail/prev-next-navigation';
 import { ShareButtons } from '@/components/detail/share-buttons';
 import { generateSEOMetadata, generateStructuredData } from '@/lib/seo';
 import { WritingNotFound } from '@/components/detail/content-not-found';
-import { MDXErrorBoundary, ErrorBoundary } from '@/components/detail/error-boundary';
+import {
+  MDXErrorBoundary,
+  ErrorBoundary,
+} from '@/components/detail/error-boundary';
 import { Metadata } from 'next';
 import { ReadingProgress } from '@/components/detail/reading-progress';
 import { mdxComponents } from '@/lib/mdx';
@@ -26,9 +33,9 @@ export async function generateStaticParams() {
 
 // Generate metadata for SEO
 export async function generateMetadata({
-  params
+  params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
   const writing = await getWritingWithContent(slug);
@@ -55,9 +62,9 @@ export async function generateMetadata({
 
 // The main page component
 export default async function WritingPage({
-  params
+  params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
 
@@ -74,7 +81,7 @@ export default async function WritingPage({
     const relatedWritings = await getRelatedWritings(
       frontmatter.tags,
       writing.slug,
-      3
+      3,
     );
 
     // Fetch navigation data for prev/next
@@ -159,7 +166,10 @@ export default async function WritingPage({
             <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
               <ShareButtons
                 title={frontmatter.title}
-                url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.dev'}/writings/${writing.slug}`}
+                url={`${
+                  process.env.NEXT_PUBLIC_SITE_URL ||
+                  'https://ardananugraha.dev'
+                }/writings/${writing.slug}`}
                 description={frontmatter.summary}
               />
             </div>
@@ -178,9 +188,7 @@ export default async function WritingPage({
             {relatedWritings.length > 0 && (
               <div className="mt-12 sm:mt-16 pt-12 sm:pt-16 border-t border-border">
                 <ErrorBoundary>
-                  <RelatedWritings
-                    writings={relatedWritings}
-                  />
+                  <RelatedWritings writings={relatedWritings} />
                 </ErrorBoundary>
               </div>
             )}

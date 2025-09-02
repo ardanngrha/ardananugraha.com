@@ -1,25 +1,19 @@
-import { NextResponse, NextRequest } from "next/server";
-import { db } from "@/database/drizzle";
-import { contentViews } from "@/database/schema";
-import { eq, and, sql } from "drizzle-orm";
-
-/**
- * NOTE (Next.js 15): dynamic route handlers receive
- * second arg: { params: Promise<Record<string,string>> }
- * so we must await params before destructuring.
- */
+import { NextResponse, NextRequest } from 'next/server';
+import { db } from '@/database/drizzle';
+import { contentViews } from '@/database/schema';
+import { eq, and, sql } from 'drizzle-orm';
 
 type ViewParams = { type: string; slug: string };
 
 // Optional: restrict allowed types at runtime
-function normalizeType(t: string): "project" | "writing" {
-  return t === "project" ? "project" : "writing";
+function normalizeType(t: string): 'project' | 'writing' {
+  return t === 'project' ? 'project' : 'writing';
 }
 
 // GET current view count
 export async function GET(
   _req: NextRequest,
-  context: { params: Promise<ViewParams> }
+  context: { params: Promise<ViewParams> },
 ) {
   const { type, slug } = await context.params;
   const safeType = normalizeType(type);
@@ -39,7 +33,7 @@ export async function GET(
 // Increment + return
 export async function POST(
   _req: NextRequest,
-  context: { params: Promise<ViewParams> }
+  context: { params: Promise<ViewParams> },
 ) {
   const { type, slug } = await context.params;
   const safeType = normalizeType(type);

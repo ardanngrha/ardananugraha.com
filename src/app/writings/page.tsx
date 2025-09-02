@@ -5,7 +5,9 @@ import WritingsClientPage from './client';
 
 export default async function WritingsPage() {
   const allPosts = await getAllWritings();
-  const allTopics = [...new Set(allPosts.flatMap(p => p.frontmatter.tags || []))];
+  const allTopics = [
+    ...new Set(allPosts.flatMap((p) => p.frontmatter.tags || [])),
+  ];
 
   return (
     <div>

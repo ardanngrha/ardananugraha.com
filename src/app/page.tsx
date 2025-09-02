@@ -1,25 +1,30 @@
-"use client"
+'use client';
 
-import { useEffect, useState } from "react"
-import Hero from "@/components/home/hero"
-import ProjectsSection from "@/components/home/projects"
-import WritingsSection from "@/components/home/writings"
-import TestimonialsSection from "@/components/home/testimonials"
-import { toast } from "sonner"
-import { ProjectContentItem } from "@/types/projects"
-import { EnhancedWriting } from "@/types/writings"
-import FirstHighlight from "@/components/home/highlights/first"
-import SecondHighlight from "@/components/home/highlights/second"
+import { useEffect, useState } from 'react';
+import Hero from '@/components/home/hero';
+import ProjectsSection from '@/components/home/projects';
+import WritingsSection from '@/components/home/writings';
+import TestimonialsSection from '@/components/home/testimonials';
+import { toast } from 'sonner';
+import { ProjectContentItem } from '@/types/projects';
+import { EnhancedWriting } from '@/types/writings';
+import FirstHighlight from '@/components/home/highlights/first';
+import SecondHighlight from '@/components/home/highlights/second';
 
 export default function Home() {
-  const [featuredProjects, setFeaturedProjects] = useState<ProjectContentItem[]>([]);
-  const [featuredWritings, setFeaturedWritings] = useState<EnhancedWriting[]>([]);
+  const [featuredProjects, setFeaturedProjects] = useState<
+    ProjectContentItem[]
+  >([]);
+  const [featuredWritings, setFeaturedWritings] = useState<EnhancedWriting[]>(
+    [],
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      toast.warning("Under Construction", {
-        description: "This website is still a work in progress. Feel free to explore!",
+      toast.warning('Under Construction', {
+        description:
+          'This website is still a work in progress. Feel free to explore!',
         closeButton: true,
         duration: 5000, // Show for 5 seconds
       });
@@ -30,7 +35,7 @@ export default function Home() {
         // Fetch featured projects and writings
         const [projectsRes, writingsRes] = await Promise.all([
           fetch('/api/featured-projects'),
-          fetch('/api/featured-writings')
+          fetch('/api/featured-writings'),
         ]);
 
         if (projectsRes.ok && writingsRes.ok) {

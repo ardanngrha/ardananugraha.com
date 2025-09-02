@@ -1,13 +1,19 @@
-"use client";
+'use client';
 
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WritingCard } from '@/components/writings/writing-card';
 import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { EnhancedWriting } from '@/types/writings';
-import { FaChevronDown, FaTag } from 'react-icons/fa';
-import { Separator } from "@/components/ui/separator"
+import { Separator } from '@/components/ui/separator';
+import { getIcon } from '@/lib/icons';
 
 type SortOption = 'newest' | 'oldest' | 'a-z' | 'z-a';
 
@@ -16,38 +22,50 @@ interface WritingsClientPageProps {
   allTopics: string[];
 }
 
-export default function WritingsClientPage({ allPosts, allTopics }: WritingsClientPageProps) {
+export default function WritingsClientPage({
+  allPosts,
+  allTopics,
+}: WritingsClientPageProps) {
   const [sortOrder, setSortOrder] = useState<SortOption>('newest');
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
 
   const handleTopicClick = (topic: string) => {
-    setSelectedTopics(prevTopics =>
+    setSelectedTopics((prevTopics) =>
       prevTopics.includes(topic)
-        ? prevTopics.filter(t => t !== topic)
-        : [...prevTopics, topic]
+        ? prevTopics.filter((t) => t !== topic)
+        : [...prevTopics, topic],
     );
   };
 
   const filteredAndSortedPosts = useMemo(() => {
-    const filtered = selectedTopics.length === 0
-      ? allPosts
-      : allPosts.filter(post =>
-        selectedTopics.some(topic => post.frontmatter.tags.includes(topic))
-      );
+    const filtered =
+      selectedTopics.length === 0
+        ? allPosts
+        : allPosts.filter((post) =>
+            selectedTopics.some((topic) =>
+              post.frontmatter.tags.includes(topic),
+            ),
+          );
 
     const sorter = (a: EnhancedWriting, b: EnhancedWriting) => {
       switch (sortOrder) {
         case 'oldest':
-          return new Date(a.frontmatter.date).getTime() - new Date(b.frontmatter.date).getTime();
+          return (
+            new Date(a.frontmatter.date).getTime() -
+            new Date(b.frontmatter.date).getTime()
+          );
         case 'a-z':
           return a.frontmatter.title.localeCompare(b.frontmatter.title);
         case 'z-a':
           return b.frontmatter.title.localeCompare(a.frontmatter.title);
         case 'newest':
         default:
-          return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+          return (
+            new Date(b.frontmatter.date).getTime() -
+            new Date(a.frontmatter.date).getTime()
+          );
       }
-    }
+    };
     return filtered.slice().sort(sorter);
   }, [allPosts, sortOrder, selectedTopics]);
 
@@ -55,7 +73,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
     newest: 'Newest First',
     oldest: 'Oldest First',
     'a-z': 'A-Z',
-    'z-a': 'Z-A'
+    'z-a': 'Z-A',
   };
 
   const containerVariants = {
@@ -93,10 +111,13 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
         <div>
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="w-full h-auto text-left flex-col items-start px-4 py-3 cursor-pointer">
+              <Button
+                variant="outline"
+                className="w-full h-auto text-left flex-col items-start px-4 py-3 cursor-pointer"
+              >
                 <span className="w-full flex justify-between items-center">
                   {sortLabels[sortOrder]}
-                  <FaChevronDown className="h-4 w-4" />
+                  {getIcon('ChevronDown', 'h-4 w-4')}
                 </span>
                 <p className="text-xs text-muted-foreground mt-1">
                   Sort posts by date or title
@@ -104,11 +125,28 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[calc(100vw-2rem)] sm:w-56">
-              <DropdownMenuRadioGroup value={sortOrder} onValueChange={(value) => setSortOrder(value as SortOption)}>
-                <DropdownMenuRadioItem value="newest" className="cursor-pointer">Newest First</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="oldest" className="cursor-pointer">Oldest First</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="a-z" className="cursor-pointer">A-Z</DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="z-a" className="cursor-pointer">Z-A</DropdownMenuRadioItem>
+              <DropdownMenuRadioGroup
+                value={sortOrder}
+                onValueChange={(value) => setSortOrder(value as SortOption)}
+              >
+                <DropdownMenuRadioItem
+                  value="newest"
+                  className="cursor-pointer"
+                >
+                  Newest First
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem
+                  value="oldest"
+                  className="cursor-pointer"
+                >
+                  Oldest First
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="a-z" className="cursor-pointer">
+                  A-Z
+                </DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="z-a" className="cursor-pointer">
+                  Z-A
+                </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -117,7 +155,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
         {/* Topics Filter */}
         <div>
           <h3 className="font-semibold text-base mb-3 flex items-center gap-2">
-            <FaTag className="h-5 w-5" />
+            {getIcon('Tag', 'h-5 w-5')}
             Topics
           </h3>
           <div className="flex flex-wrap gap-2">
@@ -129,7 +167,7 @@ export default function WritingsClientPage({ allPosts, allTopics }: WritingsClie
             >
               All
             </Button>
-            {allTopics.map(topic => (
+            {allTopics.map((topic) => (
               <Button
                 key={topic}
                 variant={selectedTopics.includes(topic) ? 'default' : 'outline'}

@@ -31,3 +31,7 @@ export interface ProjectsSectionProps {
   projects: ProjectContentItem[];
   loading: boolean;
 }
+
+export interface ProjectsClientPageProps {
+  projects: ProjectContentItem[];
+}

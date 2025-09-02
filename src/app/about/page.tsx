@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { motion } from "motion/react";
-import { PageHeader } from "@/components/page-header";
-import { AboutBg } from "@/components/backgrounds/about-bg";
-import { ExperienceTimeline } from "@/components/about/experiences";
-import { TechStack } from "@/components/about/tech-stack";
-import { FavStack } from "@/components/about/fav-stack";
-import { AboutImage } from "@/components/about/images";
+import { motion } from 'motion/react';
+import { PageHeader } from '@/components/page-header';
+import { AboutBg } from '@/components/backgrounds/about-bg';
+import { ExperienceTimeline } from '@/components/about/experiences';
+import { TechStack } from '@/components/about/tech-stack';
+import { FavStack } from '@/components/about/fav-stack';
+import { AboutImage } from '@/components/about/images';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,14 +23,14 @@ const sectionVariants = {
   hidden: {
     opacity: 0,
     y: 40,
-    scale: 0.98
+    scale: 0.98,
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 100,
       damping: 15,
       duration: 0.6,
@@ -41,13 +41,13 @@ const sectionVariants = {
 const textVariants = {
   hidden: {
     opacity: 0,
-    y: 20
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 120,
       damping: 15,
     },
@@ -73,32 +73,33 @@ export default function AboutPage() {
         variants={containerVariants}
       >
         {/* Introduction Section */}
-        <motion.div
-          className="max-w-4xl mx-auto"
-          variants={sectionVariants}
-        >
+        <motion.div className="max-w-4xl mx-auto" variants={sectionVariants}>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <motion.div variants={textVariants}>
               <motion.div className="space-y-4 leading-relaxed">
                 <motion.p variants={textVariants} className="font-semibold">
                   Hi There! Ardan here 👋🏻
                 </motion.p>
-                <motion.p variants={textVariants} className="text-muted-foreground">
-                  I&apos;m a software engineer who loves building cool things with code.
-                  I started coding out of curiosity and now I spend my time creating
-                  applications that people actually want to use.
+                <motion.p
+                  variants={textVariants}
+                  className="text-muted-foreground"
+                >
+                  I&apos;m a software engineer who loves building cool things
+                  with code. I started coding out of curiosity and now I spend
+                  my time creating applications that people actually want to
+                  use.
                 </motion.p>
-                <motion.p variants={textVariants} className="text-muted-foreground">
-                  My approach to development is simple: write clean, maintainable
-                  code, prioritize user experience, and never stop learning. Every
-                  project is an opportunity to grow and create something that can
-                  make a difference.
+                <motion.p
+                  variants={textVariants}
+                  className="text-muted-foreground"
+                >
+                  My approach to development is simple: write clean,
+                  maintainable code, prioritize user experience, and never stop
+                  learning. Every project is an opportunity to grow and create
+                  something that can make a difference.
                 </motion.p>
               </motion.div>
-              <motion.div
-                className="space-y-4 mt-6"
-                variants={textVariants}
-              >
+              <motion.div className="space-y-4 mt-6" variants={textVariants}>
                 <motion.p variants={textVariants}>
                   Here are my current favorites tech stack:
                 </motion.p>

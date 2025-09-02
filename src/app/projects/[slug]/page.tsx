@@ -1,5 +1,10 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getProjectWithContent, getAllProjects, getRelatedProjects, getProjectNavigation } from '@/lib/posts';
+import {
+  getProjectWithContent,
+  getAllProjects,
+  getRelatedProjects,
+  getProjectNavigation,
+} from '@/lib/posts';
 import { generateSEOMetadata, generateStructuredData } from '@/lib/seo';
 import { DetailHero } from '@/components/detail/detail-hero';
 import { ContentNavigation } from '@/components/detail/content-navigation';
@@ -8,7 +13,10 @@ import { ScrollToTop } from '@/components/detail/scroll-to-top';
 import { PrevNextNavigation } from '@/components/detail/prev-next-navigation';
 import { ShareButtons } from '@/components/detail/share-buttons';
 import { ProjectNotFound } from '@/components/detail/content-not-found';
-import { MDXErrorBoundary, ErrorBoundary } from '@/components/detail/error-boundary';
+import {
+  MDXErrorBoundary,
+  ErrorBoundary,
+} from '@/components/detail/error-boundary';
 import { ReadingProgress } from '@/components/detail/reading-progress';
 import { mdxComponents } from '@/lib/mdx';
 import { TableOfContents } from '@/components/detail/table-of-contents';
@@ -22,7 +30,11 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const project = await getProjectWithContent(slug);
 
@@ -50,7 +62,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 // The main page component
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
 
   try {
@@ -64,7 +80,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     const relatedProjects = await getRelatedProjects(
       project.frontmatter.tags,
       project.slug,
-      3
+      3,
     );
 
     // Fetch navigation data for prev/next
@@ -153,7 +169,10 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             <div className="my-6 sm:mt-8 pt-6 sm:pt-8 border-t border-border">
               <ShareButtons
                 title={project.frontmatter.title}
-                url={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://ardananugraha.dev'}/projects/${project.slug}`}
+                url={`${
+                  process.env.NEXT_PUBLIC_SITE_URL ||
+                  'https://ardananugraha.dev'
+                }/projects/${project.slug}`}
                 description={project.frontmatter.summary}
               />
             </div>

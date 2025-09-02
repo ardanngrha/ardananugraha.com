@@ -1,12 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "motion/react";
+import { motion } from 'motion/react';
 import { ProjectCard } from '@/components/projects/project-card';
-import { ProjectContentItem } from "@/types/projects";
-
-interface ProjectsClientPageProps {
-  projects: ProjectContentItem[];
-}
+import { ProjectsClientPageProps } from '@/types/projects';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -23,14 +19,14 @@ const itemVariants = {
   hidden: {
     opacity: 0,
     y: 30,
-    scale: 0.95
+    scale: 0.95,
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 100,
       damping: 15,
       duration: 0.6,
@@ -49,11 +45,7 @@ export function ProjectsClientPage({ projects }: ProjectsClientPageProps) {
         key="projects-page"
       >
         {projects.map((project, index) => (
-          <motion.div
-            key={project.slug}
-            variants={itemVariants}
-            custom={index}
-          >
+          <motion.div key={project.slug} variants={itemVariants} custom={index}>
             <ProjectCard project={project} variant="page" />
           </motion.div>
         ))}

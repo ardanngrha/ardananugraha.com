@@ -21,12 +21,14 @@ async function getAllProjects(): Promise<ProjectContentItem[]> {
         slug: filename.replace(/\.mdx$/, ''),
         frontmatter: data as ProjectContentItem['frontmatter'],
       };
-    })
+    }),
   );
 
   // Sort projects by date in descending order
-  return projects.sort((a, b) =>
-    new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+  return projects.sort(
+    (a, b) =>
+      new Date(b.frontmatter.date).getTime() -
+      new Date(a.frontmatter.date).getTime(),
   );
 }
 

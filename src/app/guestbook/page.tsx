@@ -1,20 +1,16 @@
-"use client";
+'use client';
 
-import { GuestbookBg } from "@/components/backgrounds/guestbook-bg";
-import { PageHeader } from "@/components/page-header";
-import { useState, useEffect, useRef, useCallback, FormEvent } from "react";
-import { useSession, signIn } from "next-auth/react";
-import { motion, AnimatePresence } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { FaGithub } from "react-icons/fa";
-import { Input } from "@/components/ui/input"
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Comment } from "@/types/guestbook";
+import { GuestbookBg } from '@/components/backgrounds/guestbook-bg';
+import { PageHeader } from '@/components/page-header';
+import { useState, useEffect, useRef, useCallback, FormEvent } from 'react';
+import { useSession, signIn } from 'next-auth/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Comment } from '@/types/guestbook';
+import { getIcon } from '@/lib/icons';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -36,7 +32,7 @@ const formVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: "spring" as const,
+      type: 'spring' as const,
       stiffness: 100,
       damping: 15,
       delay: 0.3,
@@ -47,14 +43,14 @@ const formVariants = {
 export default function GuestbookPage() {
   const { data: session } = useSession();
   const [comments, setComments] = useState<Comment[]>([]);
-  const [newComment, setNewComment] = useState("");
+  const [newComment, setNewComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const commentsContainerRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     // Target the actual scrollable viewport inside the shadcn/ui component
     const viewport = commentsContainerRef.current?.querySelector(
-      '[data-radix-scroll-area-viewport]'
+      '[data-radix-scroll-area-viewport]',
     );
     if (viewport) {
       viewport.scrollTop = viewport.scrollHeight;
@@ -64,13 +60,13 @@ export default function GuestbookPage() {
   const fetchComments = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("/api/guestbook");
+      const response = await fetch('/api/guestbook');
       if (response.ok) {
         const data = await response.json();
         setComments(data);
       }
     } catch (error) {
-      console.error("Failed to fetch comments:", error);
+      console.error('Failed to fetch comments:', error);
     } finally {
       setIsLoading(false);
     }
@@ -98,34 +94,34 @@ export default function GuestbookPage() {
     if (!newComment.trim()) return;
 
     try {
-      const response = await fetch("/api/guestbook", {
-        method: "POST",
+      const response = await fetch('/api/guestbook', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ content: newComment }),
       });
 
       if (response.ok) {
-        setNewComment("");
+        setNewComment('');
         await fetchComments(); // Refresh comments after posting
       }
     } catch (error) {
-      console.error("Failed to post comment:", error);
+      console.error('Failed to post comment:', error);
     }
   };
 
   const formatDateTime = (dateString: string) => {
     const date = new Date(dateString);
-    return `${date.toLocaleDateString()} ${date.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' })}`;
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+    })}`;
   };
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
+    <motion.div initial="hidden" animate="visible" variants={containerVariants}>
       <PageHeader
         title="Guestbook"
         description="Leave a comment below. It could be anything – appreciation, feedback,
@@ -140,7 +136,10 @@ export default function GuestbookPage() {
         animate="visible"
       >
         {/* The ref is correctly placed here on the parent component */}
-        <ScrollArea className="h-96 md:h-96 rounded-md p-4" ref={commentsContainerRef}>
+        <ScrollArea
+          className="h-96 md:h-96 rounded-md p-4"
+          ref={commentsContainerRef}
+        >
           <div className="flex-grow" />
 
           <AnimatePresence mode="wait">
@@ -199,8 +198,10 @@ export default function GuestbookPage() {
                       {/* ...existing comment rendering code... */}
                       <div className="mt-3">
                         <Avatar>
-                          <AvatarImage src={comment.author.image || ""} />
-                          <AvatarFallback>{comment.author.username.charAt(0).toUpperCase()}</AvatarFallback>
+                          <AvatarImage src={comment.author.image || ''} />
+                          <AvatarFallback>
+                            {comment.author.username.charAt(0).toUpperCase()}
+                          </AvatarFallback>
                         </Avatar>
                       </div>
                       <div className="flex-1 min-w-0">
@@ -245,15 +246,19 @@ export default function GuestbookPage() {
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{
-                      type: "spring",
+                      type: 'spring',
                       stiffness: 200,
                       damping: 15,
                       delay: 0.2,
                     }}
                   >
                     <Avatar>
-                      <AvatarImage src={session.user?.image || ""} />
-                      <AvatarFallback>{(session.user?.username || 'U').charAt(0).toUpperCase()}</AvatarFallback>
+                      <AvatarImage src={session.user?.image || ''} />
+                      <AvatarFallback>
+                        {(session.user?.username || 'U')
+                          .charAt(0)
+                          .toUpperCase()}
+                      </AvatarFallback>
                     </Avatar>
                   </motion.div>
                   <span className="text-primary font-medium text-sm">
@@ -278,7 +283,12 @@ export default function GuestbookPage() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <Button type="submit" size="default" variant="outline" className="px-4 md:px-6 cursor-pointer">
+                    <Button
+                      type="submit"
+                      size="default"
+                      variant="outline"
+                      className="px-4 md:px-6 cursor-pointer"
+                    >
                       Submit
                     </Button>
                   </motion.div>
@@ -298,8 +308,12 @@ export default function GuestbookPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button onClick={() => signIn("github")} variant="outline" className="w-full sm:w-auto cursor-pointer">
-                  Sign in with <FaGithub className="inline-block mx-1" /> to comment
+                <Button
+                  onClick={() => signIn('github')}
+                  variant="outline"
+                  className="w-full sm:w-auto cursor-pointer"
+                >
+                  Sign in with {getIcon('github')} to comment
                 </Button>
               </motion.div>
             </motion.div>

@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/database/drizzle";
-import { comments, users } from "@/database/schema";
-import { getSession } from "@/lib/auth";
-import { asc, eq } from "drizzle-orm";
+import { NextRequest, NextResponse } from 'next/server';
+import { db } from '@/database/drizzle';
+import { comments, users } from '@/database/schema';
+import { getSession } from '@/lib/auth';
+import { asc, eq } from 'drizzle-orm';
 
 export async function GET() {
   try {
@@ -15,10 +15,10 @@ export async function GET() {
 
     return NextResponse.json(allComments);
   } catch (error) {
-    console.error("Failed to fetch comments:", error);
+    console.error('Failed to fetch comments:', error);
     return NextResponse.json(
-      { error: "Failed to fetch comments" },
-      { status: 500 }
+      { error: 'Failed to fetch comments' },
+      { status: 500 },
     );
   }
 }
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const session = await getSession();
 
     if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { content } = await req.json();
@@ -36,18 +36,15 @@ export async function POST(req: NextRequest) {
 
     if (!content || !userId || !username) {
       return NextResponse.json(
-        { error: "Content and user identifiers are required" },
-        { status: 400 }
+        { error: 'Content and user identifiers are required' },
+        { status: 400 },
       );
     }
 
-    const [user] = await db
-      .select()
-      .from(users)
-      .where(eq(users.id, userId));
+    const [user] = await db.select().from(users).where(eq(users.id, userId));
 
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     await db.insert(comments).values({
@@ -55,12 +52,12 @@ export async function POST(req: NextRequest) {
       content,
     });
 
-    return NextResponse.json({ message: "Comment added" }, { status: 201 });
+    return NextResponse.json({ message: 'Comment added' }, { status: 201 });
   } catch (error) {
-    console.error("Failed to post comment:", error);
+    console.error('Failed to post comment:', error);
     return NextResponse.json(
-      { error: "Failed to post comment" },
-      { status: 500 }
+      { error: 'Failed to post comment' },
+      { status: 500 },
     );
   }
 }
