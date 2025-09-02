@@ -1,9 +1,9 @@
-import NowPlaying from "./now-playing"
-import Navigation from "./navigation"
-import Newsletter from "./newsletter"
-import Copyright from "./copyright"
-import Connect from "./connect"
-import { Separator } from "../ui/separator"
+import NowPlaying from './now-playing';
+import Navigation from './navigation';
+import Newsletter from './newsletter';
+import Copyright from './copyright';
+import Connect from './connect';
+import { Separator } from '../ui/separator';
 
 export default function Footer() {
   return (
@@ -40,7 +40,6 @@ export default function Footer() {
       <div className="py-12">
         <Copyright />
       </div>
-
     </footer>
-  )
+  );
 }

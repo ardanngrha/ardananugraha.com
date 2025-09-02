@@ -1,13 +1,8 @@
-import { motion } from "motion/react";
-import { FaFileSignature } from "react-icons/fa";
-import { WritingCard } from "@/components/writings/writing-card";
-import { EnhancedWriting } from "@/types/writings";
-import { RippleButton } from "@/components/ui/ripple-button";
-
-interface WritingsSectionProps {
-  writings: EnhancedWriting[];
-  loading: boolean;
-}
+import { motion } from 'motion/react';
+import { WritingCard } from '@/components/writings/writing-card';
+import { WritingsSectionProps } from '@/types/writings';
+import { RippleButton } from '@/components/ui/ripple-button';
+import { getIcon } from '@/lib/icons';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -32,7 +27,7 @@ export default function WritingsSection({
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-4xl md:text-5xl font-bold flex items-center gap-3 gradient-text pb-2 font-handwriting pr-2">
-          <FaFileSignature className="w-8 h-8" />
+          {getIcon('FeatherAlt', 'w-8 h-8')}
           Featured Writings
         </h2>
       </motion.div>
@@ -59,7 +54,11 @@ export default function WritingsSection({
           viewport={{ once: true, amount: 0.2 }}
         >
           {writings.map((writing) => (
-            <WritingCard key={writing.slug} writing={writing} variant="featured" />
+            <WritingCard
+              key={writing.slug}
+              writing={writing}
+              variant="featured"
+            />
           ))}
         </motion.div>
       )}

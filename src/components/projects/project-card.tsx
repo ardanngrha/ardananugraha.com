@@ -1,16 +1,11 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { ProjectContentItem } from '@/types/projects';
 import Image from 'next/image';
 import { FaGithub, FaExternalLinkAlt, FaArrowRight } from 'react-icons/fa';
 import { RippleButton } from '@/components/ui/ripple-button';
 import { getIcon } from '@/lib/icons';
-
-interface ProjectCardProps {
-  project: ProjectContentItem;
-  variant?: 'featured' | 'page';
-}
+import { ProjectCardProps } from '@/types/projects';
 
 const cardVariants = {
   hidden: { y: 20, opacity: 0 },

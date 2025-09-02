@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { TestimonialCard } from "./card";
-import { testimonials } from "@/data/testimonials";
-import { FaChevronLeft, FaChevronRight, FaFeatherAlt } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { TestimonialCard } from './card';
+import { testimonials } from '@/data/testimonials';
+import { Button } from '@/components/ui/button';
+import { getIcon } from '@/lib/icons';
 
 const SWIPE_CONFIDENCE_THRESHOLD = 10000;
 
@@ -11,7 +11,10 @@ export default function TestimonialsSection() {
   const [[current, direction], setCurrent] = useState([0, 0]);
 
   const getIndex = (index: number) => {
-    return ((index % testimonials.length) + testimonials.length) % testimonials.length;
+    return (
+      ((index % testimonials.length) + testimonials.length) %
+      testimonials.length
+    );
   };
 
   const paginate = (newDirection: number) => {
@@ -20,52 +23,52 @@ export default function TestimonialsSection() {
 
   const variants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? "100%" : "-100%",
+      x: direction > 0 ? '100%' : '-100%',
       rotate: 0,
       opacity: 0,
       scale: 0.8,
     }),
     center: {
       zIndex: 3,
-      x: "0%",
+      x: '0%',
       y: 0,
       rotate: 0,
       opacity: 1,
       scale: 1,
-      filter: "grayscale(0)",
-      transition: { type: "spring" as const, stiffness: 300, damping: 25 },
+      filter: 'grayscale(0)',
+      transition: { type: 'spring' as const, stiffness: 300, damping: 25 },
     },
     exit: (direction: number) => ({
       zIndex: 1,
-      x: direction < 0 ? "100%" : "-100%",
+      x: direction < 0 ? '100%' : '-100%',
       rotate: 0,
       opacity: 0,
       scale: 0.8,
-      transition: { type: "spring" as const, stiffness: 300, damping: 25 },
+      transition: { type: 'spring' as const, stiffness: 300, damping: 25 },
     }),
     left: {
       zIndex: 2,
-      x: "-80%",
+      x: '-80%',
       y: 30,
       rotate: 0,
       opacity: 0.6,
       scale: 0.9,
-      filter: "grayscale(0.7)",
-      transition: { type: "spring" as const, stiffness: 300, damping: 25 },
+      filter: 'grayscale(0.7)',
+      transition: { type: 'spring' as const, stiffness: 300, damping: 25 },
     },
     right: {
       zIndex: 2,
-      x: "80%",
+      x: '80%',
       y: 30,
       rotate: 0,
       opacity: 0.6,
       scale: 0.9,
-      filter: "grayscale(0.7)",
-      transition: { type: "spring" as const, stiffness: 300, damping: 25 },
+      filter: 'grayscale(0.7)',
+      transition: { type: 'spring' as const, stiffness: 300, damping: 25 },
     },
   };
 
-  const positions = ["left", "center", "right"];
+  const positions = ['left', 'center', 'right'];
   const visibleCards = [-1, 0, 1].map((offset) => ({
     pos: positions[offset + 1],
     index: getIndex(current + offset),
@@ -76,7 +79,7 @@ export default function TestimonialsSection() {
     {
       offset,
       velocity,
-    }: { offset: { x: number; y: number }; velocity: { x: number; y: number } }
+    }: { offset: { x: number; y: number }; velocity: { x: number; y: number } },
   ) => {
     const swipe = Math.abs(offset.x) * velocity.x;
 
@@ -96,7 +99,7 @@ export default function TestimonialsSection() {
       transition={{ duration: 0.5 }}
     >
       <h2 className="text-4xl md:text-5xl flex items-center gap-3 font-bold mb-8 gradient-text font-handwriting pr-2">
-        <FaFeatherAlt className="w-8 h-8" />
+        {getIcon('FeatherAlt', 'w-8 h-8')}
         Some Words
       </h2>
       <div className="relative w-full max-w-4xl h-[450px] flex items-center justify-center">
@@ -107,7 +110,7 @@ export default function TestimonialsSection() {
           variant="ghost"
           size="icon"
         >
-          <FaChevronLeft className="h-8 w-8" />
+          {getIcon('ChevronLeft', 'h-8 w-8')}
         </Button>
         <AnimatePresence initial={false} custom={direction}>
           {visibleCards.map(({ pos, index }) => (
@@ -124,14 +127,14 @@ export default function TestimonialsSection() {
               dragElastic={1}
               onDragEnd={handleDragEnd}
               onClick={() => {
-                if (pos === "left") paginate(-1);
-                if (pos === "right") paginate(1);
+                if (pos === 'left') paginate(-1);
+                if (pos === 'right') paginate(1);
               }}
-              whileHover={pos !== "center" ? { scale: 0.95, y: 20 } : {}}
+              whileHover={pos !== 'center' ? { scale: 0.95, y: 20 } : {}}
             >
               <TestimonialCard
                 testimonial={testimonials[index]}
-                isCenter={pos === "center"}
+                isCenter={pos === 'center'}
               />
             </motion.div>
           ))}
@@ -143,7 +146,7 @@ export default function TestimonialsSection() {
           variant="ghost"
           size="icon"
         >
-          <FaChevronRight className="h-8 w-8" />
+          {getIcon('ChevronRight', 'h-8 w-8')}
         </Button>
       </div>
 
@@ -151,10 +154,11 @@ export default function TestimonialsSection() {
         {testimonials.map((_, index) => (
           <motion.button
             key={index}
-            className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${index === getIndex(current)
+            className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${
+              index === getIndex(current)
                 ? 'bg-primary w-8'
                 : 'bg-muted w-3 hover:bg-muted-foreground/50'
-              }`}
+            }`}
             onClick={() => {
               const newIndex = getIndex(index);
               const direction = newIndex > getIndex(current) ? 1 : -1;
@@ -163,7 +167,7 @@ export default function TestimonialsSection() {
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
             animate={{
-              scale: index === getIndex(current) ? 1.1 : 1
+              scale: index === getIndex(current) ? 1.1 : 1,
             }}
             aria-label={`Go to testimonial ${index + 1}`}
           />

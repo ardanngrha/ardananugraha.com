@@ -23,6 +23,9 @@ import {
   FaArrowUp,
   FaExclamationTriangle,
   FaSync,
+  FaMoon,
+  FaFeatherAlt,
+  FaFileSignature,
 } from 'react-icons/fa';
 import {
   SiTypescript,
@@ -51,7 +54,7 @@ import {
   SiApachekafka,
 } from 'react-icons/si';
 import { VscAzure, VscVscode } from 'react-icons/vsc';
-import { MdAccessTime } from 'react-icons/md';
+import { MdAccessTime, MdOutlineWbSunny } from 'react-icons/md';
 import {
   FaInstagram,
   FaLinkedin,
@@ -59,7 +62,16 @@ import {
   FaFileDownload,
 } from 'react-icons/fa';
 import { FaThreads, FaXTwitter } from 'react-icons/fa6';
-import { HiOutlineHome } from 'react-icons/hi';
+import {
+  HiOutlineBookOpen,
+  HiOutlineBriefcase,
+  HiOutlineChevronDown,
+  HiOutlineChevronUp,
+  HiOutlineHome,
+  HiOutlineInformationCircle,
+  HiOutlinePencilAlt,
+  HiOutlineUser,
+} from 'react-icons/hi';
 import {
   FiCalendar,
   FiCheck,
@@ -68,6 +80,7 @@ import {
   FiEye,
   FiShare2,
 } from 'react-icons/fi';
+import { CgCodeSlash } from 'react-icons/cg';
 
 export const icons = [
   { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
@@ -124,8 +137,10 @@ export const icons = [
   { name: 'Threads', icons: <FaThreads className="" /> },
   { name: 'Email', icon: <FaEnvelope className="" /> },
   { name: 'Resume', icon: <FaFileDownload className="" /> },
+  { name: 'ChevronUpOutlined', icon: <HiOutlineChevronUp className="" /> },
   { name: 'ChevronLeft', icon: <FaChevronLeft className="" /> },
   { name: 'ChevronRight', icon: <FaChevronRight className="" /> },
+  { name: 'ChevronDownOutlined', icon: <HiOutlineChevronDown className="" /> },
   { name: 'HomeOutlined', icon: <HiOutlineHome className="" /> },
   { name: 'Home', icon: <FaHome className="" /> },
   { name: 'ArrowUp', icon: <FaArrowUp className="" /> },
@@ -143,4 +158,17 @@ export const icons = [
   { name: 'Calendar', icon: <FiCalendar className="" /> },
   { name: 'Clock', icon: <FiClock className="" /> },
   { name: 'ExternalLink', icon: <FiExternalLink className="" /> },
+  { name: 'Briefcase', icon: <HiOutlineBriefcase className="" /> },
+  { name: 'PencilAlt', icon: <HiOutlinePencilAlt className="" /> },
+  { name: 'UserOutlined', icon: <HiOutlineUser className="" /> },
+  { name: 'BookOpen', icon: <HiOutlineBookOpen className="" /> },
+  {
+    name: 'InformationCircle',
+    icon: <HiOutlineInformationCircle className="" />,
+  },
+  { name: 'Moon', icon: <FaMoon className="" /> },
+  { name: 'WbSunny', icon: <MdOutlineWbSunny className="" /> },
+  { name: 'FileSignature', icon: <FaFileSignature className="" /> },
+  { name: 'CodeSlash', icon: <CgCodeSlash className="" /> },
+  { name: 'FeatherAlt', icon: <FaFeatherAlt className="" /> },
 ];

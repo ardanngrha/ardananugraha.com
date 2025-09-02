@@ -22,3 +22,12 @@ export interface EnhancedProject extends ProjectContentItem {
   readTime?: number;
 }
 
+export interface ProjectCardProps {
+  project: ProjectContentItem;
+  variant?: 'featured' | 'page';
+}
+
+export interface ProjectsSectionProps {
+  projects: ProjectContentItem[];
+  loading: boolean;
+}

@@ -115,3 +115,11 @@ export interface DetailHeroProps {
   type: 'project' | 'writing';
   className?: string;
 }
+
+export interface CurrentTrack {
+  name: string;
+  artist: string;
+  isPlaying: boolean;
+  albumImageUrl: string;
+  songUrl: string;
+}

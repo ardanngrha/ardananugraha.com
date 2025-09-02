@@ -4,13 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'motion/react';
 import { formatRelativeDate, isRecent } from '@/lib/utils';
-import { EnhancedWriting } from '@/types/writings';
 import { getIcon } from '@/lib/icons';
-
-interface WritingCardProps {
-  writing: EnhancedWriting;
-  variant?: 'featured' | 'page';
-}
+import { WritingCardProps } from '@/types/writings';
 
 const cardVariants = {
   initial: { opacity: 0, y: 20 },

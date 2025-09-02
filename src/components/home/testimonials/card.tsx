@@ -1,7 +1,7 @@
-import { motion } from "motion/react";
-import Image from "next/image";
-import { Testimonial } from "@/types/testimonial";
-import { Separator } from "@/components/ui/separator";
+import { motion } from 'motion/react';
+import Image from 'next/image';
+import { Testimonial } from '@/types/testimonial';
+import { Separator } from '@/components/ui/separator';
 
 export function TestimonialCard({
   testimonial,
@@ -14,11 +14,12 @@ export function TestimonialCard({
 
   return (
     <motion.div
-      className={`px-4 py-6 w-72 h-80 rounded-xl relative border ring-1 ring-inset ring-gray-200 dark:ring-zinc-700/50 ${isCenter
-        ? "bg-white/80 dark:bg-black/80 border-white/30 dark:border-white/20 cursor-default"
-        : "bg-white/10 dark:bg-black/10 border-white/20 dark:border-white/10 cursor-grab"
-        }`}
-      style={{ boxSizing: "border-box" }}
+      className={`px-4 py-6 w-72 h-80 rounded-xl relative border ring-1 ring-inset ring-gray-200 dark:ring-zinc-700/50 ${
+        isCenter
+          ? 'bg-white/80 dark:bg-black/80 border-white/30 dark:border-white/20 cursor-default'
+          : 'bg-white/10 dark:bg-black/10 border-white/20 dark:border-white/10 cursor-grab'
+      }`}
+      style={{ boxSizing: 'border-box' }}
     >
       <div className="w-full h-full backdrop-blur-md p-2 flex flex-col justify-between rounded-xl">
         <div className="flex items-center">
@@ -42,9 +43,9 @@ export function TestimonialCard({
               ) : (
                 <span className="text-xs">
                   {testimonial.name
-                    .split(" ")
+                    .split(' ')
                     .map((n: string) => n[0])
-                    .join("")}
+                    .join('')}
                 </span>
               )}
             </div>

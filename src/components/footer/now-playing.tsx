@@ -1,17 +1,10 @@
-"use client"
+'use client';
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import getNowPlayingItem from "@/lib/spotify"
-import Link from "next/link"
-
-interface CurrentTrack {
-  name: string
-  artist: string
-  isPlaying: boolean
-  albumImageUrl: string
-  songUrl: string
-}
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import getNowPlayingItem from '@/lib/spotify';
+import Link from 'next/link';
+import { CurrentTrack } from '@/types/shared';
 
 // Sound waves component
 function SoundWaves({ isPlaying }: { isPlaying: boolean }) {
@@ -29,8 +22,8 @@ function SoundWaves({ isPlaying }: { isPlaying: boolean }) {
 }
 
 export default function NowPlaying() {
-  const [currentTrack, setCurrentTrack] = useState<CurrentTrack | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [currentTrack, setCurrentTrack] = useState<CurrentTrack | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCurrentTrack = async () => {
@@ -48,7 +41,7 @@ export default function NowPlaying() {
         const track = await getNowPlayingItem(
           clientId,
           clientSecret,
-          refreshToken
+          refreshToken,
         );
 
         if (track) {
@@ -94,11 +87,20 @@ export default function NowPlaying() {
 
   return (
     <div className="flex flex-col items-center md:items-start gap-2">
-      <h3 className="font-semibold text-4xl font-handwriting">Ardana Nugraha</h3>
-      <p className="text-sm text-muted-foreground italic">&quot;stay foolish, stay hungry&quot;</p>
+      <h3 className="font-semibold text-4xl font-handwriting">
+        Ardana Nugraha
+      </h3>
+      <p className="text-sm text-muted-foreground italic">
+        &quot;stay foolish, stay hungry&quot;
+      </p>
 
       {currentTrack ? (
-        <Link className="flex items-center gap-2 custom-cursor mt-2" href={currentTrack.songUrl} target="_blank" rel="noopener noreferrer">
+        <Link
+          className="flex items-center gap-2 custom-cursor mt-2"
+          href={currentTrack.songUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
             {currentTrack.albumImageUrl ? (
               <Image
@@ -130,5 +132,5 @@ export default function NowPlaying() {
         // No track is currently playing
       )}
     </div>
-  )
+  );
 }

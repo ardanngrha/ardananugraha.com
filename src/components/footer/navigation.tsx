@@ -1,11 +1,5 @@
-import Link from "next/link"
-
-const navigationLinks = [
-  { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Writings", href: "/writings" },
-  { label: "About", href: "/about" },
-]
+import Link from 'next/link';
+import { navigationLinks } from '@/data/footer';
 
 export default function Navigation() {
   return (
@@ -23,5 +17,5 @@ export default function Navigation() {
         ))}
       </nav>
     </div>
-  )
+  );
 }

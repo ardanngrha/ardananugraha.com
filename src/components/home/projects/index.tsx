@@ -1,13 +1,8 @@
-import { motion } from "motion/react";
-import { CgCodeSlash } from "react-icons/cg";
-import { ProjectCard } from "@/components/projects/project-card";
-import { ProjectContentItem } from "@/types/projects";
-import { RippleButton } from "@/components/ui/ripple-button";
-
-interface ProjectsSectionProps {
-  projects: ProjectContentItem[];
-  loading: boolean;
-}
+import { motion } from 'motion/react';
+import { ProjectCard } from '@/components/projects/project-card';
+import { ProjectsSectionProps } from '@/types/projects';
+import { RippleButton } from '@/components/ui/ripple-button';
+import { getIcon } from '@/lib/icons';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -33,7 +28,7 @@ export default function ProjectsSection({
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-4xl md:text-5xl font-bold flex items-center gap-3 gradient-text pb-2 font-handwriting pr-2">
-          <CgCodeSlash className="w-8 h-8" />
+          {getIcon('CodeSlash', 'w-8 h-8')}
           Featured Works
         </h2>
       </motion.div>
@@ -73,7 +68,11 @@ export default function ProjectsSection({
           viewport={{ once: true, amount: 0.2 }}
         >
           {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} variant="featured" />
+            <ProjectCard
+              key={project.slug}
+              project={project}
+              variant="featured"
+            />
           ))}
         </motion.div>
       )}

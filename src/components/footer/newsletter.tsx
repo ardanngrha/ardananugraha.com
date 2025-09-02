@@ -1,11 +1,11 @@
-"use client"
+'use client';
 
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button';
 
 export default function Newsletter() {
   const handleRedirect = () => {
-    window.open("https://ardananugraha.substack.com/", "_blank")
-  }
+    window.open('https://ardananugraha.substack.com/', '_blank');
+  };
 
   return (
     <div className="flex flex-col items-center md:items-start gap-2">
@@ -21,5 +21,5 @@ export default function Newsletter() {
         Subscribe
       </Button>
     </div>
-  )
+  );
 }

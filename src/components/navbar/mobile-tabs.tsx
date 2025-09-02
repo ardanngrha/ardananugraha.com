@@ -1,8 +1,8 @@
-"use client"
+'use client';
 
-import { Tabs } from "@/components/navbar/navigation-tabs"
-import { ModeToggle } from "./toggle-mode"
-import { MobileTabsProps } from "@/types/navbar"
+import { Tabs } from '@/components/navbar/navigation-tabs';
+import { ModeToggle } from './toggle-mode';
+import { MobileTabsProps } from '@/types/navbar';
 
 export function MobileTabs({ navigationTabs }: MobileTabsProps) {
   return (
@@ -32,5 +32,5 @@ export function MobileTabs({ navigationTabs }: MobileTabsProps) {
       {/* Mobile spacing to prevent content from being hidden behind bottom nav */}
       <div className="md:hidden" />
     </>
-  )
+  );
 }

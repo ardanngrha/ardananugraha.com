@@ -4,7 +4,9 @@ import { cloneElement, isValidElement, JSX } from 'react';
 // Create a mapping from tech names to their icons
 export const iconMap: Record<string, JSX.Element> = icons.reduce(
   (acc, tech) => {
-    acc[tech.name] = tech.icon;
+    if (tech.icon !== undefined) {
+      acc[tech.name] = tech.icon;
+    }
     return acc;
   },
   {} as Record<string, JSX.Element>,
