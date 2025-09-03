@@ -1,0 +1,158 @@
+@layer components {
+  /* Ripple Effects */
+  .ripple-container {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    contain: layout style;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: ripple-expand var(--animation-duration-slow)
+      var(--animation-easing) forwards;
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .ripple-background {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      var(--ripple-primary) 0%,
+      var(--ripple-secondary) 40%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity var(--animation-duration-normal) var(--animation-easing);
+    pointer-events: none;
+    will-change: opacity;
+    contain: layout style paint;
+    transform: translateZ(0);
+  }
+
+  .ripple-container:hover .ripple-background {
+    opacity: 1;
+  }
+
+  .ripple-click-effect {
+    animation: ripple-click var(--animation-duration-slow)
+      var(--animation-easing) forwards;
+  }
+
+  /* Gradient Shadow Effects */
+  .gradient-shadow {
+    position: relative;
+    will-change: box-shadow;
+    transition: box-shadow var(--animation-duration-normal)
+      var(--animation-easing);
+    contain: layout style;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .gradient-shadow::before {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--shadow-spread));
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+      135deg,
+      var(--shadow-gradient-start),
+      var(--shadow-gradient-mid),
+      var(--shadow-gradient-end)
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    opacity: 0;
+    transition: opacity var(--animation-duration-normal) var(--animation-easing);
+    pointer-events: none;
+    z-index: -1;
+    will-change: opacity;
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .gradient-shadow:hover::before {
+    opacity: var(--shadow-opacity);
+  }
+
+  .gradient-shadow-card {
+    position: relative;
+    isolation: isolate;
+    contain: layout style;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .gradient-shadow-card::before {
+    content: '';
+    position: absolute;
+    inset: calc(-1 * var(--shadow-spread));
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      var(--shadow-gradient-start),
+      var(--shadow-gradient-mid),
+      var(--shadow-gradient-end)
+    );
+    mix-blend-mode: normal;
+    opacity: 0;
+    filter: blur(var(--shadow-blur));
+    transition: opacity var(--animation-duration-normal) var(--animation-easing);
+    pointer-events: none;
+    z-index: -1;
+    will-change: opacity;
+    contain: layout style paint;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .gradient-shadow-card:hover::before {
+    opacity: var(--shadow-opacity);
+  }
+
+  /* Ensure inner content doesn't get gradient effects */
+  .gradient-shadow-card > * {
+    position: relative;
+    z-index: 1;
+    background: inherit;
+  }
+
+  /* Intensity variants */
+  .gradient-shadow-light {
+    --shadow-blur: 8px;
+    --shadow-spread: 6px;
+    --shadow-opacity: 0.2;
+  }
+  .gradient-shadow-medium {
+    --shadow-blur: 12px;
+    --shadow-spread: 8px;
+    --shadow-opacity: 0.25;
+  }
+  .gradient-shadow-strong {
+    --shadow-blur: 16px;
+    --shadow-spread: 10px;
+    --shadow-opacity: 0.35;
+  }
+
+  /* Stacking context helper */
+  .interactive-stack {
+    position: relative;
+    z-index: 1;
+  }
+  .interactive-stack::before,
+  .interactive-stack::after {
+    z-index: -1;
+  }
+}

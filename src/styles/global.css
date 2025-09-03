@@ -1,0 +1,28 @@
+/* *
+ * STYLES/GLOBAL.CSS
+ *
+ * This is the main entry point for all CSS in the project.
+ * It imports Tailwind CSS first, followed by the project's
+ * custom styles, which are organized into logical folders.
+ *
+ * The import order is crucial:
+ * 1. Settings: Global variables and configurations.
+ * 2. Base: Unclassed HTML element styling.
+ * 3. Components: Specific, reusable UI components.
+ * 4. Utils: Helper classes and accessibility overrides.
+ */
+
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@import './settings/_config.css';
+@import './settings/_variables.css';
+
+@import './base/_base.css';
+@import './base/_typography.css';
+
+@import './components/_animations.css';
+@import './components/_interactive.css';
+
+@import './utils/_accessibility.css';
+@import './utils/_helpers.css';

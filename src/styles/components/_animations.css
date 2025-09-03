@@ -1,0 +1,105 @@
+@layer components {
+  .sound-wave {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    width: 24px;
+    height: 24px;
+    justify-content: center;
+  }
+
+  .sound-wave-bar {
+    width: 3px;
+    background-color: #000000;
+    border-radius: 2px;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+
+  .dark .sound-wave-bar {
+    background-color: #ffffff;
+  }
+
+  .sound-wave-bar:nth-child(1) {
+    height: 8px;
+    animation-delay: 0s;
+  }
+  .sound-wave-bar:nth-child(2) {
+    height: 16px;
+    animation-delay: 0.1s;
+  }
+  .sound-wave-bar:nth-child(3) {
+    height: 12px;
+    animation-delay: 0.2s;
+  }
+  .sound-wave-bar:nth-child(4) {
+    height: 20px;
+    animation-delay: 0.3s;
+  }
+  .sound-wave-bar:nth-child(5) {
+    height: 8px;
+    animation-delay: 0.4s;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+
+  .theme-transition-overlay {
+    animation: ripple 1.2s var(--animation-easing) forwards;
+  }
+}
+
+/* Custom keyframes */
+@keyframes ripple {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple-expand {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.6;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(4);
+    opacity: 0;
+  }
+}
+
+@keyframes ripple-click {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.8;
+    background-color: var(--ripple-click);
+  }
+  to {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+    background-color: transparent;
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.3);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}

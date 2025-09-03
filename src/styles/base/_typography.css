@@ -1,0 +1,186 @@
+@layer components {
+  .gradient-text {
+    background: linear-gradient(
+      90deg,
+      var(--gradient-from) 0%,
+      var(--gradient-to) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 100%;
+    display: inline-block;
+  }
+
+  /* Enhanced reading experience for writing content */
+  .writing-content {
+    line-height: 1.75;
+    font-size: 1.125rem;
+  }
+
+  .writing-content h1,
+  .writing-content h2,
+  .writing-content h3,
+  .writing-content h4,
+  .writing-content h5,
+  .writing-content h6 {
+    scroll-margin-top: 5rem;
+    position: relative;
+  }
+
+  .writing-content h1:hover .heading-anchor,
+  .writing-content h2:hover .heading-anchor,
+  .writing-content h3:hover .heading-anchor,
+  .writing-content h4:hover .heading-anchor,
+  .writing-content h5:hover .heading-anchor,
+  .writing-content h6:hover .heading-anchor {
+    opacity: 1;
+  }
+
+  .heading-anchor {
+    position: absolute;
+    left: -1.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: hsl(var(--muted-foreground));
+    text-decoration: none;
+    font-weight: normal;
+  }
+
+  .heading-anchor:hover {
+    color: hsl(var(--primary));
+  }
+
+  /* Code block enhancements */
+  .writing-content pre {
+    position: relative;
+    overflow-x: auto;
+    border: 1px solid hsl(var(--border));
+    background: hsl(var(--muted));
+  }
+
+  .writing-content pre::-webkit-scrollbar {
+    height: 8px;
+  }
+  .writing-content pre::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .writing-content pre::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+  .writing-content pre::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+
+  /* Table enhancements */
+  .writing-content table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+  }
+
+  .writing-content table th:first-child,
+  .writing-content table td:first-child {
+    border-left: 1px solid hsl(var(--border));
+  }
+  .writing-content table th:last-child,
+  .writing-content table td:last-child {
+    border-right: 1px solid hsl(var(--border));
+  }
+  .writing-content table tr:first-child th {
+    border-top: 1px solid hsl(var(--border));
+  }
+  .writing-content table tr:last-child td {
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  /* List Styles */
+  .writing-content ul,
+  .writing-content ol,
+  .project-content ul,
+  .project-content ol,
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5rem;
+  }
+
+  .writing-content li,
+  .project-content li,
+  .prose li {
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .writing-content ul li,
+  .project-content ul li,
+  .prose ul li {
+    list-style-type: disc;
+    list-style-position: outside;
+  }
+
+  .writing-content ol li,
+  .project-content ol li,
+  .prose ol li {
+    list-style-type: decimal;
+    list-style-position: outside;
+  }
+
+  /* Nested lists */
+  .writing-content ul ul,
+  .writing-content ol ol,
+  .writing-content ul ol,
+  .writing-content ol ul,
+  .project-content ul ul,
+  .project-content ol ol,
+  .project-content ul ol,
+  .project-content ol ul,
+  .prose ul ul,
+  .prose ol ol,
+  .prose ul ol,
+  .prose ol ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose > :first-child,
+  .project-content > :first-child {
+    margin-top: 0 !important;
+  }
+
+  /* Responsive typography */
+  @media (max-width: 640px) {
+    .writing-content {
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+    .writing-content h1 {
+      font-size: 2rem;
+    }
+    .writing-content h2 {
+      font-size: 1.75rem;
+    }
+    .writing-content h3 {
+      font-size: 1.5rem;
+    }
+    .writing-content pre {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+  }
+
+  /* Font family utilities */
+  .font-handwriting {
+    font-family: var(--font-oooh-baby), 'Oooh Baby', cursive;
+  }
+  .font-mono {
+    font-family: var(--font-space-mono), 'Space Mono', monospace;
+  }
+  .font-tik-tok {
+    font-family: var(--font-tik-tok), 'TikTok Sans', sans-serif;
+  }
+}

@@ -1,0 +1,79 @@
+@layer components {
+  .hero-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  /* Transform utilities */
+  .-rotate-15 {
+    transform: rotate(-15deg);
+  }
+  .rotate-15 {
+    transform: rotate(15deg);
+  }
+
+  /* Custom cursor */
+  .custom-cursor {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-arrow-up-right'><path d='M7 17L17 7' stroke='%23ffffff' stroke-width='4'/><path d='M7 7h10v10' stroke='%23ffffff' stroke-width='4'/><path d='M7 17L17 7' stroke='%23000000' stroke-width='2'/><path d='M7 7h10v10' stroke='%23000000' stroke-width='2'/></svg>"),
+      auto;
+  }
+
+  /* Scrollbar hiding utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-hover-effect {
+    @apply transition-all duration-300 hover:shadow-lg hover:scale-105;
+  }
+
+  /* Performance optimization utilities */
+  .gpu-accelerated {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  .contain-layout {
+    contain: layout style paint;
+  }
+  .contain-strict {
+    contain: strict;
+  }
+
+  /* Optimized transitions for theme switching */
+  .theme-transition {
+    transition: background-color var(--animation-duration-normal)
+        var(--animation-easing),
+      border-color var(--animation-duration-normal) var(--animation-easing),
+      color var(--animation-duration-normal) var(--animation-easing),
+      box-shadow var(--animation-duration-normal) var(--animation-easing);
+  }
+}

@@ -1,0 +1,156 @@
+@layer base {
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Skip links */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    font-weight: 600;
+    transition: top 0.3s;
+  }
+  .skip-link:focus {
+    top: 6px;
+  }
+
+  /* Enhanced focus styles */
+  .focus-visible:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Touch target improvements */
+  @media (pointer: coarse) {
+    button,
+    [role='button'],
+    input[type='button'],
+    input[type='submit'],
+    input[type='reset'] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: more) {
+    .border {
+      border-width: 2px;
+    }
+    .shadow-sm {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    .shadow-md {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .gradient-shadow-card:hover {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+    }
+  }
+
+  /* Comprehensive reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+
+    .ripple-effect,
+    .ripple-container,
+    .gradient-shadow,
+    .gradient-shadow-card {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+      will-change: auto !important;
+    }
+
+    .gradient-shadow::before,
+    .gradient-shadow-card::before {
+      opacity: 0 !important;
+      animation: none !important;
+      transition: none !important;
+      filter: none !important;
+    }
+
+    .ripple-container:hover,
+    .ripple-container:focus-visible {
+      background-color: var(--ripple-primary);
+    }
+
+    .gradient-shadow-card:hover,
+    .gradient-shadow-card:focus-visible {
+      outline: 2px solid var(--shadow-gradient-start);
+      outline-offset: 2px;
+    }
+  }
+}
+
+@layer components {
+  /* Reduced motion support for specific classes */
+  .motion-safe {
+    animation-duration: var(--animation-duration-normal);
+    transition-duration: var(--animation-duration-normal);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe {
+      animation-duration: 0.01ms;
+      transition-duration: 0.01ms;
+    }
+  }
+
+  /* High performance mode for devices with limited resources */
+  @media (prefers-reduced-motion: reduce), (prefers-reduced-data: reduce) {
+    .backdrop-blur-sm,
+    .backdrop-blur,
+    .backdrop-blur-md {
+      backdrop-filter: none !important;
+    }
+
+    .gradient-shadow-card::before,
+    .gradient-shadow::before {
+      filter: none !important;
+      background: var(--shadow-gradient-start) !important;
+      opacity: calc(var(--shadow-opacity) * 0.5) !important;
+    }
+    .ripple-effect,
+    .ripple-background {
+      animation: none !important;
+      transition: none !important;
+      filter: none !important;
+      opacity: 0 !important;
+      will-change: auto !important;
+    }
+  }
+}
+
+/* Print styles - disable all interactive effects */
+@media print {
+  .ripple-effect,
+  .ripple-background,
+  .gradient-shadow::before,
+  .gradient-shadow-card::before {
+    display: none !important;
+  }
+}
