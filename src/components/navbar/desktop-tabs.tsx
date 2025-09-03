@@ -34,7 +34,7 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
                     whileTap={{ scale: 0.95 }}
                   >
                     <Image
-                      src="/images/an-black.png"
+                      src="/images/logo.png"
                       alt="logo"
                       width={32}
                       height={32}
