@@ -2,7 +2,7 @@ export interface JourneyStep {
   year: string;
   title: string;
   description: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: string;
   code: string;
   language: string;
   gradient: string;
@@ -11,7 +11,7 @@ export interface JourneyStep {
 export interface StackCategory {
   id: string;
   title: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: string;
   technologies: string[];
   words: string[];
   gradient: string;

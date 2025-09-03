@@ -3,6 +3,7 @@
 import { motion, AnimatePresence, useInView } from 'motion/react';
 import { useRef, useState, useEffect } from 'react';
 import { journeySteps } from '@/data/home-highlights';
+import { getIcon } from '@/lib/icons';
 
 const MAX_VISIBLE_CARDS = 6;
 
@@ -202,7 +203,7 @@ export default function SecondHighlight() {
                       <div
                         className={`flex-shrink-0 p-2 rounded-lg backdrop-blur-sm bg-gradient-to-br ${step.gradient} bg-opacity-20`}
                       >
-                        <step.icon className="w-5 h-5" />
+                        {getIcon(step.icon, 'w-5 h-5')}
                       </div>
                     </div>
                     <p className="text-muted-foreground text-sm leading-relaxed flex-1">

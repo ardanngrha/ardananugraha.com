@@ -28,6 +28,13 @@ import {
   FaFileSignature,
   FaChevronDown,
   FaTag,
+  FaBrain,
+  FaCode,
+  FaDatabase,
+  FaLaptopCode,
+  FaRocket,
+  FaServer,
+  FaUsers,
 } from 'react-icons/fa';
 import {
   SiTypescript,
@@ -54,9 +61,14 @@ import {
   SiDjango,
   SiRabbitmq,
   SiApachekafka,
+  SiVercel,
 } from 'react-icons/si';
 import { VscAzure, VscVscode } from 'react-icons/vsc';
-import { MdAccessTime, MdOutlineWbSunny } from 'react-icons/md';
+import {
+  MdAccessTime,
+  MdOutlineWbSunny,
+  MdScreenshotMonitor,
+} from 'react-icons/md';
 import {
   FaInstagram,
   FaLinkedin,
@@ -83,6 +95,7 @@ import {
   FiShare2,
 } from 'react-icons/fi';
 import { CgCodeSlash } from 'react-icons/cg';
+import { TiMessages } from 'react-icons/ti';
 
 export const icons = [
   { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
@@ -104,6 +117,7 @@ export const icons = [
     name: 'Next.js',
     icon: <SiNextdotjs className="text-black dark:text-white" />,
   },
+  { name: 'Vercel', icon: <SiVercel className="text-black dark:text-white" /> },
   { name: 'HTML', icon: <SiHtml5 className="text-orange-600" /> },
   { name: 'CSS', icon: <SiCss3 className="text-blue-600" /> },
   { name: 'Git', icon: <FaGitAlt className="text-orange-500" /> },
@@ -175,4 +189,16 @@ export const icons = [
   { name: 'CodeSlash', icon: <CgCodeSlash className="" /> },
   { name: 'FeatherAlt', icon: <FaFeatherAlt className="" /> },
   { name: 'Tag', icon: <FaTag className="" /> },
+  { name: 'Code', icon: <FaCode className="" /> },
+  { name: 'Rocket', icon: <FaRocket className="" /> },
+  { name: 'Brain', icon: <FaBrain className="" /> },
+  { name: 'Users', icon: <FaUsers className="" /> },
+  { name: 'Server', icon: <FaServer className="" /> },
+  { name: 'Database', icon: <FaDatabase className="" /> },
+  { name: 'LaptopCode', icon: <FaLaptopCode className="" /> },
+  {
+    name: 'ScreenshotMonitor',
+    icon: <MdScreenshotMonitor className="" />,
+  },
+  { name: 'Messages', icon: <TiMessages className="" /> },
 ];

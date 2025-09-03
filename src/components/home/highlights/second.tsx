@@ -66,7 +66,7 @@ export default function SecondHighlight() {
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            Full-Stack Architecture
+            Full-Stack Development Capabilities
           </motion.h2>
           <motion.p
             className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto"
@@ -75,9 +75,8 @@ export default function SecondHighlight() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            From beautiful interfaces and robust APIs to intelligent models,
-            reliable databases, scalable infrastructure, and real-time
-            messaging—covering the full stack, end to end.
+            I build complete web applications from user interface to database,
+            with modern AI integration
           </motion.p>
         </div>
 
@@ -191,7 +190,6 @@ export default function SecondHighlight() {
           >
             {stackCategories.map((category, index) => {
               const isActive = index === activeCard;
-              const Icon = category.icon;
 
               return (
                 <motion.div
@@ -245,7 +243,7 @@ export default function SecondHighlight() {
                         }
                       `}
                     >
-                      <Icon className="w-6 h-6" />
+                      {getIcon(category.icon, 'w-6 h-6')}
                     </motion.div>
 
                     <div>
