@@ -277,34 +277,6 @@ export default function SecondHighlight() {
               );
             })}
           </motion.div>
-
-          {/* Progress indicator */}
-          <motion.div
-            className="flex justify-center items-center space-x-3"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-          >
-            {stackCategories.map((_, index) => (
-              <motion.button
-                key={index}
-                className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${
-                  index === activeCard
-                    ? 'bg-primary w-8'
-                    : index < activeCard
-                    ? 'bg-blue-500 w-3'
-                    : 'bg-muted w-3'
-                }`}
-                onClick={() => handleCardClick(index)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.8 }}
-                animate={{
-                  scale: index === activeCard ? 1.1 : 1,
-                }}
-              />
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>

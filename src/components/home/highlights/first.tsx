@@ -283,28 +283,6 @@ export default function SecondHighlight() {
             </motion.div>
           </div>
         </div>
-
-        {/* Progress Indicator */}
-        <div className="flex justify-center gap-3 mt-10">
-          {journeySteps.map((_, index) => (
-            <motion.button
-              key={index}
-              className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${
-                index === activeStep
-                  ? 'bg-primary w-8'
-                  : index < activeStep
-                  ? 'bg-green-500 w-3'
-                  : 'bg-muted w-3'
-              }`}
-              onClick={() => handleStepClick(index)}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.8 }}
-              animate={{
-                scale: index === activeStep ? 1.1 : 1,
-              }}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );

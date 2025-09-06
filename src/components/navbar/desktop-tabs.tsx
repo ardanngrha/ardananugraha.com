@@ -29,7 +29,7 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
                 <div className="relative flex justify-between items-center">
                   {/* Logo section with hover effect */}
                   <motion.div
-                    className="flex items-center justify-center w-9 h-9 pl-2"
+                    className="flex items-center justify-center pl-2"
                     whileHover={{ scale: 1.1, rotate: 10 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -38,7 +38,8 @@ export function DesktopTabs({ navigationTabs, isVisible }: DesktopTabsProps) {
                       alt="logo"
                       width={32}
                       height={32}
-                      className="w-8 h-8 dark:filter dark:brightness-0 dark:invert"
+                      className="dark:filter dark:brightness-0 dark:invert"
+                      priority={true}
                     />
                   </motion.div>
 

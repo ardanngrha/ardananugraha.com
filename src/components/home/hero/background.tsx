@@ -11,15 +11,6 @@ type Star = {
   speed: number;
 };
 
-type Comet = {
-  x: number;
-  y: number;
-  radius: number;
-  speed: { x: number; y: number };
-  alpha: number;
-  length: number;
-};
-
 const Starfield: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -47,7 +38,6 @@ const Starfield: React.FC = () => {
     const FPS = reduced ? 15 : 60;
 
     let stars: Star[] = [];
-    const comets: Comet[] = [];
     let animationFrameId = 0;
     let lastTime = performance.now();
     let cometInterval: number | undefined;
@@ -56,18 +46,6 @@ const Starfield: React.FC = () => {
       if (!canvas) return false;
       const rect = canvas.getBoundingClientRect();
       return rect.bottom >= 0 && rect.top <= window.innerHeight;
-    };
-
-    const createComet = () => {
-      if (reduced) return;
-      comets.push({
-        x: Math.random() * canvas.width,
-        y: 0,
-        radius: Math.random() * 2 + 1,
-        speed: { x: (Math.random() - 0.5) * 10, y: Math.random() * 5 + 5 },
-        alpha: 1,
-        length: Math.random() * 100 + 50,
-      });
     };
 
     const resizeCanvas = () => {
@@ -84,13 +62,6 @@ const Starfield: React.FC = () => {
         });
       }
     };
-
-    if (!reduced) {
-      cometInterval = window.setInterval(
-        createComet,
-        Math.random() * 10000 + 5000,
-      );
-    }
 
     const animate = (time: number) => {
       // Pause when tab hidden or canvas offscreen
@@ -123,33 +94,6 @@ const Starfield: React.FC = () => {
         ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${objectColor}, ${star.alpha})`;
         ctx.fill();
-      }
-
-      // Draw comets (skip if reduced)
-      if (!reduced) {
-        for (let i = comets.length - 1; i >= 0; i--) {
-          const comet = comets[i];
-          comet.x += comet.speed.x;
-          comet.y += comet.speed.y;
-          comet.alpha -= 0.01;
-          if (comet.alpha <= 0) {
-            comets.splice(i, 1);
-            continue;
-          }
-          ctx.beginPath();
-          ctx.moveTo(comet.x, comet.y);
-          ctx.lineTo(
-            comet.x - comet.speed.x * (comet.length / 10),
-            comet.y - comet.speed.y * (comet.length / 10),
-          );
-          ctx.strokeStyle = `rgba(${objectColor}, ${comet.alpha})`;
-          ctx.lineWidth = comet.radius;
-          ctx.stroke();
-          ctx.beginPath();
-          ctx.arc(comet.x, comet.y, comet.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${objectColor}, ${comet.alpha})`;
-          ctx.fill();
-        }
       }
 
       animationFrameId = requestAnimationFrame(animate);

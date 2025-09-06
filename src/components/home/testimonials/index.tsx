@@ -149,30 +149,6 @@ export default function TestimonialsSection() {
           {getIcon('ChevronRight', 'h-8 w-8')}
         </Button>
       </div>
-
-      <div className="flex justify-center mt-6 gap-2">
-        {testimonials.map((_, index) => (
-          <motion.button
-            key={index}
-            className={`h-3 rounded-full cursor-pointer transition-all duration-300 ${
-              index === getIndex(current)
-                ? 'bg-primary w-8'
-                : 'bg-muted w-3 hover:bg-muted-foreground/50'
-            }`}
-            onClick={() => {
-              const newIndex = getIndex(index);
-              const direction = newIndex > getIndex(current) ? 1 : -1;
-              setCurrent([index, direction]);
-            }}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            animate={{
-              scale: index === getIndex(current) ? 1.1 : 1,
-            }}
-            aria-label={`Go to testimonial ${index + 1}`}
-          />
-        ))}
-      </div>
     </motion.section>
   );
 }
