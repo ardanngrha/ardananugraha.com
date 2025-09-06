@@ -36,9 +36,19 @@ export async function GET() {
     const evenCount = featuredProjects.length - (featuredProjects.length % 2);
     return NextResponse.json(
       featuredProjects.slice(0, evenCount > 0 ? evenCount : 2),
+      {
+        headers: {
+          'Cache-Control': 'public, max-age=300, stale-while-revalidate=600',
+        },
+      },
     );
   } catch (error) {
     console.error('Error fetching featured projects:', error);
-    return NextResponse.json([], { status: 500 });
+    return NextResponse.json([], {
+      status: 500,
+      headers: {
+        'Cache-Control': 'no-cache',
+      },
+    });
   }
 }

@@ -60,7 +60,9 @@ export default function GuestbookPage() {
   const fetchComments = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('/api/guestbook');
+      const response = await fetch('/api/guestbook', {
+        next: { revalidate: 60 }, // Cache for 60 seconds
+      });
       if (response.ok) {
         const data = await response.json();
         setComments(data);

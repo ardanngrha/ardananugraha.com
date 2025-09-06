@@ -13,12 +13,21 @@ export async function GET() {
       orderBy: [asc(comments.createdAt)],
     });
 
-    return NextResponse.json(allComments);
+    return NextResponse.json(allComments, {
+      headers: {
+        'Cache-Control': 'public, max-age=60, stale-while-revalidate=300',
+      },
+    });
   } catch (error) {
     console.error('Failed to fetch comments:', error);
     return NextResponse.json(
       { error: 'Failed to fetch comments' },
-      { status: 500 },
+      {
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      },
     );
   }
 }
@@ -52,12 +61,25 @@ export async function POST(req: NextRequest) {
       content,
     });
 
-    return NextResponse.json({ message: 'Comment added' }, { status: 201 });
+    return NextResponse.json(
+      { message: 'Comment added' },
+      {
+        status: 201,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      },
+    );
   } catch (error) {
     console.error('Failed to post comment:', error);
     return NextResponse.json(
       { error: 'Failed to post comment' },
-      { status: 500 },
+      {
+        status: 500,
+        headers: {
+          'Cache-Control': 'no-cache',
+        },
+      },
     );
   }
 }
