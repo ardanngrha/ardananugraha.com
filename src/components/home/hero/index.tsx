@@ -81,6 +81,10 @@ export default function Hero() {
       });
     } catch (err) {
       console.error('Failed to copy email:', err);
+      toast.error('Failed to copy email. Please try again.', {
+        duration: 3000,
+        description: 'There was an error copying the email.',
+      });
     }
   };
 
@@ -130,7 +134,7 @@ export default function Hero() {
             <div className="flex items-center gap-4 mb-6">
               <div className="w-16 h-16 rounded-full overflow-hidden">
                 <Image
-                  src="/images/avatar.png"
+                  src="/images/avatar.webp"
                   alt="Ardana Nugraha"
                   width={64}
                   height={64}
