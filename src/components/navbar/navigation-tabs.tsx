@@ -131,7 +131,6 @@ export function Tabs({ tabs, showLabels = true }: TabsProps) {
             data-tab={tab.id}
             className={cn(
               'relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200',
-              // Fix: Check if this specific tab should have white/black text
               hoveredTab === tab.id ||
                 (hoveredTab === null &&
                   !moreDropdownOpen &&

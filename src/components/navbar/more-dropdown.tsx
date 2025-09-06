@@ -34,9 +34,10 @@ export function MoreDropdown({
   return (
     <DropdownMenu open={isOpen} onOpenChange={handleOpenChange} modal={false}>
       <DropdownMenuTrigger asChild>
-        <motion.div
+        <motion.button
+          type="button"
           className={cn(
-            'relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 outline-none cursor-pointer',
+            'relative z-10 flex items-center gap-2 px-3 py-2 text-xs sm:text-sm font-medium rounded-full transition-colors duration-200 outline-none cursor-pointer border-0 bg-transparent',
             isHovered ||
               (isOpen && !isAnyTabHovered) ||
               (isActive && !isAnyTabHovered)
@@ -49,27 +50,31 @@ export function MoreDropdown({
           onMouseLeave={onMouseLeaveAction}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
+          aria-label={showLabel ? undefined : 'More navigation options'}
+          aria-expanded={isOpen}
+          aria-haspopup="menu"
         >
           {/* Mobile: Down when closed, Up when opened */}
           {/* Desktop (md+): Up when closed, Down when opened */}
-          <div className="md:hidden">
+          <div className="md:hidden" aria-hidden="true">
             {isOpen
               ? getIcon('ChevronUpOutlined', 'w-5 h-5')
               : getIcon('ChevronDownOutlined', 'w-5 h-5')}
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:block" aria-hidden="true">
             {isOpen
               ? getIcon('ChevronDownOutlined', 'w-5 h-5')
               : getIcon('ChevronUpOutlined', 'w-5 h-5')}
           </div>
-          {showLabel && 'More'}
-        </motion.div>
+          {showLabel && <span>More</span>}
+        </motion.button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="end"
         className="w-56 mt-2"
         sideOffset={5}
         onCloseAutoFocus={(e) => e.preventDefault()}
+        id="more-dropdown-menu"
       >
         <motion.div
           initial={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -82,8 +87,11 @@ export function MoreDropdown({
               <Link
                 href={item.href}
                 className="group flex items-start gap-3 w-full px-3 py-3 hover:bg-accent hover:text-accent-foreground transition-colors cursor-pointer"
+                aria-label={`Navigate to ${item.label}: ${item.description}`}
               >
-                <div className="flex-shrink-0 mt-0.5">{item.icon}</div>
+                <div className="flex-shrink-0 mt-0.5" aria-hidden="true">
+                  {item.icon}
+                </div>
                 <div className="flex flex-col gap-1 min-w-0">
                   <span className="text-sm font-medium group-hover:underline">
                     {item.label}
