@@ -8,13 +8,13 @@ import { WritingFrontmatter, EnhancedWriting } from '@/types/writings';
 // Enhanced utility functions for projects
 export async function getAllProjects(): Promise<EnhancedProject[]> {
   const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
-  
+
   try {
     const filenames = await fs.readdir(projectsDirectory);
-    
+
     const projects = await Promise.all(
       filenames
-        .filter(filename => filename.endsWith('.mdx'))
+        .filter((filename) => filename.endsWith('.mdx'))
         .map(async (filename) => {
           const filePath = path.join(projectsDirectory, filename);
           const fileContents = await fs.readFile(filePath, 'utf8');
@@ -26,7 +26,7 @@ export async function getAllProjects(): Promise<EnhancedProject[]> {
             content,
             readTime: calculateReadTime(content),
           };
-        })
+        }),
     );
 
     // Sort by date in descending order, then by featured status
@@ -34,9 +34,12 @@ export async function getAllProjects(): Promise<EnhancedProject[]> {
       // Featured projects first
       if (a.frontmatter.featured && !b.frontmatter.featured) return -1;
       if (!a.frontmatter.featured && b.frontmatter.featured) return 1;
-      
+
       // Then by date
-      return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+      return (
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime()
+      );
     });
   } catch (error) {
     console.error('Error reading projects directory:', error);
@@ -44,7 +47,9 @@ export async function getAllProjects(): Promise<EnhancedProject[]> {
   }
 }
 
-export async function getProjectWithContent(slug: string): Promise<EnhancedProject | null> {
+export async function getProjectWithContent(
+  slug: string,
+): Promise<EnhancedProject | null> {
   const projectsDirectory = path.join(process.cwd(), 'public/content/projects');
   const filePath = path.join(projectsDirectory, `${slug}.mdx`);
 
@@ -65,46 +70,54 @@ export async function getProjectWithContent(slug: string): Promise<EnhancedProje
 }
 
 // Additional project-specific utility functions
-export async function getFeaturedProjects(limit?: number): Promise<EnhancedProject[]> {
+export async function getFeaturedProjects(
+  limit?: number,
+): Promise<EnhancedProject[]> {
   const allProjects = await getAllProjects();
-  const featuredProjects = allProjects.filter(project => project.frontmatter.featured);
-  
+  const featuredProjects = allProjects.filter(
+    (project) => project.frontmatter.featured,
+  );
+
   return limit ? featuredProjects.slice(0, limit) : featuredProjects;
 }
 
-export async function getProjectsByStatus(status: 'completed' | 'in-progress' | 'planned'): Promise<EnhancedProject[]> {
+export async function getProjectsByStatus(
+  status: 'completed' | 'in-progress' | 'planned',
+): Promise<EnhancedProject[]> {
   const allProjects = await getAllProjects();
-  return allProjects.filter(project => project.frontmatter.status === status);
+  return allProjects.filter((project) => project.frontmatter.status === status);
 }
 
-export async function getProjectsByTag(tag: string): Promise<EnhancedProject[]> {
+export async function getProjectsByTag(
+  tag: string,
+): Promise<EnhancedProject[]> {
   const allProjects = await getAllProjects();
-  return allProjects.filter(project => 
-    project.frontmatter.tags.includes(tag)
+  return allProjects.filter((project) =>
+    project.frontmatter.tags.includes(tag),
   );
 }
 
 export async function getAllProjectTags(): Promise<string[]> {
   const allProjects = await getAllProjects();
   const tagSet = new Set<string>();
-  
-  allProjects.forEach(project => {
-    project.frontmatter.tags.forEach(tag => tagSet.add(tag));
+
+  allProjects.forEach((project) => {
+    project.frontmatter.tags.forEach((tag) => tagSet.add(tag));
   });
-  
+
   return Array.from(tagSet).sort();
 }
 
 // Enhanced utility functions for writings
 export async function getAllWritings(): Promise<EnhancedWriting[]> {
   const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
-  
+
   try {
     const filenames = await fs.readdir(writingsDirectory);
 
     const posts = await Promise.all(
       filenames
-        .filter(filename => filename.endsWith('.mdx'))
+        .filter((filename) => filename.endsWith('.mdx'))
         .map(async (filename) => {
           const filePath = path.join(writingsDirectory, filename);
           const fileContents = await fs.readFile(filePath, 'utf8');
@@ -116,7 +129,7 @@ export async function getAllWritings(): Promise<EnhancedWriting[]> {
             content,
             readTime: calculateReadTime(content),
           };
-        })
+        }),
     );
 
     // Sort by date in descending order, then by featured status
@@ -124,9 +137,12 @@ export async function getAllWritings(): Promise<EnhancedWriting[]> {
       // Featured writings first
       if (a.frontmatter.featured && !b.frontmatter.featured) return -1;
       if (!a.frontmatter.featured && b.frontmatter.featured) return 1;
-      
+
       // Then by date
-      return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+      return (
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime()
+      );
     });
   } catch (error) {
     console.error('Error reading writings directory:', error);
@@ -136,13 +152,13 @@ export async function getAllWritings(): Promise<EnhancedWriting[]> {
 
 export async function getAllEnhancedWritings(): Promise<EnhancedWriting[]> {
   const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
-  
+
   try {
     const filenames = await fs.readdir(writingsDirectory);
 
     const writings = await Promise.all(
       filenames
-        .filter(filename => filename.endsWith('.mdx'))
+        .filter((filename) => filename.endsWith('.mdx'))
         .map(async (filename) => {
           const filePath = path.join(writingsDirectory, filename);
           const fileContents = await fs.readFile(filePath, 'utf8');
@@ -154,7 +170,7 @@ export async function getAllEnhancedWritings(): Promise<EnhancedWriting[]> {
             content,
             readTime: calculateReadTime(content),
           };
-        })
+        }),
     );
 
     // Sort by date in descending order, then by featured status
@@ -162,9 +178,12 @@ export async function getAllEnhancedWritings(): Promise<EnhancedWriting[]> {
       // Featured writings first
       if (a.frontmatter.featured && !b.frontmatter.featured) return -1;
       if (!a.frontmatter.featured && b.frontmatter.featured) return 1;
-      
+
       // Then by date
-      return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+      return (
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime()
+      );
     });
   } catch (error) {
     console.error('Error reading writings directory:', error);
@@ -172,7 +191,9 @@ export async function getAllEnhancedWritings(): Promise<EnhancedWriting[]> {
   }
 }
 
-export async function getWritingWithContent(slug: string): Promise<EnhancedWriting | null> {
+export async function getWritingWithContent(
+  slug: string,
+): Promise<EnhancedWriting | null> {
   const writingsDirectory = path.join(process.cwd(), 'public/content/writings');
   const filePath = path.join(writingsDirectory, `${slug}.mdx`);
 
@@ -192,37 +213,50 @@ export async function getWritingWithContent(slug: string): Promise<EnhancedWriti
   }
 }
 
+export async function getFeaturedWritings(
+  limit: number = 3,
+): Promise<EnhancedWriting[]> {
+  const allWritings = await getAllEnhancedWritings();
+  const featuredWritings = allWritings.filter(
+    (writing) => writing.frontmatter.featured,
+  );
+  return featuredWritings.slice(0, limit);
+}
+
 // Related content functions
 export async function getRelatedProjects(
-  tags: string[], 
-  currentSlug: string, 
-  limit: number = 3
+  tags: string[],
+  currentSlug: string,
+  limit: number = 3,
 ): Promise<EnhancedProject[]> {
   const allProjects = await getAllProjects();
-  
+
   // Filter out current project and find projects with matching tags
   const relatedProjects = allProjects
-    .filter(project => project.slug !== currentSlug)
-    .map(project => {
-      const matchingTags = project.frontmatter.tags.filter(tag => 
-        tags.includes(tag)
+    .filter((project) => project.slug !== currentSlug)
+    .map((project) => {
+      const matchingTags = project.frontmatter.tags.filter((tag) =>
+        tags.includes(tag),
       );
       return {
         ...project,
         matchScore: matchingTags.length,
       };
     })
-    .filter(project => project.matchScore > 0)
+    .filter((project) => project.matchScore > 0)
     .sort((a, b) => {
       // Sort by match score first, then by date
       if (a.matchScore !== b.matchScore) {
         return b.matchScore - a.matchScore;
       }
-      return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+      return (
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime()
+      );
     })
     .slice(0, limit);
 
-  return relatedProjects.map(item => ({
+  return relatedProjects.map((item) => ({
     slug: item.slug,
     frontmatter: item.frontmatter,
     content: item.content,
@@ -231,35 +265,38 @@ export async function getRelatedProjects(
 }
 
 export async function getRelatedWritings(
-  tags: string[], 
-  currentSlug: string, 
-  limit: number = 3
+  tags: string[],
+  currentSlug: string,
+  limit: number = 3,
 ): Promise<EnhancedWriting[]> {
   const allWritings = await getAllEnhancedWritings();
-  
+
   // Filter out current writing and find writings with matching tags
   const relatedWritings = allWritings
-    .filter(writing => writing.slug !== currentSlug)
-    .map(writing => {
-      const matchingTags = writing.frontmatter.tags.filter(tag => 
-        tags.includes(tag)
+    .filter((writing) => writing.slug !== currentSlug)
+    .map((writing) => {
+      const matchingTags = writing.frontmatter.tags.filter((tag) =>
+        tags.includes(tag),
       );
       return {
         ...writing,
         matchScore: matchingTags.length,
       };
     })
-    .filter(writing => writing.matchScore > 0)
+    .filter((writing) => writing.matchScore > 0)
     .sort((a, b) => {
       // Sort by match score first, then by date
       if (a.matchScore !== b.matchScore) {
         return b.matchScore - a.matchScore;
       }
-      return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime();
+      return (
+        new Date(b.frontmatter.date).getTime() -
+        new Date(a.frontmatter.date).getTime()
+      );
     })
     .slice(0, limit);
 
-  return relatedWritings.map(item => ({
+  return relatedWritings.map((item) => ({
     slug: item.slug,
     frontmatter: item.frontmatter,
     content: item.content,
@@ -268,11 +305,13 @@ export async function getRelatedWritings(
 }
 
 // Generic related content function
-export async function getRelatedContent<T extends EnhancedProject | EnhancedWriting>(
+export async function getRelatedContent<
+  T extends EnhancedProject | EnhancedWriting,
+>(
   contentType: 'projects' | 'writings',
   tags: string[],
   currentSlug: string,
-  limit: number = 3
+  limit: number = 3,
 ): Promise<T[]> {
   if (contentType === 'projects') {
     return getRelatedProjects(tags, currentSlug, limit) as Promise<T[]>;
@@ -287,15 +326,20 @@ export async function getProjectNavigation(currentSlug: string): Promise<{
   next: EnhancedProject | null;
 }> {
   const allProjects = await getAllProjects();
-  const currentIndex = allProjects.findIndex(project => project.slug === currentSlug);
-  
+  const currentIndex = allProjects.findIndex(
+    (project) => project.slug === currentSlug,
+  );
+
   if (currentIndex === -1) {
     return { prev: null, next: null };
   }
 
   return {
     prev: currentIndex > 0 ? allProjects[currentIndex - 1] : null,
-    next: currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1] : null,
+    next:
+      currentIndex < allProjects.length - 1
+        ? allProjects[currentIndex + 1]
+        : null,
   };
 }
 
@@ -304,14 +348,19 @@ export async function getWritingNavigation(currentSlug: string): Promise<{
   next: EnhancedWriting | null;
 }> {
   const allWritings = await getAllEnhancedWritings();
-  const currentIndex = allWritings.findIndex(writing => writing.slug === currentSlug);
-  
+  const currentIndex = allWritings.findIndex(
+    (writing) => writing.slug === currentSlug,
+  );
+
   if (currentIndex === -1) {
     return { prev: null, next: null };
   }
 
   return {
     prev: currentIndex > 0 ? allWritings[currentIndex - 1] : null,
-    next: currentIndex < allWritings.length - 1 ? allWritings[currentIndex + 1] : null,
+    next:
+      currentIndex < allWritings.length - 1
+        ? allWritings[currentIndex + 1]
+        : null,
   };
 }

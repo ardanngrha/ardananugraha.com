@@ -1,57 +1,34 @@
-'use client';
-
-import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Hero from '@/components/home/hero';
 import ProjectsSection from '@/components/home/projects';
 import WritingsSection from '@/components/home/writings';
-import TestimonialsSection from '@/components/home/testimonials';
-import { ProjectContentItem } from '@/types/projects';
-import { EnhancedWriting } from '@/types/writings';
 import FirstHighlight from '@/components/home/highlights/first';
-import SecondHighlight from '@/components/home/highlights/second';
+import { getFeaturedProjects, getFeaturedWritings } from '@/lib/posts';
 
-export default function Home() {
-  const [featuredProjects, setFeaturedProjects] = useState<
-    ProjectContentItem[]
-  >([]);
-  const [featuredWritings, setFeaturedWritings] = useState<EnhancedWriting[]>(
-    [],
+export default async function Home() {
+  const TestimonialsSection = dynamic(
+    () => import('@/components/home/testimonials'),
+    {
+      loading: () => <div className="py-16 h-96 bg-muted/20 animate-pulse" />,
+    },
   );
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    async function fetchFeaturedContent() {
-      try {
-        // Fetch featured projects and writings
-        const [projectsRes, writingsRes] = await Promise.all([
-          fetch('/api/featured-projects'),
-          fetch('/api/featured-writings'),
-        ]);
-
-        if (projectsRes.ok && writingsRes.ok) {
-          const projects = await projectsRes.json();
-          const writings = await writingsRes.json();
-
-          setFeaturedProjects(projects);
-          setFeaturedWritings(writings);
-        }
-      } catch (error) {
-        console.error('Error fetching featured content:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchFeaturedContent();
-  }, []);
+  const SecondHighlight = dynamic(
+    () => import('@/components/home/highlights/second'),
+    {
+      loading: () => <div className="py-16 h-96 bg-muted/20 animate-pulse" />,
+    },
+  );
+  const featuredProjects = await getFeaturedProjects();
+  const featuredWritings = await getFeaturedWritings();
 
   return (
     <div>
       <Hero />
       <FirstHighlight />
       <SecondHighlight />
-      <ProjectsSection projects={featuredProjects} loading={loading} />
-      <WritingsSection writings={featuredWritings} loading={loading} />
+      <ProjectsSection projects={featuredProjects} />
+      <WritingsSection writings={featuredWritings} />
       <TestimonialsSection />
     </div>
   );

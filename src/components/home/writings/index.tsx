@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'motion/react';
 import { WritingCard } from '@/components/writings/writing-card';
 import { WritingsSectionProps } from '@/types/writings';
@@ -13,10 +15,7 @@ const containerVariants = {
     },
   },
 };
-export default function WritingsSection({
-  writings,
-  loading,
-}: WritingsSectionProps) {
+export default function WritingsSection({ writings }: WritingsSectionProps) {
   return (
     <section className="py-16">
       <motion.div
@@ -32,36 +31,21 @@ export default function WritingsSection({
         </h2>
       </motion.div>
 
-      {loading ? (
-        <div className="space-y-6">
-          {[1, 2].map((i) => (
-            <div
-              key={i}
-              className="bg-gray-50 dark:bg-zinc-800/50 rounded-2xl p-4 animate-pulse"
-            >
-              <div className="h-6 w-20 bg-muted rounded-full mb-4"></div>
-              <div className="h-6 bg-muted rounded mb-2 w-3/4"></div>
-              <div className="h-10 bg-muted rounded w-full"></div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <motion.div
-          className="space-y-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {writings.map((writing) => (
-            <WritingCard
-              key={writing.slug}
-              writing={writing}
-              variant="featured"
-            />
-          ))}
-        </motion.div>
-      )}
+      <motion.div
+        className="space-y-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {writings.map((writing) => (
+          <WritingCard
+            key={writing.slug}
+            writing={writing}
+            variant="featured"
+          />
+        ))}
+      </motion.div>
 
       <div className="flex justify-center mt-8">
         <RippleButton

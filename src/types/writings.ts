@@ -27,5 +27,4 @@ export interface WritingCardProps {
 
 export interface WritingsSectionProps {
   writings: EnhancedWriting[];
-  loading: boolean;
 }

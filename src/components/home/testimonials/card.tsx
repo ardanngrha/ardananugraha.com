@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import Image from 'next/image';
+import { useState } from 'react';
 import { Testimonial } from '@/types/testimonial';
 import { Separator } from '@/components/ui/separator';
 
@@ -10,7 +11,15 @@ export function TestimonialCard({
   testimonial: Testimonial;
   isCenter: boolean;
 }) {
+  const [imageError, setImageError] = useState(false);
+
   if (!testimonial) return null;
+
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
+  const showFallback = !testimonial.avatar || imageError;
 
   return (
     <motion.div
@@ -31,22 +40,23 @@ export function TestimonialCard({
         <div className="flex flex-col">
           <Separator />
           <div className="flex flex-row gap-2 items-center mt-4">
-            <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center text-white font-semibold">
-              {testimonial.avatar ? (
-                <Image
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-full h-full object-cover"
-                  width={36}
-                  height={36}
-                />
-              ) : (
+            <div className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-muted text-foreground font-semibold">
+              {showFallback ? (
                 <span className="text-xs">
                   {testimonial.name
                     .split(' ')
                     .map((n: string) => n[0])
                     .join('')}
                 </span>
+              ) : (
+                <Image
+                  src={testimonial.avatar}
+                  alt={testimonial.name}
+                  className="w-full h-full object-cover"
+                  width={36}
+                  height={36}
+                  onError={handleImageError}
+                />
               )}
             </div>
             <div className="flex flex-col justify-center">

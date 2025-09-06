@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { ImageSkeleton } from './loading-skeletons';
@@ -32,6 +32,20 @@ export function ImageWithLoading({
     setHasError(true);
     onError?.();
   };
+
+  useEffect(() => {
+    if (priority) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      document.head.appendChild(link);
+
+      return () => {
+        document.head.removeChild(link);
+      };
+    }
+  }, [src, priority]);
 
   if (hasError) {
     return (
@@ -75,7 +89,7 @@ export function ImageWithLoading({
         className,
       )}
     >
-      {isLoading && (
+      {isLoading && !priority && (
         <ImageSkeleton
           className="absolute inset-0 z-10"
           aspectRatio={aspectRatio}
@@ -90,7 +104,7 @@ export function ImageWithLoading({
         height={!fill ? height : undefined}
         className={cn(
           'object-cover transition-opacity duration-300',
-          isLoading ? 'opacity-0' : 'opacity-100',
+          isLoading && !priority ? 'opacity-0' : 'opacity-100',
         )}
         priority={priority}
         sizes={sizes}
